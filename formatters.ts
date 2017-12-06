@@ -1,8 +1,8 @@
-import { format as dateFormatter } from 'date-fns';
+const dateFormatter = require('tinydate'); // `require` to suppress "missing declaration file warning"
 
 export const formatDate = (date: Date | string, format = 'YYYY-MM-DD') => {
     if (date) {
-        return dateFormatter(date, format);
+        return dateFormatter(format)(date);
     }
 
     return '';

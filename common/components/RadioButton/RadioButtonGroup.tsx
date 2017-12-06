@@ -1,5 +1,5 @@
 import * as React from 'react';
-import Collapse from 'react-css-collapse';
+const Collapse = require('react-css-collapse'); // `require` to suppress "missing declaration file warning"
 import glamorous from 'glamorous';
 import { css } from 'glamor';
 import * as uniqid from 'uniqid';

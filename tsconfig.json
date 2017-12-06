@@ -4,12 +4,10 @@
         "target": "es5",
         "lib": ["es6", "dom"],
         "sourceMap": true,
-        "allowJs": true,
         "jsx": "react",
         "moduleResolution": "node",
         "rootDirs": [
-            "common",
-            "components",
+            "src",
             "stories"
         ],
         "forceConsistentCasingInFileNames": true,
@@ -21,6 +19,7 @@
         "noUnusedLocals": true
     },
     "exclude": [
-        "node_modules"
+        "dist",
+        "stories"
     ]
 }

@@ -3,19 +3,22 @@
     "name": "collector-portal-framework",
     "version": "0.1.0",
     "private": true,
+    "main": "./dist/index.js",
+    "types": "./dist/index.d.ts",
     "devDependencies": {
         "@storybook/addon-knobs": "3.2.17",
         "@storybook/react": "3.2.17",
+        "@types/react": "16.0.27",
         "@types/react-dom": "16.0.3",
         "@types/react-router-dom": "4.2.3",
-        "@types/react": "16.0.27",
         "@types/storybook__addon-actions": "3.0.1",
         "@types/storybook__addon-knobs": "3.2.1",
         "@types/storybook__react": "3.0.5",
+        "copyfiles": "1.2.0",
         "file-loader": "1.1.5",
+        "react": "16.2.0",
         "react-dom": "16.2.0",
         "react-router-dom": "4.2.2",
-        "react": "16.2.0",
         "ts-loader": "3.2.0",
         "typescript": "2.6.2"
     },
@@ -23,6 +26,7 @@
         "@types/react-datepicker": "0.55.1",
         "@types/react-modal": "3.1.0",
         "@types/uniqid": "4.1.2",
+        "date-fns": "1.29.0",
         "glamor": "^2.20.40",
         "glamorous": "^4.11.0",
         "moment": "^2.19.3",
@@ -30,7 +34,6 @@
         "react-css-collapse": "^3.1.0",
         "react-datepicker": "^0.61.0",
         "react-modal": "^3.1.7",
-        "tinydate": "1.0.0",
         "uniqid": "^4.1.1"
     },
     "peerDependencies": {
@@ -39,6 +42,9 @@
         "react": ">=16.2.0"
     },
     "scripts": {
-        "start": "start-storybook -p 9000"
+        "start": "start-storybook -p 9000",
+        "copy-static-files": "copyfiles -u 1 \"src/**/*\" -e \"**/*.{ts,tsx}\" dist",
+        "build": "npm run copy-static-files && tsc --project ./ --declaration --outDir dist",
+        "watch": "npm run build -- --watch"
     }
 }

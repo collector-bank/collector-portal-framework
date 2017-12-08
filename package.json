@@ -1,7 +1,7 @@
 {
     "title": "Collector Portal Framework",
     "name": "collector-portal-framework",
-    "version": "0.2.0",
+    "version": "0.2.1",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "devDependencies": {
@@ -48,6 +48,6 @@
         "transpile": "tsc --project ./ --declaration --outDir dist",
         "build": "npm run clean && npm run copy-static-files && npm run transpile",
         "watch": "npm run build -- --watch",
-        "prepublish": "npm run build"
+        "prepare": "npm run build"
     }
 }

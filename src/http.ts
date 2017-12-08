@@ -21,7 +21,7 @@ const request = (method: string) => (endpoint: string, payload?: {}) => {
             } else if (response.status >= 200 && response.status < 300) {
                 return response.json();
             } else {
-                return Promise.reject(response.statusText);
+                return Promise.reject(response);
             }
         })
         .catch(err => {

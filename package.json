@@ -23,10 +23,10 @@
         "typescript": "2.6.2"
     },
     "dependencies": {
-        "@types/react-datepicker": "0.55.1",
-        "@types/react-modal": "3.1.0",
-        "@types/uniqid": "4.1.2",
-        "date-fns": "1.29.0",
+        "@types/react-datepicker": "^0.55.1",
+        "@types/react-modal": "^3.1.0",
+        "@types/uniqid": "^4.1.2",
+        "date-fns": "^1.29.0",
         "glamor": "^2.20.40",
         "glamorous": "^4.11.0",
         "moment": "^2.19.3",

@@ -69,6 +69,11 @@ var Togglable = /** @class */ (function (_super) {
         };
         return _this;
     }
+    Togglable.prototype.componentWillMount = function () {
+        if (this.props.defaultExpanded) {
+            this.setState({ isExpanded: true });
+        }
+    };
     Togglable.prototype.render = function () {
         var _a = this.props, children = _a.children, title = _a.title;
         return (React.createElement(Container, { expanded: this.state.isExpanded },

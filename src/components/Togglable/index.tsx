@@ -53,6 +53,7 @@ const transition = css({
 
 export interface TogglableProps {
     title: string;
+    defaultExpanded?: boolean;
 }
 
 export interface TogglableState {
@@ -65,6 +66,12 @@ export class Togglable extends React.Component<TogglableProps, TogglableState> {
         isExpanded: false,
         id: uniqid(),
     };
+
+    componentWillMount() {
+        if (this.props.defaultExpanded) {
+            this.setState({ isExpanded: true });
+        }
+    }
 
     private toggle = () => {
         this.setState(prevState => ({

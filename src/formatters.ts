@@ -8,10 +8,10 @@ export const formatDate = (date: Date | string, format = 'YYYY-MM-DD') => {
     return '';
 };
 
-export const formatMoney = (money: number, currency?: string) => {
+export const formatMoney = (money: number, currency?: string, includeDecimals = true) => {
     if (money != null) {
         const formatted = money
-            .toFixed(2)
+            .toFixed(includeDecimals ? 2 : 0)
             .replace(/\B(?=(\d{3})+(?!\d))/g, ' ')
             .replace('.', ',');
         return currency ? `${formatted} ${currency}` : formatted;

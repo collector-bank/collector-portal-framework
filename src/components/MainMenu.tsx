@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
-import glamorous, { CSSProperties } from 'glamorous';
+import glamorous, { CSSProperties, GlamorousComponent } from 'glamorous';
 import { colors, breakpoints, borderRadius } from '../theme';
 
 const MenuContainer = glamorous.nav({
@@ -71,7 +71,7 @@ const MenuListItem = glamorous.li<MenuListItemProps>(
     },
 );
 
-const NavLink = glamorous(RouterNavLink)({
+const InternalNavLink = glamorous(RouterNavLink)({
     display: 'flex',
     alignItems: 'center',
     padding: 12,
@@ -110,6 +110,8 @@ const NavLink = glamorous(RouterNavLink)({
     },
 });
 
+const ExternalNavLink: GlamorousComponent<React.HTMLProps<HTMLAnchorElement>, {}> = InternalNavLink.withComponent('a');
+
 const NavLinkLabel = glamorous.span({
     fontSize: 18,
     marginLeft: 16,
@@ -140,6 +142,7 @@ export interface MainMenuItem {
     path: string;
     label: string;
     icon: string;
+    externalLink?: boolean;
     onlyInDesktop?: boolean;
     onlyInMobile?: boolean;
     useMarginTop?: boolean;
@@ -155,10 +158,19 @@ export const MainMenu: React.StatelessComponent<MainMenuProps> = ({ items }) => 
                     onlyInMobile={item.onlyInMobile}
                     useMarginTop={item.useMarginTop}
                 >
-                    <NavLink to={item.path}>
-                        <NavLinkIcon icon={item.icon} />
-                        <NavLinkLabel>{item.label}</NavLinkLabel>
-                    </NavLink>
+                    {item.externalLink
+                        ? (
+                            <ExternalNavLink href={item.path}>
+                                <NavLinkIcon icon={item.icon} />
+                                <NavLinkLabel>{item.label}</NavLinkLabel>
+                            </ExternalNavLink>
+                        ) : (
+                            <InternalNavLink to={item.path}>
+                                <NavLinkIcon icon={item.icon} />
+                                <NavLinkLabel>{item.label}</NavLinkLabel>
+                            </InternalNavLink>
+                        )
+                    }
                 </MenuListItem>
             ))}
         </MenuList>

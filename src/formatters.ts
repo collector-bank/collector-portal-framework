@@ -40,3 +40,11 @@ export const parseAmountString = (amount: string) => {
 
     return 0;
 };
+
+export const formatString = (str: string, ...args: any[]) => {
+    if (args.length > 0) {
+        return str.replace(/{(\d+)}/g, (match, i) => args[i] == null ? match : args[i]);
+    }
+
+    return str;
+};

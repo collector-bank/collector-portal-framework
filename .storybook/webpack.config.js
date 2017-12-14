@@ -8,7 +8,7 @@
 
 const path = require('path');
 
-const COMMON_PATH = path.join(__dirname, '../common');
+const COMMON_PATH = path.join(__dirname, '../src/common');
 const STORIES_PATH = path.join(__dirname, '../stories');
 
 module.exports = {
@@ -25,7 +25,7 @@ module.exports = {
             {
                 test: /\.(eot|ttf|woff2?|svg)$/,
                 loader: 'file-loader',
-                include: COMMON_PATH
+                include: COMMON_PATH,
             },
             {
                 test: /\.css$/,

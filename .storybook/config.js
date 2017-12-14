@@ -1,6 +1,6 @@
 import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
-import { injectGlobalStyles } from '../';
+import { injectGlobalStyles } from '../src';
 
 injectGlobalStyles();
 

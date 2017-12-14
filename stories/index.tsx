@@ -14,7 +14,7 @@ import {
     Select,
     Spinner,
     DatePicker,
-} from '../common/components';
+} from '../src/common/components';
 
 import {
     H1,
@@ -22,7 +22,7 @@ import {
     H3,
     Text,
     TextLink,
-} from '../common/typography';
+} from '../src/common/typography';
 
 const components = storiesOf('Components', module);
 

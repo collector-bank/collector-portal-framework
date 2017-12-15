@@ -32,9 +32,10 @@ export const parseAmountString = (amount: string) => {
     if (amount) {
         const cleaned = amount.replace(/,/g, '.').replace(/[^\d.]/g, '');
         const num = parseFloat(cleaned);
+        const rounded = Math.round(num * 100) / 100;
 
-        if (num > 0) {
-            return num;
+        if (rounded > 0) {
+            return rounded;
         }
     }
 

@@ -29,7 +29,7 @@ const transition = css({
 
 export interface RadioButtonItem {
     key: string;
-    label: string | JSX.Element;
+    label: string;
     child?: JSX.Element;
 }
 

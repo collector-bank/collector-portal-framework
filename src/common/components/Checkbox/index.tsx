@@ -56,7 +56,7 @@ const Input = glamorous.input({
 });
 
 export interface CheckboxProps {
-    label: string | JSX.Element;
+    label: string;
     name?: string;
     checked?: boolean;
     disabled?: boolean;
@@ -87,7 +87,10 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
                     disabled={disabled}
                     onChange={onChange}
                 />
-                <label htmlFor={this.state.id}>{label}</label>
+                <label
+                    htmlFor={this.state.id}
+                    dangerouslySetInnerHTML={{ __html: label }}
+                />
             </CheckboxContainer>
         );
     }

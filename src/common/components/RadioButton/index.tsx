@@ -53,7 +53,7 @@ const Input = glamorous.input({
 });
 
 export interface RadioButtonProps {
-    label: string | JSX.Element;
+    label: string;
     name?: string;
     selected?: boolean;
     disabled?: boolean;
@@ -84,7 +84,10 @@ export class RadioButton extends React.Component<RadioButtonProps, RadioButtonSt
                     disabled={disabled}
                     onChange={onChange}
                 />
-                <label htmlFor={this.state.id}>{label}</label>
+                <label
+                    htmlFor={this.state.id}
+                    dangerouslySetInnerHTML={{ __html: label }}
+                />
             </RadioButtonContainer>
         );
     }

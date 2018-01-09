@@ -38,7 +38,6 @@ export interface RadioButtonGroupProps {
     items: RadioButtonItem[];
     selected: string;
     disabled?: boolean;
-    optional?: boolean;
     error?: string | boolean;
     onChange: (key: string) => void;
 }
@@ -59,11 +58,11 @@ export class RadioButtonGroup extends React.Component<RadioButtonGroupProps, Rad
     }
 
     render() {
-        const { label, items, selected, disabled, optional, error } = this.props;
+        const { label, items, selected, disabled, error } = this.props;
 
         return (
             <RadioButtonGroupContainer>
-                <Label optional={optional}>{label}</Label>
+                <Label>{label}</Label>
                 <RadioButtonList>
                     {items.map(item => (
                         <li key={item.key}>

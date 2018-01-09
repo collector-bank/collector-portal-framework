@@ -38,7 +38,6 @@ export interface CheckboxGroupProps {
     items: CheckboxItem[];
     checked?: string[];
     disabled?: boolean;
-    optional?: boolean;
     error?: string | boolean;
     onChange: (key: string, checked: boolean) => void;
 }
@@ -67,11 +66,11 @@ export class CheckboxGroup extends React.Component<CheckboxGroupProps, CheckboxG
     }
 
     render() {
-        const { label, items, disabled, optional, error } = this.props;
+        const { label, items, disabled, error } = this.props;
 
         return (
             <CheckboxGroupContainer>
-                <Label optional={optional}>{label}</Label>
+                <Label>{label}</Label>
                 <CheckboxList>
                     {items.map(item => (
                         <li key={item.key}>

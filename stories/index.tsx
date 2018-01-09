@@ -58,7 +58,6 @@ components.add('Select', () => {
         <Select
             label={text('Label', 'En label')}
             disabled={boolean('Disabled', false)}
-            optional={boolean('Optional', false)}
             value={text('Selected item', 'Bar')}
             items={items}
             error={text('Error', '')}
@@ -88,7 +87,6 @@ components.add('Input', () => {
             error={text('Error', '')}
             multiline={boolean('Multiline', false)}
             disabled={boolean('Disabled', false)}
-            optional={boolean('Optional', false)}
             onChange={action('input changed')}
         />
     );
@@ -128,7 +126,6 @@ components.add('Radio button group', () => {
             items={items}
             selected={select('Option', items.map(x => x.key), 'foo')}
             disabled={boolean('Disabled', false)}
-            optional={boolean('Optional', false)}
             error={text('Error', '')}
             onChange={action('radio button group changed')}
         />
@@ -169,7 +166,6 @@ components.add('Checkbox group', () => {
             items={items}
             checked={array('Checked items', ['foo', 'baz'])}
             disabled={boolean('Disabled', false)}
-            optional={boolean('Optional', false)}
             error={text('Error', '')}
             onChange={action('checkbox group changed')}
         />

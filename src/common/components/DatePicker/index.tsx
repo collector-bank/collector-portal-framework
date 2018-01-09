@@ -83,7 +83,6 @@ export interface DatePickerProps {
     selectedDate?: Date;
     minDate?: Date;
     maxDate?: Date;
-    optional?: boolean;
     onChange: (date: Date | null) => void;
 }
 
@@ -100,11 +99,11 @@ export class DatePicker extends React.Component<DatePickerProps, {}> {
     }
 
     render() {
-        const { label, selectedDate, minDate, maxDate, optional } = this.props;
+        const { label, selectedDate, minDate, maxDate } = this.props;
 
         return (
             <InputContainer>
-                {label && <Label optional={optional}>{label}</Label>}
+                {label && <Label>{label}</Label>}
                 <ReactDatePicker
                     selected={selectedDate ? moment(selectedDate) : undefined}
                     minDate={minDate ? moment(minDate) : undefined}

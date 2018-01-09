@@ -56,7 +56,6 @@ export interface InputProps {
     maxLength?: number;
     pattern?: string;
     name?: string;
-    optional?: boolean;
     onChange?: (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
 }
 
@@ -72,11 +71,11 @@ export class Input extends React.Component<InputProps, InputState> {
     };
 
     render() {
-        const { label, value, error, multiline, optional, onChange } = this.props;
+        const { label, value, error, multiline, onChange } = this.props;
 
         return (
             <InputContainer>
-                {label && <Label htmlFor={this.state.id} optional={optional} error={Boolean(error)}>{label}</Label>}
+                {label && <Label htmlFor={this.state.id} error={Boolean(error)}>{label}</Label>}
                 {multiline ? (
                     <Textarea
                         id={this.state.id}

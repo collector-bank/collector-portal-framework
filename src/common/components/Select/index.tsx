@@ -64,7 +64,6 @@ export interface SelectProps {
     label?: string;
     disabled?: boolean;
     error?: string | boolean;
-    optional?: boolean;
     items?: SelectItem[];
     value?: string;
     onChange: (event: React.FormEvent<HTMLSelectElement>) => void;
@@ -82,7 +81,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
     };
 
     render() {
-        const { label, disabled, value, error, optional, onChange } = this.props;
+        const { label, disabled, value, error, onChange } = this.props;
         let { items } = this.props;
 
         if (!value && items) {
@@ -97,7 +96,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
 
         return (
             <SelectContainer>
-                <Label htmlFor={this.state.id} optional={optional}>{label}</Label>
+                <Label htmlFor={this.state.id}>{label}</Label>
                 <SelectFieldContainer hasError={Boolean(error)}>
                     <SelectField id={this.state.id} disabled={disabled} value={value ? value : ''} onChange={onChange}>
                         {items ? (

@@ -47,7 +47,7 @@ const Textarea = glamorous.textarea<{ hasError?: boolean }>(
 );
 
 export interface InputProps {
-    label?: string;
+    label?: string | JSX.Element;
     value?: string;
     placeholder?: string;
     multiline?: boolean;
@@ -71,7 +71,7 @@ export class Input extends React.Component<InputProps, InputState> {
     };
 
     render() {
-        const { label, value, error, multiline, onChange } = this.props;
+        const { label, value, error, multiline, onChange, ...rest } = this.props;
 
         return (
             <InputContainer>
@@ -83,7 +83,7 @@ export class Input extends React.Component<InputProps, InputState> {
                         hasError={Boolean(error)}
                         aria-invalid={Boolean(error)}
                         onChange={onChange}
-                        {...this.props}
+                        {...rest}
                     />
                 ) : (
                     <InputField
@@ -92,7 +92,7 @@ export class Input extends React.Component<InputProps, InputState> {
                         hasError={Boolean(error)}
                         aria-invalid={Boolean(error)}
                         onChange={onChange}
-                        {...this.props}
+                        {...rest}
                     />
                 )}
                 {error && typeof error === 'string' && <Alert type="error" message={error} alertSize="small" />}

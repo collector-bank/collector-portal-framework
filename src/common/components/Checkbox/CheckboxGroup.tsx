@@ -34,7 +34,7 @@ export interface CheckboxItem {
 }
 
 export interface CheckboxGroupProps {
-    label: string;
+    label: string | JSX.Element;
     items: CheckboxItem[];
     checked?: string[];
     disabled?: boolean;

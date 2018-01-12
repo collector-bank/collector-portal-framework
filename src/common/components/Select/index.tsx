@@ -61,7 +61,7 @@ export interface SelectItem {
 }
 
 export interface SelectProps {
-    label?: string;
+    label?: string | JSX.Element;
     disabled?: boolean;
     error?: string | boolean;
     items?: SelectItem[];

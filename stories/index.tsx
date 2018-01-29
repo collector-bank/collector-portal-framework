@@ -85,6 +85,7 @@ components.add('Input', () => {
             label={text('Label', 'En label')}
             placeholder={text('Placeholder', '')}
             error={text('Error', '')}
+            type={text('Type', '')}
             multiline={boolean('Multiline', false)}
             disabled={boolean('Disabled', false)}
             onChange={action('input changed')}

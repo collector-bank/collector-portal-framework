@@ -53,6 +53,7 @@
         "transpile": "tsc --project ./ --declaration --outDir dist",
         "build": "npm run clean && npm run copy-static-files && npm run transpile",
         "watch": "npm run build -- --watch",
-        "prepare": "npm run build"
+        "prepare": "npm run build",
+        "test": "npm run transpile"
     }
 }

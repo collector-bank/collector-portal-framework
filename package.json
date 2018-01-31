@@ -4,6 +4,10 @@
     "version": "1.2.0",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
+    "repository": {
+        "type": "git",
+        "url": "https://github.com/collector-bank/collector-portal-framework.git"
+      },
     "devDependencies": {
         "@storybook/addon-knobs": "^3.3.5",
         "@storybook/react": "^3.3.5",

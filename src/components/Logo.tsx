@@ -50,13 +50,14 @@ const SubHeading = glamorous.div({
 
 export interface LogoProps {
     location: string;
+    companyName: string;
     siteName: string;
 }
 
-export const Logo: React.StatelessComponent<LogoProps> = ({ location, siteName }) => (
+export const Logo: React.StatelessComponent<LogoProps> = ({ location, companyName, siteName }) => (
     <Container>
         <Link to={location}>
-            <Heading>Collector Bank</Heading>
+            <Heading>{companyName}</Heading>
             <SubHeading>{siteName}</SubHeading>
         </Link>
     </Container>

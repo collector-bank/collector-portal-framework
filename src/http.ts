@@ -1,8 +1,20 @@
+const getCookie = (key: string) => {
+    var matches = document.cookie.match('(^|;)\\s*' + key + '\\s*=\\s*([^;]+)');
+    return matches ? matches.pop() : null;
+}
+
 const request = (method: string) => (endpoint: string, payload?: {}) => {
     const headers = new Headers({
         'Content-Type': 'application/json',
-        Accept: 'application/json',
+        'Accept': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest',
     });
+
+    const csrfToken = getCookie('CSRF-TOKEN');
+
+    if (csrfToken) {
+        headers.append('X-CSRF-Token', csrfToken);
+    }
 
     const options: RequestInit = {
         headers,

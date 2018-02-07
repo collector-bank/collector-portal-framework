@@ -43,6 +43,7 @@ const Textarea = glamorous.textarea<{ hasError?: boolean }>(
     },
     ({ hasError }) => ({
         borderColor: hasError ? colors.red : colors.mediumGray,
+        backgroundColor: hasError ? '#FFFCFC' : 'transparent',
     }),
 );
 

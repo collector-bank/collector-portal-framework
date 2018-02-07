@@ -28,20 +28,6 @@ export const formatPercentage = (fraction: number) => {
     return '';
 };
 
-export const parseAmountString = (amount: string) => {
-    if (amount) {
-        const cleaned = amount.replace(/,/g, '.').replace(/[^\d.]/g, '');
-        const num = parseFloat(cleaned);
-        const rounded = Math.round(num * 100) / 100;
-
-        if (rounded > 0) {
-            return rounded;
-        }
-    }
-
-    return 0;
-};
-
 export const formatString = (str: string, ...args: any[]) => {
     if (args.length > 0) {
         return str.replace(/{(\d+)}/g, (match, i) => args[i] == null ? match : args[i]);

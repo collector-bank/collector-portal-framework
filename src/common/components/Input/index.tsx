@@ -74,30 +74,18 @@ export class Input extends React.Component<InputProps, InputState> {
     };
 
     render() {
-        const { label, value, error, multiline, onChange, ...rest } = this.props;
+        const { label, error, multiline, ...rest } = this.props;
+        const InputElement = multiline ? Textarea : InputField;
 
         return (
             <InputContainer>
                 {label && <Label htmlFor={this.state.id} error={Boolean(error)}>{label}</Label>}
-                {multiline ? (
-                    <Textarea
-                        id={this.state.id}
-                        value={value}
-                        hasError={Boolean(error)}
-                        aria-invalid={Boolean(error)}
-                        onChange={onChange}
-                        {...rest}
-                    />
-                ) : (
-                    <InputField
-                        id={this.state.id}
-                        value={value}
-                        hasError={Boolean(error)}
-                        aria-invalid={Boolean(error)}
-                        onChange={onChange}
-                        {...rest}
-                    />
-                )}
+                <InputElement
+                    id={this.state.id}
+                    hasError={Boolean(error)}
+                    aria-invalid={Boolean(error)}
+                    {...rest}
+                />
                 {error && typeof error === 'string' && <Alert type="error" message={error} alertSize="small" />}
             </InputContainer>
         );

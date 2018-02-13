@@ -6,15 +6,18 @@ import { colors, breakpoints } from '../theme';
 const Container = glamorous.div({
     background: colors.sidebarBlueLight,
     color: colors.white,
+    boxSizing: 'border-box',
     height: 128,
+    padding: 16,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
     fontWeight: 600,
 
     [breakpoints.mobileAndLower]: {
-        height: 44,
+        height: 76,
         background: 'none',
+        justifyContent: 'flex-start',
     },
 });
 
@@ -28,37 +31,22 @@ const Link = glamorous(RouterLink)({
     },
 });
 
-const Heading = glamorous.div({
-    fontSize: 26,
-
+const Image = glamorous.img({
     [breakpoints.mobileAndLower]: {
-        fontSize: 18,
-    },
-});
-
-const SubHeading = glamorous.div({
-    display: 'block',
-    color: '#E50C81',
-    fontSize: 18,
-
-    [breakpoints.mobileAndLower]: {
-        fontSize: 14,
-        display: 'initial',
-        marginLeft: '.5em',
+        width: '90%',
     },
 });
 
 export interface LogoProps {
     location: string;
-    companyName: string;
+    image: string;
     siteName: string;
 }
 
-export const Logo: React.StatelessComponent<LogoProps> = ({ location, companyName, siteName }) => (
+export const Logo: React.StatelessComponent<LogoProps> = ({ location, image, siteName }) => (
     <Container>
         <Link to={location}>
-            <Heading>{companyName}</Heading>
-            <SubHeading>{siteName}</SubHeading>
+            <Image src={image} alt={siteName} />
         </Link>
     </Container>
 );

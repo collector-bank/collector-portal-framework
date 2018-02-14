@@ -74,7 +74,7 @@ export class RadioButtonGroup extends React.Component<RadioButtonGroupProps, Rad
                                 onChange={() => this.handleChange(item.key)}
                             />
                             <Collapse isOpen={item.key === selected} className={`${transition}`}>
-                                <KidsContainer>{item.child}</KidsContainer>
+                                <KidsContainer aria-hidden={item.key !== selected}>{item.child}</KidsContainer>
                             </Collapse>
                         </li>
                     ))}

@@ -1,7 +1,7 @@
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import glamorous from 'glamorous';
-import { colors, breakpoints } from '../theme';
+import { colors, breakpoints, fonts } from '../theme';
 
 const Container = glamorous.div({
     background: colors.sidebarBlueLight,
@@ -37,16 +37,30 @@ const Image = glamorous.img({
     },
 });
 
+const SiteName = glamorous.div({
+    textAlign: 'center',
+    font: fonts.desktop.xl,
+    fontWeight: 600,
+
+    [breakpoints.mobileAndLower]: {
+        font: fonts.desktop.medium,
+        fontWeight: 600,
+    },
+});
+
 export interface LogoProps {
     location: string;
-    image: string;
+    image?: string;
     siteName: string;
 }
 
 export const Logo: React.StatelessComponent<LogoProps> = ({ location, image, siteName }) => (
     <Container>
         <Link to={location}>
-            <Image src={image} alt={siteName} />
+            {image
+                ? <Image src={image} alt={siteName} />
+                : <SiteName>{siteName}</SiteName>
+            }
         </Link>
     </Container>
 );

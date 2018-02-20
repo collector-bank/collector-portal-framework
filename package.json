@@ -1,7 +1,7 @@
 {
     "title": "Collector Portal Framework",
     "name": "collector-portal-framework",
-    "version": "2.1.1",
+    "version": "3.0.0",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "repository": {
@@ -11,8 +11,8 @@
     "devDependencies": {
         "@storybook/addon-knobs": "^3.3.13",
         "@storybook/react": "^3.3.13",
-        "@types/react": "^16.0.37",
-        "@types/react-dom": "^16.0.4",
+        "@types/react": ">=16",
+        "@types/react-dom": ">=16",
         "@types/react-router-dom": "^4.2.4",
         "@types/storybook__addon-actions": "^3.0.2",
         "@types/storybook__addon-knobs": "^3.2.3",

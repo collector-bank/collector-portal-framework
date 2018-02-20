@@ -31,7 +31,6 @@ components.addDecorator(withKnobs);
 components.add('Button', () => {
     const types: any[] = ['primary', 'secondary', 'warn', 'text'];
     const sizes: any[] = ['small', 'medium', 'large'];
-    const icons: any[] = ['', 'bank-id', 'plus', 'cross'];
 
     return (
         <Button
@@ -39,7 +38,6 @@ components.add('Button', () => {
             size={select('Size', sizes, 'medium')}
             disabled={boolean('Disabled', false)}
             loading={boolean('Loading', false)}
-            icon={select('Icon', icons, '')}
             onClick={action('button clicked')}
         >
             {text('Label', 'En knapp')}

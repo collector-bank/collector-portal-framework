@@ -9,28 +9,16 @@ import { lighten } from 'polished';
 const whiteSpinner = require('./spinner-white.svg');
 const purpleSpinner = require('./spinner-purple.svg');
 
-const icons = {
-    'bank-id': require('./icons/bank-id.svg'),
-    plus: require('./icons/plus.svg'),
-    cross: require('./icons/cross.svg'),
-};
-
 export type ButtonType = 'primary' | 'secondary' | 'warn' | 'text';
 export type ButtonSize = 'small' | 'medium' | 'large';
-export type ButtonIcon = 'bank-id' | 'plus' | 'cross';
 
 export interface ButtonProps {
     type?: ButtonType;
     size?: ButtonSize;
-    icon?: ButtonIcon;
+    icon?: JSX.Element;
     onClick?: () => void;
     disabled?: boolean;
     loading?: boolean;
-}
-
-interface IconProps {
-    size?: ButtonSize;
-    icon: ButtonIcon;
 }
 
 const ButtonElement: any = glamorous.button<ButtonProps>(
@@ -43,6 +31,9 @@ const ButtonElement: any = glamorous.button<ButtonProps>(
         border: 0,
         borderRadius: 50,
         transition: 'background-color 100ms',
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
 
         '&:disabled': {
             backgroundColor: colors.mediumGray,
@@ -53,37 +44,11 @@ const ButtonElement: any = glamorous.button<ButtonProps>(
             cursor: 'pointer',
         },
     },
-    ({ size, type, loading, icon }) => {
-        const styles: CSSProperties = {
-            ...getSizeStyles(size),
-            ...getTypeStyles(type),
-            ...getLoadingStyles(loading, type, size),
-        };
-
-        if (icon) {
-            styles.display = 'flex';
-            styles.alignItems = 'center';
-            styles.justifyContent = 'center';
-        }
-
-        return styles;
-    },
-);
-
-// tslint:disable-next-line:no-any Will not fix due to shortcoming in glamorous API
-const Icon: any = glamorous.span<IconProps>(
-    {
-        display: 'inline-block',
-        marginRight: '.5em',
-        backgroundRepeat: 'no-repeat',
-    },
-    ({ icon, size }) => {
-        return {
-            backgroundImage: `url(${icons[icon]})`,
-            backgroundSize: '100%',
-            ...getIconSizeStyles(size),
-        };
-    },
+    ({ size, type, loading, icon }) => ({
+        ...getSizeStyles(size),
+        ...getTypeStyles(type),
+        ...getLoadingStyles(loading, type, size),
+    }),
 );
 
 const getTypeStyles = (type?: ButtonType): CSSProperties => {
@@ -228,27 +193,6 @@ const getLoadingStyles = (loading?: boolean, type?: ButtonType, size?: ButtonSiz
     return styles;
 };
 
-const getIconSizeStyles = (size?: ButtonSize): CSSProperties => {
-    switch (size) {
-        case 'small':
-            return {
-                height: 18,
-                width: 18,
-            };
-        case 'large':
-            return {
-                height: 32,
-                width: 32,
-            };
-        case 'medium':
-        default:
-            return {
-                height: 24,
-                width: 24,
-            };
-    }
-};
-
 const background = (backgroundColor: string): CSSProperties => ({
     backgroundColor,
 
@@ -261,10 +205,18 @@ const background = (backgroundColor: string): CSSProperties => ({
     },
 });
 
+const IconContainer = glamorous.span({
+    width: '1.3em',
+    height: '1.3em',
+    marginRight: '.5em',
+});
+
 export const Button: React.StatelessComponent<ButtonProps> = ({ loading, children, icon, size, ...rest }) => {
     return (
         <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} {...rest}>
-            {icon && <Icon icon={icon} size={size} />}
+            {icon &&
+                <IconContainer>{icon}</IconContainer>
+            }
             <span>{children}</span>
         </ButtonElement>
     );

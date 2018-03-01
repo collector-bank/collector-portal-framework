@@ -31,9 +31,6 @@ const ButtonElement: any = glamorous.button<ButtonProps>(
         border: 0,
         borderRadius: 50,
         transition: 'background-color 100ms',
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
 
         '&:disabled': {
             backgroundColor: colors.mediumGray,
@@ -44,11 +41,21 @@ const ButtonElement: any = glamorous.button<ButtonProps>(
             cursor: 'pointer',
         },
     },
-    ({ size, type, loading, icon }) => ({
-        ...getSizeStyles(size),
-        ...getTypeStyles(type),
-        ...getLoadingStyles(loading, type, size),
-    }),
+    ({ size, type, loading, icon }) => {
+        const styles: CSSProperties = {
+            ...getSizeStyles(size),
+            ...getTypeStyles(type),
+            ...getLoadingStyles(loading, type, size),
+        };
+
+        if (icon) {
+            styles.display = 'flex';
+            styles.alignItems = 'center';
+            styles.justifyContent = 'center';
+        }
+
+        return styles;
+    },
 );
 
 const getTypeStyles = (type?: ButtonType): CSSProperties => {

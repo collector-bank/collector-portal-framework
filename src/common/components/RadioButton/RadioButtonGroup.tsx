@@ -36,7 +36,7 @@ export interface RadioButtonItem {
 export interface RadioButtonGroupProps {
     label: string | JSX.Element;
     items: RadioButtonItem[];
-    selected: string;
+    selected?: string;
     disabled?: boolean;
     error?: string | boolean;
     onChange: (key: string) => void;

@@ -64,6 +64,7 @@ export interface InputProps {
 
 export interface InputState {
     id: string;
+    isDirty: boolean;
 }
 
 export class Input extends React.Component<InputProps, InputState> {
@@ -71,22 +72,33 @@ export class Input extends React.Component<InputProps, InputState> {
 
     state: InputState = {
         id: uniqid(),
+        isDirty: false,
     };
+
+    makeDirty = () => {
+        this.setState({ isDirty: true });
+    }
 
     render() {
         const { label, error, multiline, ...rest } = this.props;
         const InputElement = multiline ? Textarea : InputField;
+        const showError = Boolean(this.state.isDirty && error);
 
         return (
             <InputContainer>
-                {label && <Label htmlFor={this.state.id} error={Boolean(error)}>{label}</Label>}
+                {label &&
+                    <Label htmlFor={this.state.id} error={showError}>{label}</Label>
+                }
                 <InputElement
                     id={this.state.id}
-                    hasError={Boolean(error)}
-                    aria-invalid={Boolean(error)}
+                    onBlur={this.makeDirty}
+                    hasError={showError}
+                    aria-invalid={showError}
                     {...rest}
                 />
-                {error && typeof error === 'string' && <Alert type="error" message={error} alertSize="small" />}
+                {showError && typeof error === 'string' &&
+                    <Alert type="error" message={error} alertSize="small" />
+                }
             </InputContainer>
         );
     }

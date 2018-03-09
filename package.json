@@ -11,6 +11,7 @@
     "devDependencies": {
         "@storybook/addon-knobs": "^3.3.13",
         "@storybook/react": "^3.3.13",
+        "@storybook/storybook-deployer": "^2.3.0",
         "@types/react": ">=16",
         "@types/react-dom": ">=16",
         "@types/react-router-dom": "^4.2.4",
@@ -52,6 +53,7 @@
         "copy-static-files": "copyfiles -u 1 \"src/**/*\" -e \"**/*.{ts,tsx}\" dist",
         "transpile": "tsc --project ./ --declaration --outDir dist",
         "build": "npm run clean && npm run copy-static-files && npm run transpile",
+        "deploy-ghpages": "storybook-to-ghpages",
         "watch": "npm run build -- --watch",
         "prepare": "npm run build",
         "test": "npm run transpile"

@@ -4,6 +4,7 @@
 [![NPM version][npm-image]][npm-url]
 
 A collection of UI components and helper functions used in a couple of our internal and external web applications at [Collector Bank](https://www.collector.se/).
+An interactive component library can be found on our [GitHub Pages site](https://collector-bank.github.io/collector-portal-framework/).
 
 
 ## This package contains

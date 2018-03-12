@@ -48,7 +48,7 @@
         "react": ">=16.2.0"
     },
     "scripts": {
-        "start": "start-storybook -p 9000",
+        "start": "start-storybook -p 9500",
         "clean": "rimraf dist",
         "copy-static-files": "copyfiles -u 1 \"src/**/*\" -e \"**/*.{ts,tsx}\" dist",
         "transpile": "tsc --project ./ --declaration --outDir dist",

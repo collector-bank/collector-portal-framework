@@ -11,7 +11,7 @@ const SelectContainer = glamorous.div({
     marginBottom: '1.25em',
 });
 
-const SelectFieldContainer = glamorous.div<{ hasError?: boolean }>(
+const SelectFieldContainer = glamorous.div<{ hasError?: boolean, disabled?: boolean }>(
     {
         position: 'relative',
         maxWidth: 220,
@@ -31,8 +31,8 @@ const SelectFieldContainer = glamorous.div<{ hasError?: boolean }>(
             height: '100%',
         },
     },
-    ({ hasError }) => ({
-        borderColor: hasError ? colors.red : colors.mediumGray
+    ({ hasError, disabled }) => ({
+        borderColor: hasError ? colors.red : disabled ? colors.lightGray : colors.mediumGray,
     })
 );
 
@@ -97,7 +97,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
         return (
             <SelectContainer>
                 <Label htmlFor={this.state.id}>{label}</Label>
-                <SelectFieldContainer hasError={Boolean(error)}>
+                <SelectFieldContainer hasError={Boolean(error)} disabled={disabled}>
                     <SelectField id={this.state.id} disabled={disabled} value={value ? value : ''} onChange={onChange}>
                         {items ? (
                             items.map(item => (

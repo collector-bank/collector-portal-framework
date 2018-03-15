@@ -83,7 +83,7 @@ export interface DatePickerProps {
     selectedDate?: Date;
     minDate?: Date;
     maxDate?: Date;
-    invalidErrorMessage?: string;
+    invalidMessage?: string;
     onChange: (date: Date | null) => void;
 }
 
@@ -104,6 +104,15 @@ export class DatePicker extends React.Component<DatePickerProps, State> {
         moment.locale(this.props.locale);
     }
 
+    /*
+    * Here we use the fact that there are two onChange handlers, one of which
+    * is used to set a valid date only, to handle an invalid state.
+    * We set the isValid state to true whenever a valid date is set,
+    * which is the onChange, but we always set isValid to false otherwise.
+    * Since onChange is always executed later, we are able to ensure that
+    * isValid is only set to valid if a proper onChange has been run.
+    * Then, onBlur, if we did not recieve an onChange event, we display an error message.
+    */
     private handleChange = (momentObject: moment.Moment) => {
         const date = momentObject ? new Date(momentObject.format()) : null;
 
@@ -125,8 +134,8 @@ export class DatePicker extends React.Component<DatePickerProps, State> {
     }
 
     render() {
-        const { label, selectedDate, minDate, maxDate, invalidErrorMessage } = this.props;
-        const showError = this.state.showError && !this.state.isValid && invalidErrorMessage;
+        const { label, selectedDate, minDate, maxDate, invalidMessage } = this.props;
+        const showError = this.state.showError && !this.state.isValid && invalidMessage;
 
         return (
             <InputContainer>
@@ -152,7 +161,7 @@ export class DatePicker extends React.Component<DatePickerProps, State> {
                     }
                 />
                 {showError &&
-                    <Alert type="error" message={invalidErrorMessage} alertSize="small" />
+                    <Alert type="error" message={invalidMessage} alertSize="small" />
                 }
             </InputContainer>
         );

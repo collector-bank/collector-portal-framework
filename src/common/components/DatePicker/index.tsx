@@ -87,7 +87,7 @@ export interface DatePickerProps {
     onChange: (date: Date | null) => void;
 }
 
-interface State {
+export interface State {
     showError: boolean;
     isValid: boolean;
 }

@@ -2,7 +2,7 @@ import * as React from 'react';
 import ReactDatePicker from 'react-datepicker';
 import * as moment from 'moment';
 import { css } from 'glamor';
-import { Label } from '../';
+import { Label, Alert } from '../';
 import { InputContainer, InputField } from '../Input';
 import { borderRadius, colors, fonts } from '../../../theme';
 
@@ -83,11 +83,22 @@ export interface DatePickerProps {
     selectedDate?: Date;
     minDate?: Date;
     maxDate?: Date;
+    invalidErrorMessage?: string;
     onChange: (date: Date | null) => void;
 }
 
-export class DatePicker extends React.Component<DatePickerProps, {}> {
+interface State {
+    showError: boolean;
+    isValid: boolean;
+}
+
+export class DatePicker extends React.Component<DatePickerProps, State> {
     static displayName = 'Collector.DatePicker';
+
+    state: State = {
+        showError: false,
+        isValid: false,
+    };
 
     componentWillMount() {
         moment.locale(this.props.locale);
@@ -95,11 +106,27 @@ export class DatePicker extends React.Component<DatePickerProps, {}> {
 
     private handleChange = (momentObject: moment.Moment) => {
         const date = momentObject ? new Date(momentObject.format()) : null;
-        this.props.onChange(date);
+
+        this.setState({ isValid: true }, () => {
+            this.props.onChange(date);
+        });
+    }
+
+    private handleChangeRaw = () => {
+        this.setState({ isValid: false });
+    }
+
+    private handleBlur = () => {
+        this.setState((prevState) => ({ showError: !prevState.isValid }), () => {
+            if (!this.state.isValid) {
+                this.props.onChange(null);
+            }
+        });
     }
 
     render() {
-        const { label, selectedDate, minDate, maxDate } = this.props;
+        const { label, selectedDate, minDate, maxDate, invalidErrorMessage } = this.props;
+        const showError = this.state.showError && !this.state.isValid && invalidErrorMessage;
 
         return (
             <InputContainer>
@@ -112,6 +139,8 @@ export class DatePicker extends React.Component<DatePickerProps, {}> {
                     useWeekdaysShort={true}
                     calendarClassName={`${style}`}
                     onChange={this.handleChange}
+                    onChangeRaw={this.handleChangeRaw}
+                    onBlur={this.handleBlur}
                     customInput={
                         <InputField
                             css={{
@@ -122,6 +151,9 @@ export class DatePicker extends React.Component<DatePickerProps, {}> {
                         />
                     }
                 />
+                {showError &&
+                    <Alert type="error" message={invalidErrorMessage} alertSize="small" />
+                }
             </InputContainer>
         );
     }

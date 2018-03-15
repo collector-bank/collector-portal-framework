@@ -1,9 +1,10 @@
 import * as React from 'react';
+import Collapse from 'react-css-collapse';
 import glamorous, { CSSProperties, GlamorousComponent } from 'glamorous';
 import * as uniqid from 'uniqid';
 import { borderRadius, colors } from '../../../theme';
-import { Alert } from '../Alert';
 import { Label } from '../Label';
+import { css } from 'glamor';
 
 export const InputContainer: GlamorousComponent<React.HTMLProps<HTMLDivElement>, {}> = glamorous.div({
     maxWidth: 500,
@@ -16,9 +17,10 @@ const inputStyles: CSSProperties = {
     width: '100%',
     borderRadius: borderRadius.small,
     border: '1px solid',
-    padding: 11,
+    padding: 11, // To make it 12 pixels when accounting for the 1px border above
     boxSizing: 'border-box',
     appearance: 'none',
+    transition: 'border-bottom-left-radius 150ms, border-bottom-right-radius 150ms',
 
     '&:disabled': {
         background: colors.offWhite,
@@ -27,13 +29,31 @@ const inputStyles: CSSProperties = {
     },
 };
 
+const inputErrorTransition = css({
+    transition: 'height 150ms',
+});
+
+
 export const InputField = glamorous.input<{ hasError?: boolean }>(
     inputStyles,
     ({ hasError }) => ({
-        borderColor: hasError ? colors.red : colors.mediumGray,
-        backgroundColor: hasError ? '#FFFCFC' : colors.white,
-    })
+        borderBottomLeftRadius: hasError ? 0 : borderRadius.small,
+        borderBottomRightRadius: hasError ? 0 : borderRadius.small,
+        borderBottomColor: hasError ? colors.red : colors.black
+    }),
 );
+
+export const InputError = glamorous.div({
+    background: colors.red,
+    fontWeight: 600,
+    borderBottomLeftRadius: borderRadius.small,
+    borderBottomRightRadius: borderRadius.small,
+    color: colors.white,
+    padding: 8,
+    paddingLeft: 12,
+    minHeight: 40,
+    boxSizing: 'border-box',
+});
 
 const Textarea = glamorous.textarea<{ hasError?: boolean }>(
     {
@@ -96,9 +116,10 @@ export class Input extends React.Component<InputProps, InputState> {
                     aria-invalid={showError}
                     {...rest}
                 />
-                {showError && typeof error === 'string' &&
-                    <Alert type="error" message={error} alertSize="small" />
-                }
+
+                <Collapse isOpen={showError && typeof error === 'string'} className={`${inputErrorTransition}`}>
+                    <InputError>{error}</InputError>
+                </Collapse>
             </InputContainer>
         );
     }

@@ -177,6 +177,7 @@ components.add('Date picker', () => {
             locale="sv"
             label={text('Label', 'En label')}
             onChange={action('date picker changed')}
+            invalidMessage="Felaktigt datum!"
             minDate={new Date()}
             selectedDate={new Date()}
         />

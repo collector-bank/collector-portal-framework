@@ -20,6 +20,7 @@ const inputStyles: CSSProperties = {
     padding: 11, // To make it 12 pixels when accounting for the 1px border above
     boxSizing: 'border-box',
     appearance: 'none',
+    transition: 'border-bottom-left-radius 150ms, border-bottom-right-radius 150ms',
 
     '&:disabled': {
         background: colors.offWhite,
@@ -28,21 +29,10 @@ const inputStyles: CSSProperties = {
     },
 };
 
-const transition = css({
+const inputErrorTransition = css({
     transition: 'height 150ms',
 });
 
-const inputErrorStyles: CSSProperties = {
-    background: colors.red,
-    fontWeight: 600,
-    borderBottomLeftRadius: borderRadius.small,
-    borderBottomRightRadius: borderRadius.small,
-    color: colors.white,
-    padding: 8,
-    paddingLeft: 12,
-    maxHeight: 0,
-    transition: 'max-height 150ms',
-}
 
 export const InputField = glamorous.input<{ hasError?: boolean }>(
     inputStyles,
@@ -53,12 +43,17 @@ export const InputField = glamorous.input<{ hasError?: boolean }>(
     }),
 );
 
-export const InputError = glamorous.div<{ hasError?: boolean }>(
-    inputErrorStyles,
-    ({ hasError }) => ({
-        maxHeight: '100%',
-    }),
-);
+export const InputError = glamorous.div({
+    background: colors.red,
+    fontWeight: 600,
+    borderBottomLeftRadius: borderRadius.small,
+    borderBottomRightRadius: borderRadius.small,
+    color: colors.white,
+    padding: 8,
+    paddingLeft: 12,
+    minHeight: 40,
+    boxSizing: 'border-box',
+});
 
 const Textarea = glamorous.textarea<{ hasError?: boolean }>(
     {
@@ -122,8 +117,8 @@ export class Input extends React.Component<InputProps, InputState> {
                     {...rest}
                 />
 
-                <Collapse isOpen={showError && typeof error === 'string'} className={`${transition}`}>
-                    <InputError hasError={Boolean(error)}> {error} </InputError>
+                <Collapse isOpen={showError && typeof error === 'string'} className={`${inputErrorTransition}`}>
+                    <InputError>{error}</InputError>
                 </Collapse>
             </InputContainer>
         );

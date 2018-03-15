@@ -1,8 +1,9 @@
 import * as React from 'react';
 import ReactDatePicker from 'react-datepicker';
+import Collapse from 'react-css-collapse';
 import * as moment from 'moment';
 import { css } from 'glamor';
-import { Label, Alert } from '../';
+import { Label, InputError } from '../';
 import { InputContainer, InputField } from '../Input';
 import { borderRadius, colors, fonts } from '../../../theme';
 
@@ -11,6 +12,10 @@ import 'moment/locale/fi';
 import 'react-datepicker/dist/react-datepicker.css';
 
 const calendar = require('./calendar.svg');
+
+const inputErrorTransition = css({
+    transition: 'height 150ms',
+});
 
 const style = css({
     '.react-datepicker': {
@@ -73,8 +78,9 @@ const style = css({
     }
 });
 
+const inputWidth = 220;
 css.global('.react-datepicker__input-container', {
-    width: 220,
+    width: inputWidth,
 });
 
 export interface DatePickerProps {
@@ -135,7 +141,7 @@ export class DatePicker extends React.Component<DatePickerProps, State> {
 
     render() {
         const { label, selectedDate, minDate, maxDate, invalidMessage } = this.props;
-        const showError = this.state.showError && !this.state.isValid && invalidMessage;
+        const showError = Boolean(this.state.showError && !this.state.isValid && invalidMessage);
 
         return (
             <InputContainer>
@@ -152,6 +158,7 @@ export class DatePicker extends React.Component<DatePickerProps, State> {
                     onBlur={this.handleBlur}
                     customInput={
                         <InputField
+                            hasError={showError}
                             css={{
                                 background: `url(${calendar}) no-repeat 95% center`,
                                 backgroundPosition: `calc(100% - 12px) 50%`, // doesn't work in IE11, that's why we need the 95% fallback above
@@ -160,9 +167,10 @@ export class DatePicker extends React.Component<DatePickerProps, State> {
                         />
                     }
                 />
-                {showError &&
-                    <Alert type="error" message={invalidMessage} alertSize="small" />
-                }
+
+                <Collapse isOpen={showError} className={`${inputErrorTransition}`}>
+                    <InputError style={{maxWidth: inputWidth}}>{invalidMessage}</InputError>
+                </Collapse>
             </InputContainer>
         );
     }

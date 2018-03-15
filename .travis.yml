@@ -9,3 +9,4 @@ deploy:
   on:
     repo: collector-bank/collector-portal-framework
     branch: master
+  skip_cleanup: true

@@ -17,6 +17,7 @@ const inputStyles: CSSProperties = {
     width: '100%',
     borderRadius: borderRadius.small,
     border: '1px solid',
+    borderColor: colors.mediumGray,
     padding: 11, // To make it 12 pixels when accounting for the 1px border above
     boxSizing: 'border-box',
     appearance: 'none',
@@ -39,7 +40,7 @@ export const InputField = glamorous.input<{ hasError?: boolean }>(
     ({ hasError }) => ({
         borderBottomLeftRadius: hasError ? 0 : borderRadius.small,
         borderBottomRightRadius: hasError ? 0 : borderRadius.small,
-        borderBottomColor: hasError ? colors.red : colors.black
+        borderBottomColor: hasError ? colors.red : colors.mediumGray
     }),
 );
 

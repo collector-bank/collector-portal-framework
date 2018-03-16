@@ -103,7 +103,7 @@ export class DatePicker extends React.Component<DatePickerProps, State> {
 
     state: State = {
         showError: false,
-        isValid: false,
+        isValid: true,
     };
 
     componentWillMount() {

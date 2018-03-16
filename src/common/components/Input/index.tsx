@@ -45,7 +45,7 @@ export const InputField = glamorous.input<{ hasError?: boolean }>(
 
 export const InputError = glamorous.div({
     background: colors.red,
-    fontWeight: 600,
+    fontWeight: 500,
     borderBottomLeftRadius: borderRadius.small,
     borderBottomRightRadius: borderRadius.small,
     color: colors.white,

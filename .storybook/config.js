@@ -10,8 +10,7 @@ addDecorator(story => (
     </div>
 ));
 
-const loadStories = () => {
-    require('../stories');
-}
+const loadStory = require.context('../src', true, /(story|stories)\.tsx$/);
+const loadStories = () => loadStory.keys().forEach(loadStory);
 
 configure(loadStories, module);

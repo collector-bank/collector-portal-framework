@@ -28,44 +28,44 @@ You can see a demo of the UI components by cloning this repo, doing `npm install
 
 ### Generic components
 
-| Component          | Notes                           | Source                                                           |
-|--------------------|---------------------------------|------------------------------------------------------------------|
-| Alert              |                                 | [Source](src/common/components/Alert/index.tsx)                  |
-| Button             |                                 | [Source](src/common/components/Button/index.tsx)                 |
-| Button group       |                                 | [Source](src/common/components/Button/ButtonGroup.tsx)           |
-| Checkbox           |                                 | [Source](src/common/components/Checkbox/index.tsx)               |
-| Checkbox group     |                                 | [Source](src/common/components/Checkbox/CheckboxGroup.tsx)       |
-| Date picker        |                                 | [Source](src/common/components/DatePicker/index.tsx)             |
-| Date picker group  |                                 | [Source](src/common/components/DatePicker/index.tsx)             |
-| Input              |                                 | [Source](src/common/components/Input/index.tsx)                  |
-| Radio button       |                                 | [Source](src/common/components/RadioButton/index.tsx)            |
-| Radio button group |                                 | [Source](src/common/components/RadioButton/RadioButtonGroup.tsx) |
-| Select             |                                 | [Source](src/common/components/Select/index.tsx)                 |
-| Spinner            |                                 | [Source](src/common/components/Spinner/index.tsx)                |
+| Component                                                         | Source                                                           |
+|-------------------------------------------------------------------|------------------------------------------------------------------|
+| [Alert](src/common/components/Alert/README.md)                    | [Source](src/common/components/Alert/index.tsx)                  |
+| [Button](src/common/components/Button/README.md)                  | [Source](src/common/components/Button/index.tsx)                 |
+| [Button group](src/common/components/Button/README.md)            | [Source](src/common/components/Button/ButtonGroup.tsx)           |
+| [Checkbox](src/common/components/Checkbox/README.md)              | [Source](src/common/components/Checkbox/index.tsx)               |
+| [Checkbox group](src/common/components/Checkbox/README.md)        | [Source](src/common/components/Checkbox/CheckboxGroup.tsx)       |
+| [Date picker](src/common/components/DatePicker/README.md)         | [Source](src/common/components/DatePicker/index.tsx)             |
+| [Date picker group](src/common/components/DatePicker/README.md)   | [Source](src/common/components/DatePicker/index.tsx)             |
+| [Input](src/common/components/Input/README.md)                    | [Source](src/common/components/Input/index.tsx)                  |
+| [Radio button](src/common/components/RadioButton/README.md)       | [Source](src/common/components/RadioButton/index.tsx)            |
+| [Radio button group](src/common/components/RadioButton/README.md) | [Source](src/common/components/RadioButton/RadioButtonGroup.tsx) |
+| [Select](src/common/components/Select/README.md)                  | [Source](src/common/components/Select/index.tsx)                 |
+| [Spinner](src/common/components/Spinner/README.md)                | [Source](src/common/components/Spinner/index.tsx)                |
 
 ### Typographic components
 
-| Component          | Notes                           | Source                                                           |
-|--------------------|---------------------------------|------------------------------------------------------------------|
-| H1                 |                                 | [Source](src/common/typography/H1.tsx)                           |
-| H2                 |                                 | [Source](src/common/typography/H2.tsx)                           |
-| H3                 |                                 | [Source](src/common/typography/H3.tsx)                           |
-| Text               |                                 | [Source](src/common/typography/Text.tsx)                         |
-| TextLink           |                                 | [Source](src/common/typography/TextLink.tsx)                     |
+| Component          | Source                                                           |
+|--------------------|------------------------------------------------------------------|
+| H1                 | [Source](src/common/typography/H1.tsx)                           |
+| H2                 | [Source](src/common/typography/H2.tsx)                           |
+| H3                 | [Source](src/common/typography/H3.tsx)                           |
+| Text               | [Source](src/common/typography/Text.tsx)                         |
+| TextLink           | [Source](src/common/typography/TextLink.tsx)                     |
 
 ### "Portal specific" components
 
-| Component          | Notes                           | Source                                                           |
-|--------------------|---------------------------------|------------------------------------------------------------------|
-| Togglable          |                                 | [Source](src/components/Togglable/index.tsx)                     |
-| Fieldset           |                                 | [Source](src/components/Fieldset.tsx)                            |
-| Logo               |                                 | [Source](src/components/Logo.tsx)                                |
-| MainContainer      |                                 | [Source](src/components/MainContainer.tsx)                       |
-| MainMenu           |                                 | [Source](src/components/MainMenu.tsx)                            |
-| Modal              |                                 | [Source](src/components/Modal.tsx)                               |
-| PageHeader         |                                 | [Source](src/components/PageHeader.tsx)                          |
-| Tabs               |                                 | [Source](src/components/Tabs.tsx)                                |
-| ValueList          |                                 | [Source](src/components/ValueList.tsx)                           |
+| Component          | Source                                                           |
+|--------------------|------------------------------------------------------------------|
+| Togglable          | [Source](src/components/Togglable/index.tsx)                     |
+| Fieldset           | [Source](src/components/Fieldset.tsx)                            |
+| Logo               | [Source](src/components/Logo.tsx)                                |
+| MainContainer      | [Source](src/components/MainContainer.tsx)                       |
+| MainMenu           | [Source](src/components/MainMenu.tsx)                            |
+| Modal              | [Source](src/components/Modal.tsx)                               |
+| PageHeader         | [Source](src/components/PageHeader.tsx)                          |
+| Tabs               | [Source](src/components/Tabs.tsx)                                |
+| ValueList          | [Source](src/components/ValueList.tsx)                           |
 
 
 [npm-url]: https://npmjs.org/package/collector-portal-framework

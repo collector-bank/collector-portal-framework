@@ -4,14 +4,14 @@ This component allows the user to choose one value from a list. When the compone
 
 ## Props
 
-| Name       | Required  | Type             | Possible values                               |
-|------------|-----------|------------------|-----------------------------------------------|
-| `label`    |           | string           |                                               |
-| `disabled` |           | boolean          |                                               |
-| `error`    |           | string | boolean |                                               |
-| `items`    |           | `SelectItem[]`   |                                               |
-| `value`    |           | string           |                                               |
-| `onChange` |     ✓     | `event => void`  |                                               |
+| Name       | Required  | Type              | Possible values                               |
+|------------|-----------|-------------------|-----------------------------------------------|
+| `label`    |           | string            |                                               |
+| `disabled` |           | boolean           |                                               |
+| `error`    |           | string or boolean |                                               |
+| `items`    |           | `SelectItem[]`    |                                               |
+| `value`    |           | string            |                                               |
+| `onChange` |     ✓     | `event => void`   |                                               |
 
 
 ```typescript

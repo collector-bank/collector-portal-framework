@@ -11,7 +11,7 @@ This component can be used for freeform data entry.
 | `placeholder` |          | string            |                                               |
 | `multiline`   |          | boolean           |                                               |
 | `disabled`    |          | boolean           |                                               |
-| `error`       |          | string | boolean  |                                               |
+| `error`       |          | string or boolean |                                               |
 | `maxLength`   |          | number            |                                               |
 | `pattern`     |          | string            |                                               |
 | `name`        |          | string            |                                               |

@@ -30,7 +30,7 @@ A group of radio buttons.
 | `items`       |           | `RadioButtonItem[]`   |
 | `selected`    |           | string                |
 | `disabled`    |           | boolean               |
-| `error`       |           | string | boolean      |
+| `error`       |           | string or boolean     |
 | `onChange`    |           | `key => void`         |
 
 ```typescript

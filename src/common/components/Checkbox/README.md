@@ -30,7 +30,7 @@ A group of checkboxes.
 | `items`       |           | `CheckboxItem[]`                          |
 | `checked`     |           | string[]                                  |
 | `disabled`    |           | boolean                                   |
-| `error`       |           | string | boolean                          |
+| `error`       |           | string or boolean                         |
 | `onChange`    |           | `(key: string, checked: boolean) => void` |
 
 ```typescript

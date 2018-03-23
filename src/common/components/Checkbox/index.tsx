@@ -25,7 +25,7 @@ const Input = glamorous.input({
     flexShrink: 0,
     borderRadius: borderRadius.small,
     marginRight: '1em',
-    transition: 'border-color 150ms',
+    transition: 'border-color 150ms, background 150ms, opacity 150ms',
 
     '&:after': {
         content: '""',
@@ -41,12 +41,12 @@ const Input = glamorous.input({
     },
 
     '&:checked': {
+        backgroundColor: colors.purple,
         borderColor: colors.purple,
     },
 
     '&:checked:after': {
         backgroundImage: `url(${checkmark})`,
-        backgroundColor: colors.purple,
     },
 
     '&:disabled': {

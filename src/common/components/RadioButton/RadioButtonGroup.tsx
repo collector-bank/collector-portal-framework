@@ -27,8 +27,10 @@ const transition = css({
     transition: 'height 150ms',
 });
 
+export type Key = any;
+
 export interface RadioButtonItem {
-    key: string;
+    key: Key;
     label: string;
     child?: JSX.Element;
 }
@@ -36,10 +38,10 @@ export interface RadioButtonItem {
 export interface RadioButtonGroupProps {
     label: string | JSX.Element;
     items: RadioButtonItem[];
-    selected?: string;
+    selected?: Key;
     disabled?: boolean;
     error?: string | boolean;
-    onChange: (key: string) => void;
+    onChange: (key: Key) => void;
 }
 
 export interface RadioButtonGroupState {
@@ -64,8 +66,8 @@ export class RadioButtonGroup extends React.Component<RadioButtonGroupProps, Rad
             <RadioButtonGroupContainer>
                 <Label>{label}</Label>
                 <RadioButtonList>
-                    {items.map(item => (
-                        <li key={item.key}>
+                    {items.map((item, i) => (
+                        <li key={i}>
                             <RadioButton
                                 label={item.label}
                                 name={this.state.name}

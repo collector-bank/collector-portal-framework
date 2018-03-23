@@ -28,14 +28,14 @@ A group of radio buttons.
 |---------------|-----------|-----------------------|
 | `label`       |     ✓     | string                |
 | `items`       |           | `RadioButtonItem[]`   |
-| `selected`    |           | string                |
+| `selected`    |           | any                   |
 | `disabled`    |           | boolean               |
 | `error`       |           | string or boolean     |
 | `onChange`    |           | `key => void`         |
 
 ```typescript
 export interface RadioButtonItem {
-    key: string;
+    key: any;
     label: string;
     child?: JSX.Element;
 }

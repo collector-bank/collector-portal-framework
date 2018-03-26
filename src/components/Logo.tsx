@@ -32,6 +32,8 @@ const Link = glamorous(RouterLink)({
 });
 
 const Image = glamorous.img({
+    display: 'block',
+
     [breakpoints.mobileAndLower]: {
         width: '90%',
     },

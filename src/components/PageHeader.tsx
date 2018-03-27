@@ -22,6 +22,10 @@ const PageHeaderContainer = glamorous.div({
         minHeight: 0,
         border: 0,
     },
+
+    '@media print': {
+        display: 'none',
+    },
 });
 
 const Title = glamorous.h1({

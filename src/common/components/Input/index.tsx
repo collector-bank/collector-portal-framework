@@ -79,7 +79,7 @@ export interface InputProps {
     pattern?: string;
     name?: string;
     onChange?: (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
-    innerRef?: () => void;
+    innerRef?: (inputElement: HTMLInputElement) => void;
     type?: string;
 }
 

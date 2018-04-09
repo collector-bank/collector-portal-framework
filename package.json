@@ -1,7 +1,7 @@
 {
     "title": "Collector Portal Framework",
     "name": "collector-portal-framework",
-    "version": "3.8.1",
+    "version": "3.9.1",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "repository": {
@@ -15,6 +15,7 @@
         "@types/react": ">=16",
         "@types/react-dom": ">=16",
         "@types/react-router-dom": "^4.2.5",
+        "@types/react-addons-css-transition-group": "15.0.4",
         "@types/storybook__addon-actions": "^3.0.3",
         "@types/storybook__addon-knobs": "^3.2.3",
         "@types/storybook__react": "^3.0.7",
@@ -40,7 +41,9 @@
         "react-css-collapse": "^3.1.0",
         "react-datepicker": "^1.2.2",
         "react-modal": "^3.3.2",
-        "uniqid": "^4.1.1"
+        "uniqid": "^4.1.1",
+        "react-autosuggest": "9.3.4",
+        "react-addons-css-transition-group": "15.6.2"
     },
     "peerDependencies": {
         "react-dom": ">=16.2.0",

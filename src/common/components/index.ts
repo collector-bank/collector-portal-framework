@@ -6,6 +6,7 @@ export * from './DatePicker';
 export * from './DatePicker/DatePickerGroup';
 export * from './Alert';
 export * from './Input';
+export * from './TagsInput';
 export * from './Label';
 export * from './RadioButton';
 export * from './RadioButton/RadioButtonGroup';

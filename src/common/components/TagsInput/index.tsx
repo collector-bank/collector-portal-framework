@@ -6,7 +6,7 @@ import { Tag } from './Tag';
 import { Text } from '../../../common/typography';
 import { css, CSSProperties } from 'glamor';
 import { borderRadius, colors } from '../../../theme';
-import * as CSSTransitionGroup from 'react-addons-css-transition-group'; // ES6
+import * as CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import * as uniqid from 'uniqid';
 
 export interface TagInputProps {

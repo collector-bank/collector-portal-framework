@@ -161,6 +161,10 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
     private renderInputComponent = (inputProps: {}) => <Input {...inputProps} />;
 
     private onSuggestionSelected = (event: any, { suggestion }: any) => {
+        if (suggestion == null || suggestion.length === 0) {
+            return;
+        }
+
         this.props.onChange(this.props.tags.concat({ label: suggestion, id: uniqid() }));
 
         this.setState({

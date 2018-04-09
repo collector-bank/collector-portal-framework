@@ -4,65 +4,52 @@ import { Input, Button, ButtonGroup, Label } from '../../../common/components';
 import glamorous from 'glamorous';
 import { Tag } from './Tag';
 import { Text } from '../../../common/typography';
-import { css, CSSProperties } from 'glamor';
+import { css } from 'glamor';
 import { borderRadius, colors } from '../../../theme';
 import * as CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import * as uniqid from 'uniqid';
 
 export interface TagInputProps {
+    tags: Tag[];
     autocompleteItems?: string[];
     placeholder?: string;
     label?: string | JSX.Element;
     canAddAllAutocompleteItemsButton?: boolean;
     addAllAutocompleteItemsButtonText?: string;
-    onChange: (items: string[]) => void;
+    clearAllAutocompleteItemsButtonText?: string;
+    onChange: (items: Tag[]) => void;
 }
 
 export interface TagInputState {
-    tags: Tag[];
     value: string;
     suggestions: string[];
     id: string;
 }
 
-interface InputContainerProps {
-    hasButton?: boolean;
-}
-
-const TagsInputContainer = glamorous.div<InputContainerProps>(
-    {
-        minHeight: 124,
-    },
-    ({ hasButton }) => {
-        return {
-            minHeight: 157
-        };
-    }
-);
-
-const TagsTransitionContainer = css({
-    display: 'flex'
+const tagsTransitionContainer = css({
+    display: 'flex',
+    flexWrap: 'wrap',
 });
 
-const TagsTransitionEnter = css({
-    opacity: 0.01,
+const tagsTransitionEnter = css({
+    opacity: 0,
 });
 
-const TagsTransitionEnterActive = css({
+const tagsTransitionEnterActive = css({
     opacity: 1,
     transition: 'opacity 200ms ease-in',
 });
 
-const TagsTransitionLeave = css({
+const tagsTransitionLeave = css({
     opacity: 1,
 });
 
-const TagsTransitionLeaveActive = css({
-    opacity: 0.01,
+const tagsTransitionLeaveActive = css({
+    opacity: 0,
     transition: 'opacity 300ms ease-out',
 });
 
-const suggestionsContainerOpen: CSSProperties = css({
+const suggestionsContainerOpen = css({
     position: 'absolute',
     background: colors.white,
     display: 'block',
@@ -79,12 +66,12 @@ const suggestionsContainerOpen: CSSProperties = css({
     overflow: 'scroll',
 });
 
-const suggestionsList: CSSProperties = css({
+const suggestionsList = css({
     listStyle: 'none',
     padding: 0
 });
 
-const suggestionCSS: CSSProperties = css({
+const suggestionCSS = css({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -101,7 +88,7 @@ const suggestionCSS: CSSProperties = css({
     },
 });
 
-const suggestionHighlighted: CSSProperties = css({
+const suggestionHighlighted = css({
     background: colors.offWhite,
 });
 
@@ -116,6 +103,7 @@ const TagsContainer = glamorous.div({
     display: 'flex',
     marginBottom: 24,
     flexWrap: 'wrap',
+    minHeight: 56
 });
 
 export class TagsInput extends React.Component<TagInputProps, TagInputState> {
@@ -123,28 +111,19 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
         id: uniqid(),
         value: '',
         suggestions: [],
-        tags: [],
     };
 
-    getNextId = (tags: Tag[]): number => tags.length === 0 ? tags.length : tags[tags.length - 1].id + 1;
-
-    triggerUpdate() {
-        this.props.onChange(this.state.tags.map(e => e.label));
+    private handleDelete = (id: string) => {
+        this.props.onChange(this.props.tags.filter((tag) => tag.id !== id));
     }
 
-    handleDelete = (id: number) => {
-        this.setState(({ tags }) => ({
-            tags: tags.filter((tag) => tag.id !== id),
-        }));
-    }
-
-    handleChange = (evt: React.FormEvent<HTMLInputElement>, { newValue }: any) => {
+    private handleChange = (evt: React.FormEvent<HTMLInputElement>, { newValue }: any) => {
         this.setState({
             value: newValue
         });
     }
 
-    getSuggestions = (value: string) => {
+    private getSuggestions = (value: string) => {
         if (!this.props.autocompleteItems) {
             return [];
         }
@@ -153,44 +132,45 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
         const inputLength = inputValue.length;
 
         return this.props.autocompleteItems
-            .filter(item => !this.state.tags.some(tag => tag.label === item))
+            .filter(item => !this.props.tags.some(tag => tag.label === item))
             .filter(item =>
                 item.toLowerCase().slice(0, inputLength) === inputValue
             );
     }
 
-    getSuggestionValue = (suggestion: string) => suggestion;
+    private getSuggestionValue = (suggestion: string) => suggestion;
 
-    renderSuggestion = (suggestion: string) => (
+    private renderSuggestion = (suggestion: string) => (
         <Text style={{ marginBottom: 0 }}>
             {suggestion}
         </Text>
     )
 
-    onSuggestionsFetchRequested = ({ value }: { value: string, reason: any }) => {
+    private onSuggestionsFetchRequested = ({ value }: any) => {
         this.setState({
             suggestions: this.getSuggestions(value)
         });
     }
 
-    onSuggestionsClearRequested = () => {
+    private onSuggestionsClearRequested = () => {
         this.setState({
             suggestions: []
         });
     }
 
-    renderInputComponent = (inputProps: {}) => <Input {...inputProps} />;
+    private renderInputComponent = (inputProps: {}) => <Input {...inputProps} />;
 
-    onSuggestionSelected = (event: any, { suggestion }: { suggestion: string }) => {
-        this.setState(prevState => ({
-            tags: [...prevState.tags.concat({ label: suggestion, id: this.getNextId(prevState.tags) })],
+    private onSuggestionSelected = (event: any, { suggestion }: any) => {
+        this.props.onChange(this.props.tags.concat({ label: suggestion, id: uniqid() }));
+
+        this.setState({
             value: '',
-        }), this.triggerUpdate); // tslint:disable-line
+        });
     }
 
-    renderTag = (tag: Tag) => <Tag key={tag.id} tag={tag} onDelete={this.handleDelete} />;
+    private renderTag = (tag: Tag) => <Tag key={tag.id} tag={tag} onDelete={this.handleDelete} />;
 
-    handleKeyDown = (event: React.KeyboardEvent<KeyboardEvent>) => {
+    private handleKeyDown = (event: React.KeyboardEvent<KeyboardEvent>) => {
         if (event.key === 'Enter') {
             if (!this.state.suggestions.some(suggestion => this.state.value !== suggestion)) {
                 this.onSuggestionSelected(null, { suggestion: this.state.value });
@@ -198,72 +178,75 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
         }
     }
 
-    addAllScopes = () => {
+    private addAllAutocompleteItems = () => {
         const tags: Tag[] = this.props.autocompleteItems!
-            .map((suggestion, index) => {
-                return { label: suggestion, id: index };
-            });
+            .map((suggestion, index) => ({ label: suggestion, id: index.toString() }));
 
-        this.setState({ tags }, this.triggerUpdate);
+        this.props.onChange(tags);
+    }
+
+    private handleClear = () => {
+        this.setState({ value: '' }, () => this.props.onChange([]));
     }
 
     render() {
-        const { value, tags, id, suggestions } = this.state;
-        const { placeholder, canAddAllAutocompleteItemsButton, addAllAutocompleteItemsButtonText, label } = this.props;
+        const { value, id, suggestions } = this.state;
+        const { placeholder, tags, canAddAllAutocompleteItemsButton, addAllAutocompleteItemsButtonText, clearAllAutocompleteItemsButtonText, label } = this.props;
 
         const inputProps: any = {
-            placeholder: placeholder,
+            placeholder,
             value,
             onChange: this.handleChange,
             onKeyDown: this.handleKeyDown,
+            id
         };
 
         return (
-            <TagsInputContainer>
-                <>
-                    {label &&
-                        <Label htmlFor={id}>{label}</Label>
-                    }
-                    <Autosuggest
-                        suggestions={suggestions}
-                        getSuggestionValue={this.getSuggestionValue}
-                        onSuggestionSelected={this.onSuggestionSelected}
-                        renderSuggestion={this.renderSuggestion}
-                        onSuggestionsClearRequested={this.onSuggestionsClearRequested}
-                        onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
-                        inputProps={inputProps}
-                        focusInputOnSuggestionClick={false}
-                        renderInputComponent={this.renderInputComponent}
-                        highlightFirstSuggestion={true}
-                        theme={theme}
-                    />
+            <>
+                {label &&
+                    <Label htmlFor={id}>{label}</Label>
+                }
+                <Autosuggest
+                    suggestions={suggestions}
+                    getSuggestionValue={this.getSuggestionValue}
+                    onSuggestionSelected={this.onSuggestionSelected}
+                    renderSuggestion={this.renderSuggestion}
+                    onSuggestionsClearRequested={this.onSuggestionsClearRequested}
+                    onSuggestionsFetchRequested={this.onSuggestionsFetchRequested}
+                    inputProps={inputProps}
+                    focusInputOnSuggestionClick={false}
+                    renderInputComponent={this.renderInputComponent}
+                    highlightFirstSuggestion={true}
+                    theme={theme}
+                />
 
-                    {canAddAllAutocompleteItemsButton &&
-                        <ButtonGroup>
-                            <Button onClick={this.addAllScopes} size="small" type="secondary">{addAllAutocompleteItemsButtonText}</Button>
-                            <Button size="small" type="warn" onClick={() => this.setState({ tags: [], value: '' }, this.triggerUpdate)}>Rensa</Button>
-                        </ButtonGroup>
-                    }
-                </>
+                {canAddAllAutocompleteItemsButton &&
+                    <ButtonGroup>
+                        <Button onClick={this.addAllAutocompleteItems} size="small" type="secondary">{addAllAutocompleteItemsButtonText}</Button>
+                        <Button size="small" type="warn" onClick={this.handleClear}>
+                            {clearAllAutocompleteItemsButtonText}
+                        </Button>
+                    </ButtonGroup>
+                }
 
                 <TagsContainer>
                     <CSSTransitionGroup
                         transitionName={{
-                            enter: `${TagsTransitionEnter}`,
-                            enterActive: `${TagsTransitionEnterActive}`,
-                            leave: `${TagsTransitionLeave}`,
-                            leaveActive: `${TagsTransitionLeaveActive}`,
+                            enter: `${tagsTransitionEnter}`,
+                            enterActive: `${tagsTransitionEnterActive}`,
+                            leave: `${tagsTransitionLeave}`,
+                            leaveActive: `${tagsTransitionLeaveActive}`,
                         }}
-                        className={`${TagsTransitionContainer}`}
+                        className={`${tagsTransitionContainer}`}
                         transitionEnter={true}
                         transitionEnterTimeout={200}
                         transitionLeave={true}
                         transitionLeaveTimeout={300}
                     >
-                        {tags.map(tag => this.renderTag(tag))}
+                        {tags.map(this.renderTag)}
                     </CSSTransitionGroup>
                 </TagsContainer>
-            </TagsInputContainer>
+            </>
         );
     }
 }

@@ -5,12 +5,12 @@ import { CrossIcon } from './Icons/Cross';
 
 export interface TagProps {
     tag: Tag;
-    onDelete: (id: number) => void;
+    onDelete: (id: string) => void;
 }
 
 export interface Tag {
     label: string;
-    id: number;
+    id: string;
 }
 
 const TagContainer = glamorous.div({
@@ -35,7 +35,7 @@ const IconContainer = glamorous.div({
     }
 });
 
-const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, onDelete: (id: number) => void, tag: Tag) => {
+const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, onDelete: (id: string) => void, tag: Tag) => {
     if (event.key === 'Enter' || event.key === 'Delete' || event.key === 'Backspace') {
         onDelete(tag.id);
     }

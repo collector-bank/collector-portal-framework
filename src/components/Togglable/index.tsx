@@ -27,7 +27,7 @@ const Header = glamorous.div({
     alignItems: 'center',
     cursor: 'pointer',
 
-    '> *': {
+    '> h2': {
         margin: 0,
     },
 });

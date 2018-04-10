@@ -6,7 +6,6 @@ import { Tag } from './Tag';
 import { Text } from '../../../common/typography';
 import { css } from 'glamor';
 import { borderRadius, colors } from '../../../theme';
-import * as CSSTransitionGroup from 'react-transition-group/CSSTransitionGroup';
 import * as uniqid from 'uniqid';
 
 export interface TagInputProps {
@@ -25,29 +24,6 @@ export interface TagInputState {
     suggestions: string[];
     id: string;
 }
-
-const tagsTransitionContainer = css({
-    display: 'flex',
-    flexWrap: 'wrap',
-});
-
-const tagsTransitionEnter = css({
-    opacity: 0,
-});
-
-const tagsTransitionEnterActive = css({
-    opacity: 1,
-    transition: 'opacity 200ms ease-in',
-});
-
-const tagsTransitionLeave = css({
-    opacity: 1,
-});
-
-const tagsTransitionLeaveActive = css({
-    opacity: 0,
-    transition: 'opacity 300ms ease-out',
-});
 
 const suggestionsContainerOpen = css({
     position: 'absolute',
@@ -233,23 +209,11 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
                     </ButtonGroup>
                 }
 
-                <TagsContainer>
-                    <CSSTransitionGroup
-                        transitionName={{
-                            enter: `${tagsTransitionEnter}`,
-                            enterActive: `${tagsTransitionEnterActive}`,
-                            leave: `${tagsTransitionLeave}`,
-                            leaveActive: `${tagsTransitionLeaveActive}`,
-                        }}
-                        className={`${tagsTransitionContainer}`}
-                        transitionEnter={true}
-                        transitionEnterTimeout={200}
-                        transitionLeave={true}
-                        transitionLeaveTimeout={300}
-                    >
+                {tags && tags.length > 0 &&
+                    <TagsContainer>
                         {tags.map(this.renderTag)}
-                    </CSSTransitionGroup>
-                </TagsContainer>
+                    </TagsContainer>
+                }
             </>
         );
     }

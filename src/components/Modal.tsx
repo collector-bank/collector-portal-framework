@@ -37,7 +37,9 @@ const overlayAfterOpen = css({
 });
 
 const overlayBeforeClose = css({
-    opacity: 0,
+    'body &': {
+        opacity: 0,
+    }
 });
 
 const content = css({

@@ -1,9 +1,9 @@
-import * as React from 'react';
 import glamorous from 'glamorous';
+import * as React from 'react';
 import * as uniqid from 'uniqid';
 import { borderRadius, colors } from '../../../theme';
+import { Alert } from '../Alert';
 import { Label } from '../Label';
-import { Alert } from '../Alert';
 
 const arrow = require('./arrow.svg');
 
@@ -43,7 +43,7 @@ const SelectField = glamorous.select({
     background: 'transparent',
     border: 0,
     width: '100%',
-    padding: 12,
+    padding: 11, // To make it 11 when accounting for border
     paddingRight: 40,
 
     '&:disabled': {

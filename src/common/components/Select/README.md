@@ -11,6 +11,7 @@ This component allows the user to choose one value from a list. When the compone
 | `error`    |           | string or boolean |                                               |
 | `items`    |           | `SelectItem[]`    |                                               |
 | `value`    |           | string            |                                               |
+| `name`     |           | string            |                                               |
 | `onChange` |     ✓     | `event => void`   |                                               |
 
 

@@ -3,12 +3,15 @@ const getCookie = (key: string) => {
     return matches ? matches.pop() : null;
 }
 
-const request = (method: string) => (endpoint: string, payload?: {}) => {
+const request = (method: string) => (endpoint: string, payload?: any) => {
     const headers = new Headers({
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
         'X-Requested-With': 'XMLHttpRequest',
+        'Accept': 'application/json',
     });
+
+    if (!(payload instanceof FormData)) {
+        headers.append('Content-Type', 'application/json');
+    }
 
     const csrfToken = getCookie('CSRF-TOKEN');
 
@@ -23,7 +26,7 @@ const request = (method: string) => (endpoint: string, payload?: {}) => {
     };
 
     if (payload) {
-        options.body = JSON.stringify(payload);
+        options.body = payload instanceof FormData ? payload : JSON.stringify(payload);
     }
 
     return window.fetch(endpoint, options)

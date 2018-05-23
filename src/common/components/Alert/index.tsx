@@ -19,8 +19,8 @@ const smallIcons = {
 };
 
 interface AlertContainerProps {
-    alertSize: Size;
-    type: Type;
+    alertSize: AlertSize;
+    type: AlertType;
     fadeIn?: boolean;
 }
 
@@ -45,7 +45,7 @@ const AlertContainer = glamorous.div<AlertContainerProps>(
     } as {})
 );
 
-const getStyle = (type: Type, alertSize: Size): CSSProperties => {
+const getStyle = (type: AlertType, alertSize: AlertSize): CSSProperties => {
     const backgroundColors = {
         error: colors.red,
         warning: colors.yellow,
@@ -100,17 +100,17 @@ const getAnimation = (fadeIn?: boolean): CSSProperties => {
     return fadeIn ? { animation: `${fadeInFrames} 3000ms forwards ease-in-out` } : {};
 };
 
-export type Size = 'small' | 'large';
-export type Type = 'error' | 'warning' | 'info' | 'success';
+export type AlertSize = 'small' | 'large';
+export type AlertType = 'error' | 'warning' | 'info' | 'success';
 
-export interface Props {
+export interface AlertProps {
     message?: string;
-    type: Type;
-    alertSize?: Size;
+    type: AlertType;
+    alertSize?: AlertSize;
     fadeIn?: boolean;
 }
 
-export const Alert: React.StatelessComponent<Props> = ({ message = 'Ett fel uppstod', alertSize = 'large', type, fadeIn }) => (
+export const Alert: React.StatelessComponent<AlertProps> = ({ message = 'Ett fel uppstod', alertSize = 'large', type, fadeIn }) => (
     <AlertContainer
         role="alert"
         alertSize={alertSize}

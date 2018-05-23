@@ -1,15 +1,15 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select } from '@storybook/addon-knobs';
-import { Alert } from './';
+import { Alert, AlertSize, AlertType } from './';
 
 const components = storiesOf('Components', module);
 
 components.addDecorator(withKnobs);
 
 components.add('Alert', () => {
-    const sizes: any[] = ['small', 'large'];
-    const types: any[] = ['error', 'warning', 'info', 'success'];
+    const sizes: AlertSize[] = ['small', 'large'];
+    const types: AlertType[] = ['error', 'warning', 'info', 'success'];
 
     return (
         <Alert

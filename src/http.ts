@@ -33,15 +33,20 @@ const request = (method: string) => (endpoint: string, payload?: any, extraHeade
         options.body = payload instanceof FormData ? payload : JSON.stringify(payload);
     }
 
+    const getPromise = (response: Response, content: any): void =>
+        response.status >= 200 && response.status < 300 ? content : Promise.reject(content);
+
+    const returnContent = (response: Response) => {
+        response.headers["Content-Type"] === 'application/json'
+            ? response.json().then(json => { return getPromise(response, json) })
+            : response.text().then(text => { return getPromise(response, text) })
+    };
+
     return window.fetch(endpoint, options)
         .then(response => {
             if (response.status === 204) {
                 return;
-            } else if (response.status >= 200 && response.status < 300) {
-                return response.json();
-            } else {
-                return Promise.reject(response);
-            }
+            } else returnContent(response);
         })
         .catch(err => {
             console.error(err);

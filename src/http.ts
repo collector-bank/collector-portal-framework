@@ -3,7 +3,7 @@ const getCookie = (key: string) => {
     return matches ? matches.pop() : null;
 }
 
-const request = (method: string) => (endpoint: string, payload?: any) => {
+const request = (method: string) => (endpoint: string, payload?: any, extraHeaders?: { [name: string]: string }) => {
     const headers = new Headers({
         'X-Requested-With': 'XMLHttpRequest',
         'Accept': 'application/json',
@@ -17,6 +17,10 @@ const request = (method: string) => (endpoint: string, payload?: any) => {
 
     if (csrfToken) {
         headers.append('X-CSRF-Token', csrfToken);
+    }
+
+    if (extraHeaders) {
+        Object.keys(extraHeaders).forEach(key => headers.append(key, extraHeaders[key]))
     }
 
     const options: RequestInit = {

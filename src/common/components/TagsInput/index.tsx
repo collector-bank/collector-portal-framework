@@ -88,7 +88,7 @@ const TagsContainer = glamorous.div<TagsContainerProps>(
     }
 );
 
-type FlexDirections = 'row' | 'column';
+export type FlexDirections = 'row' | 'column';
 
 interface TagsContainerProps {
     tagsItemsDirection: FlexDirections;

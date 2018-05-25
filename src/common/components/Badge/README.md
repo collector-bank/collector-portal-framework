@@ -8,6 +8,7 @@ A badge can be used to display content classification.
 |---------------|-----------|---------------|------------------------------------------------|
 | `label`       |     ✓     | string        |                                                |
 | `color`       |           | string        | `'purple'`, `'yellow'`                         |
+| `tooltip`     |           | string        |                                                |
 
 ## Example
 

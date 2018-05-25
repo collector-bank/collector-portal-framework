@@ -14,6 +14,7 @@ components.add('Badge', () => {
         <Badge
             label={text('Label', 'En badge')}
             color={select('Color', colors, 'purple')}
+            tooltip={text('Tooltip', 'En tooltip')}
         />
     );
 });

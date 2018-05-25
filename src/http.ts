@@ -1,7 +1,7 @@
 const getCookie = (key: string) => {
     var matches = document.cookie.match('(^|;)\\s*' + key + '\\s*=\\s*([^;]+)');
     return matches ? matches.pop() : null;
-}
+};
 
 const request = (method: string) => (endpoint: string, payload?: any, extraHeaders?: { [name: string]: string }) => {
     const headers = new Headers({
@@ -20,7 +20,7 @@ const request = (method: string) => (endpoint: string, payload?: any, extraHeade
     }
 
     if (extraHeaders) {
-        Object.keys(extraHeaders).forEach(key => headers.append(key, extraHeaders[key]))
+        Object.keys(extraHeaders).forEach(key => headers.append(key, extraHeaders[key]));
     }
 
     const options: RequestInit = {
@@ -33,16 +33,14 @@ const request = (method: string) => (endpoint: string, payload?: any, extraHeade
         options.body = payload instanceof FormData ? payload : JSON.stringify(payload);
     }
 
-    const returnPromiseForStatus = (response: Response, stream: Promise<any>) =>
+    const getPromiseForStatus = (response: Response, stream: Promise<any>) =>
         stream.then(content => response.status >= 200 && response.status < 300 ? content : Promise.reject(content));
 
     return window.fetch(endpoint, options)
-        .then(response =>
-            returnPromiseForStatus(response, response.headers.get("Content-Type") === 'application/json'
-                ? response.json()
-                : response.text()
-            )
-        )
+        .then(response => getPromiseForStatus(response, response.headers.has('Content-Type') && response.headers.get('Content-Type')!.indexOf('application/json') !== -1
+            ? response.json()
+            : response.text()
+        ))
         .catch(err => {
             console.error(err);
             throw err;

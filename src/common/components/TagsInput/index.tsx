@@ -1,12 +1,12 @@
+import { css } from 'glamor';
+import glamorous from 'glamorous';
 import * as React from 'react';
 import * as Autosuggest from 'react-autosuggest';
-import { Input, Button, ButtonGroup, Label } from '../../../common/components';
-import glamorous from 'glamorous';
-import { Tag } from './Tag';
-import { Text } from '../../../common/typography';
-import { css } from 'glamor';
-import { borderRadius, colors } from '../../../theme';
 import * as uniqid from 'uniqid';
+import { Button, ButtonGroup, Input, Label } from '../../../common/components';
+import { Text } from '../../../common/typography';
+import { borderRadius, colors } from '../../../theme';
+import { Tag } from './Tag';
 
 export interface TagInputProps {
     tags: Tag[];
@@ -16,6 +16,7 @@ export interface TagInputProps {
     canAddAllAutocompleteItemsButton?: boolean;
     addAllAutocompleteItemsButtonText?: string;
     clearAllAutocompleteItemsButtonText?: string;
+    tagsDirection?: FlexDirections;
     onChange: (items: Tag[]) => void;
 }
 
@@ -75,12 +76,23 @@ const theme = {
     suggestionHighlighted: `${suggestionHighlighted}`
 };
 
-const TagsContainer = glamorous.div({
-    display: 'flex',
-    marginBottom: 24,
-    flexWrap: 'wrap',
-    minHeight: 56
-});
+const TagsContainer = glamorous.div<TagsContainerProps>(
+    {
+        display: 'inline-flex',
+        marginBottom: 24,
+        flexWrap: 'wrap',
+        minHeight: 56,
+    },
+    ({ tagsItemsDirection }) => {
+        return { flexDirection: tagsItemsDirection }
+    }
+);
+
+type FlexDirections = 'row' | 'column';
+
+interface TagsContainerProps {
+    tagsItemsDirection: FlexDirections;
+}
 
 export class TagsInput extends React.Component<TagInputProps, TagInputState> {
     state: TagInputState = {
@@ -171,7 +183,7 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
 
     render() {
         const { value, id, suggestions } = this.state;
-        const { placeholder, tags, canAddAllAutocompleteItemsButton, addAllAutocompleteItemsButtonText, clearAllAutocompleteItemsButtonText, label } = this.props;
+        const { placeholder, tags, canAddAllAutocompleteItemsButton, addAllAutocompleteItemsButtonText, clearAllAutocompleteItemsButtonText, label, tagsDirection } = this.props;
 
         const inputProps: any = {
             placeholder,
@@ -210,7 +222,7 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
                 }
 
                 {tags && tags.length > 0 &&
-                    <TagsContainer>
+                    <TagsContainer tagsItemsDirection={tagsDirection ? tagsDirection : 'row'}>
                         {tags.map(this.renderTag)}
                     </TagsContainer>
                 }

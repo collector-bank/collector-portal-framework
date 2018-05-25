@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
-import { borderRadius, colors } from '../../../theme';
 import * as React from 'react';
+import { borderRadius, colors } from '../../../theme';
 import { CrossIcon } from './Icons/Cross';
 
 export interface TagProps {

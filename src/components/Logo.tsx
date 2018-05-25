@@ -1,7 +1,7 @@
+import glamorous from 'glamorous';
 import * as React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import glamorous from 'glamorous';
-import { colors, breakpoints, fonts } from '../theme';
+import { breakpoints, colors, fonts } from '../theme';
 
 const Container = glamorous.div({
     background: colors.sidebarBlueLight,
@@ -45,7 +45,7 @@ const SiteName = glamorous.div({
     fontWeight: 600,
 
     [breakpoints.mobileAndLower]: {
-        font: fonts.desktop.medium,
+        font: fonts.mobile.xl,
         fontWeight: 600,
     },
 });

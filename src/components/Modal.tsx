@@ -25,6 +25,7 @@ const overlay = css({
     background: 'rgba(255, 255, 255, .97)',
     display: 'flex',
     justifyContent: 'center',
+    zIndex: 999,
 
     transition: `opacity ${transitionTime}ms ease-in-out`,
     opacity: 0,

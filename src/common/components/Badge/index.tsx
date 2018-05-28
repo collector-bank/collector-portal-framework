@@ -11,6 +11,7 @@ export interface BadgeProps {
 }
 
 const Container = glamorous.div({
+    display: 'inline-block',
     position: 'relative',
     font: fonts.desktop.small,
     fontWeight: 500,

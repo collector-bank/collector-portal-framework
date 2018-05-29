@@ -3,6 +3,11 @@ const getCookie = (key: string) => {
     return matches ? matches.pop() : null;
 };
 
+export interface Error {
+    status: number;
+    content: any;
+}
+
 const request = (method: string) => (endpoint: string, payload?: any, extraHeaders?: { [name: string]: string }) => {
     const headers = new Headers({
         'X-Requested-With': 'XMLHttpRequest',
@@ -34,7 +39,11 @@ const request = (method: string) => (endpoint: string, payload?: any, extraHeade
     }
 
     const getPromiseForStatus = (response: Response, stream: Promise<any>) =>
-        stream.then(content => response.status >= 200 && response.status < 300 ? content : Promise.reject(content));
+        stream.then(content =>
+            response.status >= 200 && response.status < 300
+                ? content
+                : Promise.reject({ status: response.status, content })
+        );
 
     return window.fetch(endpoint, options)
         .then(response => getPromiseForStatus(response, response.headers.has('Content-Type') && response.headers.get('Content-Type')!.indexOf('application/json') !== -1

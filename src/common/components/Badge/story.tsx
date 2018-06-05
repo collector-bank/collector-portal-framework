@@ -8,7 +8,7 @@ const components = storiesOf('Components', module);
 components.addDecorator(withKnobs);
 
 components.add('Badge', () => {
-    const colors: BadgeColor[] = ['purple', 'yellow'];
+    const colors: BadgeColor[] = ['purple', 'yellow', 'green', 'red', 'blue'];
 
     return (
         <Badge

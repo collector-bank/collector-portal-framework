@@ -8,17 +8,14 @@ const rightChevron = require('./right-chevron.svg');
 export interface PaginatorProps {
     numberOfItems: number;
     pageSize: number;
+    activePage: number;
     numbersInMiddle: number;
     onChange: (activePage: number) => void;
 }
 
-export interface PaginatorState {
-    activePage: number;
-}
-
 interface ChevronProps {
     direction: 'left' | 'right';
-    disabled: boolean;
+    enabled: boolean;
 }
 
 const Chevron = glamorous.a<ChevronProps>(
@@ -30,11 +27,11 @@ const Chevron = glamorous.a<ChevronProps>(
         paddingRight: 2,
         display: 'inline-block',
     },
-    ({ direction, disabled }) => ({
+    ({ direction, enabled }) => ({
         background: `url(${direction === 'left' ? leftChevron : rightChevron}) no-repeat center center`,
         backgroundSize: '14px 18px',
-        opacity: disabled ? 1 : 0.3,
-        cursor: disabled ? 'pointer' : 'default',
+        opacity: enabled ? 1 : 0.3,
+        cursor: enabled ? 'pointer' : 'default',
     }),
 );
 
@@ -55,10 +52,7 @@ const Page = glamorous.a<PageProps>(
         width: 20,
         display: 'inline-block',
         textAlign: 'center',
-
-        '&:hover': {
-            cursor: 'pointer',
-        }
+        cursor: 'pointer',
     },
     ({ active }) => ({
         color: active ? colors.black : colors.purple,
@@ -76,42 +70,38 @@ interface PageProps {
     active: boolean;
 }
 
-export class Paginator extends React.Component<PaginatorProps, PaginatorState> {
-    state: PaginatorState = {
-        activePage: 1,
-    };
-
-    private readonly lastPage = Math.floor(this.props.numberOfItems / this.props.pageSize);
-    private readonly center = Math.floor(this.props.numbersInMiddle / 2);
+export class Paginator extends React.Component<PaginatorProps, {}> {
+    lastPage = () => Math.floor(this.props.numberOfItems / this.props.pageSize);
+    center = () => Math.floor(this.props.numbersInMiddle / 2);
 
     render() {
         return (
             <PaginatorContainer>
-                <Chevron direction="left" disabled={this.state.activePage !== 1} onClick={() => this.handleClick(this.previousPage())} />
+                <Chevron direction="left" enabled={this.props.activePage !== 1} onClick={() => this.handleClick(this.previousPage())} />
                 {!this.isWithinInitialRange() && this.renderJumpToStart()}
 
-                {this.getPages().map(page => <Page onClick={() => this.handleClick(page)} key={page} active={page === this.state.activePage}>{page}</Page>)}
+                {this.getPages().map(page => <Page onClick={() => this.handleClick(page)} key={page} active={page === this.props.activePage}>{page}</Page>)}
 
                 {!this.isWithinEndRange() && this.renderJumpToEnd()}
-                <Chevron direction="right" disabled={this.state.activePage !== this.lastPage} onClick={() => this.handleClick(this.nextPage())} />
+                <Chevron direction="right" enabled={this.props.activePage !== this.lastPage()} onClick={() => this.handleClick(this.nextPage())} />
             </PaginatorContainer>
         );
     }
 
     private nextPage = () => {
-        const nextPage = this.state.activePage + 1;
+        const nextPage = this.props.activePage + 1;
 
-        return nextPage <= this.lastPage ? nextPage : this.state.activePage;
+        return nextPage <= this.lastPage() ? nextPage : this.props.activePage;
     }
 
     private previousPage = () => {
-        const previousPage = this.state.activePage - 1;
+        const previousPage = this.props.activePage - 1;
 
-        return previousPage >= 1 ? previousPage : this.state.activePage;
+        return previousPage >= 1 ? previousPage : this.props.activePage;
     }
 
     private handleClick = (activePage: number) => {
-        this.setState({ activePage }, () => this.props.onChange(activePage));
+        this.props.onChange(activePage);
     }
 
     private renderJumpToStart = () => {
@@ -126,7 +116,7 @@ export class Paginator extends React.Component<PaginatorProps, PaginatorState> {
         return (
             <>
                 <Ellipses>&#8230;</Ellipses>
-                <Page onClick={() => this.handleClick(this.lastPage)} key={'end'} active={false}>{this.lastPage}</Page>
+                <Page onClick={() => this.handleClick(this.lastPage())} key={'end'} active={false}>{this.lastPage()}</Page>
             </>);
     }
 
@@ -140,28 +130,26 @@ export class Paginator extends React.Component<PaginatorProps, PaginatorState> {
         return myArray;
     }
 
-    private fillStart = (_: number, index: number) => this.props.numbersInMiddle - index <= this.lastPage ? this.props.numbersInMiddle - index : undefined;
-    private fillEnd = (_: number, index: number) => this.lastPage - index;
+    private fillStart = (_: number, index: number) => this.props.numbersInMiddle - index <= this.lastPage() ? this.props.numbersInMiddle - index : undefined;
+    private fillEnd = (_: number, index: number) => this.lastPage() - index;
 
     private getActivePages = (_: number, index: number) => {
-        if (this.state.activePage + this.props.numbersInMiddle - this.center > this.lastPage) {
+        if (this.props.activePage + this.props.numbersInMiddle - this.center() > this.lastPage()) {
             return this.fillEnd(_, index);
         }
 
-        let nextNumber = this.state.activePage - index;
+        let nextNumber = this.props.activePage - index;
 
-        if (index > this.center) { // If we're at or past the middle
-            if (this.state.activePage + index - this.center <= this.lastPage) {
-                nextNumber = this.state.activePage + index - this.center;
-            } else {
-                nextNumber = this.state.activePage - index;
+        if (index > this.center()) { // If we're at or past the middle
+            if (this.props.activePage + index - this.center() <= this.lastPage()) {
+                nextNumber = this.props.activePage + index - this.center();
             }
         }
 
-        return nextNumber <= this.lastPage ? nextNumber : undefined;
+        return nextNumber <= this.lastPage() ? nextNumber : undefined;
     }
 
-    private isWithinInitialRange = () => this.state.activePage <= this.props.numbersInMiddle - this.center || this.props.numbersInMiddle >= this.lastPage;
+    private isWithinInitialRange = () => this.props.activePage <= this.props.numbersInMiddle - this.center() || this.props.numbersInMiddle >= this.lastPage();
 
-    private isWithinEndRange = () => this.state.activePage + this.props.numbersInMiddle - this.center > this.lastPage || this.props.numbersInMiddle >= this.lastPage;
+    private isWithinEndRange = () => this.props.activePage + this.props.numbersInMiddle - this.center() > this.lastPage() || this.props.numbersInMiddle >= this.lastPage();
 }

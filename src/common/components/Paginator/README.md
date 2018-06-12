@@ -4,12 +4,13 @@ This component allows a user to paginate an arbitrary list, with user defined it
 
 ## Props
 
-| Name              | Required | Type            | Should contain                                                           |
-| ----------------- | -------- | --------------- | ------------------------------------------------------------------------ |
-| `numberOfItems`   | ✓        | number          | Length of item array                                                     |
-| `pageSize`        | ✓        | number          | Number of items per page                                                 |
-| `numbersInMiddle` | ✓        | number          | Number of items in the middle of paginator. **Should be an odd number!** |
-| `onChange`        | ✓        | `event => void` | Takes in a page number, which is used with pageSize to get your slice    |
+| Name              | Required | Type                 | Should contain                                                           |
+| ----------------- | -------- | -------------------- | ------------------------------------------------------------------------ |
+| `numberOfItems`   | ✓        | number               | Length of item array                                                     |
+| `pageSize`        | ✓        | number               | Number of items per page                                                 |
+| `activePage`      | ✓        | number               | Current page to show as active                                           |
+| `numbersInMiddle` | ✓        | number               | Number of items in the middle of paginator. **Should be an odd number!** |
+| `onChange`        | ✓        | `activePage => void` | Takes in a page number, which is used with pageSize to get your slice    |
 
 ## Example
 

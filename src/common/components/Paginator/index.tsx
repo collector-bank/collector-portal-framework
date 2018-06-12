@@ -117,7 +117,7 @@ export class Paginator extends React.Component<PaginatorProps, PaginatorState> {
     private renderJumpToStart = () => {
         return (
             <>
-                <Page onClick={() => this.handleClick(0)} key={'start'} active={false}>1</Page>
+                <Page onClick={() => this.handleClick(1)} key={'start'} active={false}>1</Page>
                 <Ellipses>&#8230;</Ellipses> {/* html ellipsis*/}
             </>);
     }

@@ -5,14 +5,14 @@ import { colors } from '../../../theme';
 const leftChevron = require('./left-chevron.svg');
 const rightChevron = require('./right-chevron.svg');
 
-interface PaginatorProps {
+export interface PaginatorProps {
     numberOfItems: number;
     pageSize: number;
     numbersInMiddle: number;
     onChange: (activePage: number) => void;
 }
 
-interface PaginatorState {
+export interface PaginatorState {
     activePage: number;
 }
 

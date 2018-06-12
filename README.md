@@ -39,6 +39,7 @@ You can see a demo of the UI components by cloning this repo, doing `npm install
 | [Date picker](src/common/components/DatePicker/README.md)         | [Source](src/common/components/DatePicker/index.tsx)             |
 | [Date picker group](src/common/components/DatePicker/README.md)   | [Source](src/common/components/DatePicker/index.tsx)             |
 | [Input](src/common/components/Input/README.md)                    | [Source](src/common/components/Input/index.tsx)                  |
+| [Paginator](src/common/components/Paginator/README.md)            | [Source](src/common/components/Paginator/index.tsx)              |
 | [TagsInput](src/common/components/TagsInput/README.md)            | [Source](src/common/components/TagsInput/index.tsx)              |
 | [Radio button](src/common/components/RadioButton/README.md)       | [Source](src/common/components/RadioButton/index.tsx)            |
 | [Radio button group](src/common/components/RadioButton/README.md) | [Source](src/common/components/RadioButton/RadioButtonGroup.tsx) |

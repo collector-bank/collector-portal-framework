@@ -25,14 +25,14 @@ const Chevron = glamorous.a<ChevronProps>(
     {
         color: colors.purple,
         width: 20,
-        height: 22,
+        height: 24,
         paddingLeft: 2,
         paddingRight: 2,
         display: 'inline-block',
     },
     ({ direction, disabled }) => ({
         background: `url(${direction === 'left' ? leftChevron : rightChevron}) no-repeat center center`,
-        backgroundSize: '12px 16px',
+        backgroundSize: '14px 18px',
         opacity: disabled ? 1 : 0.3,
         cursor: disabled ? 'pointer' : 'default',
     }),
@@ -68,7 +68,8 @@ const Page = glamorous.a<PageProps>(
 
 const PaginatorContainer = glamorous.div({
     userSelect: 'none',
-    display: 'flex'
+    display: 'flex',
+    fontSize: 18,
 });
 
 interface PageProps {

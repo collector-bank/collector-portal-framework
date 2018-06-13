@@ -45,7 +45,7 @@ const suggestionsContainerOpen = css({
 
 const suggestionsList = css({
     listStyle: 'none',
-    padding: 0
+    padding: 0,
 });
 
 const suggestionCSS = css({
@@ -61,7 +61,7 @@ const suggestionCSS = css({
 
     '&:hover': {
         background: colors.offWhite,
-        cursor: 'pointer'
+        cursor: 'pointer',
     },
 });
 
@@ -73,7 +73,7 @@ const theme = {
     suggestionsContainerOpen: `${suggestionsContainerOpen}`,
     suggestionsList: `${suggestionsList}`,
     suggestion: `${suggestionCSS}`,
-    suggestionHighlighted: `${suggestionHighlighted}`
+    suggestionHighlighted: `${suggestionHighlighted}`,
 };
 
 const TagsContainer = glamorous.div<TagsContainerProps>(
@@ -84,7 +84,7 @@ const TagsContainer = glamorous.div<TagsContainerProps>(
         minHeight: 56,
     },
     ({ tagsItemsDirection }) => {
-        return { flexDirection: tagsItemsDirection }
+        return { flexDirection: tagsItemsDirection };
     }
 );
 
@@ -102,14 +102,14 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
     };
 
     private handleDelete = (id: string) => {
-        this.props.onChange(this.props.tags.filter((tag) => tag.id !== id));
-    }
+        this.props.onChange(this.props.tags.filter(tag => tag.id !== id));
+    };
 
     private handleChange = (evt: React.FormEvent<HTMLInputElement>, { newValue }: any) => {
         this.setState({
-            value: newValue
+            value: newValue,
         });
-    }
+    };
 
     private getSuggestions = (value: string) => {
         if (!this.props.autocompleteItems) {
@@ -121,30 +121,24 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
 
         return this.props.autocompleteItems
             .filter(item => !this.props.tags.some(tag => tag.label === item))
-            .filter(item =>
-                item.toLowerCase().slice(0, inputLength) === inputValue
-            );
-    }
+            .filter(item => item.toLowerCase().slice(0, inputLength) === inputValue);
+    };
 
     private getSuggestionValue = (suggestion: string) => suggestion;
 
-    private renderSuggestion = (suggestion: string) => (
-        <Text style={{ marginBottom: 0 }}>
-            {suggestion}
-        </Text>
-    )
+    private renderSuggestion = (suggestion: string) => <Text style={{ marginBottom: 0 }}>{suggestion}</Text>;
 
     private onSuggestionsFetchRequested = ({ value }: any) => {
         this.setState({
-            suggestions: this.getSuggestions(value)
+            suggestions: this.getSuggestions(value),
         });
-    }
+    };
 
     private onSuggestionsClearRequested = () => {
         this.setState({
-            suggestions: []
+            suggestions: [],
         });
-    }
+    };
 
     private renderInputComponent = (inputProps: {}) => <Input {...inputProps} />;
 
@@ -158,7 +152,7 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
         this.setState({
             value: '',
         });
-    }
+    };
 
     private renderTag = (tag: Tag) => <Tag key={tag.id} tag={tag} onDelete={this.handleDelete} />;
 
@@ -168,36 +162,41 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
                 this.onSuggestionSelected(null, { suggestion: this.state.value });
             }
         }
-    }
+    };
 
     private addAllAutocompleteItems = () => {
-        const tags: Tag[] = this.props.autocompleteItems!
-            .map((suggestion, index) => ({ label: suggestion, id: index.toString() }));
+        const tags: Tag[] = this.props.autocompleteItems!.map((suggestion, index) => ({ label: suggestion, id: index.toString() }));
 
         this.props.onChange(tags);
-    }
+    };
 
     private handleClear = () => {
         this.setState({ value: '' }, () => this.props.onChange([]));
-    }
+    };
 
     render() {
         const { value, id, suggestions } = this.state;
-        const { placeholder, tags, canAddAllAutocompleteItemsButton, addAllAutocompleteItemsButtonText, clearAllAutocompleteItemsButtonText, label, tagsDirection } = this.props;
+        const {
+            placeholder,
+            tags,
+            canAddAllAutocompleteItemsButton,
+            addAllAutocompleteItemsButtonText,
+            clearAllAutocompleteItemsButtonText,
+            label,
+            tagsDirection,
+        } = this.props;
 
         const inputProps: any = {
             placeholder,
             value,
             onChange: this.handleChange,
             onKeyDown: this.handleKeyDown,
-            id
+            id,
         };
 
         return (
             <>
-                {label &&
-                    <Label htmlFor={id}>{label}</Label>
-                }
+                {label && <Label htmlFor={id}>{label}</Label>}
                 <Autosuggest
                     suggestions={suggestions}
                     getSuggestionValue={this.getSuggestionValue}
@@ -212,20 +211,21 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
                     theme={theme}
                 />
 
-                {canAddAllAutocompleteItemsButton &&
+                {canAddAllAutocompleteItemsButton && (
                     <ButtonGroup>
-                        <Button onClick={this.addAllAutocompleteItems} size="small" type="secondary">{addAllAutocompleteItemsButtonText}</Button>
+                        <Button onClick={this.addAllAutocompleteItems} size="small" type="secondary">
+                            {addAllAutocompleteItemsButtonText}
+                        </Button>
                         <Button size="small" type="warn" onClick={this.handleClear}>
                             {clearAllAutocompleteItemsButtonText}
                         </Button>
                     </ButtonGroup>
-                }
+                )}
 
-                {tags && tags.length > 0 &&
-                    <TagsContainer tagsItemsDirection={tagsDirection ? tagsDirection : 'row'}>
-                        {tags.map(this.renderTag)}
-                    </TagsContainer>
-                }
+                {tags &&
+                    tags.length > 0 && (
+                        <TagsContainer tagsItemsDirection={tagsDirection ? tagsDirection : 'row'}>{tags.map(this.renderTag)}</TagsContainer>
+                    )}
             </>
         );
     }

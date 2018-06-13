@@ -19,7 +19,7 @@ const Container = glamorous.div<{ expanded: boolean }>(
     },
     ({ expanded }) => ({
         borderBottomColor: expanded ? 'transparent' : colors.lightGray,
-    }),
+    })
 );
 
 const Header = glamorous.div({
@@ -44,7 +44,7 @@ const ToggleButton = glamorous.button<{ expanded: boolean }>(
     },
     ({ expanded }) => ({
         backgroundImage: expanded ? `url(${collapseIcon})` : `url(${expandIcon})`,
-    }),
+    })
 );
 
 const transition = css({
@@ -77,7 +77,7 @@ export class Togglable extends React.Component<TogglableProps, TogglableState> {
         this.setState(prevState => ({
             isExpanded: !prevState.isExpanded,
         }));
-    }
+    };
 
     render() {
         const { children, title } = this.props;

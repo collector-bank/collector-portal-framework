@@ -8,10 +8,5 @@ const components = storiesOf('Components', module);
 components.addDecorator(withKnobs);
 
 components.add('Spinner', () => {
-    return (
-        <Spinner
-            size={number('Size', 80)}
-            centered={boolean('Centered', false)}
-        />
-    );
+    return <Spinner size={number('Size', 80)} centered={boolean('Centered', false)} />;
 });

@@ -9,11 +9,7 @@ const components = storiesOf('Components', module);
 components.addDecorator(withKnobs);
 
 components.add('Select', () => {
-    const items = [
-        { label: 'Foo' },
-        { label: 'Bar' },
-        { label: 'Baz' },
-    ];
+    const items = [{ label: 'Foo' }, { label: 'Bar' }, { label: 'Baz' }];
 
     return (
         <Select

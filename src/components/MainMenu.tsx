@@ -29,7 +29,7 @@ const MenuList = glamorous.ul<{ hideIconsMobile?: boolean }>(
             paddingLeft: hideIconsMobile ? 0 : 16,
             paddingRight: hideIconsMobile ? 0 : 16,
             justifyContent: hideIconsMobile ? 'flex-start' : 'space-between',
-        }
+        },
     })
 );
 
@@ -76,49 +76,47 @@ const MenuListItem = glamorous.li<MenuListItemProps>(
         }
 
         return styles;
-    },
+    }
 );
 
-const InternalNavLink = glamorous(RouterNavLink)(
-    {
-        display: 'flex',
-        alignItems: 'center',
-        padding: 12, // change this potentially
-        color: 'inherit',
-        textDecoration: 'none',
-        borderRadius: borderRadius.small,
-        transition: 'background-color 200ms, opacity 200ms',
+const InternalNavLink = glamorous(RouterNavLink)({
+    display: 'flex',
+    alignItems: 'center',
+    padding: 12, // change this potentially
+    color: 'inherit',
+    textDecoration: 'none',
+    borderRadius: borderRadius.small,
+    transition: 'background-color 200ms, opacity 200ms',
 
-        '&:not(.active)': {
-            opacity: 0.5,
+    '&:not(.active)': {
+        opacity: 0.5,
+    },
+
+    '&:hover': {
+        background: 'rgba(255, 255, 255, .1)',
+    },
+
+    '&.active:hover': {
+        background: 'rgba(255, 255, 255, .05)',
+    },
+
+    [breakpoints.mobileAndLower]: {
+        borderBottom: '4px solid transparent',
+        borderRadius: 0,
+
+        '.active': {
+            borderBottomColor: 'currentColor',
         },
 
         '&:hover': {
-            background: 'rgba(255, 255, 255, .1)',
+            background: 'transparent',
         },
 
         '&.active:hover': {
-            background: 'rgba(255, 255, 255, .05)',
-        },
-
-        [breakpoints.mobileAndLower]: {
-            borderBottom: '4px solid transparent',
-            borderRadius: 0,
-
-            '.active': {
-                borderBottomColor: 'currentColor',
-            },
-
-            '&:hover': {
-                background: 'transparent',
-            },
-
-            '&.active:hover': {
-                background: 'transparent',
-            },
+            background: 'transparent',
         },
     },
-);
+});
 
 const ExternalNavLink: GlamorousComponent<React.HTMLProps<HTMLAnchorElement>, {}> = InternalNavLink.withComponent('a');
 
@@ -132,7 +130,7 @@ const NavLinkLabel = glamorous.span<NavLinkLabelProps>(
             display: hideIconsMobile ? 'block' : 'none',
             marginLeft: hideIconsMobile ? 0 : 16,
         },
-    }),
+    })
 );
 
 const NavLinkIcon = glamorous.div<NavLinkIconProps>(
@@ -149,7 +147,7 @@ const NavLinkIcon = glamorous.div<NavLinkIconProps>(
         [breakpoints.mobileAndLower]: {
             display: hideIconsMobile ? 'none' : 'block',
         },
-    }),
+    })
 );
 
 export interface MainMenuProps {
@@ -188,19 +186,17 @@ export const MainMenu: React.StatelessComponent<MainMenuProps> = ({ items, hideI
                     useMarginTop={item.useMarginTop}
                     hideIconsMobile={hideIconsMobile}
                 >
-                    {item.externalLink
-                        ? (
-                            <ExternalNavLink href={item.path}>
-                                <NavLinkIcon hideIconsMobile={hideIconsMobile} icon={item.icon} />
-                                <NavLinkLabel hideIconsMobile={hideIconsMobile}>{item.label}</NavLinkLabel>
-                            </ExternalNavLink>
-                        ) : (
-                            <InternalNavLink to={item.path}>
-                                <NavLinkIcon hideIconsMobile={hideIconsMobile} icon={item.icon} />
-                                <NavLinkLabel hideIconsMobile={hideIconsMobile}>{item.label}</NavLinkLabel>
-                            </InternalNavLink>
-                        )
-                    }
+                    {item.externalLink ? (
+                        <ExternalNavLink href={item.path}>
+                            <NavLinkIcon hideIconsMobile={hideIconsMobile} icon={item.icon} />
+                            <NavLinkLabel hideIconsMobile={hideIconsMobile}>{item.label}</NavLinkLabel>
+                        </ExternalNavLink>
+                    ) : (
+                        <InternalNavLink to={item.path}>
+                            <NavLinkIcon hideIconsMobile={hideIconsMobile} icon={item.icon} />
+                            <NavLinkLabel hideIconsMobile={hideIconsMobile}>{item.label}</NavLinkLabel>
+                        </InternalNavLink>
+                    )}
                 </MenuListItem>
             ))}
         </MenuList>

@@ -55,7 +55,7 @@ export class CheckboxGroup extends React.Component<CheckboxGroupProps, CheckboxG
 
     private handleChange = (key: string, event: React.FormEvent<HTMLInputElement>) => {
         this.props.onChange(key, event.currentTarget.checked);
-    }
+    };
 
     private isChecked = (optionId: string) => {
         if (this.props.checked) {
@@ -63,7 +63,7 @@ export class CheckboxGroup extends React.Component<CheckboxGroupProps, CheckboxG
         } else {
             return false;
         }
-    }
+    };
 
     render() {
         const { label, items, disabled, error } = this.props;

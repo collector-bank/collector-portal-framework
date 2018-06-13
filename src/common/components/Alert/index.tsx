@@ -39,10 +39,11 @@ const AlertContainer = glamorous.div<AlertContainerProps>(
             color: 'inherit',
         },
     },
-    ({ type, alertSize, fadeIn }) => ({
-        ...getStyle(type, alertSize),
-        ...getAnimation(fadeIn),
-    } as {})
+    ({ type, alertSize, fadeIn }) =>
+        ({
+            ...getStyle(type, alertSize),
+            ...getAnimation(fadeIn),
+        } as {})
 );
 
 const getStyle = (type: AlertType, alertSize: AlertSize): CSSProperties => {
@@ -111,13 +112,7 @@ export interface AlertProps {
 }
 
 export const Alert: React.StatelessComponent<AlertProps> = ({ message = 'Ett fel uppstod', alertSize = 'large', type, fadeIn }) => (
-    <AlertContainer
-        role="alert"
-        alertSize={alertSize}
-        type={type}
-        fadeIn={fadeIn}
-        dangerouslySetInnerHTML={{ __html: message }}
-    />
+    <AlertContainer role="alert" alertSize={alertSize} type={type} fadeIn={fadeIn} dangerouslySetInnerHTML={{ __html: message }} />
 );
 
 Alert.displayName = 'Collector.Alert';

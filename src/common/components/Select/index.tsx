@@ -11,7 +11,7 @@ const SelectContainer = glamorous.div({
     marginBottom: '1.25em',
 });
 
-const SelectFieldContainer = glamorous.div<{ hasError?: boolean, disabled?: boolean }>(
+const SelectFieldContainer = glamorous.div<{ hasError?: boolean; disabled?: boolean }>(
     {
         position: 'relative',
         maxWidth: 220,

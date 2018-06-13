@@ -34,13 +34,13 @@ const overlay = css({
 const overlayAfterOpen = css({
     'body &': {
         opacity: 1,
-    }
+    },
 });
 
 const overlayBeforeClose = css({
     'body &': {
         opacity: 0,
-    }
+    },
 });
 
 const content = css({

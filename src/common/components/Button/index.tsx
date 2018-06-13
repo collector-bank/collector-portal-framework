@@ -55,7 +55,7 @@ const ButtonElement: any = glamorous.button<ButtonProps>(
         }
 
         return styles;
-    },
+    }
 );
 
 const getTypeStyles = (type?: ButtonType): CSSProperties => {
@@ -99,7 +99,7 @@ const getTypeStyles = (type?: ButtonType): CSSProperties => {
 
                 '&:disabled': {
                     backgroundColor: 'transparent',
-                }
+                },
             };
         case 'primary':
         default:
@@ -221,9 +221,7 @@ const IconContainer = glamorous.span({
 export const Button: React.StatelessComponent<ButtonProps> = ({ loading, children, icon, size, ...rest }) => {
     return (
         <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} {...rest}>
-            {icon &&
-                <IconContainer>{icon}</IconContainer>
-            }
+            {icon && <IconContainer>{icon}</IconContainer>}
             <span>{children}</span>
         </ButtonElement>
     );

@@ -39,7 +39,7 @@ export const Spinner: any = glamorous<SpinnerProps>(Element, { rootEl: 'div' })(
         }
 
         return styles;
-    },
+    }
 );
 
 Spinner.displayName = 'Collector.Spinner';

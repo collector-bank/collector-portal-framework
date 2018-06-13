@@ -32,7 +32,7 @@ const Chevron = glamorous.a<ChevronProps>(
         backgroundSize: '14px 18px',
         opacity: enabled ? 1 : 0.3,
         cursor: enabled ? 'pointer' : 'default',
-    }),
+    })
 );
 
 const Ellipses = glamorous.span({
@@ -42,7 +42,7 @@ const Ellipses = glamorous.span({
     paddingRight: 6,
     textAlign: 'center',
     fontSize: 18,
-    color: colors.darkGray
+    color: colors.darkGray,
 });
 
 const Page = glamorous.a<PageProps>(
@@ -80,10 +80,18 @@ export class Paginator extends React.Component<PaginatorProps, {}> {
                 <Chevron direction="left" enabled={this.props.activePage !== 1} onClick={() => this.handleClick(this.previousPage())} />
                 {!this.isWithinInitialRange() && this.renderJumpToStart()}
 
-                {this.getPages().map(page => <Page onClick={() => this.handleClick(page)} key={page} active={page === this.props.activePage}>{page}</Page>)}
+                {this.getPages().map(page => (
+                    <Page onClick={() => this.handleClick(page)} key={page} active={page === this.props.activePage}>
+                        {page}
+                    </Page>
+                ))}
 
                 {!this.isWithinEndRange() && this.renderJumpToEnd()}
-                <Chevron direction="right" enabled={this.props.activePage !== this.lastPage()} onClick={() => this.handleClick(this.nextPage())} />
+                <Chevron
+                    direction="right"
+                    enabled={this.props.activePage !== this.lastPage()}
+                    onClick={() => this.handleClick(this.nextPage())}
+                />
             </PaginatorContainer>
         );
     }
@@ -92,45 +100,52 @@ export class Paginator extends React.Component<PaginatorProps, {}> {
         const nextPage = this.props.activePage + 1;
 
         return nextPage <= this.lastPage() ? nextPage : this.props.activePage;
-    }
+    };
 
     private previousPage = () => {
         const previousPage = this.props.activePage - 1;
 
         return previousPage >= 1 ? previousPage : this.props.activePage;
-    }
+    };
 
     private handleClick = (activePage: number) => {
         this.props.onChange(activePage);
-    }
+    };
 
     private renderJumpToStart = () => {
         return (
             <>
-                <Page onClick={() => this.handleClick(1)} key={'start'} active={false}>1</Page>
+                <Page onClick={() => this.handleClick(1)} key={'start'} active={false}>
+                    1
+                </Page>
                 <Ellipses>&#8230;</Ellipses> {/* html ellipsis*/}
-            </>);
-    }
+            </>
+        );
+    };
 
     private renderJumpToEnd = () => {
         return (
             <>
                 <Ellipses>&#8230;</Ellipses>
-                <Page onClick={() => this.handleClick(this.lastPage())} key={'end'} active={false}>{this.lastPage()}</Page>
-            </>);
-    }
+                <Page onClick={() => this.handleClick(this.lastPage())} key={'end'} active={false}>
+                    {this.lastPage()}
+                </Page>
+            </>
+        );
+    };
 
     private getPages = () => {
         const myArray = Array(this.props.numbersInMiddle)
             .fill(undefined)
             .map(this.isWithinInitialRange() ? this.fillStart : this.getActivePages)
             .filter(page => page !== undefined)
-            .sort((a: number, b: number) => a > b ? 1 : 0) as number[];
+            .sort((a: number, b: number) => (a > b ? 1 : 0)) as number[];
 
         return myArray;
-    }
+    };
 
-    private fillStart = (_: number, index: number) => this.props.numbersInMiddle - index <= this.lastPage() ? this.props.numbersInMiddle - index : undefined;
+    private fillStart = (_: number, index: number) =>
+        this.props.numbersInMiddle - index <= this.lastPage() ? this.props.numbersInMiddle - index : undefined;
     private fillEnd = (_: number, index: number) => this.lastPage() - index;
 
     private getActivePages = (_: number, index: number) => {
@@ -140,16 +155,20 @@ export class Paginator extends React.Component<PaginatorProps, {}> {
 
         let nextNumber = this.props.activePage - index;
 
-        if (index > this.center()) { // If we're at or past the middle
+        if (index > this.center()) {
+            // If we're at or past the middle
             if (this.props.activePage + index - this.center() <= this.lastPage()) {
                 nextNumber = this.props.activePage + index - this.center();
             }
         }
 
         return nextNumber <= this.lastPage() ? nextNumber : undefined;
-    }
+    };
 
-    private isWithinInitialRange = () => this.props.activePage <= this.props.numbersInMiddle - this.center() || this.props.numbersInMiddle >= this.lastPage();
+    private isWithinInitialRange = () =>
+        this.props.activePage <= this.props.numbersInMiddle - this.center() || this.props.numbersInMiddle >= this.lastPage();
 
-    private isWithinEndRange = () => this.props.activePage + this.props.numbersInMiddle - this.center() > this.lastPage() || this.props.numbersInMiddle >= this.lastPage();
+    private isWithinEndRange = () =>
+        this.props.activePage + this.props.numbersInMiddle - this.center() > this.lastPage() ||
+        this.props.numbersInMiddle >= this.lastPage();
 }

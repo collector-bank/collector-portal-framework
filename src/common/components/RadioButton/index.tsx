@@ -8,7 +8,7 @@ const RadioButtonContainer = glamorous.div<{ disabled?: boolean }>(
         display: 'flex',
         marginBottom: 8,
     },
-    ({ disabled }) => (disabled ? { opacity: 0.5 } : {}),
+    ({ disabled }) => (disabled ? { opacity: 0.5 } : {})
 );
 
 const Input = glamorous.input({
@@ -76,18 +76,8 @@ export class RadioButton extends React.Component<RadioButtonProps, RadioButtonSt
 
         return (
             <RadioButtonContainer disabled={disabled}>
-                <Input
-                    type="radio"
-                    id={this.state.id}
-                    name={name}
-                    checked={selected}
-                    disabled={disabled}
-                    onChange={onChange}
-                />
-                <label
-                    htmlFor={this.state.id}
-                    dangerouslySetInnerHTML={{ __html: label }}
-                />
+                <Input type="radio" id={this.state.id} name={name} checked={selected} disabled={disabled} onChange={onChange} />
+                <label htmlFor={this.state.id} dangerouslySetInnerHTML={{ __html: label }} />
             </RadioButtonContainer>
         );
     }

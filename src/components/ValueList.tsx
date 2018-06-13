@@ -30,11 +30,7 @@ export interface InfoItem {
 
 export const ValueList: React.StatelessComponent<ValueListProps> = props => {
     const items = props.items
-        .map(item =>
-            Array.isArray(item.value)
-                ? ({ ...item, value: item.value.filter(x => x) })
-                : item
-        )
+        .map(item => (Array.isArray(item.value) ? { ...item, value: item.value.filter(x => x) } : item))
         .filter(item => item.heading && item.value && item.value.length > 0);
 
     return (
@@ -42,10 +38,7 @@ export const ValueList: React.StatelessComponent<ValueListProps> = props => {
             {items.map((item, i) => [
                 <Heading key={`${i}_heading`}>{item.heading}</Heading>,
                 <Value key={`${i}_value`}>
-                    {Array.isArray(item.value)
-                        ? item.value.map((val, j) => <div key={j}>{val}</div>)
-                        : item.value
-                    }
+                    {Array.isArray(item.value) ? item.value.map((val, j) => <div key={j}>{val}</div>) : item.value}
                 </Value>,
             ])}
         </List>

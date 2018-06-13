@@ -12,7 +12,7 @@ const CheckboxContainer = glamorous.div<{ disabled?: boolean }>(
     },
     ({ disabled }) => ({
         opacity: disabled ? 0.5 : 1,
-    }),
+    })
 );
 
 const Input = glamorous.input({
@@ -79,18 +79,8 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
 
         return (
             <CheckboxContainer disabled={disabled}>
-                <Input
-                    type="checkbox"
-                    id={this.state.id}
-                    name={name}
-                    checked={checked}
-                    disabled={disabled}
-                    onChange={onChange}
-                />
-                <label
-                    htmlFor={this.state.id}
-                    dangerouslySetInnerHTML={{ __html: label }}
-                />
+                <Input type="checkbox" id={this.state.id} name={name} checked={checked} disabled={disabled} onChange={onChange} />
+                <label htmlFor={this.state.id} dangerouslySetInnerHTML={{ __html: label }} />
             </CheckboxContainer>
         );
     }

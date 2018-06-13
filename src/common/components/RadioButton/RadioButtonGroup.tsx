@@ -3,7 +3,7 @@ import Collapse from 'react-css-collapse';
 import glamorous from 'glamorous';
 import { css } from 'glamor';
 import * as uniqid from 'uniqid';
-import { Alert } from '../Alert';
+import { Alert } from '../Alert';
 import { Label } from '../Label';
 import { RadioButton } from './';
 
@@ -57,7 +57,7 @@ export class RadioButtonGroup extends React.Component<RadioButtonGroupProps, Rad
 
     private handleChange = (key: string) => {
         this.props.onChange(key);
-    }
+    };
 
     render() {
         const { label, items, selected, disabled, error } = this.props;

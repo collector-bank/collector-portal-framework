@@ -34,15 +34,11 @@ const inputErrorTransition = css({
     transition: 'height 150ms',
 });
 
-
-export const InputField = glamorous.input<{ hasError?: boolean }>(
-    inputStyles,
-    ({ hasError }) => ({
-        borderBottomLeftRadius: hasError ? 0 : borderRadius.small,
-        borderBottomRightRadius: hasError ? 0 : borderRadius.small,
-        borderBottomColor: hasError ? colors.red : colors.mediumGray
-    }),
-);
+export const InputField = glamorous.input<{ hasError?: boolean }>(inputStyles, ({ hasError }) => ({
+    borderBottomLeftRadius: hasError ? 0 : borderRadius.small,
+    borderBottomRightRadius: hasError ? 0 : borderRadius.small,
+    borderBottomColor: hasError ? colors.red : colors.mediumGray,
+}));
 
 export const InputError = glamorous.div({
     background: colors.red,
@@ -65,7 +61,7 @@ const Textarea = glamorous.textarea<{ hasError?: boolean }>(
     ({ hasError }) => ({
         borderColor: hasError ? colors.red : colors.mediumGray,
         backgroundColor: hasError ? '#FFFCFC' : colors.white,
-    }),
+    })
 );
 
 export interface InputProps {
@@ -98,7 +94,7 @@ export class Input extends React.Component<InputProps, InputState> {
 
     makeDirty = () => {
         this.setState({ isDirty: true });
-    }
+    };
 
     render() {
         const { label, error, multiline, ...rest } = this.props;
@@ -107,16 +103,12 @@ export class Input extends React.Component<InputProps, InputState> {
 
         return (
             <InputContainer>
-                {label &&
-                    <Label htmlFor={this.state.id} error={showError}>{label}</Label>
-                }
-                <InputElement
-                    id={this.state.id}
-                    onBlur={this.makeDirty}
-                    hasError={showError}
-                    aria-invalid={showError}
-                    {...rest}
-                />
+                {label && (
+                    <Label htmlFor={this.state.id} error={showError}>
+                        {label}
+                    </Label>
+                )}
+                <InputElement id={this.state.id} onBlur={this.makeDirty} hasError={showError} aria-invalid={showError} {...rest} />
 
                 <Collapse isOpen={showError && typeof error === 'string'} className={`${inputErrorTransition}`}>
                     <InputError>{error}</InputError>

@@ -32,11 +32,11 @@ const Label = glamorous.span<{ color: BadgeColor }>(
             visibility: 'visible',
             opacity: 1,
             transform: 'translateY(0)',
-        }
+        },
     },
     ({ color }) => ({
         background: colors[color],
-        color: color === 'yellow' || color === 'green' ? colors.black : colors.white
+        color: color === 'yellow' || color === 'green' ? colors.black : colors.white,
     })
 );
 
@@ -66,7 +66,7 @@ const Tooltip = glamorous.span({
     transitionDuration: '200ms',
     transitionProperty: 'opacity, visibility, transform',
 
-    '&:before': arrow
+    '&:before': arrow,
 });
 
 export const Badge: React.StatelessComponent<BadgeProps> = ({ label, tooltip, color = 'purple' }) => (

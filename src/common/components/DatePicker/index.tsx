@@ -75,7 +75,7 @@ const style = css({
         '& .react-datepicker__navigation--next': {
             borderLeftColor: colors.mediumGray,
         },
-    }
+    },
 });
 
 const inputWidth = 220;
@@ -125,19 +125,22 @@ export class DatePicker extends React.Component<DatePickerProps, State> {
         this.setState({ isValid: true }, () => {
             this.props.onChange(date);
         });
-    }
+    };
 
     private handleChangeRaw = () => {
         this.setState({ isValid: false });
-    }
+    };
 
     private handleBlur = () => {
-        this.setState((prevState) => ({ showError: !prevState.isValid }), () => {
-            if (!this.state.isValid) {
-                this.props.onChange(null);
+        this.setState(
+            prevState => ({ showError: !prevState.isValid }),
+            () => {
+                if (!this.state.isValid) {
+                    this.props.onChange(null);
+                }
             }
-        });
-    }
+        );
+    };
 
     render() {
         const { label, selectedDate, minDate, maxDate, invalidMessage } = this.props;
@@ -169,7 +172,7 @@ export class DatePicker extends React.Component<DatePickerProps, State> {
                 />
 
                 <Collapse isOpen={showError} className={`${inputErrorTransition}`}>
-                    <InputError style={{maxWidth: inputWidth}}>{invalidMessage}</InputError>
+                    <InputError style={{ maxWidth: inputWidth }}>{invalidMessage}</InputError>
                 </Collapse>
             </InputContainer>
         );

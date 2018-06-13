@@ -11,5 +11,5 @@ export const TextLink: GlamorousComponent<React.HTMLProps<HTMLAnchorElement>, {}
 
     '&:hover': {
         borderColor: 'currentColor',
-    }
+    },
 });

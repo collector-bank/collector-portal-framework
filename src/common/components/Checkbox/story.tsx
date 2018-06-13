@@ -24,7 +24,7 @@ components.add('Checkbox group', () => {
     let items = [
         {
             key: 'foo',
-            label: 'Alternativ 1'
+            label: 'Alternativ 1',
         },
         {
             key: 'bar',
@@ -33,8 +33,8 @@ components.add('Checkbox group', () => {
         {
             key: 'baz',
             label: 'Alternativ 3',
-            child: <div>Här är ett barn-element, som bara syns om "Alternativ 3" är markerat</div>
-        }
+            child: <div>Här är ett barn-element, som bara syns om "Alternativ 3" är markerat</div>,
+        },
     ];
 
     return (

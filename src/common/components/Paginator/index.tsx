@@ -71,7 +71,7 @@ interface PageProps {
 }
 
 export class Paginator extends React.Component<PaginatorProps, {}> {
-    lastPage = () => Math.floor(this.props.numberOfItems / this.props.pageSize);
+    lastPage = () => Math.ceil(this.props.numberOfItems / this.props.pageSize);
     center = () => Math.floor(this.props.numbersInMiddle / 2);
 
     render() {

@@ -75,6 +75,8 @@ export class Paginator extends React.Component<PaginatorProps, {}> {
     center = () => Math.floor(this.props.numbersInMiddle / 2);
 
     render() {
+        if (this.lastPage() === 1) return null;
+
         return (
             <PaginatorContainer>
                 <Chevron direction="left" enabled={this.props.activePage !== 1} onClick={() => this.handleClick(this.previousPage())} />

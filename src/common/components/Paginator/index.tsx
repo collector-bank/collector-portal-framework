@@ -2,8 +2,8 @@ import glamorous from 'glamorous';
 import * as React from 'react';
 import { colors } from '../../../theme';
 
-const leftChevron = require('./left-chevron.svg');
-const rightChevron = require('./right-chevron.svg');
+const leftChevron = require('./chevron-left.svg');
+const rightChevron = require('./chevron-right.svg');
 
 export interface PaginatorProps {
     numberOfItems: number;
@@ -29,7 +29,7 @@ const Chevron = glamorous.a<ChevronProps>(
     },
     ({ direction, enabled }) => ({
         background: `url(${direction === 'left' ? leftChevron : rightChevron}) no-repeat center center`,
-        backgroundSize: '14px 18px',
+        backgroundSize: 12,
         opacity: enabled ? 1 : 0.3,
         cursor: enabled ? 'pointer' : 'default',
     })

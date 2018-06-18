@@ -137,13 +137,11 @@ export class Paginator extends React.Component<PaginatorProps, {}> {
     };
 
     private getPages = () => {
-        const myArray = Array(this.props.numbersInMiddle)
+        return Array(this.props.numbersInMiddle)
             .fill(undefined)
             .map(this.isWithinInitialRange() ? this.fillStart : this.getActivePages)
             .filter(page => page !== undefined)
-            .sort((a: number, b: number) => (a > b ? 1 : 0)) as number[];
-
-        return myArray;
+            .sort((a: number, b: number) => a - b) as number[];
     };
 
     private fillStart = (_: number, index: number) =>

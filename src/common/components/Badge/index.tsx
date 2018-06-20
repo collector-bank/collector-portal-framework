@@ -26,7 +26,6 @@ const Label = glamorous.span<{ color: BadgeColor }>(
         padding: '4px 8px',
         whiteSpace: 'nowrap',
         position: 'relative',
-        zIndex: 2,
 
         '&:hover + span': {
             visibility: 'visible',
@@ -57,12 +56,11 @@ const Tooltip = glamorous.span({
     padding: '4px 8px',
     maxWidth: 350,
     position: 'absolute',
-    zIndex: 1,
     left: 0,
     top: 'calc(100% + 8px)',
     visibility: 'hidden',
     opacity: 0,
-    transform: 'translateY(-10px)',
+    transform: 'translateY(-5px)',
     transitionDuration: '200ms',
     transitionProperty: 'opacity, visibility, transform',
 

@@ -1,7 +1,7 @@
 {
     "title": "Collector Portal Framework",
     "name": "collector-portal-framework",
-    "version": "5.2.3",
+    "version": "5.2.5",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "repository": {
@@ -12,9 +12,9 @@
         "@storybook/addon-knobs": "^3.4.2",
         "@storybook/react": "^3.4.2",
         "@storybook/storybook-deployer": "^2.3.0",
-        "@types/react": ">=16",
         "@types/react-dom": ">=16",
         "@types/react-router-dom": "^4.2.5",
+        "@types/react": ">=16",
         "@types/storybook__addon-actions": "^3.0.3",
         "@types/storybook__addon-knobs": "^3.3.1",
         "@types/storybook__react": "^3.0.7",
@@ -29,9 +29,6 @@
         "typescript": "^2.7.2"
     },
     "dependencies": {
-        "@types/react-datepicker": "1.1.2",
-        "@types/react-modal": "3.1.2",
-        "@types/uniqid": "4.1.2",
         "date-fns": "^1.29.0",
         "glamor": "^2.20.40",
         "glamorous": "^4.12.1",

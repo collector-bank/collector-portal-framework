@@ -67,7 +67,7 @@ export const ModalBodyContainer: GlamorousComponent<React.HTMLProps<HTMLDivEleme
     marginBottom: 24,
 });
 
-export const Modal: React.StatelessComponent<ReactModal.Props> = props => (
+export const Modal: React.StatelessComponent<any> = props => (
     <ReactModal
         {...props}
         closeTimeoutMS={transitionTime + 50}

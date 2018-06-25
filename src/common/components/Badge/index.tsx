@@ -56,6 +56,7 @@ const Tooltip = glamorous.span({
     padding: '4px 8px',
     maxWidth: 350,
     position: 'absolute',
+    zIndex: 20,
     left: 0,
     top: 'calc(100% + 8px)',
     visibility: 'hidden',

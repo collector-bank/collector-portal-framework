@@ -37,7 +37,7 @@ A group of checkboxes.
 interface CheckboxItem {
     key: string;
     label: string;
-    child?: JSX.Element;
+    child?: React.ReactNode;
 }
 ```
 

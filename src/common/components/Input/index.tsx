@@ -65,7 +65,7 @@ const Textarea = glamorous.textarea<{ hasError?: boolean }>(
 );
 
 export interface InputProps {
-    label?: string | JSX.Element;
+    label?: string | React.ReactNode;
     value?: string;
     placeholder?: string;
     multiline?: boolean;

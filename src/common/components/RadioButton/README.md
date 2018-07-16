@@ -37,7 +37,7 @@ A group of radio buttons.
 export interface RadioButtonItem {
     key: any;
     label: string;
-    child?: JSX.Element;
+    child?: React.ReactNode;
 }
 ```
 

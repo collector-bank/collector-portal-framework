@@ -30,11 +30,11 @@ const transition = css({
 export interface CheckboxItem {
     key: string;
     label: string;
-    child?: JSX.Element;
+    child?: React.ReactNode;
 }
 
 export interface CheckboxGroupProps {
-    label: string | JSX.Element;
+    label: string | React.ReactNode;
     items: CheckboxItem[];
     checked?: string[];
     disabled?: boolean;

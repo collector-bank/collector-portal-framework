@@ -57,8 +57,8 @@ type colors =
 export interface CardProps {
     heading?: string;
     color?: colors;
-    body: JSX.Element;
-    subBody?: JSX.Element;
+    body: React.ReactNode;
+    subBody?: React.ReactNode;
 }
 
 export const Card: React.StatelessComponent<CardProps> = ({ heading, color, body, subBody }) => {

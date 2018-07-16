@@ -8,7 +8,6 @@ const CardContainer = glamorous.div({
     borderRadius: borderRadius.large,
     boxSizing: 'border-box',
     width: 280,
-    maxHeight: 400,
     padding: 20,
     marginRight: 20,
     marginBottom: 20,

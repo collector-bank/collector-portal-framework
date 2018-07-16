@@ -8,8 +8,7 @@
 
 const path = require('path');
 
-const COMMON_PATH = path.join(__dirname, '../src/common');
-const STORIES_PATH = path.join(__dirname, '../stories');
+const SOURCE_PATH = path.join(__dirname, '../src');
 
 module.exports = {
     module: {
@@ -17,19 +16,19 @@ module.exports = {
             {
                 test: /\.tsx?$/,
                 loader: 'ts-loader',
-                include: [
-                    COMMON_PATH,
-                    STORIES_PATH
-                ]
+                include: SOURCE_PATH,
             },
             {
                 test: /\.(eot|ttf|woff2?|svg)$/,
                 loader: 'file-loader',
-                include: COMMON_PATH,
+                include: SOURCE_PATH,
             },
             {
                 test: /\.css$/,
-                use: [{ loader: 'style-loader' }, { loader: 'css-loader' }]
+                use: [
+                    { loader: 'style-loader' },
+                    { loader: 'css-loader' }
+                ]
             }
         ]
     },

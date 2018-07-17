@@ -3,8 +3,7 @@ import glamorous from 'glamorous';
 import * as uniqid from 'uniqid';
 import { borderRadius, colors } from '../../../theme';
 
-const checkmark = require('./checkmark.svg');
-
+const checkboxSvg = 'data:image/svg+xml;base64,ICAgIDxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgOS44NjIgOC4xOTgiPg0KICAgICAgICA8cGF0aA0KICAgICAgICAgICAgZmlsbD0iI2ZmZiINCiAgICAgICAgICAgIGQ9Ik04Ljk3Mi4xODhsLTUuMzY0IDYuNzJMLjg4MyAzLjY1OWEuNS41IDAgMSAwLS43NjYuNjQybDMuMTE3IDMuNzE4YS41MDIuNTAyIDAgMCAwIC4zODMuMTc5aC4wMDZhLjUwMi41MDIgMCAwIDAgLjM4NS0uMTg4TDkuNzUzLjgxMkEuNDk4LjQ5OCAwIDAgMCA5LjY3NC4xMWEuNDk4LjQ5OCAwIDAgMC0uNzAyLjA3OHoiDQogICAgICAgIC8+DQogICAgPC9zdmc+';
 const CheckboxContainer = glamorous.div<{ disabled?: boolean }>(
     {
         display: 'flex',
@@ -46,7 +45,7 @@ const Input = glamorous.input({
     },
 
     '&:checked:after': {
-        backgroundImage: `url(${checkmark})`,
+        backgroundImage: `url(${checkboxSvg})`,
     },
 
     '&:disabled': {

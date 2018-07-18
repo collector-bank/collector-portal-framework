@@ -3,7 +3,8 @@ import glamorous from 'glamorous';
 import * as uniqid from 'uniqid';
 import { borderRadius, colors } from '../../../theme';
 
-const checkboxSvg = 'data:image/svg+xml;base64,ICAgIDxzdmcgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIiB2aWV3Qm94PSIwIDAgOS44NjIgOC4xOTgiPg0KICAgICAgICA8cGF0aA0KICAgICAgICAgICAgZmlsbD0iI2ZmZiINCiAgICAgICAgICAgIGQ9Ik04Ljk3Mi4xODhsLTUuMzY0IDYuNzJMLjg4MyAzLjY1OWEuNS41IDAgMSAwLS43NjYuNjQybDMuMTE3IDMuNzE4YS41MDIuNTAyIDAgMCAwIC4zODMuMTc5aC4wMDZhLjUwMi41MDIgMCAwIDAgLjM4NS0uMTg4TDkuNzUzLjgxMkEuNDk4LjQ5OCAwIDAgMCA5LjY3NC4xMWEuNDk4LjQ5OCAwIDAgMC0uNzAyLjA3OHoiDQogICAgICAgIC8+DQogICAgPC9zdmc+';
+const checkboxSvg = "'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 9.862 8.198%22%3E%3Cpath fill=%22%23fff%22 d=%22M8.972.188l-5.364 6.72L.883 3.659a.5.5 0 1 0-.766.642l3.117 3.718a.502.502 0 0 0 .383.179h.006a.502.502 0 0 0 .385-.188L9.753.812A.498.498 0 0 0 9.674.11a.498.498 0 0 0-.702.078z%22/%3E%3C/svg%3E%0A'";
+
 const CheckboxContainer = glamorous.div<{ disabled?: boolean }>(
     {
         display: 'flex',

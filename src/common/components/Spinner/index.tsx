@@ -4,7 +4,7 @@ import { keyframes } from 'glamor';
 import { SpinnerIcon } from './Spinner';
 
 const SpinnerElement = (props: {}) => (
-    <div {...props}>
+    <div role="progressbar" {...props}>
         <SpinnerIcon />
     </div>
 );

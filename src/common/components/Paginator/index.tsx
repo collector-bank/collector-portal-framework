@@ -2,8 +2,10 @@ import glamorous from 'glamorous';
 import * as React from 'react';
 import { colors } from '../../../theme';
 
-const leftChevron = require('./chevron-left.svg');
-const rightChevron = require('./chevron-right.svg');
+const leftChevron =
+    "'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 86.001 86.001%22%3E%3Cpath d=%22M64.998 80.095a3.484 3.484 0 0 1 0 4.893 3.401 3.401 0 0 1-4.844 0l-39.151-39.54a3.486 3.486 0 0 1 0-4.895l39.15-39.539a3.4 3.4 0 0 1 4.844 0A3.487 3.487 0 0 1 65 5.907L29.294 43.001l35.704 37.094z%22 fill=%22%236B1FAF%22/%3E%3C/svg%3E'";
+const rightChevron =
+    "'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 512 512%22%3E%3Cpath d=%22M367.954 213.588L160.67 5.872c-7.804-7.819-20.467-7.831-28.284-.029-7.819 7.802-7.832 20.465-.03 28.284l207.299 207.731c7.798 7.798 7.798 20.486-.015 28.299L132.356 477.873c-7.802 7.819-7.789 20.482.03 28.284A19.935 19.935 0 0 0 146.513 512c5.125 0 10.25-1.958 14.157-5.873l207.269-207.701c23.394-23.394 23.394-61.459.015-84.838z%22 fill=%22%236B1FAF%22/%3E%3C/svg%3E'";
 
 export interface PaginatorProps {
     numberOfItems: number;

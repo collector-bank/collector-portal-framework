@@ -1,13 +1,13 @@
 import * as React from 'react';
 import glamorous, { CSSProperties } from 'glamorous';
 import { keyframes } from 'glamor';
+import { SpinnerIcon } from './Spinner';
 
-/**
- * The SVG was made with http://loading.io
- */
-const spinner = require('./spinner.svg');
-
-const Element = (props: {}) => <div role="progressbar" {...props} />;
+const SpinnerElement = (props: {}) => (
+    <div role="progressbar" {...props}>
+        <SpinnerIcon />
+    </div>
+);
 
 const fadeIn = keyframes({
     '0%': { opacity: 0 },
@@ -17,12 +17,12 @@ const fadeIn = keyframes({
 export interface SpinnerProps {
     size?: number;
     centered?: boolean;
+    color?: string;
 }
 
-export const Spinner: any = glamorous<SpinnerProps>(Element, { rootEl: 'div' })(
+export const Spinner: any = glamorous<SpinnerProps>(SpinnerElement, { rootEl: 'div' })(
     {
         display: 'inline-block',
-        background: `url(${spinner}) no-repeat`,
         backgroundSize: '100%',
         animation: `${fadeIn} 250ms ease-in-out`,
     },

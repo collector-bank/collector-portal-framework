@@ -1,7 +1,7 @@
 {
     "title": "Collector Portal Framework",
     "name": "collector-portal-framework",
-    "version": "6.0.0",
+    "version": "6.1.0",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "repository": {
@@ -9,12 +9,13 @@
         "url": "https://github.com/collector-bank/collector-portal-framework.git"
     },
     "devDependencies": {
-        "@storybook/addon-knobs": "^3.4.7",
-        "@storybook/react": "^3.4.7",
+        "@storybook/addon-actions": "4.0.0-alpha.14",
+        "@storybook/addon-knobs": "4.0.0-alpha.14",
+        "@storybook/react": "4.0.0-alpha.14",
         "@storybook/storybook-deployer": "^2.3.0",
+        "@types/react": ">=16",
         "@types/react-dom": ">=16",
         "@types/react-router-dom": "^4.2.7",
-        "@types/react": ">=16",
         "@types/storybook__addon-actions": "^3.0.3",
         "@types/storybook__addon-knobs": "^3.3.1",
         "@types/storybook__react": "^3.0.7",

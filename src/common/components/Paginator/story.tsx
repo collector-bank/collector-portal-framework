@@ -9,14 +9,14 @@ components.addDecorator(withKnobs);
 
 components.add('Paginator', () => {
     let list = [];
-    for (let i = 1; i <= 20; i++) list.push(i);
+    for (let i = 1; i <= 20; i++) list.push(`${i}`);
 
     return (
         <Paginator
             numberOfItems={500}
             numbersInMiddle={5}
             pageSize={25}
-            activePage={parseInt(select('Sida', list, 1) as any)}
+            activePage={parseInt(select('Page', list, '1'))}
             onChange={activePage => null}
         />
     );

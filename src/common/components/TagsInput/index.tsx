@@ -12,7 +12,7 @@ export interface TagInputProps {
     tags: Tag[];
     autocompleteItems?: string[];
     placeholder?: string;
-    label?: string | JSX.Element;
+    label?: string | React.ReactNode;
     canAddAllAutocompleteItemsButton?: boolean;
     addAllAutocompleteItemsButtonText?: string;
     clearAllAutocompleteItemsButtonText?: string;

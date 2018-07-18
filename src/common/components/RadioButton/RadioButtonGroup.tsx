@@ -32,11 +32,11 @@ export type Key = any;
 export interface RadioButtonItem {
     key: Key;
     label: string;
-    child?: JSX.Element;
+    child?: React.ReactNode;
 }
 
 export interface RadioButtonGroupProps {
-    label: string | JSX.Element;
+    label: string | React.ReactNode;
     items: RadioButtonItem[];
     selected?: Key;
     disabled?: boolean;

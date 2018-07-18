@@ -25,7 +25,7 @@ export interface ValueListProps {
 
 export interface InfoItem {
     heading: string;
-    value: any; // string | string[] | JSX.Element[];
+    value: any;
 }
 
 export const ValueList: React.StatelessComponent<ValueListProps> = props => {

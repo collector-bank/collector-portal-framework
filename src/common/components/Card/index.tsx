@@ -16,7 +16,7 @@ const CardContainer = glamorous.div({
     minHeight: 200,
 });
 
-const Heading = glamorous.div<{ color: colors }>(
+const Heading = glamorous.div<{ color: CardColors }>(
     {
         display: 'inline-block',
         fontWeight: 600,
@@ -37,26 +37,11 @@ const SubBody = glamorous.div({
     paddingTop: 16,
 });
 
-type colors =
-    | 'black'
-    | 'darkGray'
-    | 'mediumGray'
-    | 'lightGray'
-    | 'offWhite'
-    | 'white'
-    | 'purple'
-    | 'green'
-    | 'red'
-    | 'blue'
-    | 'yellow'
-    | 'sidebarBlue'
-    | 'sidebarBlueLight'
-    | 'sidebarBlueDark'
-    | undefined;
+export type CardColors = 'purple' | 'green' | 'red' | 'blue' | 'yellow' | undefined;
 
 export interface CardProps {
     heading?: string;
-    color?: colors;
+    color?: CardColors;
     body: React.ReactNode;
     subBody?: React.ReactNode;
 }

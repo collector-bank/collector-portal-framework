@@ -5,7 +5,7 @@ deploy:
   provider: npm
   email: info@collectorbank.se
   api_key:
-    secure: 0472f921-e57a-4529-844d-dd50cf95fe03
+    secure: b9ta9x/Fp+FCXF4ZMcDgcEFXmzVIMvYlSngg4jnTKa2q6OrVqQGGiqeHvXtR4BgMSN3aoK3J2+dokfX3PEKGA/6Gosv2keqm+5M3NV7lifm5fqJ5QTWw/vh3QjXgMZb5ybYStwmPi0+g4Qujhxq+QynyQbKeA6Wu6TEBWSCbf7YLA75CUqdwE1aYlpCbGGq1TXpAcQEu4TCofMtVUsUwpXWCuXTSQVV3hxLmXxQ74oA8SE93WIyc1wx9biUTcL+ThBSmeyQJ+ypWOO9xB9i0JXuO2uMyngUCAbNt+MfP8ZyWSYw6/m1K74vc6eN6TcHAfFrDzkjAldwRg6vHVqgbA1ztgMmsmR+iq66F2xdjrJaS+Wpy0scKoVyncFswicqi417HweqUAsPFYg8z7t2VKJEHgPOlUpNgqDeGvq2PqOc6KvkBNgfJFEA8fJSgIO20+8NqLGjI4AcTdLEkQMsUKrtPoK51M4Q9m0fQi7uVSHE5hiAvSI+6l9nQWLfo9L9SuOeUgocDzDjRke+DhLKL3RC/ZwGTd9/E30aKAsb8Dtlt06TP/d9djKl7sUwqtth/vt+6nlzpAofwGFnI8D9hj5k6MsGfOqpxXh84QNNin2HBdcM2zbNGnWpfb7BT98hlMjg4rI7fampmuYZrKcYsNTw+Uo50MxegPIxLkJaJ9lE=
   on:
     repo: collector-bank/collector-portal-framework
     branch: master

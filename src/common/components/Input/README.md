@@ -10,6 +10,7 @@ This component can be used for freeform data entry.
 | `value`       |          | string            |                                               |
 | `placeholder` |          | string            |                                               |
 | `multiline`   |          | boolean           |                                               |
+| `rows`        |          | number            | Can be used in combination with `multiline`   |
 | `disabled`    |          | boolean           |                                               |
 | `error`       |          | string or boolean |                                               |
 | `maxLength`   |          | number            |                                               |

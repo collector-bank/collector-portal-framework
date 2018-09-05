@@ -9,8 +9,6 @@ const expandIcon = require('./expand.svg');
 const collapseIcon = require('./collapse.svg');
 
 const Container = glamorous.div({
-    borderBottom: '1px solid',
-    transition: 'border-color 200ms linear',
     padding: '16px 0',
     maxWidth: 900,
 });

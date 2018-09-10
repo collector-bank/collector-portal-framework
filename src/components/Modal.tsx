@@ -34,6 +34,8 @@ const overlay = css({
 const overlayAfterOpen = css({
     'body &': {
         opacity: 1,
+        overflow: 'auto',
+        WebkitOverflowScrolling: 'touch',
     },
 });
 
@@ -45,8 +47,6 @@ const overlayBeforeClose = css({
 
 const content = css({
     outline: 'none',
-    overflow: 'auto',
-    WebkitOverflowScrolling: 'touch',
     padding: '15vh 20px 40px',
     maxHeight: 'calc(100vh - 15vh - 20px)', // the 15vh and 20px is to compensate for the padding
 

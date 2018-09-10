@@ -18,7 +18,7 @@ const Header = glamorous.div({
     alignItems: 'center',
     cursor: 'pointer',
 
-    '> h2': {
+    '> h2, > h3': {
         margin: 0,
     },
 });
@@ -30,6 +30,7 @@ const ToggleButton = glamorous.button<{ expanded: boolean; iconSize: Size }>(
         backgroundColor: 'transparent',
         border: 0,
         marginRight: 12,
+        backgroundRepeat: 'no-repeat',
     },
     ({ expanded, iconSize }) => ({
         backgroundImage: expanded ? `url(${collapseIcon})` : `url(${expandIcon})`,

@@ -34,8 +34,9 @@ const ToggleButton = glamorous.button<{ expanded: boolean; iconSize: Size }>(
     },
     ({ expanded, iconSize }) => ({
         backgroundImage: expanded ? `url(${collapseIcon})` : `url(${expandIcon})`,
-        width: iconSize === 'medium' ? 24 : 17,
-        height: iconSize === 'medium' ? 24 : 15,
+        width: iconSize === 'medium' ? 24 : 21,
+        height: iconSize === 'medium' ? 24 : 21,
+        backgroundSize: iconSize === 'medium' ? undefined : 18,
     })
 );
 

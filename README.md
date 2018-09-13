@@ -45,7 +45,7 @@ You can see a demo of the UI components by cloning this repo, doing `npm install
 | [Radio button group](src/common/components/RadioButton/README.md) | [Source](src/common/components/RadioButton/RadioButtonGroup.tsx) |
 | [Select](src/common/components/Select/README.md)                  | [Source](src/common/components/Select/index.tsx)                 |
 | [Spinner](src/common/components/Spinner/README.md)                | [Source](src/common/components/Spinner/index.tsx)                |
-| [TagsInput](src/common/components/TagsInput/README.md)            | [Source](src/common/components/TagsInput/index.tsx)              |
+| [Tags Input](src/common/components/TagsInput/README.md)           | [Source](src/common/components/TagsInput/index.tsx)              |
 
 ### Typographic components
 

@@ -25,3 +25,7 @@ This component can be used for freeform data entry.
 ```jsx
 <Input label="Ditt namn" value={this.state.name} disabled={true} />
 ```
+
+## Demo
+
+[See a demo here](https://collector-bank.github.io/collector-portal-framework/?selectedKind=Components&selectedStory=Input)

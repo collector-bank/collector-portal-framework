@@ -28,3 +28,7 @@ This compoment can be used to capture a date. It provides an input field which, 
     <DatePicker locale="sv" label="Bokföringsdatum" />
 </DatePickerGroup>
 ```
+
+## Demo
+
+[See a demo here](https://collector-bank.github.io/collector-portal-framework/?selectedKind=Components&selectedStory=Date%20picker)

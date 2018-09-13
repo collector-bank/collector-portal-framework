@@ -1,4 +1,4 @@
-# Input
+# Tags Input
 
 This component can be used for freeform data entry with autocomplete and tags.
 
@@ -28,3 +28,7 @@ const handleChange = (items: Tag[]) => {
     onChange={this.handleChange}
 />
 ```
+
+## Demo
+
+[See a demo here](https://collector-bank.github.io/collector-portal-framework/?selectedKind=Components&selectedStory=Tags%20Input)

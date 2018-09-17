@@ -76,6 +76,7 @@ export interface InputProps {
     name?: string;
     rows?: number;
     onChange?: (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
+    onBlur?: (event: React.FormEvent<HTMLInputElement> | undefined) => void;
     innerRef?: (inputElement: HTMLInputElement) => void;
     type?: string;
 }
@@ -93,7 +94,11 @@ export class Input extends React.Component<InputProps, InputState> {
         isDirty: false,
     };
 
-    makeDirty = () => {
+    makeDirty = (event: React.FormEvent<HTMLInputElement> | undefined) => {
+        if (this.props.onBlur) {
+            this.props.onBlur(event);
+        }
+
         this.setState({ isDirty: true });
     };
 
@@ -109,6 +114,7 @@ export class Input extends React.Component<InputProps, InputState> {
                         {label}
                     </Label>
                 )}
+
                 <InputElement id={this.state.id} onBlur={this.makeDirty} hasError={showError} aria-invalid={showError} {...rest} />
 
                 <Collapse isOpen={showError && typeof error === 'string'} className={`${inputErrorTransition}`}>

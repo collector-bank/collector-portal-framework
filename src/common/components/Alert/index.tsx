@@ -67,7 +67,7 @@ const getStyle = (type: AlertType, alertSize: AlertSize): CSSProperties => {
                 backgroundPositionX: 0,
                 backgroundImage: `url(${smallIcons[type]})`,
                 backgroundColor: 'transparent',
-                color: 'inherit',
+                color: colors.red,
                 fontWeight: 400,
                 backgroundSize: '16px 16px',
                 padding: 0,

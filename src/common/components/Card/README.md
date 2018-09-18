@@ -16,7 +16,7 @@ A card is a component that is meant to house content in a clean and concise form
 ```jsx
 return (
     <Card
-        color="purple"
+        color="primary"
         heading="Heading"
         body={
             <div>

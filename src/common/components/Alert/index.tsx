@@ -1,8 +1,8 @@
 import * as React from 'react';
-import glamorous from 'glamorous';
-import { colors, borderRadius } from '../../../theme';
 import { CSSProperties } from 'react';
+import glamorous from 'glamorous';
 import { keyframes } from 'glamor';
+import { Theme } from '../../../themes';
 
 const largeIcons = {
     error: require('./icons/warning-filled.svg'),
@@ -22,13 +22,13 @@ interface AlertContainerProps {
     alertSize: AlertSize;
     type: AlertType;
     fadeIn?: boolean;
+    theme: Theme;
 }
 
 const AlertContainer = glamorous.div<AlertContainerProps>(
     {
         backgroundRepeat: 'no-repeat',
         backgroundPosition: 'left center',
-        borderRadius: borderRadius.small,
         display: 'inline-block',
         textAlign: 'left',
         boxSizing: 'border-box',
@@ -39,26 +39,26 @@ const AlertContainer = glamorous.div<AlertContainerProps>(
             color: 'inherit',
         },
     },
-    ({ type, alertSize, fadeIn }) =>
-        ({
-            ...getStyle(type, alertSize),
-            ...getAnimation(fadeIn),
-        } as {})
+    ({ type, alertSize, fadeIn, theme }) => ({
+        borderRadius: theme.borderRadius.small,
+        ...getStyle(type, alertSize, theme),
+        ...getAnimation(fadeIn),
+    })
 );
 
-const getStyle = (type: AlertType, alertSize: AlertSize): CSSProperties => {
+const getStyle = (type: AlertType, alertSize: AlertSize, theme: Theme): CSSProperties => {
     const backgroundColors = {
-        error: colors.red,
-        warning: colors.yellow,
-        info: colors.blue,
-        success: colors.green,
+        error: theme.colors.red,
+        warning: theme.colors.yellow,
+        info: theme.colors.blue,
+        success: theme.colors.green,
     };
 
     const textColors = {
-        error: colors.white,
-        warning: colors.black,
-        info: colors.white,
-        success: colors.white,
+        error: theme.colors.white,
+        warning: theme.colors.black,
+        info: theme.colors.white,
+        success: theme.colors.white,
     };
 
     switch (alertSize) {
@@ -67,7 +67,7 @@ const getStyle = (type: AlertType, alertSize: AlertSize): CSSProperties => {
                 backgroundPositionX: 0,
                 backgroundImage: `url(${smallIcons[type]})`,
                 backgroundColor: 'transparent',
-                color: colors.red,
+                color: theme.colors.red,
                 fontWeight: 400,
                 backgroundSize: '16px 16px',
                 padding: 0,

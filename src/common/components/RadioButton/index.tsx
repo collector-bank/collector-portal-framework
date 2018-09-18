@@ -1,7 +1,7 @@
 import * as React from 'react';
 import glamorous from 'glamorous';
 import * as uniqid from 'uniqid';
-import { colors } from '../../../theme';
+import { Theme } from '../../../themes';
 
 const RadioButtonContainer = glamorous.div<{ disabled?: boolean }>(
     {
@@ -11,46 +11,49 @@ const RadioButtonContainer = glamorous.div<{ disabled?: boolean }>(
     ({ disabled }) => (disabled ? { opacity: 0.5 } : {})
 );
 
-const Input = glamorous.input({
-    appearance: 'none',
-    position: 'relative',
-    background: 'none',
-    border: '1px solid currentColor',
-    width: 20,
-    height: 20,
-    flexShrink: 0,
-    borderRadius: '100%',
-    marginRight: '1em',
-    transition: 'border-color 150ms',
-
-    '&:after': {
-        content: '""',
-        position: 'absolute',
-        top: 3,
-        bottom: 3,
-        left: 3,
-        right: 3,
+const Input = glamorous.input<{ theme: Theme }>(
+    {
+        appearance: 'none',
+        position: 'relative',
+        background: 'none',
+        border: '1px solid currentColor',
+        width: 20,
+        height: 20,
+        flexShrink: 0,
         borderRadius: '100%',
-        transition: 'background-color 150ms',
-    },
+        marginRight: '1em',
+        transition: 'border-color 150ms',
 
-    '&:checked': {
-        borderColor: colors.purple,
+        '&:after': {
+            content: '""',
+            position: 'absolute',
+            top: 3,
+            bottom: 3,
+            left: 3,
+            right: 3,
+            borderRadius: '100%',
+            transition: 'background-color 150ms',
+        },
     },
+    ({ theme }) => ({
+        '&:checked': {
+            borderColor: theme.colors.primary,
+        },
 
-    '&:checked:after': {
-        backgroundColor: colors.purple,
-    },
+        '&:checked:after': {
+            backgroundColor: theme.colors.primary,
+        },
 
-    '&:disabled': {
-        borderColor: colors.darkGray,
-        backgroundColor: colors.lightGray,
-    },
+        '&:disabled': {
+            borderColor: theme.colors.darkGray,
+            backgroundColor: theme.colors.lightGray,
+        },
 
-    '&:disabled:checked:after': {
-        backgroundColor: colors.darkGray,
-    },
-});
+        '&:disabled:checked:after': {
+            backgroundColor: theme.colors.darkGray,
+        },
+    })
+);
 
 export interface RadioButtonProps {
     label: string;

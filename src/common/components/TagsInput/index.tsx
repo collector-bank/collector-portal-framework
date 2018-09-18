@@ -1,11 +1,11 @@
 import { css } from 'glamor';
-import glamorous from 'glamorous';
+import glamorous, { withTheme } from 'glamorous';
 import * as React from 'react';
 import * as Autosuggest from 'react-autosuggest';
 import * as uniqid from 'uniqid';
 import { Button, ButtonGroup, Input, Label } from '../../../common/components';
 import { Text } from '../../../common/typography';
-import { borderRadius, colors } from '../../../theme';
+import { Theme } from '../../../themes';
 import { Tag } from './Tag';
 
 export interface TagInputProps {
@@ -20,21 +20,25 @@ export interface TagInputProps {
     onChange: (items: Tag[]) => void;
 }
 
+export interface TagInputPropsWithTheme extends TagInputProps {
+    theme: Theme;
+}
+
 export interface TagInputState {
     value: string;
     suggestions: string[];
     id: string;
 }
 
-const suggestionsContainerOpen = css({
+const suggestionsContainerOpen = (theme: Theme) => css({
     position: 'absolute',
-    background: colors.white,
+    background: theme.colors.white,
     display: 'block',
     maxWidth: 500,
     boxSizing: 'border-box',
     border: '1px solid',
-    borderRadius: borderRadius.small,
-    borderColor: colors.mediumGray,
+    borderRadius: theme.borderRadius.small,
+    borderColor: theme.colors.mediumGray,
     zIndex: 10,
     marginTop: -4,
     width: '100%',
@@ -43,12 +47,12 @@ const suggestionsContainerOpen = css({
     overflow: 'scroll',
 });
 
-const suggestionsList = css({
+const suggestionsList = (theme: Theme) => css({
     listStyle: 'none',
     padding: 0,
 });
 
-const suggestionCSS = css({
+const suggestionCSS = (theme: Theme) => css({
     display: 'flex',
     justifyContent: 'space-between',
     alignItems: 'center',
@@ -60,21 +64,14 @@ const suggestionCSS = css({
     whiteSpace: 'no-wrap',
 
     '&:hover': {
-        background: colors.offWhite,
+        background: theme.colors.offWhite,
         cursor: 'pointer',
     },
 });
 
-const suggestionHighlighted = css({
-    background: colors.offWhite,
+const suggestionHighlighted = (theme: Theme) => css({
+    background: theme.colors.offWhite,
 });
-
-const theme = {
-    suggestionsContainerOpen: `${suggestionsContainerOpen}`,
-    suggestionsList: `${suggestionsList}`,
-    suggestion: `${suggestionCSS}`,
-    suggestionHighlighted: `${suggestionHighlighted}`,
-};
 
 const TagsContainer = glamorous.div<TagsContainerProps>(
     {
@@ -94,7 +91,14 @@ interface TagsContainerProps {
     tagsItemsDirection: FlexDirections;
 }
 
-export class TagsInput extends React.Component<TagInputProps, TagInputState> {
+export class TagsInput_ extends React.Component<TagInputPropsWithTheme, TagInputState> {
+    theme = {
+        suggestionsContainerOpen: `${suggestionsContainerOpen(this.props.theme)}`,
+        suggestionsList: `${suggestionsList(this.props.theme)}`,
+        suggestion: `${suggestionCSS(this.props.theme)}`,
+        suggestionHighlighted: `${suggestionHighlighted(this.props.theme)}`,
+    };
+
     state: TagInputState = {
         id: uniqid(),
         value: '',
@@ -197,6 +201,7 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
         return (
             <>
                 {label && <Label htmlFor={id}>{label}</Label>}
+
                 <Autosuggest
                     suggestions={suggestions}
                     getSuggestionValue={this.getSuggestionValue}
@@ -208,7 +213,7 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
                     focusInputOnSuggestionClick={false}
                     renderInputComponent={this.renderInputComponent}
                     highlightFirstSuggestion={true}
-                    theme={theme}
+                    theme={this.theme}
                 />
 
                 {canAddAllAutocompleteItemsButton && (
@@ -230,3 +235,5 @@ export class TagsInput extends React.Component<TagInputProps, TagInputState> {
         );
     }
 }
+
+export const TagsInput = withTheme(TagsInput_ as any) as React.ComponentClass<TagInputProps>;

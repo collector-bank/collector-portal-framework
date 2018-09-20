@@ -10,12 +10,12 @@ const inputErrorTransition = css({
     transition: 'height 150ms',
 });
 
-export const InputContainer = glamorous.div({
+export const InputContainer: any = glamorous.div({
     maxWidth: 500,
     marginBottom: '1.25em',
 });
 
-export const InputField = glamorous.input<{ hasError?: boolean, theme: Theme }>(
+export const InputField: any = glamorous.input<{ hasError?: boolean, theme: Theme }>(
     {
         font: 'inherit',
         color: 'inherit',
@@ -73,7 +73,7 @@ const Textarea = glamorous.textarea<{ hasError?: boolean, theme: Theme }>(
     })
 );
 
-export const InputError = glamorous.div<{ theme: Theme }>(
+export const InputError: any = glamorous.div<{ theme: Theme }>(
     {
         fontWeight: 500,
         padding: 8,

@@ -1,6 +1,8 @@
 import { css } from 'glamor';
-import { Theme } from './themes';
+import * as collectorTheme from './themes/collector';
 import './common/fonts/fonts.css';
+
+type Theme = typeof collectorTheme;
 
 export { ThemeProvider } from 'glamorous';
 

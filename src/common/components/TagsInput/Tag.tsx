@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
 import * as React from 'react';
-import { borderRadius, colors } from '../../../theme';
+import { Theme } from '../../../themes';
 import { CrossIcon } from './Icons/Cross';
 
 export interface TagProps {
@@ -13,18 +13,22 @@ export interface Tag {
     id: string;
 }
 
-const TagContainer = glamorous.div({
-    padding: '8px 16px',
-    borderRadius: borderRadius.large,
-    backgroundColor: colors.lightGray,
-    marginRight: 8,
-    marginTop: 16,
-    display: 'flex',
-    alignItems: 'center',
-    justifyContent: 'center',
-    whiteSpace: 'nowrap',
-    overflow: 'hidden',
-});
+const TagContainer = glamorous.div<{ theme: Theme }>(
+    {
+        padding: '8px 16px',
+        marginRight: 8,
+        marginTop: 16,
+        display: 'flex',
+        alignItems: 'center',
+        justifyContent: 'center',
+        whiteSpace: 'nowrap',
+        overflow: 'hidden',
+    },
+    ({ theme }) => ({
+        borderRadius: theme.borderRadius.large,
+        backgroundColor: theme.colors.lightGray,
+    })
+);
 
 const IconContainer = glamorous.div({
     marginLeft: 8,

@@ -1,15 +1,18 @@
 import * as React from 'react';
 import glamorous from 'glamorous';
-import { colors, fonts } from '../theme';
+import { Theme } from '../themes';
 
 const List = glamorous.dl({
     marginTop: 0,
 });
 
-const Heading = glamorous.dt({
-    color: colors.mediumGray,
-    font: fonts.desktop.small,
-});
+const Heading = glamorous.dt<{ theme: Theme }>(
+    {},
+    ({ theme }) => ({
+        color: theme.colors.mediumGray,
+        font: theme.fonts.desktop.small,
+    })
+);
 
 const Value = glamorous.dd({
     margin: 0,

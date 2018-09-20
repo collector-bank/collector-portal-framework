@@ -1,66 +1,78 @@
 import * as React from 'react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import glamorous from 'glamorous';
-import { borderRadius, breakpoints, colors } from '../theme';
+import { Theme } from '../themes';
 
 const NavContainer = glamorous.nav({
     marginBottom: 30,
 });
 
-const NavList = glamorous.ul({
-    listStyleType: 'none',
-    padding: 0,
-    margin: 0,
-    display: 'flex',
+const NavList = glamorous.ul<{ theme: Theme }>(
+    {
+        listStyleType: 'none',
+        padding: 0,
+        margin: 0,
+        display: 'flex',
 
-    '> li': {
-        marginRight: 16,
-
-        [breakpoints.mobileAndLower]: {
-            margin: 0,
+        '> li': {
+            marginRight: 16,
         },
     },
+    ({ theme }) => ({
+        '> li': {
+            [theme.breakpoints.mobileAndLower]: {
+                margin: 0,
+            },
+        },
 
-    [breakpoints.mobileAndLower]: {
-        flexDirection: 'column',
-        borderRadius: borderRadius.small,
-        border: `1px solid ${colors.lightGray}`,
-        borderBottom: 0,
-    },
-});
+        [theme.breakpoints.mobileAndLower]: {
+            flexDirection: 'column',
+            borderRadius: theme.borderRadius.small,
+            border: `1px solid ${theme.colors.lightGray}`,
+            borderBottom: 0,
+        },
+    })
+);
 
-const NavLink = glamorous(RouterNavLink)({
-    display: 'block',
-    padding: '10px 4px',
-    textDecoration: 'none',
-    color: colors.mediumGray,
-    fontSize: 18,
-    fontWeight: 500,
-    transitionProperty: 'border-color, color',
-    transitionDuration: '200ms',
-    borderBottom: '4px solid transparent',
-
-    '.active': {
-        borderColor: colors.purple,
-        color: 'inherit',
-    },
-
-    '&:hover': {
-        color: 'inherit',
-    },
-
-    [breakpoints.mobileAndLower]: {
-        borderBottom: `1px solid ${colors.lightGray}`,
-        borderLeft: `4px solid ${colors.lightGray}`,
-        flexDirection: 'column',
-        paddingLeft: 16,
+const NavLink = glamorous(RouterNavLink)<{ theme: Theme }>(
+    {
+        display: 'block',
+        padding: '10px 4px',
+        textDecoration: 'none',
+        fontSize: 18,
+        fontWeight: 500,
+        transitionProperty: 'border-color, color',
+        transitionDuration: '200ms',
+        borderBottom: '4px solid transparent',
 
         '.active': {
-            borderBottom: `1px solid ${colors.lightGray}`,
-            borderLeftColor: colors.purple,
+            color: 'inherit',
+        },
+
+        '&:hover': {
+            color: 'inherit',
         },
     },
-});
+    ({ theme }) => ({
+        color: theme.colors.mediumGray,
+
+        '.active': {
+            borderColor: theme.colors.primary,
+        },
+
+        [theme.breakpoints.mobileAndLower]: {
+            borderBottom: `1px solid ${theme.colors.lightGray}`,
+            borderLeft: `4px solid ${theme.colors.lightGray}`,
+            flexDirection: 'column',
+            paddingLeft: 16,
+
+            '.active': {
+                borderBottom: `1px solid ${theme.colors.lightGray}`,
+                borderLeftColor: theme.colors.primary,
+            },
+        },
+    })
+);
 
 export interface TabsProps {
     items: TabItem[];

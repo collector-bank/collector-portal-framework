@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
 import * as React from 'react';
-import { colors } from '../../../theme';
+import { Theme } from '../../../themes';
 
 const leftChevron =
     "'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 86.001 86.001%22%3E%3Cpath d=%22M64.998 80.095a3.484 3.484 0 0 1 0 4.893 3.401 3.401 0 0 1-4.844 0l-39.151-39.54a3.486 3.486 0 0 1 0-4.895l39.15-39.539a3.4 3.4 0 0 1 4.844 0A3.487 3.487 0 0 1 65 5.907L29.294 43.001l35.704 37.094z%22 fill=%22%236B1FAF%22/%3E%3C/svg%3E'";
@@ -18,18 +18,19 @@ export interface PaginatorProps {
 interface ChevronProps {
     direction: 'left' | 'right';
     enabled: boolean;
+    theme: Theme;
 }
 
 const Chevron = glamorous.a<ChevronProps>(
     {
-        color: colors.purple,
         width: 20,
         height: 24,
         paddingLeft: 2,
         paddingRight: 2,
         display: 'inline-block',
     },
-    ({ direction, enabled }) => ({
+    ({ direction, enabled, theme }) => ({
+        color: theme.colors.primary,
         background: `url(${direction === 'left' ? leftChevron : rightChevron}) no-repeat center center`,
         backgroundSize: 12,
         opacity: enabled ? 1 : 0.3,
@@ -37,17 +38,21 @@ const Chevron = glamorous.a<ChevronProps>(
     })
 );
 
-const Ellipses = glamorous.span({
-    width: 20,
-    display: 'inline-block',
-    paddingLeft: 6,
-    paddingRight: 6,
-    textAlign: 'center',
-    fontSize: 18,
-    color: colors.darkGray,
-});
+const Ellipses = glamorous.span<{ theme: Theme }>(
+    {
+        width: 20,
+        display: 'inline-block',
+        paddingLeft: 6,
+        paddingRight: 6,
+        textAlign: 'center',
+        fontSize: 18,
+    },
+    ({ theme }) => ({
+        color: theme.colors.darkGray,
+    })
+);
 
-const Page = glamorous.a<PageProps>(
+const Page = glamorous.a<{ active: boolean; theme: Theme; }>(
     {
         paddingLeft: 6,
         paddingRight: 6,
@@ -56,8 +61,8 @@ const Page = glamorous.a<PageProps>(
         textAlign: 'center',
         cursor: 'pointer',
     },
-    ({ active }) => ({
-        color: active ? colors.black : colors.purple,
+    ({ active, theme }) => ({
+        color: active ? theme.colors.black : theme.colors.primary,
         fontWeight: active ? 600 : 400,
     })
 );
@@ -67,10 +72,6 @@ const PaginatorContainer = glamorous.div({
     display: 'flex',
     fontSize: 18,
 });
-
-interface PageProps {
-    active: boolean;
-}
 
 export class Paginator extends React.Component<PaginatorProps, {}> {
     lastPage = () => Math.ceil(this.props.numberOfItems / this.props.pageSize);

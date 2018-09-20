@@ -1,43 +1,51 @@
 import * as React from 'react';
 import glamorous from 'glamorous';
-import { breakpoints, colors, fonts } from '../theme';
+import { Theme } from '../themes';
 
-const PageHeaderContainer = glamorous.div({
-    display: 'flex',
-    alignItems: 'center',
-    overflow: 'hidden',
-    boxSizing: 'border-box',
-    width: '100%',
-    minHeight: 129,
-    padding: '16px 40px',
-    borderBottom: `1px solid ${colors.lightGray}`,
+const PageHeaderContainer = glamorous.div<{ theme: Theme }>(
+    {
+        display: 'flex',
+        alignItems: 'center',
+        overflow: 'hidden',
+        boxSizing: 'border-box',
+        width: '100%',
+        minHeight: 129,
+        padding: '16px 40px',
 
-    [breakpoints.tabletAndLower]: {
-        paddingLeft: 24,
-        paddingRight: 24,
+        '@media print': {
+            display: 'none',
+        },
     },
+    ({ theme }) => ({
+        borderBottom: `1px solid ${theme.colors.lightGray}`,
 
-    [breakpoints.mobileAndLower]: {
-        padding: 16,
-        minHeight: 0,
-        border: 0,
-    },
+        [theme.breakpoints.tabletAndLower]: {
+            paddingLeft: 24,
+            paddingRight: 24,
+        },
 
-    '@media print': {
-        display: 'none',
-    },
-});
+        [theme.breakpoints.mobileAndLower]: {
+            padding: 16,
+            minHeight: 0,
+            border: 0,
+        },
+    })
+);
 
-const Title = glamorous.h1({
-    margin: 0,
-    font: fonts.desktop.xxl,
-    fontWeight: 600,
-
-    [breakpoints.mobileAndLower]: {
-        font: fonts.mobile.xxl,
+const Title = glamorous.h1<{ theme: Theme }>(
+    {
+        margin: 0,
         fontWeight: 600,
     },
-});
+    ({ theme }) => ({
+        font: theme.fonts.desktop.xxl,
+
+        [theme.breakpoints.mobileAndLower]: {
+            font: theme.fonts.mobile.xxl,
+            fontWeight: 600,
+        },
+    })
+);
 
 export interface PageHeaderProps {
     title?: string;

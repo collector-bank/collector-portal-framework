@@ -1,18 +1,22 @@
 import glamorous, { GlamorousComponent } from 'glamorous';
-import { breakpoints, fonts } from '../../theme';
+import { Theme } from '../../themes';
 
-export const H1: GlamorousComponent<React.HTMLProps<HTMLHeadingElement>, {}> = glamorous.h1({
-    font: fonts.desktop.xxl,
-    fontWeight: 600,
-    marginBottom: 24,
-
-    [breakpoints.mobileAndLower]: {
-        font: fonts.mobile.xxl,
+export const H1: GlamorousComponent<React.HTMLProps<HTMLHeadingElement>, {}> = glamorous.h1<{ theme: Theme }>(
+    {
         fontWeight: 600,
-        marginBottom: 16,
-    },
+        marginBottom: 24,
 
-    '&:first-child': {
-        marginTop: 0,
+        '&:first-child': {
+            marginTop: 0,
+        },
     },
-});
+    ({ theme }) => ({
+        font: theme.fonts.desktop.xxl,
+
+        [theme.breakpoints.mobileAndLower]: {
+            font: theme.fonts.mobile.xxl,
+            fontWeight: 600,
+            marginBottom: 16,
+        },
+    })
+);

@@ -49,20 +49,16 @@ const Image = glamorous.img<{ theme: Theme }>(
     })
 );
 
-const SiteName = glamorous.div<{ theme: Theme }>(
-    {
-        textAlign: 'center',
+const SiteName = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+    textAlign: 'center',
+    font: theme.fonts.desktop.xl,
+    fontWeight: 600,
+
+    [theme.breakpoints.mobileAndLower]: {
+        font: theme.fonts.mobile.xl,
         fontWeight: 600,
     },
-    ({ theme }) => ({
-        font: theme.fonts.desktop.xl,
-
-        [theme.breakpoints.mobileAndLower]: {
-            font: theme.fonts.mobile.xl,
-            fontWeight: 600,
-        },
-    })
-);
+}));
 
 export interface LogoProps {
     location: string;

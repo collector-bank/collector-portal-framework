@@ -10,18 +10,14 @@ export interface BadgeProps {
     tooltip?: string;
 }
 
-const Container = glamorous.div<{ theme: Theme }>(
-    {
-        display: 'inline-block',
-        position: 'relative',
-        fontWeight: 500,
-        marginLeft: '1em',
-        marginRight: '1em',
-    },
-    ({ theme }) => ({
-        font: theme.fonts.desktop.small,
-    })
-);
+const Container = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+    display: 'inline-block',
+    position: 'relative',
+    font: theme.fonts.desktop.small,
+    fontWeight: 500,
+    marginLeft: '1em',
+    marginRight: '1em',
+}));
 
 const Label = glamorous.span<{ color: BadgeColor, theme: Theme }>(
     {

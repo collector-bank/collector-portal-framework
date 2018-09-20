@@ -32,20 +32,16 @@ const PageHeaderContainer = glamorous.div<{ theme: Theme }>(
     })
 );
 
-const Title = glamorous.h1<{ theme: Theme }>(
-    {
-        margin: 0,
+const Title = glamorous.h1<{ theme: Theme }>(({ theme }) => ({
+    margin: 0,
+    font: theme.fonts.desktop.xxl,
+    fontWeight: 600,
+
+    [theme.breakpoints.mobileAndLower]: {
+        font: theme.fonts.mobile.xxl,
         fontWeight: 600,
     },
-    ({ theme }) => ({
-        font: theme.fonts.desktop.xxl,
-
-        [theme.breakpoints.mobileAndLower]: {
-            font: theme.fonts.mobile.xxl,
-            fontWeight: 600,
-        },
-    })
-);
+}));
 
 export interface PageHeaderProps {
     title?: string;

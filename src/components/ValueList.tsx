@@ -6,13 +6,10 @@ const List = glamorous.dl({
     marginTop: 0,
 });
 
-const Heading = glamorous.dt<{ theme: Theme }>(
-    {},
-    ({ theme }) => ({
-        color: theme.colors.mediumGray,
-        font: theme.fonts.desktop.small,
-    })
-);
+const Heading = glamorous.dt<{ theme: Theme }>(({ theme }) => ({
+    color: theme.colors.mediumGray,
+    font: theme.fonts.desktop.small,
+}));
 
 const Value = glamorous.dd({
     margin: 0,

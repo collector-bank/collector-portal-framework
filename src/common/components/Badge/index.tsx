@@ -2,7 +2,7 @@ import * as React from 'react';
 import glamorous from 'glamorous';
 import { Theme } from '../../../themes';
 
-export type BadgeColor = 'primary' | 'yellow' | 'green' | 'red' | 'blue';
+export type BadgeColor = 'primary' | 'yellow' | 'green' | 'red' | 'blue' | 'lightGray';
 
 export interface BadgeProps {
     label: string;
@@ -38,7 +38,7 @@ const Label = glamorous.span<{ color: BadgeColor, theme: Theme }>(
     ({ color, theme }) => ({
         borderRadius: theme.borderRadius.small,
         background: theme.colors[color],
-        color: color === 'yellow' || color === 'green' ? theme.colors.black : theme.colors.white,
+        color: color === 'yellow' || color === 'green' || color === 'lightGray' ? theme.colors.black : theme.colors.white,
     })
 );
 

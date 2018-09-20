@@ -2,13 +2,14 @@
     "compilerOptions": {
         "module": "esnext",
         "target": "es5",
+        "declaration": true,
+        "outDir": "dist",
         "lib": ["es6", "dom"],
         "sourceMap": true,
         "jsx": "react",
         "moduleResolution": "node",
         "rootDirs": [
-            "src",
-            "stories"
+            "src"
         ],
         "forceConsistentCasingInFileNames": true,
         "noImplicitReturns": true,
@@ -19,7 +20,6 @@
         "noUnusedLocals": true
     },
     "exclude": [
-        "dist",
-        "stories"
+        "dist"
     ]
 }

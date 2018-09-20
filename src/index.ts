@@ -2,6 +2,8 @@ import { css } from 'glamor';
 import { Theme } from './themes';
 import './common/fonts/fonts.css';
 
+export { ThemeProvider } from 'glamorous';
+
 export const injectGlobalStyles = (theme: Theme) => {
     css.global('html', {
         WebkitFontSmoothing: 'antialiased',

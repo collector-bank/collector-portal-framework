@@ -1,7 +1,6 @@
 import React from 'react';
 import { configure, addDecorator } from '@storybook/react';
-import { ThemeProvider } from 'glamorous'
-import { injectGlobalStyles } from '../src';
+import { ThemeProvider, injectGlobalStyles } from '../src';
 import * as theme from '../src/themes/collector';
 
 injectGlobalStyles(theme);

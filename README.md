@@ -38,7 +38,7 @@ Import Collectors theme from `collector-portal-framework/themes/collector` or cr
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { ThemeProvider, injectGlobalStyles } from 'collector-portal-framework';
-import * as theme from 'collector-portal-framework/themes/collector';
+import * as theme from 'collector-portal-framework/dist/themes/collector';
 import { YourApp } from './App';
 
 injectGlobalStyles(theme);

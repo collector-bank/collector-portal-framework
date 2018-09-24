@@ -9,7 +9,6 @@ const CardContainer = glamorous.div<{ theme: Theme }>(
         boxSizing: 'border-box',
         width: 280,
         padding: 20,
-        marginRight: 20,
         marginBottom: 20,
         color: 'inherit',
         textDecoration: 'none',

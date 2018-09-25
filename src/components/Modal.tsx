@@ -2,7 +2,7 @@ import * as React from 'react';
 import * as ReactModal from 'react-modal';
 import glamorous, { GlamorousComponent } from 'glamorous';
 import { css } from 'glamor';
-import { colors, borderRadius } from '../theme';
+import { borderRadius, colors, breakpoints } from '../themes/collector';
 
 const rootElement = document.getElementById('root') as HTMLElement;
 
@@ -56,10 +56,15 @@ const content = css({
     borderRadius: borderRadius.small,
     boxSizing: 'border-box',
     maxHeight: 'calc(100vh - 40px)',
-    maxWidth: 'calc(100vw - 10px)',
+    maxWidth: 'calc(100vw - 32px)',
+    margin: 'auto',
 
     transition: `transform ${transitionTime}ms ease-out`,
     transform: 'translateY(-30px)',
+
+    [breakpoints.mobileAndLower]: {
+        padding: 24,
+    },
 });
 
 const contentAfterOpen = css({

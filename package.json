@@ -1,7 +1,7 @@
 {
     "title": "Collector Portal Framework",
     "name": "collector-portal-framework",
-    "version": "6.5.3",
+    "version": "7.0.4",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "repository": {
@@ -50,7 +50,7 @@
         "start": "start-storybook -p 9500",
         "clean": "rimraf dist",
         "copy-static-files": "copyfiles -u 1 \"src/**/*\" -e \"**/*.{ts,tsx}\" dist",
-        "transpile": "tsc --project ./ --declaration --outDir dist",
+        "transpile": "tsc",
         "build": "npm run clean && npm run copy-static-files && npm run transpile",
         "deploy-ghpages": "storybook-to-ghpages",
         "watch": "npm run build -- --watch",

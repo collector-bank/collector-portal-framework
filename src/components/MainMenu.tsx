@@ -1,31 +1,31 @@
-import glamorous, { CSSProperties, GlamorousComponent } from 'glamorous';
 import * as React from 'react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
-import { borderRadius, breakpoints, colors } from '../theme';
+import glamorous, { CSSProperties, GlamorousComponent } from 'glamorous';
+import { Theme } from '../themes';
 
-const MenuContainer = glamorous.nav({
-    flexGrow: 1,
-    margin: '40px 0',
-
-    [breakpoints.mobileAndLower]: {
-        margin: 0,
-        borderBottom: `1px solid ${colors.lightGray}`,
+const MenuContainer = glamorous.nav<{ theme: Theme }>(
+    {
+        flexGrow: 1,
+        margin: '40px 0',
     },
-});
+    ({ theme }) => ({
+        [theme.breakpoints.mobileAndLower]: {
+            margin: 0,
+            borderBottom: `1px solid ${theme.colors.lightGray}`,
+        },
+    })
+);
 
-const MenuList = glamorous.ul<{ hideIconsMobile?: boolean }>(
+const MenuList = glamorous.ul<{ hideIconsMobile?: boolean; theme: Theme; }>(
     {
         listStyleType: 'none',
         margin: 0,
         padding: 0,
-
-        [breakpoints.mobileAndLower]: {
+    },
+    ({ hideIconsMobile, theme }) => ({
+        [theme.breakpoints.mobileAndLower]: {
             display: 'flex',
             flexWrap: 'wrap',
-        },
-    },
-    ({ hideIconsMobile }) => ({
-        [breakpoints.mobileAndLower]: {
             paddingLeft: hideIconsMobile ? 0 : 16,
             paddingRight: hideIconsMobile ? 0 : 16,
             justifyContent: hideIconsMobile ? 'flex-start' : 'space-between',
@@ -38,24 +38,25 @@ interface MenuListItemProps {
     onlyInMobile?: boolean;
     useMarginTop?: boolean;
     hideIconsMobile?: boolean;
+    theme: Theme;
 }
 
 const MenuListItem = glamorous.li<MenuListItemProps>(
     {
         marginLeft: 12,
         marginRight: 12,
-
-        [breakpoints.mobileAndLower]: {
-            marginLeft: 0,
-            marginRight: 0,
-        },
     },
-    ({ onlyInDesktop, onlyInMobile, useMarginTop, hideIconsMobile }) => {
-        let styles: CSSProperties = {};
+    ({ onlyInDesktop, onlyInMobile, useMarginTop, theme }) => {
+        let styles: CSSProperties = {
+            [theme.breakpoints.mobileAndLower]: {
+                marginLeft: 0,
+                marginRight: 0,
+            }
+        };
 
         if (onlyInDesktop) {
             styles = {
-                [breakpoints.mobileAndLower]: {
+                [theme.breakpoints.mobileAndLower]: {
                     display: 'none',
                 },
             };
@@ -65,8 +66,10 @@ const MenuListItem = glamorous.li<MenuListItemProps>(
             styles = {
                 display: 'none',
 
-                [breakpoints.mobileAndLower]: {
+                [theme.breakpoints.mobileAndLower]: {
                     display: 'block',
+                    marginLeft: 0,
+                    marginRight: 0,
                 },
             };
         }
@@ -79,44 +82,48 @@ const MenuListItem = glamorous.li<MenuListItemProps>(
     }
 );
 
-const InternalNavLink = glamorous(RouterNavLink)({
-    display: 'flex',
-    alignItems: 'center',
-    padding: 12, // change this potentially
-    color: 'inherit',
-    textDecoration: 'none',
-    borderRadius: borderRadius.small,
-    transition: 'background-color 200ms, opacity 200ms',
+const InternalNavLink = glamorous(RouterNavLink)<{ theme: Theme }>(
+    {
+        display: 'flex',
+        alignItems: 'center',
+        padding: 12, // change this potentially
+        color: 'inherit',
+        textDecoration: 'none',
+        transition: 'background-color 200ms, opacity 200ms',
 
-    '&:not(.active)': {
-        opacity: 0.5,
-    },
-
-    '&:hover': {
-        background: 'rgba(255, 255, 255, .1)',
-    },
-
-    '&.active:hover': {
-        background: 'rgba(255, 255, 255, .05)',
-    },
-
-    [breakpoints.mobileAndLower]: {
-        borderBottom: '4px solid transparent',
-        borderRadius: 0,
-
-        '.active': {
-            borderBottomColor: 'currentColor',
+        '&:not(.active)': {
+            opacity: 0.5,
         },
 
         '&:hover': {
-            background: 'transparent',
+            background: 'rgba(255, 255, 255, .1)',
         },
 
         '&.active:hover': {
-            background: 'transparent',
+            background: 'rgba(255, 255, 255, .05)',
         },
     },
-});
+    ({ theme }) => ({
+        borderRadius: theme.borderRadius.small,
+
+        [theme.breakpoints.mobileAndLower]: {
+            borderBottom: '4px solid transparent',
+            borderRadius: 0,
+
+            '.active': {
+                borderBottomColor: 'currentColor',
+            },
+
+            '&:hover': {
+                background: 'transparent',
+            },
+
+            '&.active:hover': {
+                background: 'transparent',
+            },
+        },
+    })
+);
 
 const ExternalNavLink: GlamorousComponent<React.HTMLProps<HTMLAnchorElement>, {}> = InternalNavLink.withComponent('a');
 
@@ -125,8 +132,8 @@ const NavLinkLabel = glamorous.span<NavLinkLabelProps>(
         fontSize: 18,
         marginLeft: 16,
     },
-    ({ hideIconsMobile }) => ({
-        [breakpoints.mobileAndLower]: {
+    ({ hideIconsMobile, theme }) => ({
+        [theme.breakpoints.mobileAndLower]: {
             display: hideIconsMobile ? 'block' : 'none',
             marginLeft: hideIconsMobile ? 0 : 16,
         },
@@ -141,10 +148,10 @@ const NavLinkIcon = glamorous.div<NavLinkIconProps>(
         width: 24,
         height: 24,
     },
-    ({ icon, hideIconsMobile }) => ({
+    ({ icon, hideIconsMobile, theme }) => ({
         backgroundImage: `url(${icon})`,
 
-        [breakpoints.mobileAndLower]: {
+        [theme.breakpoints.mobileAndLower]: {
             display: hideIconsMobile ? 'none' : 'block',
         },
     })
@@ -157,11 +164,13 @@ export interface MainMenuProps {
 
 export interface NavLinkLabelProps {
     hideIconsMobile?: boolean;
+    theme: Theme;
 }
 
 export interface NavLinkIconProps {
     icon: string;
     hideIconsMobile?: boolean;
+    theme: Theme;
 }
 
 export interface MainMenuItem {

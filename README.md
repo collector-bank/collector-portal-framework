@@ -22,6 +22,36 @@ An interactive component library can be found on our [GitHub Pages site](https:/
 * [Glamorous](https://glamorous.rocks/)
 
 
+## Install
+
+```
+$ npm install --save collector-portal-framework
+```
+
+
+## How to use
+
+Import Collectors theme from `collector-portal-framework/themes/collector` or create your own. Then import `ThemeProvider` and
+`injectGlobalStyles` from `collector-portal-framework` and provide them the theme.
+
+```js
+import * as React from 'react';
+import * as ReactDOM from 'react-dom';
+import { ThemeProvider, injectGlobalStyles } from 'collector-portal-framework';
+import * as theme from 'collector-portal-framework/dist/themes/collector';
+import { YourApp } from './App';
+
+injectGlobalStyles(theme);
+
+ReactDOM.render(
+  <ThemeProvider theme={theme}>
+    <YourApp />
+  </ThemeProvider>,
+  document.getElementById('root')
+);
+```
+
+
 ## Available components
 
 You can see a demo of the UI components by cloning this repo, doing `npm install` followed by `npm start` to start an instance of [React Storybook](https://storybook.js.org/).

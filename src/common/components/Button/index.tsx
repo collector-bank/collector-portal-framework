@@ -1,17 +1,13 @@
 import * as React from 'react';
 import glamorous, { CSSProperties } from 'glamorous';
-import { colors, breakpoints } from '../../../theme';
+import { Theme } from '../../../themes';
 import { lighten } from 'polished';
 
 /**
  * The SVG was made with http://loading.io
  */
-
 const spinner = (color: string) =>
     `'data:image/svg+xml,%3Csvg width=%2280%22 height=%2280%22 xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22 preserveAspectRatio=%22xMidYMid%22 class=%22uil-ring-alt%22%3E%3Cpath class=%22bk%22 fill=%22none%22 d=%22M0 0h100v100h-100z%22/%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22none%22/%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 stroke=%22${encodeURIComponent(color)}%22 stroke-width=%226%22 stroke-linecap=%22round%22 fill=%22none%22%3E%3Canimate attributeName=%22stroke-dashoffset%22 dur=%222s%22 repeatCount=%22indefinite%22 from=%220%22 to=%22502%22/%3E%3Canimate attributeName=%22stroke-dasharray%22 dur=%222s%22 repeatCount=%22indefinite%22 values=%22150.6 100.4;1 250;150.6 100.4%22/%3E%3C/circle%3E%3C/svg%3E'`;
-
-const whiteSpinner = spinner(colors.white);
-const purpleSpinner = spinner(colors.purple);
 
 export type ButtonType = 'primary' | 'secondary' | 'warn' | 'text';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -25,7 +21,11 @@ export interface ButtonProps {
     loading?: boolean;
 }
 
-const ButtonElement: any = glamorous.button<ButtonProps>(
+export interface ButtonElementProps extends ButtonProps {
+    theme: Theme;
+}
+
+const ButtonElement: any = glamorous.button<ButtonElementProps>(
     {
         fontFamily: 'inherit',
         whiteSpace: 'nowrap',
@@ -36,20 +36,20 @@ const ButtonElement: any = glamorous.button<ButtonProps>(
         borderRadius: 50,
         transition: 'background-color 100ms',
 
-        '&:disabled': {
-            backgroundColor: colors.mediumGray,
-            color: colors.lightGray,
-        },
-
         '&:not(:disabled)': {
             cursor: 'pointer',
         },
     },
-    ({ size, type, loading, icon }) => {
+    ({ size, type, loading, icon, theme }) => {
         const styles: CSSProperties = {
-            ...getSizeStyles(size),
-            ...getTypeStyles(type),
-            ...getLoadingStyles(loading, type, size),
+            '&:disabled': {
+                backgroundColor: theme.colors.mediumGray,
+                color: theme.colors.lightGray,
+            },
+
+            ...getSizeStyles(theme, size),
+            ...getTypeStyles(theme, type),
+            ...getLoadingStyles(theme, loading, type, size),
         };
 
         if (icon) {
@@ -62,43 +62,43 @@ const ButtonElement: any = glamorous.button<ButtonProps>(
     }
 );
 
-const getTypeStyles = (type?: ButtonType): CSSProperties => {
+const getTypeStyles = (theme: Theme, type?: ButtonType): CSSProperties => {
     switch (type) {
         case 'warn':
             return {
-                ...background(colors.red),
-                color: colors.white,
+                ...background(theme.colors.red),
+                color: theme.colors.white,
             };
         case 'secondary':
             return {
-                ...background(colors.offWhite),
-                color: colors.black,
-                border: `1px solid ${colors.offWhite}`,
+                ...background(theme.colors.offWhite),
+                color: theme.colors.black,
+                border: `1px solid ${theme.colors.offWhite}`,
 
                 '&:hover:not(:disabled)': {
-                    backgroundColor: lighten(0.02, colors.offWhite),
+                    backgroundColor: lighten(0.02, theme.colors.offWhite),
                 },
 
                 '&:active:not(:disabled)': {
-                    backgroundColor: lighten(0.04, colors.offWhite),
+                    backgroundColor: lighten(0.04, theme.colors.offWhite),
                 },
             };
         case 'text':
             return {
                 backgroundColor: 'transparent',
-                color: colors.purple,
+                color: theme.colors.primary,
 
                 minWidth: 0,
                 paddingLeft: 12,
                 paddingRight: 12,
 
                 '&:hover:not(:disabled)': {
-                    color: lighten(0.1, colors.purple),
+                    color: lighten(0.1, theme.colors.primary),
                     textDecoration: 'underline',
                 },
 
                 '&:active:not(:disabled)': {
-                    color: lighten(0.2, colors.purple),
+                    color: lighten(0.2, theme.colors.primary),
                 },
 
                 '&:disabled': {
@@ -108,13 +108,13 @@ const getTypeStyles = (type?: ButtonType): CSSProperties => {
         case 'primary':
         default:
             return {
-                ...background(colors.purple),
-                color: colors.white,
+                ...background(theme.colors.primary),
+                color: theme.colors.white,
             };
     }
 };
 
-const getSizeStyles = (size?: ButtonSize): CSSProperties => {
+const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSProperties => {
     const medium: CSSProperties = {
         fontSize: 18,
         lineHeight: '24px',
@@ -149,7 +149,7 @@ const getSizeStyles = (size?: ButtonSize): CSSProperties => {
                 paddingLeft: 32,
                 paddingRight: 32,
 
-                [breakpoints.mobileAndLower]: medium,
+                [theme.breakpoints.mobileAndLower]: medium,
             };
         case 'medium':
         default:
@@ -157,7 +157,7 @@ const getSizeStyles = (size?: ButtonSize): CSSProperties => {
     }
 };
 
-const getLoadingStyles = (loading?: boolean, type?: ButtonType, size?: ButtonSize): CSSProperties => {
+const getLoadingStyles = (theme: Theme, loading?: boolean, type?: ButtonType, size?: ButtonSize): CSSProperties => {
     let styles: CSSProperties = {};
 
     if (loading) {
@@ -173,17 +173,17 @@ const getLoadingStyles = (loading?: boolean, type?: ButtonType, size?: ButtonSiz
 
         switch (type) {
             case 'warn':
-                styles.backgroundImage = `url(${whiteSpinner})`;
+                styles.backgroundImage = `url(${spinner(theme.colors.white)})`;
                 break;
             case 'secondary':
-                styles.backgroundImage = `url(${purpleSpinner})`;
+                styles.backgroundImage = `url(${spinner(theme.colors.primary)})`;
                 break;
             case 'text':
-                styles.backgroundImage = `url(${purpleSpinner})`;
+                styles.backgroundImage = `url(${spinner(theme.colors.primary)})`;
                 break;
             case 'primary':
             default:
-                styles.backgroundImage = `url(${whiteSpinner})`;
+                styles.backgroundImage = `url(${spinner(theme.colors.white)})`;
                 break;
         }
 

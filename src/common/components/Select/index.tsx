@@ -1,7 +1,7 @@
 import glamorous from 'glamorous';
 import * as React from 'react';
 import * as uniqid from 'uniqid';
-import { borderRadius, colors } from '../../../theme';
+import { Theme } from '../../../themes';
 import { Alert } from '../Alert';
 import { Label } from '../Label';
 
@@ -12,13 +12,11 @@ const SelectContainer = glamorous.div({
     marginBottom: '1.25em',
 });
 
-const SelectFieldContainer = glamorous.div<{ hasError?: boolean; disabled?: boolean }>(
+const SelectFieldContainer = glamorous.div<{ hasError?: boolean; disabled?: boolean; theme: Theme; }>(
     {
         position: 'relative',
         maxWidth: 220,
-        backgroundColor: colors.white,
         border: '1px solid',
-        borderRadius: borderRadius.small,
 
         '&:after': {
             content: '""',
@@ -32,29 +30,34 @@ const SelectFieldContainer = glamorous.div<{ hasError?: boolean; disabled?: bool
             height: '100%',
         },
     },
-    ({ hasError, disabled }) => ({
-        borderColor: hasError ? colors.red : disabled ? colors.lightGray : colors.mediumGray,
+    ({ hasError, disabled, theme }) => ({
+        backgroundColor: theme.colors.white,
+        borderRadius: theme.borderRadius.small,
+        borderColor: hasError ? theme.colors.red : disabled ? theme.colors.lightGray : theme.colors.mediumGray,
     })
 );
 
-const SelectField = glamorous.select({
-    font: 'inherit',
-    color: 'inherit',
-    appearance: 'none',
-    background: 'transparent',
-    border: 0,
-    width: '100%',
-    padding: 11, // To make it 11 when accounting for border
-    paddingRight: 40,
+const SelectField = glamorous.select<{ theme: Theme }>(
+    {
+        font: 'inherit',
+        color: 'inherit',
+        appearance: 'none',
+        background: 'transparent',
+        border: 0,
+        width: '100%',
+        padding: 11, // To make it 11 when accounting for border
+        paddingRight: 40,
 
-    '&:disabled': {
-        background: colors.offWhite,
+        '&::-ms-expand': {
+            display: 'none',
+        },
     },
-
-    '&::-ms-expand': {
-        display: 'none',
-    },
-});
+    ({ theme }) => ({
+        '&:disabled': {
+            background: theme.colors.offWhite,
+        },
+    })
+);
 
 export interface SelectItem {
     key?: string;

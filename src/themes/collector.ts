@@ -6,7 +6,7 @@ export const colors = {
     offWhite: '#F4F4F4',
     white: '#FFFFFF',
 
-    purple: '#6B1FAF',
+    primary: '#6B1FAF',
     green: '#43CA43',
     red: '#F02C2C',
     blue: '#0672DF',

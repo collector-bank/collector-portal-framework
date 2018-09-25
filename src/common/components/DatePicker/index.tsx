@@ -3,9 +3,10 @@ import ReactDatePicker from 'react-datepicker';
 import Collapse from 'react-css-collapse';
 import * as moment from 'moment';
 import { css } from 'glamor';
+import { withTheme } from 'glamorous';
 import { Label, InputError } from '../';
 import { InputContainer, InputField } from '../Input';
-import { borderRadius, colors, fonts } from '../../../theme';
+import { Theme } from '../../../themes';
 
 import 'moment/locale/sv';
 import 'moment/locale/fi';
@@ -18,18 +19,18 @@ const inputErrorTransition = css({
     transition: 'height 150ms',
 });
 
-const style = css({
+const style = (theme: Theme) => css({
     '.react-datepicker': {
-        font: fonts.desktop.small,
-        borderColor: colors.mediumGray,
-        borderRadius: borderRadius.small,
+        font: theme.fonts.desktop.small,
+        borderColor: theme.colors.mediumGray,
+        borderRadius: theme.borderRadius.small,
 
         '& .react-datepicker__current-month, & .react-datepicker__day-name': {
             textTransform: 'capitalize',
         },
 
         '& .react-datepicker__current-month': {
-            font: fonts.desktop.medium,
+            font: theme.fonts.desktop.medium,
             fontWeight: 500,
         },
 
@@ -43,38 +44,38 @@ const style = css({
         },
 
         '& .react-datepicker__day--selected': {
-            backgroundColor: colors.purple,
+            backgroundColor: theme.colors.primary,
         },
 
         '& .react-datepicker__day:not(.react-datepicker__day--selected):not(.react-datepicker__day--disabled):hover': {
-            backgroundColor: colors.offWhite,
+            backgroundColor: theme.colors.offWhite,
         },
 
         '& .react-datepicker__day-name': {
-            color: colors.darkGray,
+            color: theme.colors.darkGray,
         },
 
         '& .react-datepicker__header': {
-            backgroundColor: colors.offWhite,
-            borderColor: colors.mediumGray,
-            borderTopLeftRadius: borderRadius.small,
-            borderTopRightRadius: borderRadius.small,
+            backgroundColor: theme.colors.offWhite,
+            borderColor: theme.colors.mediumGray,
+            borderTopLeftRadius: theme.borderRadius.small,
+            borderTopRightRadius: theme.borderRadius.small,
         },
 
         '.react-datepicker-popper[data-placement^="bottom"] & .react-datepicker__triangle': {
-            borderBottomColor: colors.offWhite,
+            borderBottomColor: theme.colors.offWhite,
         },
 
         '.react-datepicker-popper[data-placement^="bottom"] & .react-datepicker__triangle:before': {
-            borderBottomColor: colors.mediumGray,
+            borderBottomColor: theme.colors.mediumGray,
         },
 
         '& .react-datepicker__navigation--previous': {
-            borderRightColor: colors.mediumGray,
+            borderRightColor: theme.colors.mediumGray,
         },
 
         '& .react-datepicker__navigation--next': {
-            borderLeftColor: colors.mediumGray,
+            borderLeftColor: theme.colors.mediumGray,
         },
     },
 });
@@ -92,6 +93,7 @@ export interface DatePickerProps {
     maxDate?: Date;
     invalidMessage?: string;
     onChange: (date: Date | null) => void;
+    theme?: Theme;
 }
 
 export interface State {
@@ -99,7 +101,7 @@ export interface State {
     isValid: boolean;
 }
 
-export class DatePicker extends React.Component<DatePickerProps, State> {
+class DatePicker_ extends React.Component<DatePickerProps, State> {
     static displayName = 'Collector.DatePicker';
 
     state: State = {
@@ -146,6 +148,7 @@ export class DatePicker extends React.Component<DatePickerProps, State> {
     render() {
         const { label, selectedDate, minDate, maxDate, invalidMessage } = this.props;
         const showError = Boolean(this.state.showError && !this.state.isValid && invalidMessage);
+        const calendarClassName = `${style(this.props.theme!)}`;
 
         return (
             <InputContainer>
@@ -156,7 +159,7 @@ export class DatePicker extends React.Component<DatePickerProps, State> {
                     maxDate={maxDate ? moment(maxDate) : undefined}
                     dateFormat="YYYY-MM-DD"
                     useWeekdaysShort={true}
-                    calendarClassName={`${style}`}
+                    calendarClassName={calendarClassName}
                     onChange={this.handleChange}
                     onChangeRaw={this.handleChangeRaw}
                     onBlur={this.handleBlur}
@@ -179,3 +182,5 @@ export class DatePicker extends React.Component<DatePickerProps, State> {
         );
     }
 }
+
+export const DatePicker = withTheme(DatePicker_ as any) as React.ComponentClass<DatePickerProps>;

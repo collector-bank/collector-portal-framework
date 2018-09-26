@@ -19,7 +19,7 @@ const CardContainer = glamorous.div<{ theme: Theme }>(
     })
 );
 
-const Heading = glamorous.div<{ color: CardColors, theme: Theme }>(
+const Heading = glamorous.div<{ color: CardColors; theme: Theme }>(
     {
         display: 'inline-block',
         fontWeight: 600,
@@ -31,7 +31,9 @@ const Heading = glamorous.div<{ color: CardColors, theme: Theme }>(
     })
 );
 
-const Body = glamorous.div();
+const Body = glamorous.div({
+    overflowWrap: 'break-word',
+});
 
 const SubBody = glamorous.div<{ theme: Theme }>(
     {

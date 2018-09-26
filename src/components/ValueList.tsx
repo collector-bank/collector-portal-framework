@@ -7,7 +7,7 @@ const List = glamorous.dl({
 });
 
 const Heading = glamorous.dt<{ theme: Theme }>(({ theme }) => ({
-    color: theme.colors.mediumGray,
+    color: theme.colors.darkGray,
     font: theme.fonts.desktop.small,
 }));
 

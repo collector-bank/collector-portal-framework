@@ -2,6 +2,7 @@ import * as React from 'react';
 import * as ReactModal from 'react-modal';
 import glamorous, { GlamorousComponent } from 'glamorous';
 import { css } from 'glamor';
+import { borderRadius, colors, breakpoints } from '../themes/collector';
 
 const rootElement = document.getElementById('root') as HTMLElement;
 
@@ -22,9 +23,10 @@ const overlay = css({
     bottom: 0,
     left: 0,
     right: 0,
-    background: 'rgba(255, 255, 255, .97)',
+    background: 'rgba(0, 0, 0, .3)',
     display: 'flex',
     justifyContent: 'center',
+    alignItems: 'center',
     zIndex: 999,
 
     transition: `opacity ${transitionTime}ms ease-in-out`,
@@ -34,8 +36,6 @@ const overlay = css({
 const overlayAfterOpen = css({
     'body &': {
         opacity: 1,
-        overflow: 'auto',
-        WebkitOverflowScrolling: 'touch',
     },
 });
 
@@ -46,12 +46,25 @@ const overlayBeforeClose = css({
 });
 
 const content = css({
+    background: colors.white,
+    boxShadow: '0 2px 7px 0 rgba(0, 0, 0, 0.2)',
+    position: 'absolute',
     outline: 'none',
-    padding: '15vh 20px 40px',
-    maxHeight: 'calc(100vh - 15vh - 20px)', // the 15vh and 20px is to compensate for the padding
+    overflow: 'auto',
+    WebkitOverflowScrolling: 'touch',
+    padding: '40px',
+    borderRadius: borderRadius.small,
+    boxSizing: 'border-box',
+    maxHeight: 'calc(100vh - 40px)',
+    maxWidth: 'calc(100vw - 32px)',
+    margin: 'auto',
 
     transition: `transform ${transitionTime}ms ease-out`,
     transform: 'translateY(-30px)',
+
+    [breakpoints.mobileAndLower]: {
+        padding: 24,
+    },
 });
 
 const contentAfterOpen = css({
@@ -71,7 +84,7 @@ export const Modal: React.StatelessComponent<any> = props => (
     <ReactModal
         {...props}
         closeTimeoutMS={transitionTime + 50}
-        shouldCloseOnOverlayClick={false}
+        shouldCloseOnOverlayClick={true}
         className={{
             base: `${content}`,
             afterOpen: `${contentAfterOpen}`,

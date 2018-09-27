@@ -28,7 +28,7 @@ interface AlertContainerProps {
 const AlertContainer = glamorous.div<AlertContainerProps>(
     {
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'left center',
+        backgroundPosition: 'left 10px',
         display: 'inline-block',
         textAlign: 'left',
         boxSizing: 'border-box',
@@ -45,6 +45,10 @@ const AlertContainer = glamorous.div<AlertContainerProps>(
         ...getAnimation(fadeIn),
     })
 );
+
+const Heading = glamorous.div({
+    fontWeight: 600,
+});
 
 const getStyle = (type: AlertType, alertSize: AlertSize, theme: Theme): CSSProperties => {
     const backgroundColors = {
@@ -105,14 +109,18 @@ export type AlertSize = 'small' | 'large';
 export type AlertType = 'error' | 'warning' | 'info' | 'success';
 
 export interface AlertProps {
-    message?: string;
+    heading?: string;
+    message: string;
     type: AlertType;
     alertSize?: AlertSize;
     fadeIn?: boolean;
 }
 
-export const Alert: React.StatelessComponent<AlertProps> = ({ message = 'Ett fel uppstod', alertSize = 'large', type, fadeIn }) => (
-    <AlertContainer role="alert" alertSize={alertSize} type={type} fadeIn={fadeIn} dangerouslySetInnerHTML={{ __html: message }} />
+export const Alert: React.StatelessComponent<AlertProps> = ({ heading, message, alertSize = 'large', type, fadeIn }) => (
+    <AlertContainer role="alert" alertSize={alertSize} type={type} fadeIn={fadeIn}>
+        {heading && <Heading>{heading}</Heading>}
+        <span dangerouslySetInnerHTML={{ __html: message }} />
+    </AlertContainer>
 );
 
 Alert.displayName = 'Collector.Alert';

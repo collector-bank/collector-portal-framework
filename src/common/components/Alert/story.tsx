@@ -14,6 +14,7 @@ components.add('Alert', () => {
     return (
         <Alert
             type={select('Type', types, 'error')}
+            heading={text('Heading', '')}
             message={text('Message', 'Ett felmeddelande')}
             alertSize={select('Size', sizes, 'large')}
         />

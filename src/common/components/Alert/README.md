@@ -6,6 +6,7 @@ This component can be used to provide contextual feedback messages for typical u
 
 | Name          | Required  | Type    | Possible values                               |
 |---------------|-----------|---------|-----------------------------------------------|
+| `heading`     |           | string  |                                               |
 | `message`     |     ✓     | string  |                                               |
 | `type`        |     ✓     | string  | `'error'`, `'warning'`, `'info'`, `'success'` |
 | `alertSize`   |           | string  | `'small'`, `'large'`                          |

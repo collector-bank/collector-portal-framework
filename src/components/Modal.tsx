@@ -48,7 +48,6 @@ const overlayBeforeClose = css({
 const content = css({
     background: colors.white,
     boxShadow: '0 2px 7px 0 rgba(0, 0, 0, 0.2)',
-    position: 'absolute',
     outline: 'none',
     overflow: 'auto',
     WebkitOverflowScrolling: 'touch',
@@ -57,7 +56,6 @@ const content = css({
     boxSizing: 'border-box',
     maxHeight: 'calc(100vh - 40px)',
     maxWidth: 'calc(100vw - 32px)',
-    margin: 'auto',
 
     transition: `transform ${transitionTime}ms ease-out`,
     transform: 'translateY(-30px)',

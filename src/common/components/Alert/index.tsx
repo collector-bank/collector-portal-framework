@@ -28,7 +28,6 @@ interface AlertContainerProps {
 const AlertContainer = glamorous.div<AlertContainerProps>(
     {
         backgroundRepeat: 'no-repeat',
-        backgroundPosition: 'left 10px',
         display: 'inline-block',
         textAlign: 'left',
         boxSizing: 'border-box',
@@ -68,10 +67,10 @@ const getStyle = (type: AlertType, alertSize: AlertSize, theme: Theme): CSSPrope
     switch (alertSize) {
         case 'small':
             return {
-                backgroundPositionX: 0,
+                backgroundPosition: '0 4px',
                 backgroundImage: `url(${smallIcons[type]})`,
                 backgroundColor: 'transparent',
-                color: theme.colors.red,
+                color: type === 'error' ? theme.colors.red : undefined,
                 fontWeight: 400,
                 backgroundSize: '16px 16px',
                 padding: 0,
@@ -81,7 +80,7 @@ const getStyle = (type: AlertType, alertSize: AlertSize, theme: Theme): CSSPrope
         case 'large':
         default:
             return {
-                backgroundPositionX: 12,
+                backgroundPosition: '12px 12px',
                 backgroundImage: `url(${largeIcons[type]})`,
                 backgroundColor: backgroundColors[type],
                 color: textColors[type],

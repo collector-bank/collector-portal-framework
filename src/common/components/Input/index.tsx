@@ -5,10 +5,16 @@ import { css } from 'glamor';
 import * as uniqid from 'uniqid';
 import { Theme } from '../../../themes';
 import { Label } from '../Label';
+import { DescriptionIcon } from './DescriptionIcon';
 
 const inputErrorTransition = css({
     transition: 'height 150ms',
 });
+
+const InputLabel = glamorous(Label)({
+    display: 'flex',
+    alignItems: 'center',
+})
 
 export const InputContainer: any = glamorous.div({
     maxWidth: 500,
@@ -104,6 +110,7 @@ export interface InputProps {
     onBlur?: (event: React.FormEvent<HTMLInputElement> | undefined) => void;
     innerRef?: (inputElement: HTMLInputElement) => void;
     type?: string;
+    description?: string;
 }
 
 export interface InputState {
@@ -128,16 +135,20 @@ export class Input extends React.Component<InputProps, InputState> {
     };
 
     render() {
-        const { label, error, multiline, ...rest } = this.props;
+        const { label, error, multiline, description, ...rest } = this.props;
         const InputElement = multiline ? Textarea : InputField;
         const showError = Boolean(this.state.isDirty && error);
 
         return (
             <InputContainer>
                 {label && (
-                    <Label htmlFor={this.state.id} error={showError}>
+                    <InputLabel htmlFor={this.state.id} error={showError}>
                         {label}
-                    </Label>
+
+                        {description && (
+                            <DescriptionIcon />
+                        )}
+                    </InputLabel>
                 )}
 
                 <InputElement id={this.state.id} onBlur={this.makeDirty} hasError={showError} aria-invalid={showError} {...rest} />

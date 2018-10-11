@@ -5,7 +5,7 @@ import { css } from 'glamor';
 import * as uniqid from 'uniqid';
 import { Theme } from '../../../themes';
 import { Label } from '../Label';
-import { DescriptionIcon } from './DescriptionIcon';
+import { Description } from './Description';
 
 const inputErrorTransition = css({
     transition: 'height 150ms',
@@ -146,7 +146,7 @@ export class Input extends React.Component<InputProps, InputState> {
                         {label}
 
                         {description && (
-                            <DescriptionIcon />
+                            <Description description={description} />
                         )}
                     </InputLabel>
                 )}

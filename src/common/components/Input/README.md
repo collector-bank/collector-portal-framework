@@ -20,6 +20,7 @@ This component can be used for freeform data entry.
 | `onBlur`      |          | `event => void`   |                                             |
 | `innerRef`    |          | `() => void`      |                                             |
 | `type`        |          | string            |                                             |
+| `Description` |          | string            |                                             |
 
 ## Example
 

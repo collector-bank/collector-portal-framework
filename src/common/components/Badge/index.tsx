@@ -1,5 +1,6 @@
 import * as React from 'react';
 import glamorous from 'glamorous';
+import { Tooltip } from '../Tooltip';
 import { Theme } from '../../../themes';
 
 export type BadgeColor = 'primary' | 'yellow' | 'green' | 'red' | 'blue' | 'lightGray';
@@ -10,13 +11,21 @@ export interface BadgeProps {
     tooltip?: string;
 }
 
+interface BadgeState {
+    tooltipIsVisible: boolean;
+}
+
 const Container = glamorous.div<{ theme: Theme }>(({ theme }) => ({
     display: 'inline-block',
-    position: 'relative',
     font: theme.fonts.desktop.small,
     fontWeight: 500,
     marginLeft: '1em',
     marginRight: '1em',
+    position: 'relative',
+
+    [theme.breakpoints.mobileAndLower]: {
+        position: 'static',
+    },
 }));
 
 const Label = glamorous.span<{ color: BadgeColor, theme: Theme }>(
@@ -24,12 +33,6 @@ const Label = glamorous.span<{ color: BadgeColor, theme: Theme }>(
         padding: '4px 8px',
         whiteSpace: 'nowrap',
         position: 'relative',
-
-        '&:hover + span': {
-            visibility: 'visible',
-            opacity: 1,
-            transform: 'translateY(0)',
-        },
     },
     ({ color, theme }) => ({
         borderRadius: theme.borderRadius.small,
@@ -38,45 +41,40 @@ const Label = glamorous.span<{ color: BadgeColor, theme: Theme }>(
     })
 );
 
-const Tooltip = glamorous.span<{ theme: Theme }>(
-    {
-        padding: '4px 8px',
-        maxWidth: 350,
-        position: 'absolute',
-        zIndex: 20,
-        left: 0,
-        top: 'calc(100% + 8px)',
-        visibility: 'hidden',
-        opacity: 0,
-        transform: 'translateY(-5px)',
-        transitionDuration: '200ms',
-        transitionProperty: 'opacity, visibility, transform',
+export class Badge extends React.Component<BadgeProps, BadgeState> {
+    static displayName = 'Collector.Badge';
 
-        '&:before': {
-            content: '""',
-            borderLeft: '5px solid transparent',
-            borderRight: '5px solid transparent',
-            position: 'absolute',
-            left: 10,
-            top: -5,
-        },
-    },
-    ({ theme }) => ({
-        background: theme.colors.lightGray,
-        color: theme.colors.black,
-        borderRadius: theme.borderRadius.small,
+    state: BadgeState = {
+        tooltipIsVisible: false
+    };
 
-        '&:before': {
-            borderBottom: `5px solid ${theme.colors.lightGray}`,
-        },
-    })
-);
+    private showTooltip = () => {
+        this.setState({ tooltipIsVisible: true });
+    };
 
-export const Badge: React.StatelessComponent<BadgeProps> = ({ label, tooltip, color = 'primary' }) => (
-    <Container>
-        <Label color={color}>{label}</Label>
-        {tooltip && <Tooltip>{tooltip}</Tooltip>}
-    </Container>
-);
+    private hideTooltip = () => {
+        this.setState({ tooltipIsVisible: false });
+    };
 
-Badge.displayName = 'Collector.Badge';
+    private toggleTooltip = () => {
+        this.setState(prevState => ({ tooltipIsVisible: !prevState.tooltipIsVisible }));
+    };
+
+    render() {
+        const { label, tooltip, color = 'primary' } = this.props;
+
+        return (
+            <Container>
+                <Label
+                    color={color}
+                    onMouseEnter={tooltip ? this.showTooltip : undefined}
+                    onMouseLeave={tooltip ? this.hideTooltip : undefined}
+                    onClick={tooltip ? this.toggleTooltip : undefined}
+                >
+                    {label}
+                </Label>
+                {tooltip && <Tooltip visible={this.state.tooltipIsVisible}>{tooltip}</Tooltip>}
+            </Container>
+        );
+    }
+}

@@ -20,10 +20,6 @@ export interface TagInputProps {
     onChange: (items: Tag[]) => void;
 }
 
-export interface TagInputPropsWithTheme extends TagInputProps {
-    theme: Theme;
-}
-
 export interface TagInputState {
     value: string;
     suggestions: string[];
@@ -91,7 +87,7 @@ interface TagsContainerProps {
     tagsItemsDirection: FlexDirections;
 }
 
-export class TagsInput_ extends React.Component<TagInputPropsWithTheme, TagInputState> {
+export class TagsInput_ extends React.Component<TagInputProps & { theme: Theme }, TagInputState> {
     theme = {
         suggestionsContainerOpen: `${suggestionsContainerOpen(this.props.theme)}`,
         suggestionsList: `${suggestionsList(this.props.theme)}`,
@@ -190,7 +186,7 @@ export class TagsInput_ extends React.Component<TagInputPropsWithTheme, TagInput
             tagsDirection,
         } = this.props;
 
-        const inputProps: any = {
+        const inputProps = {
             placeholder,
             value,
             onChange: this.handleChange,

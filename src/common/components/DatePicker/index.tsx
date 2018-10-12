@@ -93,7 +93,6 @@ export interface DatePickerProps {
     maxDate?: Date;
     invalidMessage?: string;
     onChange: (date: Date | null) => void;
-    theme?: Theme;
 }
 
 export interface State {
@@ -101,7 +100,7 @@ export interface State {
     isValid: boolean;
 }
 
-class DatePicker_ extends React.Component<DatePickerProps, State> {
+class DatePicker_ extends React.Component<DatePickerProps & { theme: Theme }, State> {
     static displayName = 'Collector.DatePicker';
 
     state: State = {
@@ -148,7 +147,7 @@ class DatePicker_ extends React.Component<DatePickerProps, State> {
     render() {
         const { label, selectedDate, minDate, maxDate, invalidMessage } = this.props;
         const showError = Boolean(this.state.showError && !this.state.isValid && invalidMessage);
-        const calendarClassName = `${style(this.props.theme!)}`;
+        const calendarClassName = `${style(this.props.theme)}`;
 
         return (
             <InputContainer>

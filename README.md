@@ -12,7 +12,7 @@ An interactive component library can be found on our [GitHub Pages site](https:/
 * UI components
 * [Formatter functions](src/formatters.ts)
 * [HTTP module for doing API requests](src/http.ts)
-* [Brand colors and fonts](src/theme.ts)
+* [Brand colors and fonts](src/themes/collector.ts)
 
 
 ## Technologies used

@@ -54,7 +54,7 @@ const content = css({
     padding: '40px',
     borderRadius: borderRadius.small,
     boxSizing: 'border-box',
-    maxHeight: 'calc(100vh - 40px)',
+    maxHeight: 'calc(100vh - 80px)',
     maxWidth: 'calc(100vw - 32px)',
 
     transition: `transform ${transitionTime}ms ease-out`,

@@ -16,6 +16,7 @@ const CardContainer = glamorous.div<{ theme: Theme }>(
     },
     ({ theme }) => ({
         borderRadius: theme.borderRadius.large,
+        background: theme.colors.white,
     })
 );
 

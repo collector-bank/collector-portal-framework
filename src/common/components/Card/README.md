@@ -4,12 +4,14 @@ A card is a component that is meant to house content in a clean and concise form
 
 ## Props
 
-| Name      | Required | Type                            | Notes                                                                                                                    |
-| --------- | -------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
-| `heading` |          | string                          | Heading in the corner of the card with an underlined color, indicated in `color`                                         |
-| `color`   |          | `portal-framework/theme/colors` | This must correspond to a portal framework color, and is typed as such                                                   |
-| `body`    |          | `React.ReactNode`               | This contains the main body to render in the upper part of the card. <br/>Should be width: 280px, height: 320px ideally. |
-| `subBody` |          | `React.ReactNode`               | This is for secondary information or a CTA, with a Button                                                                |
+| Name        | Required | Type                            | Notes                                                                                                                    |
+| ----------- | -------- | ------------------------------- | ------------------------------------------------------------------------------------------------------------------------ |
+| `heading`   |          | string                          | Heading in the corner of the card with an underlined color, indicated in `color`                                         |
+| `color`     |          | `portal-framework/theme/colors` | This must correspond to a portal framework color, and is typed as such                                                   |
+| `body`      |          | `React.ReactNode`               | This contains the main body to render in the upper part of the card. <br/>Should be width: 280px, height: 320px ideally. |
+| `subBody`   |          | `React.ReactNode`               | This is for secondary information or a CTA, with a Button                                                                |
+| `subBody`   |          | `React.ReactNode`               | This is for secondary information or a CTA, with a Button                                                                |
+| `onDismiss` |          | () => void                      | This is for handling dismissing the card, showing a small cross in the corner of the card, to let parent hides it        |
 
 # CardContainer
 

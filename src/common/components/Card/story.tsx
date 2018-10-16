@@ -14,7 +14,7 @@ components.add('Card', () => {
             <Card
                 body={
                     <div style={{ minHeight: 120 }}>
-                        <H3>{text('Heading', 'My title')}</H3>
+                        <H3>{text('Title', 'My title')}</H3>
                         <Text>{text('Body', 'Här kommer det in mer text')}</Text>
                     </div>
                 }
@@ -29,14 +29,15 @@ components.add('Card', () => {
                     </>
                 }
                 color="yellow"
-                heading="Label"
+                heading={text('Heading', 'Card 1 heading')}
+                onDismiss={boolean('Dismissable', false) ? () => console.log('Card dismissal event') : undefined}
             />
 
             {boolean('Show cardgroup', false) && <CardGroup>
                 <Card
                     body={
                         <div style={{ minHeight: 120 }}>
-                            <H3>{text('Heading', 'My title')}</H3>
+                            <H3>{text('Title', 'My title')}</H3>
                             <Text>{text('Body', 'Här kommer det in mer text')}</Text>
                         </div>
                     }
@@ -57,7 +58,7 @@ components.add('Card', () => {
                 <Card
                     body={
                         <div style={{ minHeight: 120 }}>
-                            <H3>{text('Heading', 'My title')}</H3>
+                            <H3>{text('Title', 'My title')}</H3>
                             <Text>{text('Body', 'Här kommer det in mer text')}</Text>
                         </div>
                     }

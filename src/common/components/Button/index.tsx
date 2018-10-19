@@ -1,15 +1,17 @@
 import * as React from 'react';
 import glamorous, { CSSProperties } from 'glamorous';
 import { Theme } from '../../../themes';
-import { lighten } from 'polished';
+import { lighten, darken } from 'polished';
 
 /**
  * The SVG was made with http://loading.io
  */
 const spinner = (color: string) =>
-    `'data:image/svg+xml,%3Csvg width=%2280%22 height=%2280%22 xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22 preserveAspectRatio=%22xMidYMid%22 class=%22uil-ring-alt%22%3E%3Cpath class=%22bk%22 fill=%22none%22 d=%22M0 0h100v100h-100z%22/%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22none%22/%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 stroke=%22${encodeURIComponent(color)}%22 stroke-width=%226%22 stroke-linecap=%22round%22 fill=%22none%22%3E%3Canimate attributeName=%22stroke-dashoffset%22 dur=%222s%22 repeatCount=%22indefinite%22 from=%220%22 to=%22502%22/%3E%3Canimate attributeName=%22stroke-dasharray%22 dur=%222s%22 repeatCount=%22indefinite%22 values=%22150.6 100.4;1 250;150.6 100.4%22/%3E%3C/circle%3E%3C/svg%3E'`;
+    `'data:image/svg+xml,%3Csvg width=%2280%22 height=%2280%22 xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22 preserveAspectRatio=%22xMidYMid%22 class=%22uil-ring-alt%22%3E%3Cpath class=%22bk%22 fill=%22none%22 d=%22M0 0h100v100h-100z%22/%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22none%22/%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 stroke=%22${encodeURIComponent(
+        color
+    )}%22 stroke-width=%226%22 stroke-linecap=%22round%22 fill=%22none%22%3E%3Canimate attributeName=%22stroke-dashoffset%22 dur=%222s%22 repeatCount=%22indefinite%22 from=%220%22 to=%22502%22/%3E%3Canimate attributeName=%22stroke-dasharray%22 dur=%222s%22 repeatCount=%22indefinite%22 values=%22150.6 100.4;1 250;150.6 100.4%22/%3E%3C/circle%3E%3C/svg%3E'`;
 
-export type ButtonType = 'primary' | 'secondary' | 'warn' | 'text';
+export type ButtonType = 'primary' | 'secondary' | 'secondaryNegative' | 'success' | 'warn' | 'text';
 export type ButtonSize = 'small' | 'medium' | 'large';
 
 export interface ButtonProps {
@@ -105,6 +107,25 @@ const getTypeStyles = (theme: Theme, type?: ButtonType): CSSProperties => {
                     backgroundColor: 'transparent',
                 },
             };
+        case 'secondaryNegative':
+            return {
+                ...background(theme.colors.white),
+                color: theme.colors.black,
+                border: `1px solid ${theme.colors.white}`,
+
+                '&:hover:not(:disabled)': {
+                    backgroundColor: darken(0.02, theme.colors.white),
+                },
+
+                '&:active:not(:disabled)': {
+                    backgroundColor: darken(0.04, theme.colors.white),
+                },
+            };
+        case 'success':
+            return {
+                ...background(theme.colors.green),
+                color: theme.colors.white,
+            };
         case 'primary':
         default:
             return {
@@ -173,9 +194,11 @@ const getLoadingStyles = (theme: Theme, loading?: boolean, type?: ButtonType, si
 
         switch (type) {
             case 'warn':
+            case 'success':
                 styles.backgroundImage = `url(${spinner(theme.colors.white)})`;
                 break;
             case 'secondary':
+            case 'secondaryNegative':
                 styles.backgroundImage = `url(${spinner(theme.colors.primary)})`;
                 break;
             case 'text':

@@ -10,7 +10,7 @@ const components = storiesOf('Components', module);
 components.addDecorator(withKnobs);
 
 components.add('Button', () => {
-    const types: ButtonType[] = ['primary', 'secondary', 'warn', 'text'];
+    const types: ButtonType[] = ['primary', 'secondary', 'secondaryNegative', 'warn', 'text', 'success'];
     const sizes: ButtonSize[] = ['small', 'medium', 'large'];
 
     return (

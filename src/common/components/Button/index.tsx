@@ -241,18 +241,19 @@ const background = (backgroundColor: string): CSSProperties => ({
     },
 });
 
-const IconContainer = glamorous.span({
+const IconContainer = glamorous.span<{ iconAlignment: IconAligmment }>(({ iconAlignment }) => ({
     width: '1.3em',
     height: '1.3em',
-    marginRight: '.5em',
-});
+    marginRight: iconAlignment === 'start' ? '.5em' : 0,
+    marginLeft: iconAlignment === 'end' ? '.5em' : 0,
+}));
 
 export const Button: React.StatelessComponent<ButtonProps> = ({ loading, children, icon, iconAlignment = 'start', size, ...rest }) => {
     return (
         <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} {...rest}>
-            {icon && iconAlignment === 'start' && <IconContainer>{icon}</IconContainer>}
+            {icon && iconAlignment === 'start' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}
             <span>{children}</span>
-            {icon && iconAlignment === 'end' && <IconContainer>{icon}</IconContainer>}
+            {icon && iconAlignment === 'end' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}
         </ButtonElement>
     );
 };

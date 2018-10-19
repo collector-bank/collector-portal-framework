@@ -1,7 +1,7 @@
 {
     "title": "Collector Portal Framework",
     "name": "collector-portal-framework",
-    "version": "7.5.0",
+    "version": "7.6.0",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "repository": {

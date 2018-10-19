@@ -13,11 +13,13 @@ const spinner = (color: string) =>
 
 export type ButtonType = 'primary' | 'secondary' | 'secondaryNegative' | 'success' | 'warn' | 'text';
 export type ButtonSize = 'small' | 'medium' | 'large';
+export type IconAligmment = 'start' | 'end';
 
 export interface ButtonProps {
     type?: ButtonType;
     size?: ButtonSize;
     icon?: JSX.Element;
+    iconAlignment?: IconAligmment;
     onClick?: () => void;
     disabled?: boolean;
     loading?: boolean;
@@ -245,11 +247,12 @@ const IconContainer = glamorous.span({
     marginRight: '.5em',
 });
 
-export const Button: React.StatelessComponent<ButtonProps> = ({ loading, children, icon, size, ...rest }) => {
+export const Button: React.StatelessComponent<ButtonProps> = ({ loading, children, icon, iconAlignment = 'start', size, ...rest }) => {
     return (
         <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} {...rest}>
-            {icon && <IconContainer>{icon}</IconContainer>}
+            {icon && iconAlignment === 'start' && <IconContainer>{icon}</IconContainer>}
             <span>{children}</span>
+            {icon && iconAlignment === 'end' && <IconContainer>{icon}</IconContainer>}
         </ButtonElement>
     );
 };

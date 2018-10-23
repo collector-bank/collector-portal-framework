@@ -7,7 +7,7 @@ import { Theme } from '../../../themes';
 const largeIcons = {
     error: require('./icons/warning-filled.svg'),
     warning: require('./icons/warning.svg'),
-    info: require('./icons/info.svg'),
+    info: require('./icons/info-black.svg'),
     success: require('./icons/success.svg'),
 };
 
@@ -53,14 +53,14 @@ const getStyle = (type: AlertType, alertSize: AlertSize, theme: Theme): CSSPrope
     const backgroundColors = {
         error: theme.colors.red,
         warning: theme.colors.yellow,
-        info: theme.colors.blue,
+        info: theme.colors.lightGray,
         success: theme.colors.green,
     };
 
     const textColors = {
         error: theme.colors.white,
         warning: theme.colors.black,
-        info: theme.colors.white,
+        info: theme.colors.black,
         success: theme.colors.white,
     };
 

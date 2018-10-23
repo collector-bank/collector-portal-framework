@@ -4,6 +4,7 @@ import { action } from '@storybook/addon-actions';
 import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { Button, ButtonType, ButtonSize } from './';
 import { ButtonGroup } from './ButtonGroup';
+import { CrossIcon } from '../TagsInput/Icons/Cross';
 
 const components = storiesOf('Components', module);
 
@@ -21,6 +22,8 @@ components.add('Button', () => {
                 disabled={boolean('Disabled', false)}
                 loading={boolean('Loading', false)}
                 onClick={action('button clicked')}
+                icon={boolean('Show icon', false) ? <CrossIcon /> : undefined}
+                iconAlignment={select('Icon alignment', ['start', 'end'], 'start')}
             >
                 {text('Label', 'En knapp')}
             </Button>

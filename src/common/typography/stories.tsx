@@ -1,6 +1,6 @@
 import * as React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, text } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { H1, H2, H3, Text, TextLink } from './';
 
 const typography = storiesOf('Typography', module);
@@ -15,8 +15,8 @@ const loremIpsum = `
     eros elementum vitae. Curabitur sagittis nulla in nisl vulputate, a semper est imperdiet.
 `;
 
-typography.add('Heading 1', () => <H1>{text('Heading', 'Heading 1')}</H1>);
-typography.add('Heading 2', () => <H2>{text('Heading', 'Heading 2')}</H2>);
-typography.add('Heading 3', () => <H3>{text('Heading', 'Heading 3')}</H3>);
+typography.add('Heading 1', () => <H1 centered={boolean('Centered', false)}>{text('Heading', 'Heading 1')}</H1>);
+typography.add('Heading 2', () => <H2 centered={boolean('Centered', false)}>{text('Heading', 'Heading 2')}</H2>);
+typography.add('Heading 3', () => <H3 centered={boolean('Centered', false)}>{text('Heading', 'Heading 3')}</H3>);
 typography.add('Body text', () => <Text>{text('Text', loremIpsum)}</Text>);
 typography.add('Text link', () => <TextLink href="#">{text('Link text', 'This is a link')}</TextLink>);

@@ -1,10 +1,19 @@
 import glamorous, { GlamorousComponent } from 'glamorous';
 import { Theme } from '../../themes';
 
-export const H3: GlamorousComponent<React.HTMLProps<HTMLHeadingElement>, {}> = glamorous.h3<{ theme: Theme }>(({ theme }) => ({
+export interface H3Props extends React.HTMLProps<HTMLHeadingElement> {
+    centered?: boolean;
+}
+
+export interface H3WithThemeProps extends H3Props {
+    theme: Theme;
+}
+
+export const H3: GlamorousComponent<H3Props, {}> = glamorous.h3<H3WithThemeProps>(({ theme, centered }) => ({
     font: theme.fonts.desktop.large,
     fontWeight: 600,
     marginBottom: 16,
+    textAlign: centered ? 'center' : 'initial',
 
     '&:first-child': {
         marginTop: 0,

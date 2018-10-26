@@ -246,6 +246,9 @@ const IconContainer = glamorous.span<{ iconAlignment: IconAligmment }>(({ iconAl
     height: '1.3em',
     marginRight: iconAlignment === 'start' ? '.5em' : 0,
     marginLeft: iconAlignment === 'end' ? '.5em' : 0,
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center',
 }));
 
 export const Button: React.StatelessComponent<ButtonProps> = ({ loading, children, icon, iconAlignment = 'start', size, ...rest }) => {

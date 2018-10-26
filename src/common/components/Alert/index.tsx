@@ -53,7 +53,7 @@ const getStyle = (type: AlertType, alertSize: AlertSize, theme: Theme): CSSPrope
     const backgroundColors = {
         error: theme.colors.red,
         warning: theme.colors.yellow,
-        info: theme.colors.lightGray,
+        info: theme.colors.offWhite,
         success: theme.colors.green,
     };
 

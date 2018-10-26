@@ -109,7 +109,7 @@ export type AlertType = 'error' | 'warning' | 'info' | 'success';
 
 export interface AlertProps {
     heading?: string;
-    message: string;
+    message: string | JSX.Element;
     type: AlertType;
     alertSize?: AlertSize;
     fadeIn?: boolean;
@@ -118,7 +118,8 @@ export interface AlertProps {
 export const Alert: React.StatelessComponent<AlertProps> = ({ heading, message, alertSize = 'large', type, fadeIn }) => (
     <AlertContainer role="alert" alertSize={alertSize} type={type} fadeIn={fadeIn}>
         {heading && <Heading>{heading}</Heading>}
-        <span dangerouslySetInnerHTML={{ __html: message }} />
+        {typeof message === 'string' && <span dangerouslySetInnerHTML={{ __html: message }} />}
+        {typeof message !== 'string' && message}
     </AlertContainer>
 );
 

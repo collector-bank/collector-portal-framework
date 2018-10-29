@@ -14,6 +14,7 @@ components.add('Input', () => {
             label={text('Label', 'En label')}
             placeholder={text('Placeholder', '')}
             error={text('Error', '')}
+            warning={text('Warning', '')}
             description={text('Description', '')}
             multiline={boolean('Multiline', false)}
             disabled={boolean('Disabled', false)}

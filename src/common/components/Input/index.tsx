@@ -96,12 +96,12 @@ export const InputError: any = glamorous.div<{ theme: Theme }>(
 );
 
 export interface InputProps {
-    label?: string | React.ReactNode;
+    label?: React.ReactNode;
     value?: string;
     placeholder?: string;
     multiline?: boolean;
     disabled?: boolean;
-    error?: string | boolean | React.ReactNode;
+    error?: boolean | React.ReactNode;
     maxLength?: number;
     pattern?: string;
     name?: string;
@@ -151,7 +151,7 @@ export class Input extends React.Component<InputProps, InputState> {
 
                 <InputElement id={this.state.id} onBlur={this.makeDirty} hasError={showError} aria-invalid={showError} {...rest} />
 
-                <Collapse isOpen={showError} className={`${inputErrorTransition}`}>
+                <Collapse isOpen={showError && typeof showError !== 'boolean'} className={`${inputErrorTransition}`}>
                     <InputError>{error}</InputError>
                 </Collapse>
             </InputContainer>

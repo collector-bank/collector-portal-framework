@@ -43,6 +43,7 @@ components.add('Radio button group', () => {
             items={items}
             selected={select('Option', items.map(x => x.key), 'foo')}
             disabled={boolean('Disabled', false)}
+            direction={boolean('Display items in row', false) ? 'row' : undefined}
             error={text('Error', '')}
             onChange={action('radio button group changed')}
         />

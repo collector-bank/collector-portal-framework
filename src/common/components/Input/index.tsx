@@ -1,5 +1,5 @@
 import { css } from 'glamor';
-import glamorous from 'glamorous';
+import glamorous, { CSSProperties } from 'glamorous';
 import * as React from 'react';
 import Collapse from 'react-css-collapse';
 import * as uniqid from 'uniqid';
@@ -21,63 +21,53 @@ export const InputContainer: any = glamorous.div({
     marginBottom: '1.25em',
 });
 
-export const InputField: any = glamorous.input<{ hasError?: boolean; theme: Theme }>(
-    {
-        font: 'inherit',
-        color: 'inherit',
-        width: '100%',
-        border: '1px solid',
-        padding: 11, // To make it 12 pixels when accounting for the 1px border above
-        boxSizing: 'border-box',
-        appearance: 'none',
-        transition: 'border-bottom-left-radius 150ms, border-bottom-right-radius 150ms',
+interface ErrorProps {
+    hasError: boolean;
+    theme: Theme;
+    hasErrorNode: boolean;
+}
 
-        '&:disabled': {
-            opacity: 1,
-        },
+const getBorderColor = (hasError: boolean, hasErrorNode: boolean, theme: Theme) => {
+    if (hasError) {
+        return hasErrorNode ? theme.colors.mediumGray : theme.colors.red;
+    }
+
+    return theme.colors.mediumGray;
+};
+
+const commonStyles = (hasError: boolean, theme: Theme, hasErrorNode: boolean): CSSProperties => ({
+    font: 'inherit',
+    color: 'inherit',
+    width: '100%',
+    border: '1px solid',
+    padding: 11, // To make it 12 pixels when accounting for the 1px border above
+    boxSizing: 'border-box',
+    appearance: 'none',
+    transition: 'border-bottom-left-radius 150ms, border-bottom-right-radius 150ms',
+    borderRadius: theme.borderRadius.small,
+    borderColor: getBorderColor(hasError, hasErrorNode, theme),
+    borderBottomLeftRadius: hasErrorNode ? 0 : theme.borderRadius.small,
+    borderBottomRightRadius: hasErrorNode ? 0 : theme.borderRadius.small,
+    borderBottomColor: hasError ? theme.colors.red : theme.colors.mediumGray,
+
+    '&:disabled': {
+        opacity: 1,
+        background: theme.colors.offWhite,
+        borderColor: theme.colors.lightGray,
     },
-    ({ hasError, theme }) => ({
-        borderRadius: theme.borderRadius.small,
-        borderColor: theme.colors.mediumGray,
-        borderBottomLeftRadius: hasError ? 0 : theme.borderRadius.small,
-        borderBottomRightRadius: hasError ? 0 : theme.borderRadius.small,
-        borderBottomColor: hasError ? theme.colors.red : theme.colors.mediumGray,
+});
 
-        '&:disabled': {
-            background: theme.colors.offWhite,
-            borderColor: theme.colors.lightGray,
-        },
-    })
-);
+export const InputField: any = glamorous.input<ErrorProps>(({ hasError, theme, hasErrorNode }) => ({
+    ...commonStyles(hasError, theme, hasErrorNode),
+}));
 
-const Textarea = glamorous.textarea<{ hasError?: boolean; theme: Theme }>(
-    {
-        font: 'inherit',
-        color: 'inherit',
-        width: '100%',
-        border: '1px solid',
-        padding: 11, // To make it 12 pixels when accounting for the 1px border above
-        boxSizing: 'border-box',
-        appearance: 'none',
-        transition: 'border-bottom-left-radius 150ms, border-bottom-right-radius 150ms',
-        resize: 'vertical',
-        minHeight: 80,
+const Textarea = glamorous.textarea<ErrorProps>(({ hasError, theme, hasErrorNode }) => ({
+    ...commonStyles(hasError, theme, hasErrorNode),
 
-        '&:disabled': {
-            opacity: 1,
-        },
-    },
-    ({ hasError, theme }) => ({
-        borderRadius: theme.borderRadius.small,
-        borderColor: hasError ? theme.colors.red : theme.colors.mediumGray,
-        backgroundColor: hasError ? '#FFFCFC' : theme.colors.white,
-
-        '&:disabled': {
-            background: theme.colors.offWhite,
-            borderColor: theme.colors.lightGray,
-        },
-    })
-);
+    resize: 'vertical',
+    minHeight: 80,
+    marginBottom: hasErrorNode ? -6 : undefined,
+}));
 
 export const InputError: any = glamorous.div<{ theme: Theme }>(
     {
@@ -138,6 +128,7 @@ export class Input extends React.Component<InputProps, InputState> {
         const { label, error, multiline, description, ...rest } = this.props;
         const InputElement = multiline ? Textarea : InputField;
         const showError = Boolean(this.state.isDirty && error);
+        const hasErrorNode = showError && typeof error !== 'boolean';
 
         return (
             <InputContainer>
@@ -149,9 +140,16 @@ export class Input extends React.Component<InputProps, InputState> {
                     </InputLabel>
                 )}
 
-                <InputElement id={this.state.id} onBlur={this.makeDirty} hasError={showError} aria-invalid={showError} {...rest} />
+                <InputElement
+                    id={this.state.id}
+                    onBlur={this.makeDirty}
+                    hasError={showError}
+                    aria-invalid={showError}
+                    hasErrorNode={hasErrorNode}
+                    {...rest}
+                />
 
-                <Collapse isOpen={showError && typeof showError !== 'boolean'} className={`${inputErrorTransition}`}>
+                <Collapse isOpen={hasErrorNode} className={`${inputErrorTransition}`}>
                     <InputError>{error}</InputError>
                 </Collapse>
             </InputContainer>

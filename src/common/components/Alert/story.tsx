@@ -28,6 +28,7 @@ components.add('Alert', () => {
                 )
             }
             alertSize={select('Size', sizes, 'large')}
+            wide={boolean('Wide', false)}
         />
     );
 });

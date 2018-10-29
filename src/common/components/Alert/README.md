@@ -11,6 +11,7 @@ This component can be used to provide contextual feedback messages for typical u
 | `type`      | ✓        | string                | `'error'`, `'warning'`, `'info'`, `'success'` |
 | `alertSize` |          | string                | `'small'`, `'large'`                          |
 | `fadeIn`    |          | boolean               |                                               |
+| `wide`      |          | boolean               |                                               |
 
 ## Example
 

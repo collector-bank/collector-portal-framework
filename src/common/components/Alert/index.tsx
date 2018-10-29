@@ -22,6 +22,7 @@ interface AlertContainerProps {
     alertSize: AlertSize;
     type: AlertType;
     fadeIn?: boolean;
+    wide?: boolean;
     theme: Theme;
 }
 
@@ -32,14 +33,15 @@ const AlertContainer = glamorous.div<AlertContainerProps>(
         textAlign: 'left',
         boxSizing: 'border-box',
         width: '100%',
-        maxWidth: 500,
 
         '> a': {
             color: 'inherit',
         },
     },
-    ({ type, alertSize, fadeIn, theme }) => ({
+    ({ type, alertSize, fadeIn, wide, theme }) => ({
         borderRadius: theme.borderRadius.small,
+        maxWidth: wide ? undefined : 500,
+
         ...getStyle(type, alertSize, theme),
         ...getAnimation(fadeIn),
     })
@@ -113,10 +115,11 @@ export interface AlertProps {
     type: AlertType;
     alertSize?: AlertSize;
     fadeIn?: boolean;
+    wide?: boolean;
 }
 
-export const Alert: React.StatelessComponent<AlertProps> = ({ heading, message, alertSize = 'large', type, fadeIn }) => (
-    <AlertContainer role="alert" alertSize={alertSize} type={type} fadeIn={fadeIn}>
+export const Alert: React.StatelessComponent<AlertProps> = ({ heading, message, alertSize = 'large', type, fadeIn, wide }) => (
+    <AlertContainer role="alert" alertSize={alertSize} type={type} fadeIn={fadeIn} wide={wide}>
         {heading && <Heading>{heading}</Heading>}
         {typeof message === 'string' && <span dangerouslySetInnerHTML={{ __html: message }} />}
         {typeof message !== 'string' && message}

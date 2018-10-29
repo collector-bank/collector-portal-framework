@@ -4,13 +4,13 @@ This component allows the user to choose only one of a predefined set of mutuall
 
 ## Props
 
-| Name          | Required  | Type            |
-|---------------|-----------|-----------------|
-| `label`       |     ✓     | string          |
-| `name`        |           | string          |
-| `selected`    |           | boolean         |
-| `disabled`    |           | boolean         |
-| `onChange`    |           | `event => void` |
+| Name       | Required | Type            |
+| ---------- | -------- | --------------- |
+| `label`    | ✓        | string          |
+| `name`     |          | string          |
+| `selected` |          | boolean         |
+| `disabled` |          | boolean         |
+| `onChange` |          | `event => void` |
 
 ## Example
 
@@ -22,21 +22,21 @@ This component allows the user to choose only one of a predefined set of mutuall
 
 [See a demo here](https://collector-bank.github.io/collector-portal-framework/?selectedKind=Components&selectedStory=Radio%20button)
 
-
 # Radio button group
 
 A group of radio buttons.
 
 ## Props
 
-| Name          | Required  | Type                  |
-|---------------|-----------|-----------------------|
-| `label`       |     ✓     | string                |
-| `items`       |           | `RadioButtonItem[]`   |
-| `selected`    |           | any                   |
-| `disabled`    |           | boolean               |
-| `error`       |           | string or boolean     |
-| `onChange`    |           | `key => void`         |
+| Name        | Required | Type                       |
+| ----------- | -------- | -------------------------- |
+| `label`     | ✓        | string                     |
+| `items`     |          | `RadioButtonItem[]`        |
+| `direction` |          | Direction (`row | column`) |
+| `selected`  |          | any                        |
+| `disabled`  |          | boolean                    |
+| `error`     |          | string or boolean          |
+| `onChange`  |          | `key => void`              |
 
 ```typescript
 export interface RadioButtonItem {
@@ -52,7 +52,7 @@ export interface RadioButtonItem {
 const items = [
     {
         key: 'foo',
-        label: 'Alternativ 1'
+        label: 'Alternativ 1',
     },
     {
         key: 'bar',
@@ -61,13 +61,11 @@ const items = [
     {
         key: 'baz',
         label: 'Alternativ 3',
-        child: <div>Här är ett barn-element, som bara syns om "Alternativ 3" är markerat</div>
-    }
+        child: <div>Här är ett barn-element, som bara syns om "Alternativ 3" är markerat</div>,
+    },
 ];
 
-return (
-    <RadioButtonGroup label="En label" items={items} />
-);
+return <RadioButtonGroup label="En label" items={items} />;
 ```
 
 ## Demo

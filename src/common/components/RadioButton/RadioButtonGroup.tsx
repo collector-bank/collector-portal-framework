@@ -7,15 +7,23 @@ import { Alert } from '../Alert';
 import { Label } from '../Label';
 import { RadioButton } from './';
 
+export type Direction = 'row' | 'column';
+
 const RadioButtonGroupContainer = glamorous.div({
     marginBottom: '1.25em',
 });
 
-const RadioButtonList = glamorous.ul({
+const RadioButtonList = glamorous.ul<{ direction: Direction }>(({ direction }) => ({
     listStyleType: 'none',
+    display: 'flex',
+    flexDirection: direction,
     padding: 0,
     margin: 0,
-});
+}));
+
+const RadioButtonContainer = glamorous.li<{ direction: Direction }>(({ direction }) => ({
+    paddingRight: direction === 'row' ? 32 : 0,
+}));
 
 const KidsContainer = glamorous.div({
     overflow: 'hidden',
@@ -41,6 +49,7 @@ export interface RadioButtonGroupProps {
     selected?: Key;
     disabled?: boolean;
     error?: string | boolean;
+    direction?: Direction;
     onChange: (key: Key) => void;
 }
 
@@ -60,14 +69,14 @@ export class RadioButtonGroup extends React.Component<RadioButtonGroupProps, Rad
     };
 
     render() {
-        const { label, items, selected, disabled, error } = this.props;
+        const { label, items, selected, disabled, error, direction = 'column' } = this.props;
 
         return (
             <RadioButtonGroupContainer>
                 <Label>{label}</Label>
-                <RadioButtonList>
+                <RadioButtonList direction={direction}>
                     {items.map((item, i) => (
-                        <li key={i}>
+                        <RadioButtonContainer direction={direction} key={i}>
                             <RadioButton
                                 label={item.label}
                                 name={this.state.name}
@@ -78,7 +87,7 @@ export class RadioButtonGroup extends React.Component<RadioButtonGroupProps, Rad
                             <Collapse isOpen={item.key === selected} className={`${transition}`}>
                                 <KidsContainer aria-hidden={item.key !== selected}>{item.child}</KidsContainer>
                             </Collapse>
-                        </li>
+                        </RadioButtonContainer>
                     ))}
                 </RadioButtonList>
                 {error && typeof error === 'string' && <Alert type="error" message={error} alertSize="small" />}

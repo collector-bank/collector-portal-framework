@@ -22,20 +22,20 @@ export const InputContainer: any = glamorous.div({
 });
 
 interface ErrorProps {
-    hasError: boolean;
+    indicateError: boolean;
     theme: Theme;
-    hasErrorNode: boolean;
+    showAlertMessage: boolean;
 }
 
-const getBorderColor = (hasError: boolean, hasErrorNode: boolean, theme: Theme) => {
-    if (hasError) {
-        return hasErrorNode ? theme.colors.mediumGray : theme.colors.red;
+const getBorderColor = (indicateError: boolean, showAlertMessage: boolean, theme: Theme) => {
+    if (indicateError) {
+        return showAlertMessage ? theme.colors.mediumGray : theme.colors.red;
     }
 
     return theme.colors.mediumGray;
 };
 
-const commonStyles = (hasError: boolean, theme: Theme, hasErrorNode: boolean): CSSProperties => ({
+const commonStyles = (indicateError: boolean, theme: Theme, showAlertMessage: boolean): CSSProperties => ({
     font: 'inherit',
     color: 'inherit',
     width: '100%',
@@ -45,10 +45,10 @@ const commonStyles = (hasError: boolean, theme: Theme, hasErrorNode: boolean): C
     appearance: 'none',
     transition: 'border-bottom-left-radius 150ms, border-bottom-right-radius 150ms',
     borderRadius: theme.borderRadius.small,
-    borderColor: getBorderColor(hasError, hasErrorNode, theme),
-    borderBottomLeftRadius: hasErrorNode ? 0 : theme.borderRadius.small,
-    borderBottomRightRadius: hasErrorNode ? 0 : theme.borderRadius.small,
-    borderBottomColor: hasError ? theme.colors.red : theme.colors.mediumGray,
+    borderColor: getBorderColor(indicateError, showAlertMessage, theme),
+    borderBottomLeftRadius: showAlertMessage ? 0 : theme.borderRadius.small,
+    borderBottomRightRadius: showAlertMessage ? 0 : theme.borderRadius.small,
+    borderBottomColor: indicateError ? theme.colors.red : theme.colors.mediumGray,
 
     '&:disabled': {
         opacity: 1,
@@ -57,33 +57,41 @@ const commonStyles = (hasError: boolean, theme: Theme, hasErrorNode: boolean): C
     },
 });
 
-export const InputField: any = glamorous.input<ErrorProps>(({ hasError, theme, hasErrorNode }) => ({
-    ...commonStyles(hasError, theme, hasErrorNode),
+export const InputField: any = glamorous.input<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
+    ...commonStyles(indicateError, theme, showAlertMessage),
 }));
 
-const Textarea = glamorous.textarea<ErrorProps>(({ hasError, theme, hasErrorNode }) => ({
-    ...commonStyles(hasError, theme, hasErrorNode),
+const Textarea = glamorous.textarea<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
+    ...commonStyles(indicateError, theme, showAlertMessage),
 
     resize: 'vertical',
     minHeight: 80,
-    marginBottom: hasErrorNode ? -6 : undefined,
+    marginBottom: showAlertMessage ? -6 : undefined,
 }));
 
-export const InputError: any = glamorous.div<{ theme: Theme }>(
-    {
-        fontWeight: 500,
-        padding: 8,
-        paddingLeft: 12,
-        minHeight: 40,
-        boxSizing: 'border-box',
-    },
-    ({ theme }) => ({
-        background: theme.colors.red,
-        color: theme.colors.white,
-        borderBottomLeftRadius: theme.borderRadius.small,
-        borderBottomRightRadius: theme.borderRadius.small,
-    })
-);
+const alertStyle = (theme: Theme): CSSProperties => ({
+    fontWeight: 500,
+    padding: 8,
+    paddingLeft: 12,
+    minHeight: 40,
+    boxSizing: 'border-box',
+    borderBottomLeftRadius: theme.borderRadius.small,
+    borderBottomRightRadius: theme.borderRadius.small,
+});
+
+export const InputError: any = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+    ...alertStyle(theme),
+
+    background: theme.colors.red,
+    color: theme.colors.white,
+}));
+
+export const InputWarning: any = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+    ...alertStyle(theme),
+
+    background: theme.colors.yellow,
+    color: theme.colors.black,
+}));
 
 export interface InputProps {
     label?: React.ReactNode;
@@ -92,6 +100,7 @@ export interface InputProps {
     multiline?: boolean;
     disabled?: boolean;
     error?: boolean | React.ReactNode;
+    warning?: React.ReactNode;
     maxLength?: number;
     pattern?: string;
     name?: string;
@@ -125,15 +134,16 @@ export class Input extends React.Component<InputProps, InputState> {
     };
 
     render() {
-        const { label, error, multiline, description, ...rest } = this.props;
+        const { label, error, warning, multiline, description, ...rest } = this.props;
         const InputElement = multiline ? Textarea : InputField;
-        const showError = Boolean(this.state.isDirty && error);
-        const hasErrorNode = showError && typeof error !== 'boolean';
+        const indicateError = Boolean(this.state.isDirty && error);
+        const showErrorMessage = indicateError && typeof error !== 'boolean';
+        const showWarningMessage = Boolean(this.state.isDirty && warning);
 
         return (
             <InputContainer>
                 {label && (
-                    <InputLabel htmlFor={this.state.id} error={showError}>
+                    <InputLabel htmlFor={this.state.id} error={indicateError}>
                         {label}
 
                         {description && <Description description={description} />}
@@ -143,14 +153,18 @@ export class Input extends React.Component<InputProps, InputState> {
                 <InputElement
                     id={this.state.id}
                     onBlur={this.makeDirty}
-                    hasError={showError}
-                    aria-invalid={showError}
-                    hasErrorNode={hasErrorNode}
+                    hasError={indicateError}
+                    aria-invalid={indicateError}
+                    showAlertMessage={showErrorMessage || showWarningMessage}
                     {...rest}
                 />
 
-                <Collapse isOpen={hasErrorNode} className={`${inputErrorTransition}`}>
+                <Collapse isOpen={showErrorMessage} className={`${inputErrorTransition}`}>
                     <InputError>{error}</InputError>
+                </Collapse>
+
+                <Collapse isOpen={showWarningMessage} className={`${inputErrorTransition}`}>
+                    <InputWarning>{warning}</InputWarning>
                 </Collapse>
             </InputContainer>
         );

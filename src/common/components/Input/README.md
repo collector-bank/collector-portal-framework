@@ -13,6 +13,7 @@ This component can be used for freeform data entry.
 | `rows`        |          | number                     | Can be used in combination with `multiline` |
 | `disabled`    |          | boolean                    |                                             |
 | `error`       |          | boolean or React.ReactNode |                                             |
+| `warning`     |          | React.ReactNode            |                                             |
 | `maxLength`   |          | number                     |                                             |
 | `pattern`     |          | string                     |                                             |
 | `name`        |          | string                     |                                             |

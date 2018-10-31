@@ -152,11 +152,11 @@ export class Input extends React.Component<InputProps, InputState> {
 
                 <InputElement
                     id={this.state.id}
-                    onBlur={this.makeDirty}
                     hasError={indicateError}
                     aria-invalid={indicateError}
                     showAlertMessage={showErrorMessage || showWarningMessage}
                     {...rest}
+                    onBlur={this.makeDirty}
                 />
 
                 <Collapse isOpen={showErrorMessage} className={`${inputErrorTransition}`}>

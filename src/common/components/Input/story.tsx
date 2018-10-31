@@ -20,6 +20,7 @@ components.add('Input', () => {
             disabled={boolean('Disabled', false)}
             rows={number('Rows', 10)}
             onChange={action('input changed')}
+            onBlur={boolean('Log onBlur', false) ? action('on blur') : undefined}
         />
     );
 });

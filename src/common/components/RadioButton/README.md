@@ -30,7 +30,7 @@ A group of radio buttons.
 
 | Name        | Required | Type                       |
 | ----------- | -------- | -------------------------- |
-| `label`     | ✓        | string                     |
+| `label`     |          | string                     |
 | `items`     |          | `RadioButtonItem[]`        |
 | `direction` |          | Direction (`row | column`) |
 | `selected`  |          | any                        |

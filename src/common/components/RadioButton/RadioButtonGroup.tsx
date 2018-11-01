@@ -44,7 +44,7 @@ export interface RadioButtonItem {
 }
 
 export interface RadioButtonGroupProps {
-    label: string | React.ReactNode;
+    label?: React.ReactNode;
     items: RadioButtonItem[];
     selected?: Key;
     disabled?: boolean;

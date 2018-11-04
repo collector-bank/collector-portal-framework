@@ -251,7 +251,7 @@ const IconContainer = glamorous.span<{ iconAlignment: IconAligmment }>(({ iconAl
     alignItems: 'center',
 }));
 
-export const Button: React.StatelessComponent<ButtonProps> = ({ loading, children, icon, iconAlignment = 'start', size, ...rest }) => {
+export const Button: React.StatelessComponent<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> = ({ loading, children, icon, iconAlignment = 'start', size, ...rest }) => {
     return (
         <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} {...rest}>
             {icon && iconAlignment === 'start' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}

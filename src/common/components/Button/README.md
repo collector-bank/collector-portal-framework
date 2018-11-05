@@ -8,7 +8,7 @@ Buttons are used to invoke an event.
 | --------------- | -------- | ------------- | ----------------------------------------------------------------------------------- | --------------------------------------------------------------- |
 | `type`          |          | string        | `'primary'`, `'secondary'`, `'secondaryNegative'`, `'success'`, `'warn'`, `'text'`, | Use secondary negative only if you have an off-white background |
 | `size`          |          | string        | `'small'`, `'medium'`, `'large'`                                                    |                                                                 |
-| `icon`          |          | `JSX.Element` |                                                                                     |                                                                 |
+| `icon`          |          | `JSX.Element` |                                                                                     | Icon _must_ contain a height in the SVG to show up.             |
 | `iconAlignment` |          | `string`      | 'start', 'end'                                                                      | Defaults to start                                               |
 | `onClick`       |          | `() => void`  |                                                                                     |                                                                 |
 | `disabled`      |          | boolean       |                                                                                     |                                                                 |

@@ -13,13 +13,13 @@ const spinner = (color: string) =>
 
 export type ButtonType = 'primary' | 'secondary' | 'secondaryNegative' | 'success' | 'warn' | 'text';
 export type ButtonSize = 'small' | 'medium' | 'large';
-export type IconAligmment = 'start' | 'end';
+export type IconAlignment = 'start' | 'end';
 
 export interface ButtonProps {
     type?: ButtonType;
     size?: ButtonSize;
     icon?: JSX.Element;
-    iconAlignment?: IconAligmment;
+    iconAlignment?: IconAlignment;
     onClick?: () => void;
     disabled?: boolean;
     loading?: boolean;
@@ -241,9 +241,9 @@ const background = (backgroundColor: string): CSSProperties => ({
     },
 });
 
-const IconContainer = glamorous.span<{ iconAlignment: IconAligmment }>(({ iconAlignment }) => ({
-    width: '1.3em',
-    height: '1.3em',
+const IconContainer = glamorous.span<{ iconAlignment: IconAlignment }>(({ iconAlignment }) => ({
+    maxWidth: '1.3em',
+    maxHeight: '1.3em',
     marginRight: iconAlignment === 'start' ? '.5em' : 0,
     marginLeft: iconAlignment === 'end' ? '.5em' : 0,
     display: 'flex',

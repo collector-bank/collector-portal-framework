@@ -15,9 +15,10 @@ components.add('Select', () => {
         <Select
             label={text('Label', 'En label')}
             disabled={boolean('Disabled', false)}
-            value={text('Selected item', 'Bar')}
+            value={text('Selected item', '')}
             items={items}
             error={text('Error', '')}
+            placeholder={text('Placeholder', '')}
             onChange={action('select changed')}
         />
     );

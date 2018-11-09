@@ -93,7 +93,7 @@ export const InputWarning: any = glamorous.div<{ theme: Theme }>(({ theme }) => 
     color: theme.colors.black,
 }));
 
-export interface InputProps {
+export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
     label?: React.ReactNode;
     value?: string;
     placeholder?: string;

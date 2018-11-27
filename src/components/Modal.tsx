@@ -1,6 +1,5 @@
 import * as React from 'react';
 import * as ReactModal from 'react-modal';
-import glamorous, { GlamorousComponent } from 'glamorous';
 import { css } from 'glamor';
 import { borderRadius, colors, breakpoints } from '../themes/collector';
 
@@ -72,10 +71,6 @@ const contentAfterOpen = css({
 const contentBeforeClose = css({
     transition: `transform ${transitionTime}ms ease-in`,
     transform: 'translateY(-30px)',
-});
-
-export const ModalBodyContainer: GlamorousComponent<React.HTMLProps<HTMLDivElement>, {}> = glamorous.div({
-    marginBottom: 24,
 });
 
 export const Modal: React.StatelessComponent<any> = props => (

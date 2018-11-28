@@ -1,6 +1,6 @@
 import glamorous from 'glamorous';
-import * as React from 'react';
-import * as uniqid from 'uniqid';
+import React from 'react';
+import uniqid from 'uniqid';
 import { Theme } from '../../../themes';
 import { Alert } from '../Alert';
 import { Label } from '../Label';

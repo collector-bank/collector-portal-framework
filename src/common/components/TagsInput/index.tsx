@@ -1,8 +1,8 @@
 import { css } from 'glamor';
 import glamorous, { withTheme } from 'glamorous';
-import * as React from 'react';
-import * as Autosuggest from 'react-autosuggest';
-import * as uniqid from 'uniqid';
+import React from 'react';
+import Autosuggest from 'react-autosuggest';
+import uniqid from 'uniqid';
 import { Button, ButtonGroup, Input, Label } from '../../../common/components';
 import { Text } from '../../../common/typography';
 import { Theme } from '../../../themes';

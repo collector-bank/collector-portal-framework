@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import glamorous from 'glamorous';
 import { Theme } from '../themes';
 

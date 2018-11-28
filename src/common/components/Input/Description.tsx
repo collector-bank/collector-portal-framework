@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import glamorous from 'glamorous';
 import { withTheme } from 'glamorous';
 import { Tooltip } from '../Tooltip';

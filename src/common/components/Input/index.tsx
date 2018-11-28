@@ -1,8 +1,8 @@
 import { css } from 'glamor';
 import glamorous, { CSSProperties } from 'glamorous';
-import * as React from 'react';
+import React from 'react';
 import Collapse from 'react-css-collapse';
-import * as uniqid from 'uniqid';
+import uniqid from 'uniqid';
 import { Theme } from '../../../themes';
 import { Label } from '../Label';
 import { Description } from './Description';

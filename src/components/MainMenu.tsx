@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import glamorous, { CSSProperties, GlamorousComponent } from 'glamorous';
 import { Theme } from '../themes';

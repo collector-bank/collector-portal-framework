@@ -1,8 +1,8 @@
-import * as React from 'react';
+import React from 'react';
 import Collapse from 'react-css-collapse';
 import glamorous from 'glamorous';
 import { css } from 'glamor';
-import * as uniqid from 'uniqid';
+import uniqid from 'uniqid';
 import { Alert } from '../Alert';
 import { Label } from '../Label';
 import { RadioButton } from './';

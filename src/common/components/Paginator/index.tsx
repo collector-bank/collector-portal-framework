@@ -1,5 +1,5 @@
 import glamorous from 'glamorous';
-import * as React from 'react';
+import React from 'react';
 import { Theme } from '../../../themes';
 
 const leftChevron =

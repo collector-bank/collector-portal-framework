@@ -1,5 +1,5 @@
 import glamorous from 'glamorous';
-import * as React from 'react';
+import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import { Theme } from '../themes';
 

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import { CSSProperties } from 'react';
 import glamorous from 'glamorous';
 import { keyframes } from 'glamor';

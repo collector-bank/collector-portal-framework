@@ -1,8 +1,8 @@
 import { action } from '@storybook/addon-actions';
 import { array, boolean, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import * as React from 'react';
-import * as uniqid from 'uniqid';
+import React from 'react';
+import uniqid from 'uniqid';
 import { TagsInput } from './';
 
 const components = storiesOf('Components', module);

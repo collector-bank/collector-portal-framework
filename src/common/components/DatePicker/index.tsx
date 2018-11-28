@@ -1,7 +1,7 @@
-import * as React from 'react';
+import React from 'react';
 import ReactDatePicker from 'react-datepicker';
 import Collapse from 'react-css-collapse';
-import * as moment from 'moment';
+import moment from 'moment';
 import { css } from 'glamor';
 import { withTheme } from 'glamorous';
 import { Label, InputError } from '../';

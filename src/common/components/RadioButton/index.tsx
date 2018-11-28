@@ -1,6 +1,6 @@
-import * as React from 'react';
+import React from 'react';
 import glamorous from 'glamorous';
-import * as uniqid from 'uniqid';
+import uniqid from 'uniqid';
 import { Theme } from '../../../themes';
 
 const RadioButtonContainer = glamorous.div<{ disabled?: boolean }>(

@@ -1,4 +1,4 @@
-import * as React from 'react';
+import React from 'react';
 import glamorous, { CSSProperties } from 'glamorous';
 import { Theme } from '../../../themes';
 import { lighten, darken } from 'polished';

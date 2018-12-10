@@ -1,21 +1,29 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, number } from '@storybook/addon-knobs';
-import { action } from '@storybook/addon-actions';
+import { State, Store } from '@sambego/storybook-state';
 import { Slider } from './';
 
 const components = storiesOf('Components', module);
 
 components.addDecorator(withKnobs);
 
+const store = new Store({
+    value: 500
+});
+
 components.add('Slider', () => {
     return (
-        <Slider
-            type="range"
-            min={number('Min', 100)}
-            max={number('Max', 1000)}
-            value={number('Value', 500)}
-            onChange={action('value changed')}
-        />
+        <div style={{ maxWidth: 500 }}>
+            <State store={store}>
+                <Slider
+                    type="range"
+                    min={number('Min', 100)}
+                    max={number('Max', 1000)}
+                    value={store.get('value')}
+                    onChange={event => store.set({ value: Number(event.currentTarget.value) })}
+                />
+            </State>
+        </div>
     );
 });

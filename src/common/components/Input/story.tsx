@@ -1,5 +1,5 @@
-import { action } from '@storybook/addon-actions';
 import { boolean, number, text, withKnobs } from '@storybook/addon-knobs';
+import { State, Store } from '@sambego/storybook-state';
 import { storiesOf } from '@storybook/react';
 import React from 'react';
 import { Input } from './';
@@ -8,19 +8,25 @@ const components = storiesOf('Components', module);
 
 components.addDecorator(withKnobs);
 
+const store = new Store({
+    value: ''
+});
+
 components.add('Input', () => {
     return (
-        <Input
-            label={text('Label', 'En label')}
-            placeholder={text('Placeholder', '')}
-            error={text('Error', '')}
-            warning={text('Warning', '')}
-            description={text('Description', '')}
-            multiline={boolean('Multiline', false)}
-            disabled={boolean('Disabled', false)}
-            rows={number('Rows', 10)}
-            onChange={action('input changed')}
-            onBlur={boolean('Log onBlur', false) ? action('on blur') : undefined}
-        />
+        <State store={store}>
+            <Input
+                label={text('Label', 'En label')}
+                placeholder={text('Placeholder', '')}
+                error={text('Error', '')}
+                warning={text('Warning', '')}
+                description={text('Description', '')}
+                multiline={boolean('Multiline', false)}
+                disabled={boolean('Disabled', false)}
+                rows={number('Rows', 10)}
+                value={store.get('value')}
+                onChange={event => store.set({ value: event.currentTarget.value })}
+            />
+        </State>
     );
 });

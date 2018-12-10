@@ -6,7 +6,7 @@ export interface LabelProps {
     theme: Theme;
 }
 
-export const Label: GlamorousComponent<Pick<LabelProps, "error"> & React.HTMLProps<HTMLLabelElement>, LabelProps> = glamorous.label<LabelProps>(
+export const Label: GlamorousComponent<Pick<LabelProps, 'error'> & React.HTMLProps<HTMLLabelElement>, LabelProps> = glamorous.label<LabelProps>(
     {
         display: 'block',
         maxWidth: 540,

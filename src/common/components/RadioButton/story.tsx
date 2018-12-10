@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
+import { State, Store } from '@sambego/storybook-state';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { RadioButton } from './';
 import { RadioButtonGroup } from './RadioButtonGroup';
 
@@ -9,15 +9,25 @@ const components = storiesOf('Components', module);
 
 components.addDecorator(withKnobs);
 
+const state = new Store({
+    selected: false
+});
+
 components.add('Radio button', () => {
     return (
-        <RadioButton
-            label={text('Label', 'En label')}
-            selected={boolean('Selected', false)}
-            disabled={boolean('Disabled', false)}
-            onChange={action('radio button changed')}
-        />
+        <State store={state}>
+            <RadioButton
+                label={text('Label', 'En label')}
+                disabled={boolean('Disabled', false)}
+                selected={state.get('selected')}
+                onChange={() => state.set({ selected: !state.get('selected') })}
+            />
+        </State>
     );
+});
+
+const groupStore = new Store({
+    selected: 'foo'
 });
 
 components.add('Radio button group', () => {
@@ -38,14 +48,16 @@ components.add('Radio button group', () => {
     ];
 
     return (
-        <RadioButtonGroup
-            label={text('Label', 'En label')}
-            items={items}
-            selected={select('Option', items.map(x => x.key), 'foo')}
-            disabled={boolean('Disabled', false)}
-            direction={boolean('Display items in row', false) ? 'row' : undefined}
-            error={text('Error', '')}
-            onChange={action('radio button group changed')}
-        />
+        <State store={groupStore}>
+            <RadioButtonGroup
+                label={text('Label', 'En label')}
+                items={items}
+                disabled={boolean('Disabled', false)}
+                direction={boolean('Display items in row', false) ? 'row' : undefined}
+                error={text('Error', '')}
+                selected={groupStore.get('selected')}
+                onChange={selected => groupStore.set({ selected })}
+            />
+        </State>
     );
 });

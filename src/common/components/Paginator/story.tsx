@@ -1,5 +1,6 @@
-import { withKnobs, select } from '@storybook/addon-knobs';
+import { withKnobs, number } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
+import { State, Store } from '@sambego/storybook-state';
 import React from 'react';
 import { Paginator } from './';
 
@@ -7,17 +8,20 @@ const components = storiesOf('Components', module);
 
 components.addDecorator(withKnobs);
 
-components.add('Paginator', () => {
-    let list = [];
-    for (let i = 1; i <= 20; i++) list.push(`${i}`);
+const store = new Store({
+    activePage: 2
+});
 
+components.add('Paginator', () => {
     return (
-        <Paginator
-            numberOfItems={500}
-            numbersInMiddle={5}
-            pageSize={25}
-            activePage={parseInt(select('Page', list, '1'))}
-            onChange={activePage => null}
-        />
+        <State store={store}>
+            <Paginator
+                numberOfItems={number('Number of items', 500)}
+                numbersInMiddle={number('Numbers in middle', 5)}
+                pageSize={number('Page size', 25)}
+                activePage={store.get('activePage')}
+                onChange={activePage => store.set({ activePage })}
+            />
+        </State>
     );
 });

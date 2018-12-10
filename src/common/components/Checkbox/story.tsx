@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
-import { withKnobs, text, array, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { State, Store } from '@sambego/storybook-state';
 import { Checkbox } from './';
 import { CheckboxGroup } from './CheckboxGroup';
 
@@ -9,15 +9,25 @@ const components = storiesOf('Components', module);
 
 components.addDecorator(withKnobs);
 
+const store = new Store({
+    checked: false
+});
+
 components.add('Checkbox', () => {
     return (
-        <Checkbox
-            label={text('Label', 'En label')}
-            checked={boolean('Checked', false)}
-            disabled={boolean('Disabled', false)}
-            onChange={action('checkbox changed')}
-        />
+        <State store={store}>
+            <Checkbox
+                label={text('Label', 'En label')}
+                disabled={boolean('Disabled', false)}
+                checked={store.get('checked')}
+                onChange={() => store.set({ checked: !store.get('checked') })}
+            />
+        </State>
     );
+});
+
+const groupStore = new Store({
+    checked: ['foo', 'baz']
 });
 
 components.add('Checkbox group', () => {
@@ -38,13 +48,21 @@ components.add('Checkbox group', () => {
     ];
 
     return (
-        <CheckboxGroup
-            label={text('Label', 'En label')}
-            items={items}
-            checked={array('Checked items', ['foo', 'baz'])}
-            disabled={boolean('Disabled', false)}
-            error={text('Error', '')}
-            onChange={action('checkbox group changed')}
-        />
+        <State store={groupStore}>
+            <CheckboxGroup
+                label={text('Label', 'En label')}
+                items={items}
+                disabled={boolean('Disabled', false)}
+                error={text('Error', '')}
+                checked={groupStore.get('checked')}
+                onChange={(optionId, selected) => {
+                    groupStore.set({
+                        checked: selected
+                            ? [...groupStore.get('checked'), optionId]
+                            : groupStore.get('checked').filter((x: string) => x !== optionId)
+                    });
+                }}
+            />
+        </State>
     );
 });

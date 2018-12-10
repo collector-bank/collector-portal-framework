@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
+import { State, Store } from '@sambego/storybook-state';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
 import { Select } from './';
 
@@ -8,18 +8,28 @@ const components = storiesOf('Components', module);
 
 components.addDecorator(withKnobs);
 
+const store = new Store({
+    value: ''
+});
+
 components.add('Select', () => {
-    const items = [{ label: 'Foo' }, { label: 'Bar' }, { label: 'Baz' }];
+    const items = [
+        { label: 'Foo' },
+        { label: 'Bar' },
+        { label: 'Baz' }
+    ];
 
     return (
-        <Select
-            label={text('Label', 'En label')}
-            disabled={boolean('Disabled', false)}
-            value={text('Selected item', '')}
-            items={items}
-            error={text('Error', '')}
-            placeholder={text('Placeholder', '')}
-            onChange={action('select changed')}
-        />
+        <State store={store}>
+            <Select
+                label={text('Label', 'En label')}
+                disabled={boolean('Disabled', false)}
+                items={items}
+                error={text('Error', '')}
+                placeholder={text('Placeholder', '')}
+                value={store.get('value')}
+                onChange={event => store.set({ value: event.currentTarget.value })}
+            />
+        </State>
     );
 });

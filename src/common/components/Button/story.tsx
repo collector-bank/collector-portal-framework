@@ -1,6 +1,5 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { action } from '@storybook/addon-actions';
 import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
 import { Button, ButtonType, ButtonSize } from './';
 import { ButtonGroup } from './ButtonGroup';
@@ -21,7 +20,6 @@ components.add('Button', () => {
                 size={select('Size', sizes, 'medium')}
                 disabled={boolean('Disabled', false)}
                 loading={boolean('Loading', false)}
-                onClick={action('button clicked')}
                 icon={boolean('Show icon', false) ? <CrossIcon /> : undefined}
                 iconAlignment={select('Icon alignment', ['start', 'end'], 'start')}
             >
@@ -35,7 +33,6 @@ components.add('Button', () => {
                         size={select('Size', sizes, 'medium')}
                         disabled={boolean('Disabled', false)}
                         loading={boolean('Loading', false)}
-                        onClick={action('button clicked')}
                     >
                         {text('Label', 'En knapp')}
                     </Button>
@@ -45,7 +42,6 @@ components.add('Button', () => {
                         size={select('Size', sizes, 'medium')}
                         disabled={boolean('Disabled', false)}
                         loading={boolean('Loading', false)}
-                        onClick={action('button clicked')}
                     >
                         {text('Label', 'En knapp')}
                     </Button>

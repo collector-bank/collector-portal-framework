@@ -59,15 +59,9 @@ export interface TogglableState {
 
 export class Togglable extends React.Component<TogglableProps, TogglableState> {
     state: TogglableState = {
-        isExpanded: false,
+        isExpanded: this.props.defaultExpanded ? true : false,
         id: uniqid(),
     };
-
-    componentWillMount() {
-        if (this.props.defaultExpanded) {
-            this.setState({ isExpanded: true });
-        }
-    }
 
     private toggle = () => {
         this.setState(prevState => ({

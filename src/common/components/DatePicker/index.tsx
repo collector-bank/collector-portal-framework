@@ -8,9 +8,11 @@ import { InputContainer, InputField } from '../Input';
 import { Theme } from '../../../themes';
 
 import sv from 'date-fns/locale/sv';
+import nb from 'date-fns/locale/nb';
 import fi from 'date-fns/locale/fi';
 
 registerLocale('sv', sv);
+registerLocale('nb', nb);
 registerLocale('fi', fi);
 setDefaultLocale('sv');
 
@@ -90,7 +92,7 @@ css.global('.react-datepicker__input-container', {
 });
 
 export interface DatePickerProps {
-    locale: 'sv' | 'fi';
+    locale: 'sv' | 'fi' | 'nb';
     label?: string;
     selectedDate?: Date;
     minDate?: Date;

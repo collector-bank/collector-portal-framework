@@ -4,15 +4,15 @@ This compoment can be used to capture a date. It provides an input field which, 
 
 ## Props
 
-| Name             | Required  | Type    | Possible values                      |
-|------------------|-----------|---------|--------------------------------------|
-| `locale`         |     ✓     | string                        | `'sv'`, `'fi'` |
-| `label`          |           | string                        |                |
-| `selectedDate`   |           | Date                          |                |
-| `minDate`        |           | Date                          |                |
-| `maxDate`        |           | Date                          |                |
-| `invalidMessage` |           | string                        |                |
-| `onChange`       |           | `(date: Date | null) => void` |                |
+| Name             | Required  | Type    | Possible values                              |
+|------------------|-----------|---------|----------------------------------------------|
+| `locale`         |     ✓     | string                        | `'sv'`, `'fi'`, `'nb'` |
+| `label`          |           | string                        |                        |
+| `selectedDate`   |           | Date                          |                        |
+| `minDate`        |           | Date                          |                        |
+| `maxDate`        |           | Date                          |                        |
+| `invalidMessage` |           | string                        |                        |
+| `onChange`       |           | `(date: Date | null) => void` |                        |
 
 ## Example
 

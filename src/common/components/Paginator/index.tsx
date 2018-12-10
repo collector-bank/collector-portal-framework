@@ -52,7 +52,7 @@ const Ellipses = glamorous.span<{ theme: Theme }>(
     })
 );
 
-const Page = glamorous.a<{ active: boolean; theme: Theme; }>(
+const Page = glamorous.a<{ active: boolean; theme: Theme }>(
     {
         paddingLeft: 6,
         paddingRight: 6,
@@ -78,7 +78,7 @@ export class Paginator extends React.Component<PaginatorProps, {}> {
     center = () => Math.floor(this.props.numbersInMiddle / 2);
 
     render() {
-        if (this.lastPage() === 1) return null;
+        if (this.lastPage() === 1 || this.lastPage() === 0) return null;
 
         return (
             <PaginatorContainer>
@@ -149,6 +149,7 @@ export class Paginator extends React.Component<PaginatorProps, {}> {
 
     private fillStart = (_: number, index: number) =>
         this.props.numbersInMiddle - index <= this.lastPage() ? this.props.numbersInMiddle - index : undefined;
+
     private fillEnd = (_: number, index: number) => this.lastPage() - index;
 
     private getActivePages = (_: number, index: number) => {

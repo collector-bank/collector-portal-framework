@@ -1,15 +1,19 @@
 import React from 'react';
-import ReactDatePicker from 'react-datepicker';
+import ReactDatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import Collapse from 'react-css-collapse';
-import moment from 'moment';
 import { css } from 'glamor';
 import { withTheme } from 'glamorous';
 import { Label, InputError } from '../';
 import { InputContainer, InputField } from '../Input';
 import { Theme } from '../../../themes';
 
-import 'moment/locale/sv';
-import 'moment/locale/fi';
+import sv from 'date-fns/locale/sv';
+import fi from 'date-fns/locale/fi';
+
+registerLocale('sv', sv);
+registerLocale('fi', fi);
+setDefaultLocale('sv');
+
 import 'react-datepicker/dist/react-datepicker.css';
 
 const calendar =
@@ -108,10 +112,6 @@ class DatePicker_ extends React.Component<DatePickerProps & { theme: Theme }, St
         isValid: true,
     };
 
-    componentWillMount() {
-        moment.locale(this.props.locale);
-    }
-
     /*
     * Here we use the fact that there are two onChange handlers, one of which
     * is used to set a valid date only, to handle an invalid state.
@@ -121,9 +121,7 @@ class DatePicker_ extends React.Component<DatePickerProps & { theme: Theme }, St
     * isValid is only set to valid if a proper onChange has been run.
     * Then, onBlur, if we did not recieve an onChange event, we display an error message.
     */
-    private handleChange = (momentObject: moment.Moment) => {
-        const date = momentObject ? new Date(momentObject.format()) : null;
-
+    private handleChange = (date: Date) => {
         this.setState({ isValid: true }, () => {
             this.props.onChange(date);
         });
@@ -145,7 +143,7 @@ class DatePicker_ extends React.Component<DatePickerProps & { theme: Theme }, St
     };
 
     render() {
-        const { label, selectedDate, minDate, maxDate, invalidMessage } = this.props;
+        const { label, locale, selectedDate, minDate, maxDate, invalidMessage } = this.props;
         const showError = Boolean(this.state.showError && !this.state.isValid && invalidMessage);
         const calendarClassName = `${style(this.props.theme)}`;
 
@@ -153,10 +151,11 @@ class DatePicker_ extends React.Component<DatePickerProps & { theme: Theme }, St
             <InputContainer>
                 {label && <Label>{label}</Label>}
                 <ReactDatePicker
-                    selected={selectedDate ? moment(selectedDate) : undefined}
-                    minDate={minDate ? moment(minDate) : undefined}
-                    maxDate={maxDate ? moment(maxDate) : undefined}
-                    dateFormat="YYYY-MM-DD"
+                    locale={locale}
+                    selected={selectedDate}
+                    minDate={minDate}
+                    maxDate={maxDate}
+                    dateFormat="yyyy-MM-dd"
                     useWeekdaysShort={true}
                     calendarClassName={calendarClassName}
                     onChange={this.handleChange}

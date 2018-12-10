@@ -1,4 +1,5 @@
 export * from './Alert';
+export * from './AmountSelector';
 export * from './Badge';
 export * from './Button';
 export * from './Button/ButtonGroup';
@@ -14,5 +15,6 @@ export * from './Paginator';
 export * from './RadioButton';
 export * from './RadioButton/RadioButtonGroup';
 export * from './Select';
+export * from './Spinner';
 export * from './Spinner';
 export * from './TagsInput';

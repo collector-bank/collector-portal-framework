@@ -1,9 +1,11 @@
-import { State, Store } from '@sambego/storybook-state';
-import { array, boolean, text, withKnobs } from '@storybook/addon-knobs';
-import { storiesOf } from '@storybook/react';
 import React from 'react';
 import uniqid from 'uniqid';
+import { State, Store } from '@sambego/storybook-state';
+import { array, boolean, text, withKnobs } from '@storybook/addon-knobs';
+import { withReadme } from 'storybook-readme';
+import { storiesOf } from '@storybook/react';
 import { TagsInput } from './';
+import readme from './README.md';
 
 const components = storiesOf('Components', module);
 
@@ -17,7 +19,7 @@ const store = new Store({
     ]
 });
 
-components.add('Tags Input', () => {
+components.add('Tags Input', withReadme(readme, () => {
     const autoCompleteItems = ['Item 1', 'Item 2', 'Item 3', 'Item 4', 'Item 5', 'Item 6', 'Item 7'];
 
     return (
@@ -34,4 +36,4 @@ components.add('Tags Input', () => {
             />
         </State>
     );
-});
+}));

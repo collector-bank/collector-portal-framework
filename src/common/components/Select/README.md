@@ -37,7 +37,3 @@ return (
     <Select label="Välj en" items={items} />
 );
 ```
-
-## Demo
-
-[See a demo here](https://collector-bank.github.io/collector-portal-framework/?selectedKind=Components&selectedStory=Select)

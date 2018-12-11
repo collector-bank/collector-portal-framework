@@ -2,7 +2,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, number } from '@storybook/addon-knobs';
 import { State, Store } from '@sambego/storybook-state';
+import { withReadme } from 'storybook-readme';
 import { Slider } from './';
+import readme from './README.md';
 
 const components = storiesOf('Components', module);
 
@@ -12,7 +14,7 @@ const store = new Store({
     value: 500
 });
 
-components.add('Slider', () => {
+components.add('Slider', withReadme(readme, () => {
     return (
         <div style={{ maxWidth: 500 }}>
             <State store={store}>
@@ -26,4 +28,4 @@ components.add('Slider', () => {
             </State>
         </div>
     );
-});
+}));

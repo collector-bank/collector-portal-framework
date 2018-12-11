@@ -1,8 +1,10 @@
-import { withKnobs, number } from '@storybook/addon-knobs';
-import { storiesOf } from '@storybook/react';
-import { State, Store } from '@sambego/storybook-state';
 import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { withKnobs, number } from '@storybook/addon-knobs';
+import { withReadme } from 'storybook-readme';
+import { State, Store } from '@sambego/storybook-state';
 import { Paginator } from './';
+import readme from './README.md';
 
 const components = storiesOf('Components', module);
 
@@ -12,7 +14,7 @@ const store = new Store({
     activePage: 2
 });
 
-components.add('Paginator', () => {
+components.add('Paginator', withReadme(readme, () => {
     return (
         <State store={store}>
             <Paginator
@@ -24,4 +26,4 @@ components.add('Paginator', () => {
             />
         </State>
     );
-});
+}));

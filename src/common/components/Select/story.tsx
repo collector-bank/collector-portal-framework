@@ -2,7 +2,9 @@ import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { State, Store } from '@sambego/storybook-state';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withReadme } from 'storybook-readme';
 import { Select } from './';
+import readme from './README.md';
 
 const components = storiesOf('Components', module);
 
@@ -12,7 +14,7 @@ const store = new Store({
     value: ''
 });
 
-components.add('Select', () => {
+components.add('Select', withReadme(readme, () => {
     const items = [
         { label: 'Foo' },
         { label: 'Bar' },
@@ -32,4 +34,4 @@ components.add('Select', () => {
             />
         </State>
     );
-});
+}));

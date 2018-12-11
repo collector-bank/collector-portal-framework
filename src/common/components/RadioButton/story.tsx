@@ -1,9 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { State, Store } from '@sambego/storybook-state';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withReadme } from 'storybook-readme';
+import { State, Store } from '@sambego/storybook-state';
 import { RadioButton } from './';
 import { RadioButtonGroup } from './RadioButtonGroup';
+import readme from './README.md';
+import groupReadme from './GroupREADME.md';
 
 const components = storiesOf('Components', module);
 
@@ -13,7 +16,7 @@ const state = new Store({
     selected: false
 });
 
-components.add('Radio button', () => {
+components.add('Radio button', withReadme(readme, () => {
     return (
         <State store={state}>
             <RadioButton
@@ -24,13 +27,13 @@ components.add('Radio button', () => {
             />
         </State>
     );
-});
+}));
 
 const groupStore = new Store({
     selected: 'foo'
 });
 
-components.add('Radio button group', () => {
+components.add('Radio button group', withReadme(groupReadme, () => {
     let items = [
         {
             key: 'foo',
@@ -60,4 +63,4 @@ components.add('Radio button group', () => {
             />
         </State>
     );
-});
+}));

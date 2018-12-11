@@ -4,7 +4,7 @@
 [![NPM version][npm-image]][npm-url]
 
 A collection of UI components and helper functions used in a couple of our internal and external web applications at [Collector Bank](https://www.collector.se/).
-An interactive component library can be found on our [GitHub Pages site](https://collector-bank.github.io/collector-portal-framework/).
+Documentation and an interactive test area can be found [here](https://collector-bank.github.io/collector-portal-framework/).
 
 
 ## This package contains
@@ -34,7 +34,7 @@ $ npm install --save collector-portal-framework
 Import Collectors theme from `collector-portal-framework/themes/collector` or create your own. Then import `ThemeProvider` and
 `injectGlobalStyles` from `collector-portal-framework` and provide them the theme.
 
-```js
+```jsx
 import * as React from 'react';
 import * as ReactDOM from 'react-dom';
 import { ThemeProvider, injectGlobalStyles } from 'collector-portal-framework';
@@ -54,30 +54,30 @@ ReactDOM.render(
 
 ## Available components
 
-You can see a demo of the UI components by cloning this repo, doing `npm install` followed by `npm start` to start an instance of [React Storybook](https://storybook.js.org/).
+You can see a demo of the UI components [here](https://collector-bank.github.io/collector-portal-framework/). If you want your own local copy you can clone this repo and do `npm install` followed by `npm start` to start a local instance of [Storybook](https://storybook.js.org/).
 
 ### Generic components
 
-| Component                                                         | Source                                                           |
-|-------------------------------------------------------------------|------------------------------------------------------------------|
-| [Alert](src/common/components/Alert/README.md)                    | [Source](src/common/components/Alert/index.tsx)                  |
-| [AmountSelector](src/common/components/AmountSelector/README.md)  | [Source](src/common/components/AmountSelector/index.tsx)         |
-| [Badge](src/common/components/Badge/README.md)                    | [Source](src/common/components/Badge/index.tsx)                  |
-| [Button](src/common/components/Button/README.md)                  | [Source](src/common/components/Button/index.tsx)                 |
-| [Button group](src/common/components/Button/README.md)            | [Source](src/common/components/Button/ButtonGroup.tsx)           |
-| [Card](src/common/components/Card/README.md)                      | [Source](src/common/components/Card/index.tsx)                   |
-| [Checkbox](src/common/components/Checkbox/README.md)              | [Source](src/common/components/Checkbox/index.tsx)               |
-| [Checkbox group](src/common/components/Checkbox/README.md)        | [Source](src/common/components/Checkbox/CheckboxGroup.tsx)       |
-| [Date picker](src/common/components/DatePicker/README.md)         | [Source](src/common/components/DatePicker/index.tsx)             |
-| [Date picker group](src/common/components/DatePicker/README.md)   | [Source](src/common/components/DatePicker/index.tsx)             |
-| [Input](src/common/components/Input/README.md)                    | [Source](src/common/components/Input/index.tsx)                  |
-| [Paginator](src/common/components/Paginator/README.md)            | [Source](src/common/components/Paginator/index.tsx)              |
-| [Radio button](src/common/components/RadioButton/README.md)       | [Source](src/common/components/RadioButton/index.tsx)            |
-| [Radio button group](src/common/components/RadioButton/README.md) | [Source](src/common/components/RadioButton/RadioButtonGroup.tsx) |
-| [Select](src/common/components/Select/README.md)                  | [Source](src/common/components/Select/index.tsx)                 |
-| [Slider](src/common/components/Slider/README.md)                  | [Source](src/common/components/Slider/index.tsx)                 |
-| [Spinner](src/common/components/Spinner/README.md)                | [Source](src/common/components/Spinner/index.tsx)                |
-| [Tags Input](src/common/components/TagsInput/README.md)           | [Source](src/common/components/TagsInput/index.tsx)              |
+| Component                                                          | Source                                                           |
+|--------------------------------------------------------------------|------------------------------------------------------------------|
+| [Alert](src/common/components/Alert/README.md)                     | [Source](src/common/components/Alert/index.tsx)                  |
+| [Amount selector](src/common/components/AmountSelector/README.md)  | [Source](src/common/components/AmountSelector/index.tsx)         |
+| [Badge](src/common/components/Badge/README.md)                     | [Source](src/common/components/Badge/index.tsx)                  |
+| [Button](src/common/components/Button/README.md)                   | [Source](src/common/components/Button/index.tsx)                 |
+| [Button group](src/common/components/Button/README.md)             | [Source](src/common/components/Button/ButtonGroup.tsx)           |
+| [Card](src/common/components/Card/README.md)                       | [Source](src/common/components/Card/index.tsx)                   |
+| [Checkbox](src/common/components/Checkbox/README.md)               | [Source](src/common/components/Checkbox/index.tsx)               |
+| [Checkbox group](src/common/components/Checkbox/README.md)         | [Source](src/common/components/Checkbox/CheckboxGroup.tsx)       |
+| [Date picker](src/common/components/DatePicker/README.md)          | [Source](src/common/components/DatePicker/index.tsx)             |
+| [Date picker group](src/common/components/DatePicker/README.md)    | [Source](src/common/components/DatePicker/index.tsx)             |
+| [Input](src/common/components/Input/README.md)                     | [Source](src/common/components/Input/index.tsx)                  |
+| [Paginator](src/common/components/Paginator/README.md)             | [Source](src/common/components/Paginator/index.tsx)              |
+| [Radio button](src/common/components/RadioButton/README.md)        | [Source](src/common/components/RadioButton/index.tsx)            |
+| [Radio button group](src/common/components/RadioButton/README.md)  | [Source](src/common/components/RadioButton/RadioButtonGroup.tsx) |
+| [Select](src/common/components/Select/README.md)                   | [Source](src/common/components/Select/index.tsx)                 |
+| [Slider](src/common/components/Slider/README.md)                   | [Source](src/common/components/Slider/index.tsx)                 |
+| [Spinner](src/common/components/Spinner/README.md)                 | [Source](src/common/components/Spinner/index.tsx)                |
+| [Tags Input](src/common/components/TagsInput/README.md)            | [Source](src/common/components/TagsInput/index.tsx)              |
 
 ### Typographic components
 

@@ -15,7 +15,3 @@ A badge can be used to display content classification.
 ```jsx
 <Badge label="This is a badge" />
 ```
-
-## Demo
-
-[See a demo here](https://collector-bank.github.io/collector-portal-framework/?selectedKind=Components&selectedStory=Badge)

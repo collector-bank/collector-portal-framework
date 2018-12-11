@@ -25,7 +25,3 @@ This component allows users to input an amount in 3 different ways; using a slid
     stepSize={100}
 />
 ```
-
-## Demo
-
-[See a demo here](https://collector-bank.github.io/collector-portal-framework/?selectedKind=Components&selectedStory=AmountSelector)

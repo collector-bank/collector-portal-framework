@@ -1,8 +1,10 @@
-import { text, withKnobs } from '@storybook/addon-knobs';
-import { State, Store } from '@sambego/storybook-state';
-import { storiesOf } from '@storybook/react';
 import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { text, withKnobs } from '@storybook/addon-knobs';
+import { withReadme } from 'storybook-readme';
+import { State, Store } from '@sambego/storybook-state';
 import { DatePicker } from './';
+import readme from './README.md';
 
 const components = storiesOf('Components', module);
 
@@ -12,7 +14,7 @@ const store = new Store({
     selectedDate: new Date()
 });
 
-components.add('Date picker', () => {
+components.add('Date picker', withReadme(readme, () => {
     return (
         <State store={store}>
             <DatePicker
@@ -25,4 +27,4 @@ components.add('Date picker', () => {
             />
         </State>
     );
-});
+}));

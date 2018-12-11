@@ -1,14 +1,17 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withReadme } from 'storybook-readme';
 import { Card } from './';
 import { Button, H3, Text } from '../../../components';
 import { CardGroup } from './CardGroup';
+import readme from './README.md';
 
 const components = storiesOf('Components', module);
 
 components.addDecorator(withKnobs);
-components.add('Card', () => {
+
+components.add('Card', withReadme(readme, () => {
     return (
         <>
             <Card
@@ -78,4 +81,4 @@ components.add('Card', () => {
             </CardGroup>}
         </>
     );
-});
+}));

@@ -5,14 +5,14 @@ This compoment can be used to capture a date. It provides an input field which, 
 ## Props
 
 | Name             | Required  | Type    | Possible values                              |
-|------------------|-----------|---------|----------------------------------------------|
-| `locale`         |     ✓     | string                        | `'sv'`, `'fi'`, `'nb'` |
-| `label`          |           | string                        |                        |
-| `selectedDate`   |           | Date                          |                        |
-| `minDate`        |           | Date                          |                        |
-| `maxDate`        |           | Date                          |                        |
-| `invalidMessage` |           | string                        |                        |
-| `onChange`       |           | `(date: Date | null) => void` |                        |
+|------------------|-----------|---------|-----------------------------------------------|
+| `locale`         |     ✓     | string                         | `'sv'`, `'fi'`, `'nb'` |
+| `label`          |           | string                         |                        |
+| `selectedDate`   |           | Date                           |                        |
+| `minDate`        |           | Date                           |                        |
+| `maxDate`        |           | Date                           |                        |
+| `invalidMessage` |           | string                         |                        |
+| `onChange`       |           | `(date: Date \| null) => void` |                        |
 
 ## Example
 
@@ -20,7 +20,7 @@ This compoment can be used to capture a date. It provides an input field which, 
 <DatePicker locale="sv" label="Bokföringsdatum" />
 ```
 
-...or if you want multiple...
+...or if you want multiple date pickers...
 
 ```jsx
 <DatePickerGroup>
@@ -28,7 +28,3 @@ This compoment can be used to capture a date. It provides an input field which, 
     <DatePicker locale="sv" label="Bokföringsdatum" />
 </DatePickerGroup>
 ```
-
-## Demo
-
-[See a demo here](https://collector-bank.github.io/collector-portal-framework/?selectedKind=Components&selectedStory=Date%20picker)

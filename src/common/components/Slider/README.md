@@ -21,7 +21,3 @@ Sliders allow users to make selections from a range of values.
     value={500}
 />
 ```
-
-## Demo
-
-[See a demo here](https://collector-bank.github.io/collector-portal-framework/?selectedKind=Components&selectedStory=Slider)

@@ -1,9 +1,12 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withReadme } from 'storybook-readme';
 import { State, Store } from '@sambego/storybook-state';
 import { Checkbox } from './';
 import { CheckboxGroup } from './CheckboxGroup';
+import readme from './README.md';
+import groupReadme from './GroupREADME.md';
 
 const components = storiesOf('Components', module);
 
@@ -13,7 +16,7 @@ const store = new Store({
     checked: false
 });
 
-components.add('Checkbox', () => {
+components.add('Checkbox', withReadme(readme, () => {
     return (
         <State store={store}>
             <Checkbox
@@ -24,13 +27,13 @@ components.add('Checkbox', () => {
             />
         </State>
     );
-});
+}));
 
 const groupStore = new Store({
     checked: ['foo', 'baz']
 });
 
-components.add('Checkbox group', () => {
+components.add('Checkbox group', withReadme(groupReadme, () => {
     let items = [
         {
             key: 'foo',
@@ -65,4 +68,4 @@ components.add('Checkbox group', () => {
             />
         </State>
     );
-});
+}));

@@ -27,7 +27,3 @@ const paginatedList = this.state.originalList.slice((this.state.activePage - 1) 
     {paginatedList.map(item => <Item>item</Item>)}
 </Items>
 ```
-
-## Demo
-
-[See a demo here](https://collector-bank.github.io/collector-portal-framework/?selectedKind=Components&selectedStory=Paginator)

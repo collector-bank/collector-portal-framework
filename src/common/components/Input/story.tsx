@@ -1,8 +1,10 @@
 import { boolean, number, text, withKnobs } from '@storybook/addon-knobs';
 import { State, Store } from '@sambego/storybook-state';
 import { storiesOf } from '@storybook/react';
+import { withReadme } from 'storybook-readme';
 import React from 'react';
 import { Input } from './';
+import readme from './README.md';
 
 const components = storiesOf('Components', module);
 
@@ -12,7 +14,7 @@ const store = new Store({
     value: ''
 });
 
-components.add('Input', () => {
+components.add('Input', withReadme(readme, () => {
     return (
         <State store={store}>
             <Input
@@ -29,4 +31,4 @@ components.add('Input', () => {
             />
         </State>
     );
-});
+}));

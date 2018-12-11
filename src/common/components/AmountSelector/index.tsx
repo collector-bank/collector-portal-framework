@@ -174,14 +174,15 @@ export class AmountSelector extends React.Component<Props, State> {
         return (
             <Container>
                 <InputContainer>
-                    <Button onClick={this.decrease}><Minus /></Button>
+                    <Button onClick={this.decrease} data-testid="decrease"><Minus /></Button>
                     <AmountInput
                         value={isDrafting ? draftValue : value}
                         onChange={this.changeDraftValue}
                         onBlur={this.commitDraftValue}
                         pattern="[0-9]*"
+                        data-testid="input"
                     />
-                    <Button onClick={this.increase}><Plus /></Button>
+                    <Button onClick={this.increase} data-testid="increase"><Plus /></Button>
                 </InputContainer>
 
                 <Slider
@@ -190,6 +191,7 @@ export class AmountSelector extends React.Component<Props, State> {
                     max={max}
                     value={value}
                     onChange={this.handleRangeInputChange}
+                    data-testid="slider"
                 />
 
                 <Range>

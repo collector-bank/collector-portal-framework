@@ -1,9 +1,10 @@
 {
     "title": "Collector Portal Framework",
     "name": "collector-portal-framework",
-    "version": "11.0.0",
+    "version": "11.1.0",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
+    "sideEffects": false,
     "repository": {
         "type": "git",
         "url": "https://github.com/collector-bank/collector-portal-framework.git"

@@ -1,6 +1,6 @@
-import glamorous, { GlamorousComponent } from 'glamorous';
+import styled from "../styled";
 
-export const Fieldset: GlamorousComponent<React.HTMLProps<HTMLFieldSetElement>, {}> = glamorous.fieldset({
+export const Fieldset = styled("fieldset")({
     margin: 0,
     marginBottom: 16,
     padding: 0,

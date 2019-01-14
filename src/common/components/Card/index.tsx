@@ -1,10 +1,9 @@
 import React from 'react';
-import glamorous from 'glamorous';
-import { Theme } from '../../../themes';
+import styled from '../../../styled';
 
 const cross = `'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="14" height="14"%3E%3Cdefs%3E%3Cpath id="a" d="M13.4142136 12l5.2928932 5.2928932c.3905243.3905243.3905243 1.0236893 0 1.4142136-.3905243.3905243-1.0236893.3905243-1.4142136 0L12 13.4142136l-5.29289322 5.2928932c-.39052429.3905243-1.02368927.3905243-1.41421356 0-.39052429-.3905243-.39052429-1.0236893 0-1.4142136L10.5857864 12 5.29289322 6.70710678c-.39052429-.39052429-.39052429-1.02368927 0-1.41421356.39052429-.39052429 1.02368927-.39052429 1.41421356 0L12 10.5857864l5.2928932-5.29289318c.3905243-.39052429 1.0236893-.39052429 1.4142136 0 .3905243.39052429.3905243 1.02368927 0 1.41421356L13.4142136 12z"/%3E%3C/defs%3E%3Cg fill="none" fill-rule="evenodd" transform="translate(-5 -5)"%3E%3Cmask id="b" fill="%23fff"%3E%3Cuse xlink:href="%23a"/%3E%3C/mask%3E%3Cuse fill="%23000" fill-rule="nonzero" xlink:href="%23a"/%3E%3Cg fill="%23000" mask="url(%23b)"%3E%3Cpath d="M0 0h24v24H0z"/%3E%3C/g%3E%3C/g%3E%3C/svg%3E'`;
 
-const CardContainer = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+const CardContainer = styled("div")(({ theme }) => ({
     display: 'block',
     boxShadow: '0 2px 7px 0 rgba(0, 0, 0, 0.2)',
     boxSizing: 'border-box',
@@ -18,7 +17,7 @@ const CardContainer = glamorous.div<{ theme: Theme }>(({ theme }) => ({
     background: theme.colors.white,
 }));
 
-const Heading = glamorous.div<{ color: CardColors; theme: Theme }>(({ color, theme }) => ({
+const Heading = styled("div")(({ color, theme }) => ({
     display: 'inline-block',
     fontWeight: 600,
     marginBottom: 16,
@@ -26,16 +25,16 @@ const Heading = glamorous.div<{ color: CardColors; theme: Theme }>(({ color, the
     borderColor: color ? theme.colors[color] : 'transparent',
 }));
 
-const Body = glamorous.div({
+const Body = styled("div")({
     overflowWrap: 'break-word',
 });
 
-const SubBody = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+const SubBody = styled("div")(({ theme }) => ({
     paddingTop: 16,
     borderColor: theme.colors.lightGray,
 }));
 
-const Dismissable = glamorous.div({
+const Dismissable = styled("div")({
     width: 14,
     height: 14,
     backgroundImage: `url(${cross})`,
@@ -45,7 +44,7 @@ const Dismissable = glamorous.div({
     },
 });
 
-const HeadingContainer = glamorous.div({
+const HeadingContainer = styled("div")({
     display: 'flex',
     justifyContent: 'space-between',
 });

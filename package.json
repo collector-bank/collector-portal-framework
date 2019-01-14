@@ -27,6 +27,7 @@
         "@types/storybook__addon-options": "4.0.0",
         "@types/storybook__react": "4.0.0",
         "@types/uniqid": "4.1.2",
+        "csstype": "2.6.0",
         "babel-loader": "8.0.4",
         "copyfiles": "2.1.0",
         "file-loader": "2.0.0",
@@ -42,9 +43,12 @@
         "typescript": "3.2.2"
     },
     "dependencies": {
+        "@emotion/core": "^10.0.6",
+        "@emotion/styled": "^10.0.6",
+        "emotion-theming": "10.0.6",
+        "babel-plugin-emotion": "^10.0.6",
         "date-fns": "^2.0.0-alpha.25",
         "glamor": "^2.20.40",
-        "glamorous": "^5.0.0",
         "polished": "^2.3.1",
         "react-autosuggest": "^9.4.2",
         "react-css-collapse": "^3.6.0",

@@ -1,6 +1,6 @@
 import React from 'react';
 import Collapse from 'react-css-collapse';
-import glamorous from 'glamorous';
+import styled from '@emotion/styled';
 import { css } from 'glamor';
 import uniqid from 'uniqid';
 import { Alert } from '../Alert';
@@ -9,11 +9,11 @@ import { RadioButton } from './';
 
 export type Direction = 'row' | 'column';
 
-const RadioButtonGroupContainer = glamorous.div({
+const RadioButtonGroupContainer = styled('div')({
     marginBottom: '1.25em',
 });
 
-const RadioButtonList = glamorous.ul<{ direction: Direction }>(({ direction }) => ({
+const RadioButtonList = styled('ul')<{ direction: Direction }>(({ direction }) => ({
     listStyleType: 'none',
     display: 'flex',
     flexDirection: direction,
@@ -21,11 +21,11 @@ const RadioButtonList = glamorous.ul<{ direction: Direction }>(({ direction }) =
     margin: 0,
 }));
 
-const RadioButtonContainer = glamorous.li<{ direction: Direction }>(({ direction }) => ({
+const RadioButtonContainer = styled('li')<{ direction: Direction }>(({ direction }) => ({
     paddingRight: direction === 'row' ? 32 : 0,
 }));
 
-const KidsContainer = glamorous.div({
+const KidsContainer = styled('div')({
     overflow: 'hidden',
     marginLeft: 34,
     maxWidth: 500 - 34,

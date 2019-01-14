@@ -1,23 +1,23 @@
 import React from 'react';
 import Collapse from 'react-css-collapse';
-import glamorous from 'glamorous';
 import { css } from 'glamor';
 import uniqid from 'uniqid';
 import { Checkbox } from './';
 import { Alert } from '../Alert';
 import { Label } from '../Label';
+import styled from '../../../styled';
 
-const CheckboxGroupContainer = glamorous.div({
+const CheckboxGroupContainer = styled("div")({
     marginBottom: '1.25em',
 });
 
-const CheckboxList = glamorous.ul({
+const CheckboxList = styled("ul")({
     listStyleType: 'none',
     padding: 0,
     margin: 0,
 });
 
-const KidsContainer = glamorous.div({
+const KidsContainer = styled("div")({
     overflow: 'hidden',
     marginLeft: 34,
     maxWidth: 500 - 34,

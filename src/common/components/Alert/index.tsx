@@ -1,6 +1,6 @@
 import React from 'react';
 import { CSSProperties } from 'react';
-import glamorous from 'glamorous';
+import styled from '../../../styled';
 import { keyframes } from 'glamor';
 import { Theme } from '../../../themes';
 
@@ -23,10 +23,9 @@ interface AlertContainerProps {
     type: AlertType;
     fadeIn?: boolean;
     wide?: boolean;
-    theme: Theme;
 }
 
-const AlertContainer = glamorous.div<AlertContainerProps>(
+const AlertContainer = styled('div')<AlertContainerProps>(
     {
         backgroundRepeat: 'no-repeat',
         display: 'inline-block',
@@ -47,7 +46,7 @@ const AlertContainer = glamorous.div<AlertContainerProps>(
     })
 );
 
-const Heading = glamorous.div({
+const Heading = styled('div')({
     fontWeight: 600,
 });
 

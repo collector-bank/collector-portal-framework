@@ -1,15 +1,10 @@
-import glamorous, { GlamorousComponent } from 'glamorous';
-import { Theme } from '../../themes';
+import styled from "../../styled";
 
 export interface H2Props extends React.HTMLProps<HTMLHeadingElement> {
     centered?: boolean;
 }
 
-export interface H2WithTheme extends H2Props {
-    theme: Theme;
-}
-
-export const H2: GlamorousComponent<H2Props, {}> = glamorous.h2<H2WithTheme>(({ theme, centered }) => ({
+export const H2 = styled("h2")<H2Props>(({ theme, centered }) => ({
     font: theme.fonts.desktop.xl,
     fontWeight: 600,
     marginBottom: 16,

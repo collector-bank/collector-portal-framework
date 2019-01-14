@@ -1,6 +1,6 @@
-import glamorous, { GlamorousComponent } from 'glamorous';
+import styled from "../../../styled";
 
-export const CardGroup: GlamorousComponent<{} & React.HTMLProps<HTMLDivElement>, {}> = glamorous.div({
+export const CardGroup = styled("div")({
     display: 'flex',
     flexWrap: 'wrap',
     marginRight: -10,

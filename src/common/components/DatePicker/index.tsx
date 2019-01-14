@@ -2,7 +2,6 @@ import React from 'react';
 import ReactDatePicker, { registerLocale, setDefaultLocale } from 'react-datepicker';
 import Collapse from 'react-css-collapse';
 import { css } from 'glamor';
-import { withTheme } from 'glamorous';
 import { Label, InputError } from '../';
 import { InputContainer, InputField } from '../Input';
 import { Theme } from '../../../themes';
@@ -17,6 +16,7 @@ registerLocale('fi', fi);
 setDefaultLocale('sv');
 
 import 'react-datepicker/dist/react-datepicker.css';
+import { withTheme } from 'emotion-theming';
 
 const calendar =
     "'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 16 16%22%3E%3Cpath fill=%22%23111%22 d=%22M13.504 1.463h-1.223V.502a.5.5 0 0 0-1 0v.961H4.742V.502a.5.5 0 0 0-1 0v.961H2.52c-.758 0-1.374.616-1.374 1.374v11.339a.5.5 0 0 0 .5.5h12.732a.5.5 0 0 0 .5-.5V2.837c0-.758-.616-1.374-1.374-1.374zm-10.984 1h10.984c.206 0 .374.168.374.374v1.857H2.146V2.837c0-.206.168-.374.374-.374zm-.374 11.213V5.694h11.732v7.982H2.146z%22/%3E%3Cpath fill=%22%23111%22 d=%22M12.117 8.904h-2.5a.5.5 0 0 0-.5.5v2.5a.5.5 0 0 0 .5.5h2.5a.5.5 0 0 0 .5-.5v-2.5a.5.5 0 0 0-.5-.5zm-.5 2.5h-1.5v-1.5h1.5v1.5z%22/%3E%3C/svg%3E'";
@@ -183,4 +183,4 @@ class DatePicker_ extends React.Component<DatePickerProps & { theme: Theme }, St
     }
 }
 
-export const DatePicker = withTheme(DatePicker_ as any) as React.ComponentClass<DatePickerProps>;
+export const DatePicker = withTheme(DatePicker_ as React.ComponentClass<DatePickerProps>);

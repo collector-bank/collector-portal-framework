@@ -1,6 +1,6 @@
-import glamorous, { GlamorousComponent } from 'glamorous';
+import styled from "../../../styled";
 
-export const DatePickerGroup: GlamorousComponent<React.HTMLProps<HTMLDivElement>, {}> = glamorous.div({
+export const DatePickerGroup = styled("div")({
     display: 'flex',
     flexWrap: 'wrap',
     marginLeft: -8,

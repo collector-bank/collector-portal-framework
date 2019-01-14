@@ -1,19 +1,19 @@
 import React from 'react';
 import Collapse from 'react-css-collapse';
-import glamorous from 'glamorous';
 import uniqid from 'uniqid';
 import { css } from 'glamor';
 import { H2, H3 } from '../../components';
+import styled from '../../styled';
 
 const expandIcon = require('./expand.svg');
 const collapseIcon = require('./collapse.svg');
 
-const Container = glamorous.div({
+const Container = styled('div')({
     padding: '16px 0',
     maxWidth: 900,
 });
 
-const Header = glamorous.div({
+const Header = styled('div')({
     display: 'flex',
     alignItems: 'center',
     cursor: 'pointer',
@@ -23,22 +23,18 @@ const Header = glamorous.div({
     },
 });
 
-const ToggleButton = glamorous.button<{ expanded: boolean; iconSize: Size }>(
-    {
-        fontFamily: 'inherit',
-        cursor: 'pointer',
-        backgroundColor: 'transparent',
-        border: 0,
-        marginRight: 12,
-        backgroundRepeat: 'no-repeat',
-    },
-    ({ expanded, iconSize }) => ({
-        backgroundImage: expanded ? `url(${collapseIcon})` : `url(${expandIcon})`,
-        width: iconSize === 'medium' ? 24 : 21,
-        height: iconSize === 'medium' ? 24 : 21,
-        backgroundSize: iconSize === 'medium' ? undefined : 18,
-    })
-);
+const ToggleButton = styled('button')<{ expanded: boolean; iconSize: Size }>(({ expanded, iconSize }) => ({
+    fontFamily: 'inherit',
+    cursor: 'pointer',
+    backgroundColor: 'transparent',
+    border: 0,
+    marginRight: 12,
+    backgroundRepeat: 'no-repeat',
+    backgroundImage: expanded ? `url(${collapseIcon})` : `url(${expandIcon})`,
+    width: iconSize === 'medium' ? 24 : 21,
+    height: iconSize === 'medium' ? 24 : 21,
+    backgroundSize: iconSize === 'medium' ? undefined : 18,
+}));
 
 const transition = css({
     transition: 'height 150ms',

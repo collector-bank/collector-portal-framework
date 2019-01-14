@@ -1,22 +1,22 @@
-import { css } from 'glamor';
-import glamorous, { CSSProperties } from 'glamorous';
+import { css, CSSProperties } from 'glamor';
 import React from 'react';
 import Collapse from 'react-css-collapse';
 import uniqid from 'uniqid';
 import { Theme } from '../../../themes';
 import { Label } from '../Label';
 import { Description } from './Description';
+import styled from '../../../styled';
 
 const inputErrorTransition = css({
     transition: 'height 150ms',
 });
 
-const InputLabel = glamorous(Label)({
+const InputLabel = styled(Label)<React.LabelHTMLAttributes<HTMLLabelElement>>({
     display: 'flex',
     alignItems: 'center',
 });
 
-export const InputContainer: any = glamorous.div({
+export const InputContainer: any = styled("div")({
     maxWidth: 500,
     marginBottom: '1.25em',
 });
@@ -57,11 +57,11 @@ const commonStyles = (indicateError: boolean, theme: Theme, showAlertMessage: bo
     },
 });
 
-export const InputField: any = glamorous.input<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
+export const InputField: any = styled("input")<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
     ...commonStyles(indicateError, theme, showAlertMessage),
 }));
 
-const Textarea = glamorous.textarea<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
+const Textarea = styled("textarea")<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
     ...commonStyles(indicateError, theme, showAlertMessage),
 
     resize: 'vertical',
@@ -79,14 +79,14 @@ const alertStyle = (theme: Theme): CSSProperties => ({
     borderBottomRightRadius: theme.borderRadius.small,
 });
 
-export const InputError: any = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+export const InputError: any = styled("div")(({ theme }) => ({
     ...alertStyle(theme),
 
     background: theme.colors.red,
     color: theme.colors.white,
 }));
 
-export const InputWarning: any = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+export const InputWarning: any = styled("div")(({ theme }) => ({
     ...alertStyle(theme),
 
     background: theme.colors.yellow,

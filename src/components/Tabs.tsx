@@ -1,40 +1,36 @@
 import React from 'react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
-import glamorous from 'glamorous';
-import { Theme } from '../themes';
+import styled from "../styled";
 
-const NavContainer = glamorous.nav({
+const NavContainer = styled("nav")({
     marginBottom: 30,
 });
 
-const NavList = glamorous.ul<{ theme: Theme }>(
-    {
-        listStyleType: 'none',
-        padding: 0,
-        margin: 0,
-        display: 'flex',
+const NavList = styled("ul")({
+    listStyleType: 'none',
+    padding: 0,
+    margin: 0,
+    display: 'flex',
 
-        '> li': {
-            marginRight: 16,
+    '> li': {
+        marginRight: 16,
+    },
+}, ({ theme }) => ({
+    '> li': {
+        [theme.breakpoints.mobileAndLower]: {
+            margin: 0,
         },
     },
-    ({ theme }) => ({
-        '> li': {
-            [theme.breakpoints.mobileAndLower]: {
-                margin: 0,
-            },
-        },
 
-        [theme.breakpoints.mobileAndLower]: {
-            flexDirection: 'column',
-            borderRadius: theme.borderRadius.small,
-            border: `1px solid ${theme.colors.lightGray}`,
-            borderBottom: 0,
-        },
-    })
-);
+    [theme.breakpoints.mobileAndLower]: {
+        flexDirection: 'column',
+        borderRadius: theme.borderRadius.small,
+        border: `1px solid ${theme.colors.lightGray}`,
+        borderBottom: 0,
+    },
+}));
 
-const NavLink = glamorous(RouterNavLink)<{ theme: Theme }>(
+const NavLink = styled(RouterNavLink)(
     {
         display: 'block',
         padding: '10px 4px',

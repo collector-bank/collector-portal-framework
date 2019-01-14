@@ -1,5 +1,4 @@
 import { css } from 'glamor';
-import glamorous, { withTheme } from 'glamorous';
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
 import uniqid from 'uniqid';
@@ -7,6 +6,8 @@ import { Button, ButtonGroup, Input, Label } from '../../../common/components';
 import { Text } from '../../../common/typography';
 import { Theme } from '../../../themes';
 import { Tag } from './Tag';
+import styled from '@emotion/styled-base';
+import { withTheme } from 'emotion-theming';
 
 export interface TagInputProps {
     tags: Tag[];
@@ -26,60 +27,60 @@ export interface TagInputState {
     id: string;
 }
 
-const suggestionsContainerOpen = (theme: Theme) => css({
-    position: 'absolute',
-    background: theme.colors.white,
-    display: 'block',
-    maxWidth: 500,
-    boxSizing: 'border-box',
-    border: '1px solid',
-    borderRadius: theme.borderRadius.small,
-    borderColor: theme.colors.mediumGray,
-    zIndex: 10,
-    marginTop: -4,
-    width: '100%',
-    boxShadow: '0 2px 6px 0 #BAAFC4',
-    maxHeight: '70vh',
-    overflow: 'scroll',
-});
+const suggestionsContainerOpen = (theme: Theme) =>
+    css({
+        position: 'absolute',
+        background: theme.colors.white,
+        display: 'block',
+        maxWidth: 500,
+        boxSizing: 'border-box',
+        border: '1px solid',
+        borderRadius: theme.borderRadius.small,
+        borderColor: theme.colors.mediumGray,
+        zIndex: 10,
+        marginTop: -4,
+        width: '100%',
+        boxShadow: '0 2px 6px 0 #BAAFC4',
+        maxHeight: '70vh',
+        overflow: 'scroll',
+    });
 
-const suggestionsList = (theme: Theme) => css({
-    listStyle: 'none',
-    padding: 0,
-});
+const suggestionsList = (theme: Theme) =>
+    css({
+        listStyle: 'none',
+        padding: 0,
+    });
 
-const suggestionCSS = (theme: Theme) => css({
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    transition: 'background-color 150ms',
-    paddingTop: 12,
-    paddingBottom: 12,
-    paddingLeft: 24,
-    paddingRight: 24,
-    whiteSpace: 'no-wrap',
+const suggestionCSS = (theme: Theme) =>
+    css({
+        display: 'flex',
+        justifyContent: 'space-between',
+        alignItems: 'center',
+        transition: 'background-color 150ms',
+        paddingTop: 12,
+        paddingBottom: 12,
+        paddingLeft: 24,
+        paddingRight: 24,
+        whiteSpace: 'no-wrap',
 
-    '&:hover': {
+        '&:hover': {
+            background: theme.colors.offWhite,
+            cursor: 'pointer',
+        },
+    });
+
+const suggestionHighlighted = (theme: Theme) =>
+    css({
         background: theme.colors.offWhite,
-        cursor: 'pointer',
-    },
-});
+    });
 
-const suggestionHighlighted = (theme: Theme) => css({
-    background: theme.colors.offWhite,
-});
-
-const TagsContainer = glamorous.div<TagsContainerProps>(
-    {
-        display: 'inline-flex',
-        marginBottom: 24,
-        flexWrap: 'wrap',
-        minHeight: 56,
-    },
-    ({ tagsItemsDirection }) => {
-        return { flexDirection: tagsItemsDirection };
-    }
-);
+const TagsContainer = styled('div')<TagsContainerProps>(({ tagsItemsDirection }) => ({
+    display: 'inline-flex',
+    marginBottom: 24,
+    flexWrap: 'wrap',
+    minHeight: 56,
+    flexDirection: tagsItemsDirection,
+}));
 
 export type FlexDirections = 'row' | 'column';
 
@@ -223,13 +224,12 @@ export class TagsInput_ extends React.Component<TagInputProps & { theme: Theme }
                     </ButtonGroup>
                 )}
 
-                {tags &&
-                    tags.length > 0 && (
-                        <TagsContainer tagsItemsDirection={tagsDirection ? tagsDirection : 'row'}>{tags.map(this.renderTag)}</TagsContainer>
-                    )}
+                {tags && tags.length > 0 && (
+                    <TagsContainer tagsItemsDirection={tagsDirection ? tagsDirection : 'row'}>{tags.map(this.renderTag)}</TagsContainer>
+                )}
             </>
         );
     }
 }
 
-export const TagsInput = withTheme(TagsInput_ as any) as React.ComponentClass<TagInputProps>;
+export const TagsInput = withTheme(TagsInput_ as React.ComponentClass<TagInputProps>);

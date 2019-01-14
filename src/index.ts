@@ -4,7 +4,7 @@ import './common/fonts/fonts.css';
 
 type Theme = typeof collectorTheme;
 
-export { ThemeProvider } from 'glamorous';
+export { ThemeProvider } from 'emotion-theming';
 
 export const injectGlobalStyles = (theme: Theme) => {
     css.global('html', {

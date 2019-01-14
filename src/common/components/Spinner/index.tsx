@@ -1,12 +1,13 @@
-import React from 'react';
-import glamorous, { CSSProperties } from 'glamorous';
-import { keyframes } from 'glamor';
-import { Theme } from '../../../themes';
+import styled from '../../../styled';
 
 /**
  * The SVG was made with http://loading.io
  */
-const spinner = (color: string) => `'data:image/svg+xml, %3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22 preserveAspectRatio=%22xMidYMid%22%3E%3Cpath fill=%22none%22 d=%22M0 0h100v100h-100z%22 /%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22none%22 /%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 stroke=%22${encodeURIComponent(color)}%22 stroke-width=%226%22 stroke-linecap=%22round%22 fill=%22none%22%3E%3Canimate attributeName=%22stroke-dashoffset%22 dur=%222s%22 repeatCount=%22indefinite%22 from=%220%22 to=%22502%22 /%3E%3Canimate attributeName=%22stroke-dasharray%22 dur=%222s%22 repeatCount=%22indefinite%22 values=%22150.6 100.4;1 250;150.6 100.4%22 /%3E%3C/circle%3E%3C/svg%3E'`;
+/*
+const spinner = (color: string) =>
+    `'data:image/svg+xml, %3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22 preserveAspectRatio=%22xMidYMid%22%3E%3Cpath fill=%22none%22 d=%22M0 0h100v100h-100z%22 /%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22none%22 /%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 stroke=%22${encodeURIComponent(
+        color
+    )}%22 stroke-width=%226%22 stroke-linecap=%22round%22 fill=%22none%22%3E%3Canimate attributeName=%22stroke-dashoffset%22 dur=%222s%22 repeatCount=%22indefinite%22 from=%220%22 to=%22502%22 /%3E%3Canimate attributeName=%22stroke-dasharray%22 dur=%222s%22 repeatCount=%22indefinite%22 values=%22150.6 100.4;1 250;150.6 100.4%22 /%3E%3C/circle%3E%3C/svg%3E'`;
 
 const SpinnerElement = (props: {}) => <div role="progressbar" {...props} />;
 
@@ -22,7 +23,10 @@ export interface SpinnerProps {
     theme: Theme;
 }
 
-export const Spinner: any = glamorous<SpinnerProps>(SpinnerElement, { rootEl: 'div' })(
+
+export const Spinner: any = styled(SpinnerElement, {
+    rootEl: 'div',
+})<SpinnerProps>(
     {
         display: 'inline-block',
         bakcgroundSize: '100%',
@@ -46,3 +50,6 @@ export const Spinner: any = glamorous<SpinnerProps>(SpinnerElement, { rootEl: 'd
 );
 
 Spinner.displayName = 'Collector.Spinner';
+*/
+
+export const Spinner = styled('div')({ width: 80, height: 80, background: 'red' });

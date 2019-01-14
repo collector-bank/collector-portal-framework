@@ -1,6 +1,6 @@
-import glamorous, { GlamorousComponent } from 'glamorous';
+import styled from "../../styled";
 
-export const Text: GlamorousComponent<React.HTMLProps<HTMLParagraphElement>, {}> = glamorous.p({
+export const Text = styled("p")({
     marginTop: 0,
     maxWidth: 540,
 });

@@ -1,9 +1,8 @@
-import glamorous from 'glamorous';
+import styled from '../styled';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
-import { Theme } from '../themes';
 
-const Container = glamorous.div<{ theme: Theme }>(
+const Container = styled('div')(
     {
         boxSizing: 'border-box',
         height: 128,
@@ -25,7 +24,7 @@ const Container = glamorous.div<{ theme: Theme }>(
     })
 );
 
-const Link = glamorous(RouterLink)<{ theme: Theme }>(
+const Link = styled(RouterLink)(
     {
         color: 'inherit',
         textDecoration: 'none',
@@ -38,7 +37,7 @@ const Link = glamorous(RouterLink)<{ theme: Theme }>(
     })
 );
 
-const Image = glamorous.img<{ theme: Theme }>(
+const Image = styled('img')(
     {
         display: 'block',
     },
@@ -49,7 +48,7 @@ const Image = glamorous.img<{ theme: Theme }>(
     })
 );
 
-const SiteName = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+const SiteName = styled('div')(({ theme }) => ({
     textAlign: 'center',
     font: theme.fonts.desktop.xl,
     fontWeight: 600,

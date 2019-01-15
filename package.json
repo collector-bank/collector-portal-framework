@@ -12,8 +12,8 @@
     "devDependencies": {
         "@babel/core": "7.2.0",
         "@sambego/storybook-state": "1.3.2",
-        "@storybook/addon-knobs": "^4.0.12",
-        "@storybook/addon-options": "4.0.12",
+        "@storybook/addon-knobs": "^5.0.0-alpha.1",
+        "@storybook/addon-options": "5.0.0-alpha.1",
         "@storybook/react": "5.0.0-alpha.1",
         "@storybook/storybook-deployer": "2.8.1",
         "@types/jest": "23.3.10",

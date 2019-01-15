@@ -72,7 +72,7 @@ const MenuListItem = styled('li')<MenuListItemProps>(({ onlyInDesktop, onlyInMob
     return styles;
 });
 
-const InternalNavLink = styled(RouterNavLink)(({ theme }) => ({
+const ExternalNavLink = styled('a')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     padding: 12,
@@ -112,7 +112,7 @@ const InternalNavLink = styled(RouterNavLink)(({ theme }) => ({
     },
 }));
 
-const ExternalNavLink = InternalNavLink.withComponent('a');
+const InternalNavLink = ExternalNavLink.withComponent(RouterNavLink);
 
 const NavLinkLabel = styled('span')<NavLinkLabelProps>(({ hideIconsMobile, theme }) => ({
     fontSize: 18,
@@ -174,7 +174,7 @@ export const MainMenu: React.StatelessComponent<MainMenuProps> = ({ items, hideI
                     hideIconsMobile={hideIconsMobile}
                 >
                     {item.externalLink ? (
-                        <ExternalNavLink href={item.path} to={item.path}> {/*TODO Why do we keep to here? */}
+                        <ExternalNavLink href={item.path}>
                             <NavLinkIcon hideIconsMobile={hideIconsMobile} icon={item.icon} />
                             <NavLinkLabel hideIconsMobile={hideIconsMobile}>{item.label}</NavLinkLabel>
                         </ExternalNavLink>

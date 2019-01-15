@@ -98,7 +98,7 @@ const ExternalNavLink = styled('a')(({ theme }) => ({
         borderBottom: '4px solid transparent',
         borderRadius: 0,
 
-        '.active': {
+        '&.active': {
             borderBottomColor: 'currentColor',
         },
 

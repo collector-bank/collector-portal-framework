@@ -1,6 +1,6 @@
-import styled from "../styled";
+import styled from '../styled';
 
-export const Fieldset = styled("fieldset")({
+export const Fieldset = styled('fieldset')<{}>({
     margin: 0,
     marginBottom: 16,
     padding: 0,

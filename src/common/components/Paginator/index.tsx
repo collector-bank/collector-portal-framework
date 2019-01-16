@@ -19,7 +19,7 @@ interface ChevronProps {
     enabled: boolean;
 }
 
-const Chevron = styled('a')<ChevronProps>(({ direction, enabled, theme }) => ({
+const Chevron = styled.a<ChevronProps>(({ direction, enabled, theme }) => ({
     width: 20,
     height: 24,
     paddingLeft: 2,
@@ -32,7 +32,7 @@ const Chevron = styled('a')<ChevronProps>(({ direction, enabled, theme }) => ({
     cursor: enabled ? 'pointer' : 'default',
 }));
 
-const Ellipses = styled('span')(
+const Ellipses = styled.span(
     {
         width: 20,
         display: 'inline-block',
@@ -46,7 +46,7 @@ const Ellipses = styled('span')(
     })
 );
 
-const Page = styled('a')<{ active: boolean }>(({ active, theme }) => ({
+const Page = styled.a<{ active: boolean }>(({ active, theme }) => ({
     paddingLeft: 6,
     paddingRight: 6,
     width: 20,
@@ -57,7 +57,7 @@ const Page = styled('a')<{ active: boolean }>(({ active, theme }) => ({
     fontWeight: active ? 600 : 400,
 }));
 
-const PaginatorContainer = styled('div')({
+const PaginatorContainer = styled.div({
     userSelect: 'none',
     display: 'flex',
     fontSize: 18,

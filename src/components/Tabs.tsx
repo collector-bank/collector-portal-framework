@@ -2,11 +2,11 @@ import React from 'react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
 import styled from '../styled';
 
-const NavContainer = styled('nav')({
+const NavContainer = styled.nav({
     marginBottom: 30,
 });
 
-const NavList = styled('ul')(
+const NavList = styled.ul(
     {
         listStyleType: 'none',
         padding: 0,

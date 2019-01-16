@@ -9,11 +9,11 @@ import { RadioButton } from './';
 
 export type Direction = 'row' | 'column';
 
-const RadioButtonGroupContainer = styled('div')({
+const RadioButtonGroupContainer = styled.div({
     marginBottom: '1.25em',
 });
 
-const RadioButtonList = styled('ul')<{ direction: Direction }>(({ direction }) => ({
+const RadioButtonList = styled.ul<{ direction: Direction }>(({ direction }) => ({
     listStyleType: 'none',
     display: 'flex',
     flexDirection: direction,
@@ -21,11 +21,11 @@ const RadioButtonList = styled('ul')<{ direction: Direction }>(({ direction }) =
     margin: 0,
 }));
 
-const RadioButtonContainer = styled('li')<{ direction: Direction }>(({ direction }) => ({
+const RadioButtonContainer = styled.li<{ direction: Direction }>(({ direction }) => ({
     paddingRight: direction === 'row' ? 32 : 0,
 }));
 
-const KidsContainer = styled('div')({
+const KidsContainer = styled.div({
     overflow: 'hidden',
     marginLeft: 34,
     maxWidth: 500 - 34,

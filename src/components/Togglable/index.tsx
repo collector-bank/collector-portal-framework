@@ -8,12 +8,12 @@ import styled from '../../styled';
 const expandIcon = require('./expand.svg');
 const collapseIcon = require('./collapse.svg');
 
-const Container = styled('div')({
+const Container = styled.div({
     padding: '16px 0',
     maxWidth: 900,
 });
 
-const Header = styled('div')({
+const Header = styled.div({
     display: 'flex',
     alignItems: 'center',
     cursor: 'pointer',
@@ -23,7 +23,7 @@ const Header = styled('div')({
     },
 });
 
-const ToggleButton = styled('button')<{ expanded: boolean; iconSize: Size }>(({ expanded, iconSize }) => ({
+const ToggleButton = styled.button<{ expanded: boolean; iconSize: Size }>(({ expanded, iconSize }) => ({
     fontFamily: 'inherit',
     cursor: 'pointer',
     backgroundColor: 'transparent',

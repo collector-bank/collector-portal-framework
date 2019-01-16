@@ -1,6 +1,6 @@
 import styled from '../../../styled';
 
-export const DatePickerGroup = styled('div')<{}>({
+export const DatePickerGroup = styled.div<{}>({
     display: 'flex',
     flexWrap: 'wrap',
     marginLeft: -8,

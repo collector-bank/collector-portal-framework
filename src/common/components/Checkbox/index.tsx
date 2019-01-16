@@ -5,13 +5,13 @@ import styled from '../../../styled';
 const checkboxSvg =
     "'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 9.862 8.198%22%3E%3Cpath fill=%22%23fff%22 d=%22M8.972.188l-5.364 6.72L.883 3.659a.5.5 0 1 0-.766.642l3.117 3.718a.502.502 0 0 0 .383.179h.006a.502.502 0 0 0 .385-.188L9.753.812A.498.498 0 0 0 9.674.11a.498.498 0 0 0-.702.078z%22/%3E%3C/svg%3E%0A'";
 
-const CheckboxContainer = styled('div')<{ disabled?: boolean }>(({ disabled }) => ({
+const CheckboxContainer = styled.div<{ disabled?: boolean }>(({ disabled }) => ({
     display: 'flex',
     marginBottom: 8,
     opacity: disabled ? 0.5 : 1,
 }));
 
-const Input = styled('input')(({ theme }) => ({
+const Input = styled.input(({ theme }) => ({
     appearance: 'none',
     position: 'relative',
     background: 'none',

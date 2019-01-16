@@ -3,7 +3,7 @@ import { NavLink as RouterNavLink } from 'react-router-dom';
 import styled from '../styled';
 import { CSSProperties } from 'glamor';
 
-const MenuContainer = styled('nav')(({ theme }) => ({
+const MenuContainer = styled.nav(({ theme }) => ({
     flexGrow: 1,
     margin: '40px 0',
 
@@ -13,7 +13,7 @@ const MenuContainer = styled('nav')(({ theme }) => ({
     },
 }));
 
-const MenuList = styled('ul')<MenuListItemProps>(({ hideIconsMobile, theme }) => ({
+const MenuList = styled.ul<MenuListItemProps>(({ hideIconsMobile, theme }) => ({
     listStyleType: 'none',
     margin: 0,
     padding: 0,
@@ -34,7 +34,7 @@ interface MenuListItemProps {
     hideIconsMobile?: boolean;
 }
 
-const MenuListItem = styled('li')<MenuListItemProps>(({ onlyInDesktop, onlyInMobile, useMarginTop, theme }) => {
+const MenuListItem = styled.li<MenuListItemProps>(({ onlyInDesktop, onlyInMobile, useMarginTop, theme }) => {
     let styles: CSSProperties = {
         marginLeft: 12,
         marginRight: 12,
@@ -72,7 +72,7 @@ const MenuListItem = styled('li')<MenuListItemProps>(({ onlyInDesktop, onlyInMob
     return styles;
 });
 
-const ExternalNavLink = styled('a')(({ theme }) => ({
+const ExternalNavLink = styled.a(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     padding: 12,
@@ -114,7 +114,7 @@ const ExternalNavLink = styled('a')(({ theme }) => ({
 
 const InternalNavLink = ExternalNavLink.withComponent(RouterNavLink);
 
-const NavLinkLabel = styled('span')<NavLinkLabelProps>(({ hideIconsMobile, theme }) => ({
+const NavLinkLabel = styled.span<NavLinkLabelProps>(({ hideIconsMobile, theme }) => ({
     fontSize: 18,
     marginLeft: 16,
 
@@ -124,7 +124,7 @@ const NavLinkLabel = styled('span')<NavLinkLabelProps>(({ hideIconsMobile, theme
     },
 }));
 
-const NavLinkIcon = styled('div')<NavLinkIconProps>(({ icon, hideIconsMobile, theme }) => ({
+const NavLinkIcon = styled.div<NavLinkIconProps>(({ icon, hideIconsMobile, theme }) => ({
     backgroundRepeat: 'no-repeat',
     backgroundPosition: 'top center',
     backgroundSize: '100%',

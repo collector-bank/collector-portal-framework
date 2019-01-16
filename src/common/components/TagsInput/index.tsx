@@ -6,7 +6,7 @@ import { Button, ButtonGroup, Input, Label } from '../../../common/components';
 import { Text } from '../../../common/typography';
 import { Theme } from '../../../themes';
 import { Tag } from './Tag';
-import styled from '@emotion/styled-base';
+import styled from '../../../styled';
 import { withTheme } from 'emotion-theming';
 
 export interface TagInputProps {
@@ -74,7 +74,7 @@ const suggestionHighlighted = (theme: Theme) =>
         background: theme.colors.offWhite,
     });
 
-const TagsContainer = styled('div')<TagsContainerProps>(({ tagsItemsDirection }) => ({
+const TagsContainer = styled.div<TagsContainerProps>(({ tagsItemsDirection }) => ({
     display: 'inline-flex',
     marginBottom: 24,
     flexWrap: 'wrap',

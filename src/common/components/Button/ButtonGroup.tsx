@@ -6,7 +6,7 @@ export interface ButtonGroupProps {
 
 // GlamorousComponent<ButtonGroupProps & React.HTMLProps<HTMLDivElement>, ButtonGroupProps>
 
-export const ButtonGroup = styled('div')<ButtonGroupProps>(
+export const ButtonGroup = styled.div<ButtonGroupProps>(
     {
         display: 'flex',
         flexWrap: 'wrap',

@@ -30,7 +30,7 @@ export interface ButtonElementProps extends ButtonProps {
     theme: Theme;
 }
 
-const ButtonElement: any = styled('button')<ButtonProps>(({ size, type, loading, icon, theme }) => {
+const ButtonElement: any = styled.button<ButtonProps>(({ size, type, loading, icon, theme }) => {
     const styles: CSSProperties = {
         fontFamily: 'inherit',
         whiteSpace: 'nowrap',
@@ -239,7 +239,7 @@ const background = (backgroundColor: string): CSSProperties => ({
     },
 });
 
-const IconContainer = styled('span')<{ iconAlignment: IconAlignment }>(({ iconAlignment }) => ({
+const IconContainer = styled.span<{ iconAlignment: IconAlignment }>(({ iconAlignment }) => ({
     maxWidth: '1.3em',
     maxHeight: '1.3em',
     marginRight: iconAlignment === 'start' ? '.5em' : 0,

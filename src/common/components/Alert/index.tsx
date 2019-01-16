@@ -25,7 +25,7 @@ interface AlertContainerProps {
     wide?: boolean;
 }
 
-const AlertContainer = styled('div')<AlertContainerProps>(
+const AlertContainer = styled.div<AlertContainerProps>(
     {
         backgroundRepeat: 'no-repeat',
         display: 'inline-block',
@@ -46,7 +46,7 @@ const AlertContainer = styled('div')<AlertContainerProps>(
     })
 );
 
-const Heading = styled('div')({
+const Heading = styled.div({
     fontWeight: 600,
 });
 

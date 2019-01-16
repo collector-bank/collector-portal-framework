@@ -1,6 +1,6 @@
 import styled from '../styled';
 
-export const MainContainer = styled('div')(({ theme }) => ({
+export const MainContainer = styled.div(({ theme }) => ({
     boxSizing: 'border-box',
     width: '100%',
     padding: 40,

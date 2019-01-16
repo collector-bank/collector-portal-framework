@@ -1,3 +1,3 @@
 import styled from '../styled';
 
-export const NoBr = styled('span')<{}>({ whiteSpace: 'nowrap' });
+export const NoBr = styled.span<{}>({ whiteSpace: 'nowrap' });

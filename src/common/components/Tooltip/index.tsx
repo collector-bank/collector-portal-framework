@@ -4,7 +4,7 @@ interface Props {
     visible: boolean;
 }
 
-const Outer = styled('div')<Props>(({ theme, visible }) => ({
+const Outer = styled.div<Props>(({ theme, visible }) => ({
     position: 'absolute',
     zIndex: 20,
     left: -5,
@@ -39,7 +39,7 @@ const Outer = styled('div')<Props>(({ theme, visible }) => ({
     },
 }));
 
-const Inner = styled('div')(({ theme }) => ({
+const Inner = styled.div(({ theme }) => ({
     display: 'inline-block',
     padding: '4px 8px',
     background: theme.colors.lightGray,

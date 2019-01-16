@@ -16,11 +16,11 @@ const Plus = () => (
     </svg>
 );
 
-const Container = styled('div')({
+const Container = styled.div({
     marginBottom: '3em',
 });
 
-const InputContainer = styled('div')(({ theme }) => ({
+const InputContainer = styled.div(({ theme }) => ({
     border: `1px solid ${theme.colors.mediumGray}`,
     borderRadius: theme.borderRadius.small,
     display: 'flex',
@@ -30,7 +30,7 @@ const InputContainer = styled('div')(({ theme }) => ({
     marginBottom: '1em',
 }));
 
-const Input = styled('input')(({ theme }) => ({
+const Input = styled.input(({ theme }) => ({
     appearance: 'none',
     border: `solid ${theme.colors.mediumGray}`,
     borderWidth: '0 1px',
@@ -51,7 +51,7 @@ const Input = styled('input')(({ theme }) => ({
 
 const AmountInput = createFormattedNumberInput<any>(Input);
 
-const Button = styled('button')(({ theme }) => ({
+const Button = styled.button(({ theme }) => ({
     fontFamily: 'inherit',
     background: 'transparent',
     border: 0,
@@ -72,7 +72,7 @@ const Button = styled('button')(({ theme }) => ({
     },
 }));
 
-const Range = styled('div')(({ theme }) => ({
+const Range = styled.div(({ theme }) => ({
     display: 'flex',
     justifyContent: 'space-between',
     font: theme.fonts.desktop.medium,

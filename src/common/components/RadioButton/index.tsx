@@ -2,7 +2,7 @@ import React from 'react';
 import styled from '@emotion/styled';
 import uniqid from 'uniqid';
 
-const RadioButtonContainer = styled('div')<{ disabled?: Boolean }>(
+const RadioButtonContainer = styled.div<{ disabled?: Boolean }>(
     {
         display: 'flex',
         marginBottom: 8,
@@ -10,7 +10,7 @@ const RadioButtonContainer = styled('div')<{ disabled?: Boolean }>(
     ({ disabled }) => (disabled ? { opacity: 0.5 } : {})
 );
 
-const Input = styled('input')(({ theme }) => ({
+const Input = styled.input(({ theme }) => ({
     appearance: 'none',
     position: 'relative',
     background: 'none',

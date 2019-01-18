@@ -1,6 +1,6 @@
 import dateFormatter from 'date-fns/format';
 
-export const formatDate = (date: Date | number, format = 'yyyy-MM-dd') => {
+export const formatDate = (date: Date | string, format = 'yyyy-MM-dd') => {
     if (date) {
         return dateFormatter(date, format);
     }

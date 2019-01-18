@@ -19,7 +19,7 @@ Documentation and an interactive test area can be found [here](https://collector
 
 * [React](https://reactjs.org/)
 * [TypeScript](https://www.typescriptlang.org/)
-* [Glamorous](https://glamorous.rocks/)
+* ~~Glamorous~~ [emotion](https://emotion.sh/)
 
 
 ## Install
@@ -31,22 +31,16 @@ $ npm install --save collector-portal-framework
 
 ## How to use
 
-Import Collectors theme from `collector-portal-framework/themes/collector` or create your own. Then import `ThemeProvider` and
-`injectGlobalStyles` from `collector-portal-framework` and provide them the theme.
-
 ```jsx
-import * as React from 'react';
-import * as ReactDOM from 'react-dom';
-import { ThemeProvider, injectGlobalStyles } from 'collector-portal-framework';
-import * as theme from 'collector-portal-framework/dist/themes/collector';
+import React from 'react';
+import ReactDOM from 'react-dom';
+import { CollectorPortalFramework } from 'collector-portal-framework';
 import { YourApp } from './App';
 
-injectGlobalStyles(theme);
-
 ReactDOM.render(
-  <ThemeProvider theme={theme}>
+  <CollectorPortalFramework>
     <YourApp />
-  </ThemeProvider>,
+  </CollectorPortalFramework>,
   document.getElementById('root')
 );
 ```

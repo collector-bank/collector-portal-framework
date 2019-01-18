@@ -1,30 +1,26 @@
 import React from 'react';
 import Collapse from 'react-css-collapse';
-import { css } from 'glamor';
+import { ClassNames } from '@emotion/core';
 import uniqid from 'uniqid';
 import { Checkbox } from './';
 import { Alert } from '../Alert';
 import { Label } from '../Label';
-import styled from '../../../styled';
+import styled from '../../../';
 
-const CheckboxGroupContainer = styled("div")({
+const CheckboxGroupContainer = styled.div({
     marginBottom: '1.25em',
 });
 
-const CheckboxList = styled("ul")({
+const CheckboxList = styled.ul({
     listStyleType: 'none',
     padding: 0,
     margin: 0,
 });
 
-const KidsContainer = styled("div")({
+const KidsContainer = styled.div({
     overflow: 'hidden',
     marginLeft: 34,
     maxWidth: 500 - 34,
-});
-
-const transition = css({
-    transition: 'height 150ms',
 });
 
 export interface CheckboxItem {
@@ -69,26 +65,30 @@ export class CheckboxGroup extends React.Component<CheckboxGroupProps, CheckboxG
         const { label, items, disabled, error } = this.props;
 
         return (
-            <CheckboxGroupContainer>
-                <Label>{label}</Label>
-                <CheckboxList>
-                    {items.map(item => (
-                        <li key={item.key}>
-                            <Checkbox
-                                label={item.label}
-                                name={this.state.name}
-                                checked={this.isChecked(item.key)}
-                                disabled={disabled}
-                                onChange={event => this.handleChange(item.key, event)}
-                            />
-                            <Collapse isOpen={this.isChecked(item.key)} className={`${transition}`}>
-                                <KidsContainer>{item.child}</KidsContainer>
-                            </Collapse>
-                        </li>
-                    ))}
-                </CheckboxList>
-                {error && typeof error === 'string' && <Alert type="error" message={error} alertSize="small" />}
-            </CheckboxGroupContainer>
+            <ClassNames>
+                {({ css }) => (
+                    <CheckboxGroupContainer>
+                        <Label>{label}</Label>
+                        <CheckboxList>
+                            {items.map(item => (
+                                <li key={item.key}>
+                                    <Checkbox
+                                        label={item.label}
+                                        name={this.state.name}
+                                        checked={this.isChecked(item.key)}
+                                        disabled={disabled}
+                                        onChange={event => this.handleChange(item.key, event)}
+                                    />
+                                    <Collapse isOpen={this.isChecked(item.key)} className={css({ transition: 'height 150ms' })}>
+                                        <KidsContainer>{item.child}</KidsContainer>
+                                    </Collapse>
+                                </li>
+                            ))}
+                        </CheckboxList>
+                        {error && typeof error === 'string' && <Alert type="error" message={error} alertSize="small" />}
+                    </CheckboxGroupContainer>
+                )}
+            </ClassNames>
         );
     }
 }

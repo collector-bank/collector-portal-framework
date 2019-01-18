@@ -1,16 +1,16 @@
 import React from 'react';
-import styled from "../styled";
+import styled from '../';
 
-const List = styled("dl")({
+const List = styled.dl({
     marginTop: 0,
 });
 
-const Heading = styled("dt")(({ theme }) => ({
+const Heading = styled.dt(({ theme }) => ({
     color: theme.colors.darkGray,
     font: theme.fonts.desktop.small,
 }));
 
-const Value = styled("dd")({
+const Value = styled.dd({
     margin: 0,
 
     '&:not(:last-child)': {

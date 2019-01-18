@@ -2,7 +2,7 @@ import React from 'react';
 import { Tooltip } from '../Tooltip';
 import { Theme } from '../../../themes';
 import { withTheme } from 'emotion-theming';
-import styled from '../../../styled';
+import styled from '../../../';
 
 interface Props {
     description: string;
@@ -12,7 +12,7 @@ interface State {
     tooltipIsVisible: boolean;
 }
 
-const Container = styled("div")(({ theme }) => ({
+const Container = styled.div(({ theme }) => ({
     display: 'inline-block',
     width: 20,
     height: 20,

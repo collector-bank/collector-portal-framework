@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from '../../../styled';
+import styled from '../../../';
 
 const leftChevron =
     "'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 86.001 86.001%22%3E%3Cpath d=%22M64.998 80.095a3.484 3.484 0 0 1 0 4.893 3.401 3.401 0 0 1-4.844 0l-39.151-39.54a3.486 3.486 0 0 1 0-4.895l39.15-39.539a3.4 3.4 0 0 1 4.844 0A3.487 3.487 0 0 1 65 5.907L29.294 43.001l35.704 37.094z%22 fill=%22%236B1FAF%22/%3E%3C/svg%3E'";
@@ -19,7 +19,7 @@ interface ChevronProps {
     enabled: boolean;
 }
 
-const Chevron = styled('a')<ChevronProps>(({ direction, enabled, theme }) => ({
+const Chevron = styled.a<ChevronProps>(({ direction, enabled, theme }) => ({
     width: 20,
     height: 24,
     paddingLeft: 2,
@@ -32,7 +32,7 @@ const Chevron = styled('a')<ChevronProps>(({ direction, enabled, theme }) => ({
     cursor: enabled ? 'pointer' : 'default',
 }));
 
-const Ellipses = styled('span')(
+const Ellipses = styled.span(
     {
         width: 20,
         display: 'inline-block',
@@ -46,7 +46,7 @@ const Ellipses = styled('span')(
     })
 );
 
-const Page = styled('a')<{ active: boolean }>(({ active, theme }) => ({
+const Page = styled.a<{ active: boolean }>(({ active, theme }) => ({
     paddingLeft: 6,
     paddingRight: 6,
     width: 20,
@@ -57,7 +57,7 @@ const Page = styled('a')<{ active: boolean }>(({ active, theme }) => ({
     fontWeight: active ? 600 : 400,
 }));
 
-const PaginatorContainer = styled('div')({
+const PaginatorContainer = styled.div({
     userSelect: 'none',
     display: 'flex',
     fontSize: 18,

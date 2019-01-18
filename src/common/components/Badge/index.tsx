@@ -1,6 +1,6 @@
 import React from 'react';
 import { Tooltip } from '../Tooltip';
-import styled from '../../../styled';
+import styled from '../../../';
 
 export type BadgeColor = 'primary' | 'yellow' | 'green' | 'red' | 'blue' | 'lightGray';
 
@@ -14,7 +14,7 @@ interface BadgeState {
     tooltipIsVisible: boolean;
 }
 
-const Container = styled('div')(({ theme }) => ({
+const Container = styled.div(({ theme }) => ({
     display: 'inline-block',
     font: theme.fonts.desktop.small,
     fontWeight: 500,
@@ -27,7 +27,7 @@ const Container = styled('div')(({ theme }) => ({
     },
 }));
 
-const Label = styled('span')<{ color: BadgeColor }>(({ color, theme }) => ({
+const Label = styled.span<{ color: BadgeColor }>(({ color, theme }) => ({
     padding: '4px 8px',
     whiteSpace: 'nowrap',
     position: 'relative',

@@ -1,8 +1,8 @@
 import React from 'react';
+import { CSSObject } from '@emotion/core';
 import { Theme } from '../../../themes';
 import { lighten, darken } from 'polished';
-import styled from '../../../styled';
-import { CSSProperties } from 'glamor';
+import styled from '../../../';
 
 /**
  * The SVG was made with http://loading.io
@@ -30,8 +30,8 @@ export interface ButtonElementProps extends ButtonProps {
     theme: Theme;
 }
 
-const ButtonElement: any = styled('button')<ButtonProps>(({ size, type, loading, icon, theme }) => {
-    const styles: CSSProperties = {
+const ButtonElement: any = styled.button<ButtonProps>(({ size, type, loading, icon, theme }) => {
+    const styles: CSSObject = {
         fontFamily: 'inherit',
         whiteSpace: 'nowrap',
         textDecoration: 'none',
@@ -135,8 +135,8 @@ const getTypeStyles = (theme: Theme, type?: ButtonType) => {
     }
 };
 
-const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSProperties => {
-    const medium: CSSProperties = {
+const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
+    const medium: CSSObject = {
         fontSize: 18,
         lineHeight: '24px',
         fontWeight: 500,
@@ -178,8 +178,8 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSProperties => {
     }
 };
 
-const getLoadingStyles = (theme: Theme, loading?: boolean, type?: ButtonType, size?: ButtonSize): CSSProperties => {
-    let styles: CSSProperties = {};
+const getLoadingStyles = (theme: Theme, loading?: boolean, type?: ButtonType, size?: ButtonSize): CSSObject => {
+    let styles: CSSObject = {};
 
     if (loading) {
         styles = {
@@ -227,7 +227,7 @@ const getLoadingStyles = (theme: Theme, loading?: boolean, type?: ButtonType, si
     return styles;
 };
 
-const background = (backgroundColor: string): CSSProperties => ({
+const background = (backgroundColor: string): CSSObject => ({
     backgroundColor,
 
     '&:hover:not(:disabled)': {
@@ -239,7 +239,7 @@ const background = (backgroundColor: string): CSSProperties => ({
     },
 });
 
-const IconContainer = styled('span')<{ iconAlignment: IconAlignment }>(({ iconAlignment }) => ({
+const IconContainer = styled.span<{ iconAlignment: IconAlignment }>(({ iconAlignment }) => ({
     maxWidth: '1.3em',
     maxHeight: '1.3em',
     marginRight: iconAlignment === 'start' ? '.5em' : 0,

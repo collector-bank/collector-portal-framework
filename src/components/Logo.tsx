@@ -1,8 +1,8 @@
-import styled from '../styled';
 import React from 'react';
 import { Link as RouterLink } from 'react-router-dom';
+import styled from '../';
 
-const Container = styled('div')(
+const Container = styled.div(
     {
         boxSizing: 'border-box',
         height: 128,
@@ -37,7 +37,7 @@ const Link = styled(RouterLink)(
     })
 );
 
-const Image = styled('img')(
+const Image = styled.img(
     {
         display: 'block',
     },
@@ -48,7 +48,7 @@ const Image = styled('img')(
     })
 );
 
-const SiteName = styled('div')(({ theme }) => ({
+const SiteName = styled.div(({ theme }) => ({
     textAlign: 'center',
     font: theme.fonts.desktop.xl,
     fontWeight: 600,

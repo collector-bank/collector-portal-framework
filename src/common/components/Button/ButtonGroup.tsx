@@ -1,12 +1,10 @@
-import styled from '../../../styled';
+import styled from '../../../';
 
 export interface ButtonGroupProps {
     align?: 'flex-start' | 'flex-end' | 'center';
 }
 
-// GlamorousComponent<ButtonGroupProps & React.HTMLProps<HTMLDivElement>, ButtonGroupProps>
-
-export const ButtonGroup = styled('div')<ButtonGroupProps>(
+export const ButtonGroup = styled.div<ButtonGroupProps>(
     {
         display: 'flex',
         flexWrap: 'wrap',

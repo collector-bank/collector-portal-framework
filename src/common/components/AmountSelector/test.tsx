@@ -1,7 +1,6 @@
 import * as React from 'react';
 import { render, fireEvent, cleanup } from 'react-testing-library';
-import { ThemeProvider } from 'emotion-theming';
-import * as theme from '../../../themes/collector';
+import { CollectorPortalFramework } from '../../../';
 import { AmountSelector } from './';
 
 class Container extends React.Component {
@@ -15,9 +14,9 @@ class Container extends React.Component {
 
     render() {
         return (
-            <ThemeProvider theme={theme}>
+            <CollectorPortalFramework>
                 <AmountSelector currency="SEK" min={740} max={1330} stepSize={100} value={this.state.value} onChange={this.handleChange} />
-            </ThemeProvider>
+            </CollectorPortalFramework>
         );
     }
 }

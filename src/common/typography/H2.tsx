@@ -1,10 +1,10 @@
-import styled from "../../styled";
+import styled from '../../';
 
 export interface H2Props extends React.HTMLProps<HTMLHeadingElement> {
     centered?: boolean;
 }
 
-export const H2 = styled("h2")<H2Props>(({ theme, centered }) => ({
+export const H2 = styled('h2')<H2Props>(({ theme, centered }) => ({
     font: theme.fonts.desktop.xl,
     fontWeight: 600,
     marginBottom: 16,

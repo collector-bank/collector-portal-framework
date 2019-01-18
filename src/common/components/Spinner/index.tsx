@@ -1,6 +1,5 @@
-import styled from '../../../styled';
-import { keyframes } from '@emotion/core';
-import { CSSProperties } from 'glamor';
+import { keyframes, CSSObject } from '@emotion/core';
+import styled from '../../../';
 
 /**
  * The SVG was made with http://loading.io
@@ -23,14 +22,14 @@ export interface SpinnerProps {
 }
 
 
-export const Spinner = styled("div")<SpinnerProps>(
+export const Spinner = styled.div<SpinnerProps>(
     {
         display: 'inline-block',
         bakcgroundSize: '100%',
         animation: `${fadeIn} 250ms ease-in-out`,
     },
     ({ theme, size = 80, centered = false }) => {
-        const styles: CSSProperties = {
+        const styles: CSSObject = {
             width: size,
             height: size,
             background: `url(${spinner(theme.colors.primary)}) no-repeat`,

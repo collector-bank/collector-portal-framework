@@ -1,6 +1,6 @@
-import styled from '../../../styled';
+import styled from '../../../';
 
-export const CardGroup = styled('div')<{}>({
+export const CardGroup = styled.div<{}>({
     display: 'flex',
     flexWrap: 'wrap',
     marginRight: -10,

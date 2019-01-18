@@ -1,13 +1,13 @@
-import { css } from 'glamor';
 import React from 'react';
 import Autosuggest from 'react-autosuggest';
+import { withTheme } from 'emotion-theming';
 import uniqid from 'uniqid';
+import { css } from 'glamor';
+import styled from '../../../';
 import { Button, ButtonGroup, Input, Label } from '../../../common/components';
 import { Text } from '../../../common/typography';
 import { Theme } from '../../../themes';
 import { Tag } from './Tag';
-import styled from '@emotion/styled-base';
-import { withTheme } from 'emotion-theming';
 
 export interface TagInputProps {
     tags: Tag[];
@@ -74,7 +74,7 @@ const suggestionHighlighted = (theme: Theme) =>
         background: theme.colors.offWhite,
     });
 
-const TagsContainer = styled('div')<TagsContainerProps>(({ tagsItemsDirection }) => ({
+const TagsContainer = styled.div<TagsContainerProps>(({ tagsItemsDirection }) => ({
     display: 'inline-flex',
     marginBottom: 24,
     flexWrap: 'wrap',

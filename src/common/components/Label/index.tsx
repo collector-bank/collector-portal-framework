@@ -1,12 +1,10 @@
-import styled from '../../../styled';
+import styled from '../../../';
 
 export interface LabelProps {
     error?: boolean;
 }
 
-//GlamorousComponent<Pick<LabelProps, 'error'> & React.HTMLProps<HTMLLabelElement>, LabelProps>
-
-export const Label = styled('label')<LabelProps>(({ error, theme }) => ({
+export const Label = styled.label<LabelProps>(({ error, theme }) => ({
     display: 'block',
     maxWidth: 540,
     fontWeight: 500,

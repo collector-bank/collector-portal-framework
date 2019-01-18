@@ -1,7 +1,6 @@
 import React from 'react';
-import { CSSProperties } from 'react';
-import styled from '../../../styled';
-import { keyframes } from 'glamor';
+import { keyframes, CSSObject } from '@emotion/core';
+import styled from '../../../';
 import { Theme } from '../../../themes';
 
 const largeIcons = {
@@ -25,7 +24,7 @@ interface AlertContainerProps {
     wide?: boolean;
 }
 
-const AlertContainer = styled('div')<AlertContainerProps>(
+const AlertContainer = styled.div<AlertContainerProps>(
     {
         backgroundRepeat: 'no-repeat',
         display: 'inline-block',
@@ -46,11 +45,11 @@ const AlertContainer = styled('div')<AlertContainerProps>(
     })
 );
 
-const Heading = styled('div')({
+const Heading = styled.div({
     fontWeight: 600,
 });
 
-const getStyle = (type: AlertType, alertSize: AlertSize, theme: Theme): CSSProperties => {
+const getStyle = (type: AlertType, alertSize: AlertSize, theme: Theme): CSSObject => {
     const backgroundColors = {
         error: theme.colors.red,
         warning: theme.colors.yellow,
@@ -94,7 +93,7 @@ const getStyle = (type: AlertType, alertSize: AlertSize, theme: Theme): CSSPrope
     }
 };
 
-const getAnimation = (fadeIn?: boolean): CSSProperties => {
+const getAnimation = (fadeIn?: boolean): CSSObject => {
     const fadeInFrames = keyframes({
         '0%': { opacity: 0 },
         '10%': { opacity: 1 },

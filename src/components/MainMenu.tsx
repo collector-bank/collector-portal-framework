@@ -47,6 +47,7 @@ const MenuListItem = styled.li<MenuListItemProps>(({ onlyInDesktop, onlyInMobile
 
     if (onlyInDesktop) {
         styles = {
+            ...styles,
             [theme.breakpoints.mobileAndLower]: {
                 display: 'none',
             },
@@ -55,6 +56,7 @@ const MenuListItem = styled.li<MenuListItemProps>(({ onlyInDesktop, onlyInMobile
 
     if (onlyInMobile) {
         styles = {
+            ...styles,
             display: 'none',
 
             [theme.breakpoints.mobileAndLower]: {

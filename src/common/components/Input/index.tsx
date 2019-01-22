@@ -39,6 +39,7 @@ const commonStyles = (indicateError: boolean, theme: Theme, showAlertMessage: bo
     padding: 11, // To make it 12 pixels when accounting for the 1px border above
     boxSizing: 'border-box',
     appearance: 'none',
+    boxShadow: 'none',
     transition: 'border-bottom-left-radius 150ms, border-bottom-right-radius 150ms',
     borderRadius: theme.borderRadius.small,
     borderColor: getBorderColor(indicateError, showAlertMessage, theme),

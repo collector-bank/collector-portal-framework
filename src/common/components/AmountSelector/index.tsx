@@ -32,6 +32,7 @@ const InputContainer = styled.div(({ theme }) => ({
 
 const Input = styled.input(({ theme }) => ({
     appearance: 'none',
+    boxShadow: 'none',
     border: `solid ${theme.colors.mediumGray}`,
     borderWidth: '0 1px',
     borderRadius: 0,

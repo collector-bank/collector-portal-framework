@@ -16,7 +16,7 @@
         "@storybook/addon-options": "5.0.0-alpha.7",
         "@storybook/react": "5.0.0-alpha.7",
         "@storybook/storybook-deployer": "2.8.1",
-        "@types/jest": "23.3.12",
+        "@types/jest": "23.3.13",
         "@types/react-autosuggest": "9.3.6",
         "@types/react-dom": ">=16",
         "@types/react-modal": "3.8.0",
@@ -37,12 +37,12 @@
         "rimraf": "2.6.3",
         "storybook-readme": "4.0.5",
         "ts-jest": "23.10.5",
-        "typescript": "3.2.2"
+        "typescript": "3.2.4"
     },
     "dependencies": {
         "@emotion/core": "^10.0.6",
         "@emotion/styled": "^10.0.6",
-        "date-fns": "2.0.0-alpha.25",
+        "date-fns": "2.0.0-alpha.27",
         "emotion-theming": "^10.0.6",
         "glamor": "^2.20.40",
         "polished": "^2.3.3",

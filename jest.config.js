@@ -3,7 +3,8 @@ module.exports = {
     testEnvironment: 'jsdom',
     rootDir: 'src',
     transform: {
-        '^.+\\.(t|j)sx?$': 'ts-jest'
+        '^.+\\.(t|j)sx?$': 'ts-jest',
+        '^.+\\.(css)$': '<rootDir>/../style-mock.js'
     },
     transformIgnorePatterns: [
         'node_modules/(?!(react-formatted-number-input)/)'

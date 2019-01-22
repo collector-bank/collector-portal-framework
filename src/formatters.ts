@@ -1,7 +1,12 @@
 import dateFormatter from 'date-fns/format';
+import parseISO from 'date-fns/parseISO';
 
 export const formatDate = (date: Date | string, format = 'yyyy-MM-dd') => {
     if (date) {
+        if (typeof date === 'string') {
+            date = parseISO(date);
+        }
+
         return dateFormatter(date, format);
     }
 

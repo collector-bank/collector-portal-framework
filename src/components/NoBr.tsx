@@ -1,5 +1,3 @@
-import glamorous, { GlamorousComponent } from 'glamorous';
+import styled from '../';
 
-export const NoBr: GlamorousComponent<React.HTMLProps<HTMLSpanElement>, {}> = glamorous.span({
-    whiteSpace: 'nowrap',
-});
+export const NoBr = styled.span<{}>({ whiteSpace: 'nowrap' });

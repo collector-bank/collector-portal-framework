@@ -1,9 +1,8 @@
 import * as React from 'react';
-import glamorous from 'glamorous';
 import { createFormattedNumberInput } from 'react-formatted-number-input';
 import { formatMoney } from '../../../formatters';
-import { Theme } from '../../../themes';
 import { Slider } from '../Slider';
+import styled from '../../../';
 
 const Minus = () => (
     <svg width="16" height="2" xmlns="http://www.w3.org/2000/svg">
@@ -13,15 +12,15 @@ const Minus = () => (
 
 const Plus = () => (
     <svg width="16" height="16" xmlns="http://www.w3.org/2000/svg">
-        <path fill="currentColor" d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z"/>
+        <path fill="currentColor" d="M9 7h6a1 1 0 0 1 0 2H9v6a1 1 0 0 1-2 0V9H1a1 1 0 1 1 0-2h6V1a1 1 0 1 1 2 0v6z" />
     </svg>
 );
 
-const Container = glamorous.div({
+const Container = styled.div({
     marginBottom: '3em',
 });
 
-const InputContainer = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+const InputContainer = styled.div(({ theme }) => ({
     border: `1px solid ${theme.colors.mediumGray}`,
     borderRadius: theme.borderRadius.small,
     display: 'flex',
@@ -31,8 +30,9 @@ const InputContainer = glamorous.div<{ theme: Theme }>(({ theme }) => ({
     marginBottom: '1em',
 }));
 
-const Input = glamorous.input<{ theme: Theme }>(({ theme }) => ({
+const Input = styled.input(({ theme }) => ({
     appearance: 'none',
+    boxShadow: 'none',
     border: `solid ${theme.colors.mediumGray}`,
     borderWidth: '0 1px',
     borderRadius: 0,
@@ -46,13 +46,13 @@ const Input = glamorous.input<{ theme: Theme }>(({ theme }) => ({
     },
 
     '::-ms-clear': {
-        display: 'none'
+        display: 'none',
     },
 }));
 
 const AmountInput = createFormattedNumberInput<any>(Input);
 
-const Button = glamorous.button<{ theme: Theme }>(({ theme }) => ({
+const Button = styled.button(({ theme }) => ({
     fontFamily: 'inherit',
     background: 'transparent',
     border: 0,
@@ -73,7 +73,7 @@ const Button = glamorous.button<{ theme: Theme }>(({ theme }) => ({
     },
 }));
 
-const Range = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+const Range = styled.div(({ theme }) => ({
     display: 'flex',
     justifyContent: 'space-between',
     font: theme.fonts.desktop.medium,
@@ -97,7 +97,7 @@ interface State {
     draftValue?: number;
 }
 
-export class AmountSelector extends React.Component<Props, State> {    
+export class AmountSelector extends React.Component<Props, State> {
     static displayName = 'Collector.AmountSelector';
 
     state: State = {
@@ -106,21 +106,17 @@ export class AmountSelector extends React.Component<Props, State> {
 
     private increase = () => {
         const remainder = this.props.value % this.props.stepSize;
-        const value = remainder > 0
-            ? this.props.value + this.props.stepSize - remainder
-            : this.props.value + this.props.stepSize;
+        const value = remainder > 0 ? this.props.value + this.props.stepSize - remainder : this.props.value + this.props.stepSize;
 
         this.props.onChange(Math.min(value, this.props.max));
-    }
+    };
 
     private decrease = () => {
         const remainder = this.props.value % this.props.stepSize;
-        const value = remainder > 0
-            ? this.props.value - remainder
-            : this.props.value - this.props.stepSize;
+        const value = remainder > 0 ? this.props.value - remainder : this.props.value - this.props.stepSize;
 
         this.props.onChange(Math.max(value, this.props.min));
-    }
+    };
 
     private handleRangeInputChange = (event: React.FormEvent<HTMLInputElement>) => {
         const middle = this.props.max - this.props.min;
@@ -135,14 +131,14 @@ export class AmountSelector extends React.Component<Props, State> {
         }
 
         this.props.onChange(value);
-    }
+    };
 
     private changeDraftValue = (draftValue: number) => {
         this.setState({
             isDrafting: true,
-            draftValue
+            draftValue,
         });
-    }
+    };
 
     private commitDraftValue = () => {
         if (this.state.isDrafting && this.state.draftValue != null) {
@@ -152,10 +148,10 @@ export class AmountSelector extends React.Component<Props, State> {
 
             this.setState({
                 isDrafting: false,
-                draftValue: undefined
+                draftValue: undefined,
             });
         }
-    }
+    };
 
     private clampAndRound = (value: number) => {
         if (value <= this.props.min) {
@@ -165,7 +161,7 @@ export class AmountSelector extends React.Component<Props, State> {
         } else {
             return Math.round(value / this.props.stepSize) * this.props.stepSize;
         }
-    }
+    };
 
     render() {
         const { min, max, value, currency } = this.props;

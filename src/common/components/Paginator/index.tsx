@@ -1,6 +1,5 @@
-import glamorous from 'glamorous';
 import React from 'react';
-import { Theme } from '../../../themes';
+import styled from '../../../';
 
 const leftChevron =
     "'data:image/svg+xml,%3Csvg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 86.001 86.001%22%3E%3Cpath d=%22M64.998 80.095a3.484 3.484 0 0 1 0 4.893 3.401 3.401 0 0 1-4.844 0l-39.151-39.54a3.486 3.486 0 0 1 0-4.895l39.15-39.539a3.4 3.4 0 0 1 4.844 0A3.487 3.487 0 0 1 65 5.907L29.294 43.001l35.704 37.094z%22 fill=%22%236B1FAF%22/%3E%3C/svg%3E'";
@@ -18,27 +17,22 @@ export interface PaginatorProps {
 interface ChevronProps {
     direction: 'left' | 'right';
     enabled: boolean;
-    theme: Theme;
 }
 
-const Chevron = glamorous.a<ChevronProps>(
-    {
-        width: 20,
-        height: 24,
-        paddingLeft: 2,
-        paddingRight: 2,
-        display: 'inline-block',
-    },
-    ({ direction, enabled, theme }) => ({
-        color: theme.colors.primary,
-        background: `url(${direction === 'left' ? leftChevron : rightChevron}) no-repeat center center`,
-        backgroundSize: 12,
-        opacity: enabled ? 1 : 0.3,
-        cursor: enabled ? 'pointer' : 'default',
-    })
-);
+const Chevron = styled.a<ChevronProps>(({ direction, enabled, theme }) => ({
+    width: 20,
+    height: 24,
+    paddingLeft: 2,
+    paddingRight: 2,
+    display: 'inline-block',
+    color: theme.colors.primary,
+    background: `url(${direction === 'left' ? leftChevron : rightChevron}) no-repeat center center`,
+    backgroundSize: 12,
+    opacity: enabled ? 1 : 0.3,
+    cursor: enabled ? 'pointer' : 'default',
+}));
 
-const Ellipses = glamorous.span<{ theme: Theme }>(
+const Ellipses = styled.span(
     {
         width: 20,
         display: 'inline-block',
@@ -52,22 +46,18 @@ const Ellipses = glamorous.span<{ theme: Theme }>(
     })
 );
 
-const Page = glamorous.a<{ active: boolean; theme: Theme }>(
-    {
-        paddingLeft: 6,
-        paddingRight: 6,
-        width: 20,
-        display: 'inline-block',
-        textAlign: 'center',
-        cursor: 'pointer',
-    },
-    ({ active, theme }) => ({
-        color: active ? theme.colors.black : theme.colors.primary,
-        fontWeight: active ? 600 : 400,
-    })
-);
+const Page = styled.a<{ active: boolean }>(({ active, theme }) => ({
+    paddingLeft: 6,
+    paddingRight: 6,
+    width: 20,
+    display: 'inline-block',
+    textAlign: 'center',
+    cursor: 'pointer',
+    color: active ? theme.colors.black : theme.colors.primary,
+    fontWeight: active ? 600 : 400,
+}));
 
-const PaginatorContainer = glamorous.div({
+const PaginatorContainer = styled.div({
     userSelect: 'none',
     display: 'flex',
     fontSize: 18,
@@ -78,7 +68,7 @@ export class Paginator extends React.Component<PaginatorProps, {}> {
     center = () => Math.floor(this.props.numbersInMiddle / 2);
 
     render() {
-        if (this.lastPage() === 1 || this.lastPage() === 0) return null;
+        if (this.lastPage() === 1 || this.lastPage() === 0) return null;
 
         return (
             <PaginatorContainer>

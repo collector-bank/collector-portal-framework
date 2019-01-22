@@ -1,19 +1,19 @@
 import React from 'react';
 import Collapse from 'react-css-collapse';
-import glamorous from 'glamorous';
+import { ClassNames } from '@emotion/core';
 import uniqid from 'uniqid';
-import { css } from 'glamor';
 import { H2, H3 } from '../../components';
+import styled from '../../';
 
 const expandIcon = require('./expand.svg');
 const collapseIcon = require('./collapse.svg');
 
-const Container = glamorous.div({
+const Container = styled.div({
     padding: '16px 0',
     maxWidth: 900,
 });
 
-const Header = glamorous.div({
+const Header = styled.div({
     display: 'flex',
     alignItems: 'center',
     cursor: 'pointer',
@@ -23,26 +23,18 @@ const Header = glamorous.div({
     },
 });
 
-const ToggleButton = glamorous.button<{ expanded: boolean; iconSize: Size }>(
-    {
-        fontFamily: 'inherit',
-        cursor: 'pointer',
-        backgroundColor: 'transparent',
-        border: 0,
-        marginRight: 12,
-        backgroundRepeat: 'no-repeat',
-    },
-    ({ expanded, iconSize }) => ({
-        backgroundImage: expanded ? `url(${collapseIcon})` : `url(${expandIcon})`,
-        width: iconSize === 'medium' ? 24 : 21,
-        height: iconSize === 'medium' ? 24 : 21,
-        backgroundSize: iconSize === 'medium' ? undefined : 18,
-    })
-);
-
-const transition = css({
-    transition: 'height 150ms',
-});
+const ToggleButton = styled.button<{ expanded: boolean; iconSize: Size }>(({ expanded, iconSize }) => ({
+    fontFamily: 'inherit',
+    cursor: 'pointer',
+    backgroundColor: 'transparent',
+    border: 0,
+    marginRight: 12,
+    backgroundRepeat: 'no-repeat',
+    backgroundImage: expanded ? `url(${collapseIcon})` : `url(${expandIcon})`,
+    width: iconSize === 'medium' ? 24 : 21,
+    height: iconSize === 'medium' ? 24 : 21,
+    backgroundSize: iconSize === 'medium' ? undefined : 18,
+}));
 
 export interface TogglableProps {
     title: string;
@@ -71,19 +63,22 @@ export class Togglable extends React.Component<TogglableProps, TogglableState> {
 
     render() {
         const { children, title } = this.props;
-
         const size: Size = this.props.size ? this.props.size : 'medium';
 
         return (
-            <Container>
-                <Header onClick={this.toggle} aria-expanded={this.state.isExpanded} aria-controls={this.state.id}>
-                    <ToggleButton expanded={this.state.isExpanded} iconSize={size} />
-                    {size === 'medium' ? <H2>{title}</H2> : <H3>{title}</H3>}
-                </Header>
-                <Collapse isOpen={this.state.isExpanded} className={`${transition}`}>
-                    <div id={this.state.id}>{children}</div>
-                </Collapse>
-            </Container>
+            <ClassNames>
+                {({ css }) => (
+                    <Container>
+                        <Header onClick={this.toggle} aria-expanded={this.state.isExpanded} aria-controls={this.state.id}>
+                            <ToggleButton expanded={this.state.isExpanded} iconSize={size} />
+                            {size === 'medium' ? <H2>{title}</H2> : <H3>{title}</H3>}
+                        </Header>
+                        <Collapse isOpen={this.state.isExpanded} className={css({ transition: 'height 150ms' })}>
+                            <div id={this.state.id}>{children}</div>
+                        </Collapse>
+                    </Container>
+                )}
+            </ClassNames>
         );
     }
 }

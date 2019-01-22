@@ -1,8 +1,8 @@
 import React from 'react';
-import glamorous from 'glamorous';
-import { withTheme } from 'glamorous';
 import { Tooltip } from '../Tooltip';
 import { Theme } from '../../../themes';
+import { withTheme } from 'emotion-theming';
+import styled from '../../../';
 
 interface Props {
     description: string;
@@ -12,7 +12,7 @@ interface State {
     tooltipIsVisible: boolean;
 }
 
-const Container = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+const Container = styled.div(({ theme }) => ({
     display: 'inline-block',
     width: 20,
     height: 20,
@@ -65,4 +65,4 @@ export class Description_ extends React.Component<Props & { theme: Theme }, Stat
     }
 }
 
-export const Description = withTheme(Description_ as any) as React.ComponentClass<Props>;
+export const Description = withTheme(Description_ as React.ComponentClass<Props>);

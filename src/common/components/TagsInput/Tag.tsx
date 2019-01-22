@@ -1,7 +1,6 @@
-import glamorous from 'glamorous';
 import React from 'react';
-import { Theme } from '../../../themes';
 import { CrossIcon } from './Icons/Cross';
+import styled from '../../../';
 
 export interface TagProps {
     tag: Tag;
@@ -13,7 +12,7 @@ export interface Tag {
     id: string;
 }
 
-const TagContainer = glamorous.div<{ theme: Theme }>(
+const TagContainer = styled.div(
     {
         padding: '8px 16px',
         marginRight: 8,
@@ -30,7 +29,7 @@ const TagContainer = glamorous.div<{ theme: Theme }>(
     })
 );
 
-const IconContainer = glamorous.div({
+const IconContainer = styled.div({
     marginLeft: 8,
     display: 'flex',
 

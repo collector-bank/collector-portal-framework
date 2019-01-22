@@ -1,6 +1,3 @@
-import glamorous, { GlamorousComponent } from 'glamorous';
+import styled from '../';
 
-export const TabContent: GlamorousComponent<React.HTMLProps<HTMLDivElement>, {}> = glamorous.div({
-    position: 'relative',
-    minHeight: 150,
-});
+export const TabContent = styled.div<{}>({ position: 'relative', minHeight: 150 });

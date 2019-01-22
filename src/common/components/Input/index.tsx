@@ -1,22 +1,18 @@
-import { css } from 'glamor';
-import glamorous, { CSSProperties } from 'glamorous';
 import React from 'react';
 import Collapse from 'react-css-collapse';
+import { ClassNames, CSSObject } from '@emotion/core';
 import uniqid from 'uniqid';
 import { Theme } from '../../../themes';
 import { Label } from '../Label';
 import { Description } from './Description';
+import styled from '../../../';
 
-const inputErrorTransition = css({
-    transition: 'height 150ms',
-});
-
-const InputLabel = glamorous(Label)({
+const InputLabel = styled(Label)<React.LabelHTMLAttributes<HTMLLabelElement>>({
     display: 'flex',
     alignItems: 'center',
 });
 
-export const InputContainer: any = glamorous.div({
+export const InputContainer: any = styled.div({
     maxWidth: 500,
     marginBottom: '1.25em',
 });
@@ -35,7 +31,7 @@ const getBorderColor = (indicateError: boolean, showAlertMessage: boolean, theme
     return theme.colors.mediumGray;
 };
 
-const commonStyles = (indicateError: boolean, theme: Theme, showAlertMessage: boolean): CSSProperties => ({
+const commonStyles = (indicateError: boolean, theme: Theme, showAlertMessage: boolean): CSSObject => ({
     font: 'inherit',
     color: 'inherit',
     width: '100%',
@@ -43,6 +39,7 @@ const commonStyles = (indicateError: boolean, theme: Theme, showAlertMessage: bo
     padding: 11, // To make it 12 pixels when accounting for the 1px border above
     boxSizing: 'border-box',
     appearance: 'none',
+    boxShadow: 'none',
     transition: 'border-bottom-left-radius 150ms, border-bottom-right-radius 150ms',
     borderRadius: theme.borderRadius.small,
     borderColor: getBorderColor(indicateError, showAlertMessage, theme),
@@ -57,11 +54,11 @@ const commonStyles = (indicateError: boolean, theme: Theme, showAlertMessage: bo
     },
 });
 
-export const InputField: any = glamorous.input<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
+export const InputField: any = styled.input<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
     ...commonStyles(indicateError, theme, showAlertMessage),
 }));
 
-const Textarea = glamorous.textarea<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
+const Textarea = styled.textarea<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
     ...commonStyles(indicateError, theme, showAlertMessage),
 
     resize: 'vertical',
@@ -69,7 +66,7 @@ const Textarea = glamorous.textarea<ErrorProps>(({ indicateError, theme, showAle
     marginBottom: showAlertMessage ? -6 : undefined,
 }));
 
-const alertStyle = (theme: Theme): CSSProperties => ({
+const alertStyle = (theme: Theme): CSSObject => ({
     fontWeight: 500,
     padding: 8,
     paddingLeft: 12,
@@ -79,14 +76,14 @@ const alertStyle = (theme: Theme): CSSProperties => ({
     borderBottomRightRadius: theme.borderRadius.small,
 });
 
-export const InputError: any = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+export const InputError: any = styled.div(({ theme }) => ({
     ...alertStyle(theme),
 
     background: theme.colors.red,
     color: theme.colors.white,
 }));
 
-export const InputWarning: any = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+export const InputWarning: any = styled.div(({ theme }) => ({
     ...alertStyle(theme),
 
     background: theme.colors.yellow,
@@ -107,7 +104,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
     rows?: number;
     onChange?: (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     onBlur?: (event: React.FormEvent<HTMLInputElement> | undefined) => void;
-    innerRef?: (inputElement: HTMLInputElement) => void;
+    // innerRef?: (inputElement: HTMLInputElement) => void;
     type?: string;
     description?: string;
 }
@@ -141,32 +138,36 @@ export class Input extends React.Component<InputProps, InputState> {
         const showWarningMessage = Boolean(this.state.isDirty && warning);
 
         return (
-            <InputContainer>
-                {label && (
-                    <InputLabel htmlFor={this.state.id} error={indicateError}>
-                        {label}
+            <ClassNames>
+                {({ css }) => (
+                    <InputContainer>
+                        {label && (
+                            <InputLabel htmlFor={this.state.id} error={indicateError}>
+                                {label}
 
-                        {description && <Description description={description} />}
-                    </InputLabel>
+                                {description && <Description description={description} />}
+                            </InputLabel>
+                        )}
+
+                        <InputElement
+                            id={this.state.id}
+                            hasError={indicateError}
+                            aria-invalid={indicateError}
+                            showAlertMessage={showErrorMessage || showWarningMessage}
+                            {...rest}
+                            onBlur={this.makeDirty}
+                        />
+
+                        <Collapse isOpen={showErrorMessage} className={css({ transition: 'height 150ms' })}>
+                            <InputError>{error}</InputError>
+                        </Collapse>
+
+                        <Collapse isOpen={showWarningMessage} className={css({ transition: 'height 150ms' })}>
+                            <InputWarning>{warning}</InputWarning>
+                        </Collapse>
+                    </InputContainer>
                 )}
-
-                <InputElement
-                    id={this.state.id}
-                    hasError={indicateError}
-                    aria-invalid={indicateError}
-                    showAlertMessage={showErrorMessage || showWarningMessage}
-                    {...rest}
-                    onBlur={this.makeDirty}
-                />
-
-                <Collapse isOpen={showErrorMessage} className={`${inputErrorTransition}`}>
-                    <InputError>{error}</InputError>
-                </Collapse>
-
-                <Collapse isOpen={showWarningMessage} className={`${inputErrorTransition}`}>
-                    <InputWarning>{warning}</InputWarning>
-                </Collapse>
-            </InputContainer>
+            </ClassNames>
         );
     }
 }

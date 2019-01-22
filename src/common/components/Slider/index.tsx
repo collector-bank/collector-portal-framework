@@ -1,5 +1,6 @@
-import glamorous from 'glamorous';
+import { CSSObject } from '@emotion/core';
 import { Theme } from '../../../themes';
+import styled from '../../../';
 
 const track = (theme: Theme, percentFilled?: number) => ({
     width: '100%',
@@ -11,7 +12,7 @@ const track = (theme: Theme, percentFilled?: number) => ({
     borderRadius: theme.borderRadius.small,
 });
 
-const thumb = (theme: Theme) => ({
+const thumb = (theme: Theme): CSSObject => ({
     boxSizing: 'border-box',
     border: '4px solid #fff',
     width: 36,
@@ -29,10 +30,9 @@ interface SliderProps {
     min: number;
     max: number;
     value: number;
-    theme: Theme;
 }
 
-export const Slider = glamorous.input<SliderProps>(({ min, max, value, theme }) => ({
+export const Slider = styled.input<SliderProps>(({ min, max, value, theme }) => ({
     WebkitAppearance: 'none',
     width: '100%',
     height: 36,

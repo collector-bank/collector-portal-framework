@@ -1,7 +1,6 @@
 import React from 'react';
-import glamorous from 'glamorous';
 import { Tooltip } from '../Tooltip';
-import { Theme } from '../../../themes';
+import styled from '../../../';
 
 export type BadgeColor = 'primary' | 'yellow' | 'green' | 'red' | 'blue' | 'lightGray';
 
@@ -15,7 +14,7 @@ interface BadgeState {
     tooltipIsVisible: boolean;
 }
 
-const Container = glamorous.div<{ theme: Theme }>(({ theme }) => ({
+const Container = styled.div(({ theme }) => ({
     display: 'inline-block',
     font: theme.fonts.desktop.small,
     fontWeight: 500,
@@ -28,24 +27,20 @@ const Container = glamorous.div<{ theme: Theme }>(({ theme }) => ({
     },
 }));
 
-const Label = glamorous.span<{ color: BadgeColor, theme: Theme }>(
-    {
-        padding: '4px 8px',
-        whiteSpace: 'nowrap',
-        position: 'relative',
-    },
-    ({ color, theme }) => ({
-        borderRadius: theme.borderRadius.small,
-        background: theme.colors[color],
-        color: color === 'yellow' || color === 'green' || color === 'lightGray' ? theme.colors.black : theme.colors.white,
-    })
-);
+const Label = styled.span<{ color: BadgeColor }>(({ color, theme }) => ({
+    padding: '4px 8px',
+    whiteSpace: 'nowrap',
+    position: 'relative',
+    borderRadius: theme.borderRadius.small,
+    background: theme.colors[color],
+    color: color === 'yellow' || color === 'green' || color === 'lightGray' ? theme.colors.black : theme.colors.white,
+}));
 
 export class Badge extends React.Component<BadgeProps, BadgeState> {
     static displayName = 'Collector.Badge';
 
     state: BadgeState = {
-        tooltipIsVisible: false
+        tooltipIsVisible: false,
     };
 
     private showTooltip = () => {

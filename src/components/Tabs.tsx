@@ -1,13 +1,12 @@
 import React from 'react';
 import { NavLink as RouterNavLink } from 'react-router-dom';
-import glamorous from 'glamorous';
-import { Theme } from '../themes';
+import styled from '../';
 
-const NavContainer = glamorous.nav({
+const NavContainer = styled.nav({
     marginBottom: 30,
 });
 
-const NavList = glamorous.ul<{ theme: Theme }>(
+const NavList = styled.ul(
     {
         listStyleType: 'none',
         padding: 0,
@@ -34,45 +33,38 @@ const NavList = glamorous.ul<{ theme: Theme }>(
     })
 );
 
-const NavLink = glamorous(RouterNavLink)<{ theme: Theme }>(
-    {
-        display: 'block',
-        padding: '10px 4px',
-        textDecoration: 'none',
-        fontSize: 18,
-        fontWeight: 500,
-        transitionProperty: 'border-color, color',
-        transitionDuration: '200ms',
-        borderBottom: '4px solid transparent',
+const NavLink = styled(RouterNavLink)(({ theme }) => ({
+    display: 'block',
+    padding: '10px 4px',
+    textDecoration: 'none',
+    fontSize: 18,
+    fontWeight: 500,
+    transitionProperty: 'border-color, color',
+    transitionDuration: '200ms',
+    borderBottom: '4px solid transparent',
 
-        '.active': {
-            color: 'inherit',
-        },
+    '&:hover': {
+        color: 'inherit',
+    },
+    color: theme.colors.mediumGray,
 
-        '&:hover': {
-            color: 'inherit',
+    '&.active': {
+        color: 'inherit',
+        borderColor: theme.colors.primary,
+    },
+
+    [theme.breakpoints.mobileAndLower]: {
+        borderBottom: `1px solid ${theme.colors.lightGray}`,
+        borderLeft: `4px solid ${theme.colors.lightGray}`,
+        flexDirection: 'column',
+        paddingLeft: 16,
+
+        '&.active': {
+            borderBottom: `1px solid ${theme.colors.lightGray}`,
+            borderLeftColor: theme.colors.primary,
         },
     },
-    ({ theme }) => ({
-        color: theme.colors.mediumGray,
-
-        '.active': {
-            borderColor: theme.colors.primary,
-        },
-
-        [theme.breakpoints.mobileAndLower]: {
-            borderBottom: `1px solid ${theme.colors.lightGray}`,
-            borderLeft: `4px solid ${theme.colors.lightGray}`,
-            flexDirection: 'column',
-            paddingLeft: 16,
-
-            '.active': {
-                borderBottom: `1px solid ${theme.colors.lightGray}`,
-                borderLeftColor: theme.colors.primary,
-            },
-        },
-    })
-);
+}));
 
 export interface TabsProps {
     items: TabItem[];

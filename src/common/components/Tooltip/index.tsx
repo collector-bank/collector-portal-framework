@@ -1,54 +1,45 @@
 import React from 'react';
-import glamorous from 'glamorous';
-import { Theme } from '../../../themes';
-
+import styled from '../../../';
 interface Props {
     visible: boolean;
 }
 
-const Outer = glamorous.div<{ visible: boolean; theme: Theme; }>(
-    {
-        position: 'absolute',
-        zIndex: 20,
-        left: -5,
-        top: 'calc(100% + 8px)',
-        width: 320,
-        transitionDuration: '200ms',
-        transitionProperty: 'opacity, visibility, transform',
+const Outer = styled.div<Props>(({ theme, visible }) => ({
+    position: 'absolute',
+    zIndex: 20,
+    left: -5,
+    top: 'calc(100% + 8px)',
+    width: 320,
+    transitionDuration: '200ms',
+    transitionProperty: 'opacity, visibility, transform',
 
-        // the arrow
+    // the arrow
+    '&:before': {
+        content: '""',
+        borderLeft: '5px solid transparent',
+        borderRight: '5px solid transparent',
+        position: 'absolute',
+        left: 10,
+        top: -5,
+        borderBottom: `5px solid ${theme.colors.lightGray}`,
+    },
+    visibility: visible ? 'visible' : 'hidden',
+    opacity: visible ? 1 : 0,
+    transform: visible ? 'translateY(0)' : 'translateY(-5px)',
+
+    [theme.breakpoints.mobileAndLower]: {
+        top: 'auto',
+        left: 8,
+        right: 8,
+        width: 'auto',
+
         '&:before': {
-            content: '""',
-            borderLeft: '5px solid transparent',
-            borderRight: '5px solid transparent',
-            position: 'absolute',
-            left: 10,
-            top: -5,
+            display: 'none',
         },
     },
-    ({ theme, visible }) => ({
-        visibility: visible ? 'visible' : 'hidden',
-        opacity: visible ? 1 : 0,
-        transform: visible ? 'translateY(0)' : 'translateY(-5px)',
+}));
 
-        '&:before': {
-            borderBottom: `5px solid ${theme.colors.lightGray}`,
-        },
-
-        [theme.breakpoints.mobileAndLower]: {
-            top: 'auto',
-            left: 8,
-            right: 8,
-            width: 'auto',
-
-            '&:before': {
-                display: 'none',
-            },
-        },
-    })
-);
-
-const Inner = glamorous.div<{ theme: Theme; }>(({ theme }) => ({
+const Inner = styled.div(({ theme }) => ({
     display: 'inline-block',
     padding: '4px 8px',
     background: theme.colors.lightGray,

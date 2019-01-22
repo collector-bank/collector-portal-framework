@@ -1,17 +1,16 @@
 import React from 'react';
-import glamorous from 'glamorous';
-import { Theme } from '../themes';
+import styled from '../';
 
-const List = glamorous.dl({
+const List = styled.dl({
     marginTop: 0,
 });
 
-const Heading = glamorous.dt<{ theme: Theme }>(({ theme }) => ({
+const Heading = styled.dt(({ theme }) => ({
     color: theme.colors.darkGray,
     font: theme.fonts.desktop.small,
 }));
 
-const Value = glamorous.dd({
+const Value = styled.dd({
     margin: 0,
 
     '&:not(:last-child)': {

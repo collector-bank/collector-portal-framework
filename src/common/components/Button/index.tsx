@@ -1,7 +1,8 @@
 import React from 'react';
-import glamorous, { CSSProperties } from 'glamorous';
+import { CSSObject } from '@emotion/core';
 import { Theme } from '../../../themes';
 import { lighten, darken } from 'polished';
+import styled from '../../../';
 
 /**
  * The SVG was made with http://loading.io
@@ -29,8 +30,8 @@ export interface ButtonElementProps extends ButtonProps {
     theme: Theme;
 }
 
-const ButtonElement: any = glamorous.button<ButtonElementProps>(
-    {
+const ButtonElement: any = styled.button<ButtonProps>(({ size, type, loading, icon, theme }) => {
+    const styles: CSSObject = {
         fontFamily: 'inherit',
         whiteSpace: 'nowrap',
         textDecoration: 'none',
@@ -40,33 +41,30 @@ const ButtonElement: any = glamorous.button<ButtonElementProps>(
         borderRadius: 50,
         transition: 'background-color 100ms',
 
+        '&:disabled': {
+            backgroundColor: theme.colors.mediumGray,
+            color: theme.colors.lightGray,
+        },
+
         '&:not(:disabled)': {
             cursor: 'pointer',
         },
-    },
-    ({ size, type, loading, icon, theme }) => {
-        const styles: CSSProperties = {
-            '&:disabled': {
-                backgroundColor: theme.colors.mediumGray,
-                color: theme.colors.lightGray,
-            },
 
-            ...getSizeStyles(theme, size),
-            ...getTypeStyles(theme, type),
-            ...getLoadingStyles(theme, loading, type, size),
-        };
+        ...getSizeStyles(theme, size),
+        ...getTypeStyles(theme, type),
+        ...getLoadingStyles(theme, loading, type, size),
+    };
 
-        if (icon) {
-            styles.display = 'flex';
-            styles.alignItems = 'center';
-            styles.justifyContent = 'center';
-        }
-
-        return styles;
+    if (icon) {
+        styles.display = 'flex';
+        styles.alignItems = 'center';
+        styles.justifyContent = 'center';
     }
-);
 
-const getTypeStyles = (theme: Theme, type?: ButtonType): CSSProperties => {
+    return styles;
+});
+
+const getTypeStyles = (theme: Theme, type?: ButtonType) => {
     switch (type) {
         case 'warn':
             return {
@@ -137,8 +135,8 @@ const getTypeStyles = (theme: Theme, type?: ButtonType): CSSProperties => {
     }
 };
 
-const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSProperties => {
-    const medium: CSSProperties = {
+const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
+    const medium: CSSObject = {
         fontSize: 18,
         lineHeight: '24px',
         fontWeight: 500,
@@ -180,8 +178,8 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSProperties => {
     }
 };
 
-const getLoadingStyles = (theme: Theme, loading?: boolean, type?: ButtonType, size?: ButtonSize): CSSProperties => {
-    let styles: CSSProperties = {};
+const getLoadingStyles = (theme: Theme, loading?: boolean, type?: ButtonType, size?: ButtonSize): CSSObject => {
+    let styles: CSSObject = {};
 
     if (loading) {
         styles = {
@@ -229,7 +227,7 @@ const getLoadingStyles = (theme: Theme, loading?: boolean, type?: ButtonType, si
     return styles;
 };
 
-const background = (backgroundColor: string): CSSProperties => ({
+const background = (backgroundColor: string): CSSObject => ({
     backgroundColor,
 
     '&:hover:not(:disabled)': {
@@ -241,7 +239,7 @@ const background = (backgroundColor: string): CSSProperties => ({
     },
 });
 
-const IconContainer = glamorous.span<{ iconAlignment: IconAlignment }>(({ iconAlignment }) => ({
+const IconContainer = styled.span<{ iconAlignment: IconAlignment }>(({ iconAlignment }) => ({
     maxWidth: '1.3em',
     maxHeight: '1.3em',
     marginRight: iconAlignment === 'start' ? '.5em' : 0,
@@ -251,7 +249,14 @@ const IconContainer = glamorous.span<{ iconAlignment: IconAlignment }>(({ iconAl
     alignItems: 'center',
 }));
 
-export const Button: React.StatelessComponent<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> = ({ loading, children, icon, iconAlignment = 'start', size, ...rest }) => {
+export const Button: React.StatelessComponent<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
+    loading,
+    children,
+    icon,
+    iconAlignment = 'start',
+    size,
+    ...rest
+}) => {
     return (
         <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} {...rest}>
             {icon && iconAlignment === 'start' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}

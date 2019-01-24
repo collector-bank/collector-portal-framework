@@ -1,6 +1,6 @@
 import React from 'react';
 import { Global } from '@emotion/core';
-import styled, { CreateStyled } from '@emotion/styled';
+import * as emotionStyled from '@emotion/styled';
 import { ThemeProvider } from 'emotion-theming';
 import { Theme } from './themes';
 import * as collectorTheme from './themes/collector';
@@ -16,7 +16,7 @@ const globalStyles = (theme: Theme) => ({
         margin: 0,
         font: theme.fonts.desktop.medium,
         color: theme.colors.black,
-    }
+    },
 });
 
 interface Props {
@@ -30,4 +30,5 @@ export const CollectorPortalFramework: React.StatelessComponent<Props> = ({ them
     </ThemeProvider>
 );
 
-export default styled as CreateStyled<Theme>;
+const styled = emotionStyled as unknown as emotionStyled.CreateStyled<Theme>;
+export default styled;

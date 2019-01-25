@@ -30,5 +30,5 @@ export const CollectorPortalFramework: React.StatelessComponent<Props> = ({ them
     </ThemeProvider>
 );
 
-const styled = emotionStyled as unknown as emotionStyled.CreateStyled<Theme>;
+const styled = emotionStyled.default as unknown as emotionStyled.CreateStyled<Theme>;
 export default styled;

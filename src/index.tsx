@@ -1,6 +1,6 @@
 import React from 'react';
 import { Global } from '@emotion/core';
-import * as emotionStyled from '@emotion/styled';
+import * as emotion from '@emotion/styled';
 import { ThemeProvider } from 'emotion-theming';
 import { Theme } from './themes';
 import * as collectorTheme from './themes/collector';
@@ -30,5 +30,5 @@ export const CollectorPortalFramework: React.StatelessComponent<Props> = ({ them
     </ThemeProvider>
 );
 
-const styled = emotionStyled.default as unknown as emotionStyled.CreateStyled<Theme>;
+const styled = emotion.default as emotion.CreateStyled<Theme>;
 export default styled;

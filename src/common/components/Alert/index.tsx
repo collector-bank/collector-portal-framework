@@ -116,8 +116,16 @@ export interface AlertProps {
     wide?: boolean;
 }
 
-export const Alert: React.StatelessComponent<AlertProps> = ({ heading, message, alertSize = 'large' as AlertSize, type, fadeIn, wide }) => (
-    <AlertContainer role="alert" alertSize={alertSize} type={type} fadeIn={fadeIn} wide={wide}>
+export const Alert: React.StatelessComponent<AlertProps & React.ButtonHTMLAttributes<HTMLDivElement>> = ({
+    heading,
+    message,
+    alertSize = 'large' as AlertSize,
+    type,
+    fadeIn,
+    wide,
+    ...rest
+}) => (
+    <AlertContainer role="alert" alertSize={alertSize} type={type} fadeIn={fadeIn} wide={wide} {...rest}>
         {heading && <Heading>{heading}</Heading>}
         {typeof message === 'string' && <span dangerouslySetInnerHTML={{ __html: message }} />}
         {typeof message !== 'string' && message}

@@ -25,6 +25,7 @@ export const Modal: React.StatelessComponent<any> = props => (
                     {...props}
                     closeTimeoutMS={transitionTime + 50}
                     shouldCloseOnOverlayClick={true}
+                    ariaHideApp={rootElement == null ? false : undefined}
                     className={{
                         base: css({
                             background: colors.white,

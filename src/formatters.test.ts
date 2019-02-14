@@ -16,6 +16,8 @@ describe('formatMoney', () => {
         expect(formatMoney(100000000)).toBe('100 000 000,00');
         expect(formatMoney(456.5433)).toBe('456,54');
         expect(formatMoney(1456.5433)).toBe('1 456,54');
+        expect(formatMoney(0.5)).toBe('0,50');
+        expect(formatMoney(1.5)).toBe('1,50');
     });
 
     test('with currency', () => {
@@ -28,6 +30,8 @@ describe('formatMoney', () => {
         expect(formatMoney(4356.5433, 'SEK', false)).toBe('4 357 SEK');
         expect(formatMoney(4356.5433, undefined, false)).toBe('4 357');
         expect(formatMoney(14356.5433, undefined, false)).toBe('14 357');
+        expect(formatMoney(0.5, undefined, false)).toBe('1');
+        expect(formatMoney(1.5, undefined, false)).toBe('2');
     });
 });
 

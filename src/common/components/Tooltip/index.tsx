@@ -47,6 +47,7 @@ const Inner = styled.div(({ theme }) => ({
     borderRadius: theme.borderRadius.small,
     font: theme.fonts.desktop.small,
     fontWeight: 500,
+    whiteSpace: 'pre-line',
 }));
 
 export const Tooltip: React.StatelessComponent<Props> = ({ visible, children }) => {

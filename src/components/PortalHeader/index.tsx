@@ -20,7 +20,7 @@ export const Container = styled.header(({ theme }) => ({
         alignItems: 'center',
         position: 'fixed',
         width: '100%',
-        zIndex: 1,
+        zIndex: 60,
     },
 }));
 

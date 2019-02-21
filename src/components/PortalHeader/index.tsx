@@ -3,7 +3,7 @@ import styled from '../../';
 import { MainMenu, MainMenuItem } from './MainMenu';
 import { Logo } from './Logo';
 
-export const Container = styled.header(({ theme }) => ({
+const Container = styled.header(({ theme }) => ({
     position: 'relative',
     width: 280,
     display: 'flex',
@@ -24,8 +24,7 @@ export const Container = styled.header(({ theme }) => ({
     },
 }));
 
-
-export interface Props {
+interface PortalHeaderProps {
     logoImage?: string;
     logoTarget: string;
     siteName: string;
@@ -33,7 +32,7 @@ export interface Props {
     menuFooter?: JSX.Element;
 }
 
-export const PortalHeader: React.StatelessComponent<Props> = ({ logoImage, logoTarget, siteName, menuItems, menuFooter }) => (
+export const PortalHeader: React.StatelessComponent<PortalHeaderProps> = ({ logoImage, logoTarget, siteName, menuItems, menuFooter }) => (
     <Container>
         <Logo image={logoImage} siteName={siteName} location={logoTarget} />
         <MainMenu items={menuItems} menuFooter={menuFooter} />

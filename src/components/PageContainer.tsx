@@ -1,6 +1,6 @@
 import styled from '..';
 
-export const PageContainer = styled.div(({ theme }) => ({
+export const PageContainer = styled.div<{}>(({ theme }) => ({
     boxSizing: 'border-box',
     width: '100%',
     padding: 40,

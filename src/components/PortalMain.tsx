@@ -1,6 +1,6 @@
 import styled from '..';
 
-export const PortalMain = styled.main(({ theme }) => ({
+export const PortalMain = styled.main<{}>(({ theme }) => ({
     display: 'block',
     width: '100%',
     maxWidth: 1200,

@@ -1,6 +1,6 @@
 import styled from '..';
 
-export const PortalContainer = styled.div(({ theme }) => ({
+export const PortalContainer = styled.div<{}>(({ theme }) => ({
     backgroundColor: theme.colors.offWhite,
     display: 'flex',
 

@@ -4,6 +4,7 @@ import Collapse from 'react-css-collapse';
 import { css } from 'glamor';
 import { Label, InputError } from '../';
 import { InputContainer, InputField } from '../Input';
+import styled from '../../../';
 import { Theme } from '../../../themes';
 
 import sv from 'date-fns/locale/sv';
@@ -23,6 +24,12 @@ const calendar =
 
 const inputErrorTransition = css({
     transition: 'height 150ms',
+});
+
+const InputFieldWithIcon = styled(InputField)<{ hasError: boolean; }>({
+    background: `url(${calendar}) no-repeat 95% center`,
+    backgroundPosition: `calc(100% - 12px) 50%`, // doesn't work in IE11, that's why we need the 95% fallback above
+    backgroundSize: '24px 24px', // a single value here doesn't work in IE11
 });
 
 const style = (theme: Theme) => css({
@@ -163,16 +170,7 @@ class DatePicker_ extends React.Component<DatePickerProps & { theme: Theme }, St
                     onChange={this.handleChange}
                     onChangeRaw={this.handleChangeRaw}
                     onBlur={this.handleBlur}
-                    customInput={
-                        <InputField
-                            hasError={showError}
-                            css={{
-                                background: `url(${calendar}) no-repeat 95% center`,
-                                backgroundPosition: `calc(100% - 12px) 50%`, // doesn't work in IE11, that's why we need the 95% fallback above
-                                backgroundSize: '24px 24px', // a single value here doesn't work in IE11
-                            }}
-                        />
-                    }
+                    customInput={<InputFieldWithIcon hasError={showError} />}
                 />
 
                 <Collapse isOpen={showError} className={`${inputErrorTransition}`}>

@@ -6,50 +6,40 @@ const NavContainer = styled.nav({
     marginBottom: 30,
 });
 
-const NavList = styled.ul(
-    {
-        listStyleType: 'none',
-        padding: 0,
-        margin: 0,
-        display: 'flex',
+const NavList = styled.ul(({ theme }) => ({
+    listStyleType: 'none',
+    padding: 0,
+    margin: 0,
+    display: 'flex',
 
-        '> li': {
-            marginRight: 16,
-        },
+    [theme.breakpoints.mobileAndLower]: {
+        flexDirection: 'column',
+        borderRadius: theme.borderRadius.small,
+        border: `1px solid ${theme.colors.lightGray}`,
+        borderBottom: 0,
     },
-    ({ theme }) => ({
-        '> li': {
-            [theme.breakpoints.mobileAndLower]: {
-                margin: 0,
-            },
-        },
-
-        [theme.breakpoints.mobileAndLower]: {
-            flexDirection: 'column',
-            borderRadius: theme.borderRadius.small,
-            border: `1px solid ${theme.colors.lightGray}`,
-            borderBottom: 0,
-        },
-    })
-);
+}));
 
 const NavLink = styled(RouterNavLink)(({ theme }) => ({
     display: 'block',
-    padding: '10px 4px',
+    padding: '12px 20px',
     textDecoration: 'none',
     fontSize: 18,
     fontWeight: 500,
+    minWidth: 100,
+    textAlign: 'center',
     transitionProperty: 'border-color, color',
     transitionDuration: '200ms',
-    borderBottom: '4px solid transparent',
+    borderBottom: `4px solid ${theme.colors.lightGray}`,
 
     '&:hover': {
-        color: 'inherit',
+        color: theme.colors.primary,
     },
-    color: theme.colors.mediumGray,
+
+    color: 'inherit',
 
     '&.active': {
-        color: 'inherit',
+        color: theme.colors.primary,
         borderColor: theme.colors.primary,
     },
 

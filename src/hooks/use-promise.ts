@@ -2,7 +2,7 @@ import { useState } from 'react';
 
 export function usePromise<TResult>(promise: () => Promise<TResult>) {
     const [data, setData] = useState<TResult | undefined>(undefined);
-    const [loading, setLoading] = useState(true);
+    const [loading, setLoading] = useState(false);
     const [error, setError] = useState(false);
 
     const trigger = async () => {

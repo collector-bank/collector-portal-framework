@@ -91,12 +91,12 @@ export const InputWarning: any = styled.div(({ theme }) => ({
 }));
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    label?: React.ReactNode;
+    label?: string | React.ReactNode;
     value?: string;
     placeholder?: string;
     multiline?: boolean;
     disabled?: boolean;
-    error?: boolean | React.ReactNode;
+    error?: string | boolean | React.ReactNode;
     warning?: React.ReactNode;
     maxLength?: number;
     pattern?: string;

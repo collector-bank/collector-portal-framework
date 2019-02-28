@@ -1,6 +1,7 @@
 import * as React from 'react';
-import { useFetch } from '../hooks/use-fetch';
+import { usePromise } from '../hooks/use-promise';
 import { Spinner, Alert } from '../common/components';
+import { useEffect } from 'react';
 
 interface Props<TResult> {
     apiMethod: () => Promise<TResult>;
@@ -8,18 +9,14 @@ interface Props<TResult> {
     errorText: string;
     errorIndicator?: React.ReactNode;
     loadingIndicator?: React.ReactNode;
-    increaseNumberToFetch?: number;
 }
 
-export const FetchHandler = <TResult extends {}>({
-    apiMethod,
-    children,
-    loadingIndicator,
-    errorIndicator,
-    errorText,
-    increaseNumberToFetch,
-}: Props<TResult>) => {
-    const { loading, data, error } = useFetch(apiMethod, increaseNumberToFetch);
+export const FetchHandler = <TResult extends {}>({ apiMethod, children, loadingIndicator, errorIndicator, errorText }: Props<TResult>) => {
+    const { loading, data, error, trigger } = usePromise(apiMethod);
+
+    useEffect(() => {
+        trigger();
+    }, []);
 
     return (
         <>

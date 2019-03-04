@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '../';
 
-const PageHeaderContainer = styled.div({
+const PageHeaderContainer = styled.div(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
     overflow: 'hidden',
@@ -9,12 +9,11 @@ const PageHeaderContainer = styled.div({
     width: '100%',
     minHeight: 129,
     padding: '16px 40px',
+    borderBottom: `1px solid ${theme.colors.lightGray}`,
 
     '@media print': {
         display: 'none',
     },
-}, ({ theme }) => ({
-    borderBottom: `1px solid ${theme.colors.lightGray}`,
 
     [theme.breakpoints.tabletAndLower]: {
         paddingLeft: 24,
@@ -44,5 +43,7 @@ export interface PageHeaderProps {
 }
 
 export const PageHeader: React.StatelessComponent<PageHeaderProps> = ({ title, children }) => (
-    <PageHeaderContainer>{title ? <Title>{title}</Title> : children}</PageHeaderContainer>
+    <PageHeaderContainer>
+        {title ? <Title>{title}</Title> : children}
+    </PageHeaderContainer>
 );

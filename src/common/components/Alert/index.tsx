@@ -24,26 +24,22 @@ interface AlertContainerProps {
     wide?: boolean;
 }
 
-const AlertContainer = styled.div<AlertContainerProps>(
-    {
-        backgroundRepeat: 'no-repeat',
-        display: 'inline-block',
-        textAlign: 'left',
-        boxSizing: 'border-box',
-        width: '100%',
+const AlertContainer = styled.div<AlertContainerProps>(({ type, alertSize, fadeIn, wide, theme }) => ({
+    backgroundRepeat: 'no-repeat',
+    display: 'inline-block',
+    textAlign: 'left',
+    boxSizing: 'border-box',
+    width: '100%',
+    borderRadius: theme.borderRadius.small,
+    maxWidth: wide ? undefined : 500,
 
-        '> a': {
-            color: 'inherit',
-        },
+    ...getStyle(type, alertSize, theme),
+    ...getAnimation(fadeIn),
+
+    '> a': {
+        color: 'inherit',
     },
-    ({ type, alertSize, fadeIn, wide, theme }) => ({
-        borderRadius: theme.borderRadius.small,
-        maxWidth: wide ? undefined : 500,
-
-        ...getStyle(type, alertSize, theme),
-        ...getAnimation(fadeIn),
-    })
-);
+}));
 
 const Heading = styled.div({
     fontWeight: 600,

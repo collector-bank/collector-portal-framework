@@ -21,6 +21,7 @@ const Input = styled.input(({ theme }) => ({
     flexShrink: 0,
     marginRight: '1em',
     transition: 'border-color 150ms, background 150ms, opacity 150ms',
+    borderRadius: theme.borderRadius.small,
 
     '&:after': {
         content: '""',
@@ -38,8 +39,6 @@ const Input = styled.input(({ theme }) => ({
     '&:checked:after': {
         backgroundImage: `url(${checkboxSvg})`,
     },
-
-    borderRadius: theme.borderRadius.small,
 
     '&:checked': {
         backgroundColor: theme.colors.primary,

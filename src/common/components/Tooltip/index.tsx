@@ -1,5 +1,6 @@
 import React from 'react';
 import styled from '../../../';
+
 interface Props {
     visible: boolean;
 }
@@ -12,6 +13,9 @@ const Outer = styled.div<Props>(({ theme, visible }) => ({
     width: 320,
     transitionDuration: '200ms',
     transitionProperty: 'opacity, visibility, transform',
+    visibility: visible ? 'visible' : 'hidden',
+    opacity: visible ? 1 : 0,
+    transform: visible ? 'translateY(0)' : 'translateY(-5px)',
 
     // the arrow
     '&:before': {
@@ -23,9 +27,6 @@ const Outer = styled.div<Props>(({ theme, visible }) => ({
         top: -5,
         borderBottom: `5px solid ${theme.colors.lightGray}`,
     },
-    visibility: visible ? 'visible' : 'hidden',
-    opacity: visible ? 1 : 0,
-    transform: visible ? 'translateY(0)' : 'translateY(-5px)',
 
     [theme.breakpoints.mobileAndLower]: {
         top: 'auto',

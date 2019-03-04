@@ -6,32 +6,27 @@ const NavContainer = styled.nav({
     marginBottom: 30,
 });
 
-const NavList = styled.ul(
-    {
-        listStyleType: 'none',
-        padding: 0,
-        margin: 0,
-        display: 'flex',
+const NavList = styled.ul(({ theme }) => ({
+    listStyleType: 'none',
+    padding: 0,
+    margin: 0,
+    display: 'flex',
 
-        '> li': {
-            marginRight: 16,
-        },
-    },
-    ({ theme }) => ({
-        '> li': {
-            [theme.breakpoints.mobileAndLower]: {
-                margin: 0,
-            },
-        },
+    '> li': {
+        marginRight: 16,
 
         [theme.breakpoints.mobileAndLower]: {
-            flexDirection: 'column',
-            borderRadius: theme.borderRadius.small,
-            border: `1px solid ${theme.colors.lightGray}`,
-            borderBottom: 0,
+            margin: 0,
         },
-    })
-);
+    },
+
+    [theme.breakpoints.mobileAndLower]: {
+        flexDirection: 'column',
+        borderRadius: theme.borderRadius.small,
+        border: `1px solid ${theme.colors.lightGray}`,
+        borderBottom: 0,
+    },
+}));
 
 const NavLink = styled(RouterNavLink)(({ theme }) => ({
     display: 'block',
@@ -42,11 +37,11 @@ const NavLink = styled(RouterNavLink)(({ theme }) => ({
     transitionProperty: 'border-color, color',
     transitionDuration: '200ms',
     borderBottom: '4px solid transparent',
+    color: theme.colors.mediumGray,
 
     '&:hover': {
         color: 'inherit',
     },
-    color: theme.colors.mediumGray,
 
     '&.active': {
         color: 'inherit',

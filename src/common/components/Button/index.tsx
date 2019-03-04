@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { CSSObject } from '@emotion/core';
 import { Theme } from '../../../themes';
 import { lighten, darken } from 'polished';
@@ -30,7 +30,7 @@ export interface ButtonElementProps extends ButtonProps {
     theme: Theme;
 }
 
-const ButtonElement: any = styled.button<ButtonProps>(({ size, type, loading, icon, theme }) => {
+const ButtonElement = styled.button<ButtonProps>(({ size, type, loading, icon, theme }) => {
     const styles: CSSObject = {
         fontFamily: 'inherit',
         whiteSpace: 'nowrap',
@@ -249,21 +249,18 @@ const IconContainer = styled.span<{ iconAlignment: IconAlignment }>(({ iconAlign
     alignItems: 'center',
 }));
 
-export const Button: React.StatelessComponent<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
-    loading,
-    children,
-    icon,
-    iconAlignment = 'start',
-    size,
-    ...rest
-}) => {
-    return (
-        <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} {...rest}>
+type CollectorButtonProps = React.ForwardRefExoticComponent<
+    ButtonProps & React.RefAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement>
+>;
+
+export const Button: CollectorButtonProps = forwardRef<HTMLButtonElement, ButtonProps>(
+    ({ loading, children, icon, iconAlignment = 'start', size, ...rest }, ref) => (
+        <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} {...rest} ref={ref}>
             {icon && iconAlignment === 'start' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}
             <span>{children}</span>
             {icon && iconAlignment === 'end' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}
         </ButtonElement>
-    );
-};
+    )
+);
 
 Button.displayName = 'Collector.Button';

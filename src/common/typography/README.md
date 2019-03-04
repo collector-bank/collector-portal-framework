@@ -4,13 +4,13 @@ Our typographic components are simple to use as they are close to the completely
 
 ## Props
 
-| Component  | Props                |
-| ---------- | -------------------- |
-| H1         | `centered?`: boolean |
-| H2         | `centered?`: boolean |
-| H3         | `centered?`: boolean |
-| Text       | None                 |
-| TextLink   | None                 |
+| Component  | Props |
+| ---------- | ----  |
+| H1         |       |
+| H2         |       |
+| H3         |       |
+| Text       |       |
+| TextLink   |       |
 
 ## Example
 ```jsx

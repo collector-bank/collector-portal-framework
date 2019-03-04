@@ -21,7 +21,6 @@ export interface SpinnerProps {
     color?: string;
 }
 
-
 export const Spinner = styled.div<SpinnerProps>(
     {
         display: 'inline-block',

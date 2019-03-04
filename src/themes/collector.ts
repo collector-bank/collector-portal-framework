@@ -31,9 +31,9 @@ export const fonts = {
     mobile: {
         small: `14px/24px ${fontStack}`,
         medium: `16px/24px ${fontStack}`,
-        large: `19px/24px ${fontStack}`,
-        xl: `23px/32px ${fontStack}`,
-        xxl: `28px/32px ${fontStack}`,
+        large: `18px/24px ${fontStack}`,
+        xl: `21px/28px ${fontStack}`,
+        xxl: `24px/32px ${fontStack}`,
     },
 };
 

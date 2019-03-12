@@ -7,22 +7,22 @@ const Container = styled.nav({
     marginBottom: 30,
 });
 
-const InnerContainer = styled.div<{ verticalView: boolean }>(({ verticalView }) => ({
-    display: verticalView ? 'block' : 'inline-block',
+const InnerContainer = styled.div<{ vertical: boolean }>(({ vertical }) => ({
+    display: vertical ? 'block' : 'inline-block',
 }));
 
-const List = styled.ul<{ verticalView: boolean }>(({ theme, verticalView }) => ({
+const List = styled.ul<{ vertical: boolean }>(({ theme, vertical }) => ({
     listStyleType: 'none',
     padding: 0,
     margin: 0,
     display: 'flex',
-    flexDirection: verticalView ? 'column' : undefined,
-    borderRadius: verticalView ? theme.borderRadius.small : undefined,
-    border: verticalView ? `1px solid ${theme.colors.lightGray}` : undefined,
+    flexDirection: vertical ? 'column' : undefined,
+    borderRadius: vertical ? theme.borderRadius.small : undefined,
+    border: vertical ? `1px solid ${theme.colors.lightGray}` : undefined,
     borderBottom: 0,
 }));
 
-const Link = styled(NavLink)<{ verticalView: boolean }>(({ theme, verticalView }) => ({
+const Link = styled(NavLink)<{ vertical: boolean }>(({ theme, vertical }) => ({
     display: 'block',
     padding: '12px 20px',
     textDecoration: 'none',
@@ -31,11 +31,11 @@ const Link = styled(NavLink)<{ verticalView: boolean }>(({ theme, verticalView }
     minWidth: 100,
     transitionProperty: 'border-color, color',
     transitionDuration: '200ms',
-    textAlign: verticalView ? 'left' : 'center',
-    borderBottom: verticalView ? `1px solid ${theme.colors.lightGray}` : `4px solid ${theme.colors.lightGray}`,
-    borderLeft: verticalView ? `4px solid ${theme.colors.lightGray}` : undefined,
-    flexDirection: verticalView ? 'column' : undefined,
-    paddingLeft: verticalView ? 16 : undefined,
+    textAlign: vertical ? 'left' : 'center',
+    borderBottom: vertical ? `1px solid ${theme.colors.lightGray}` : `4px solid ${theme.colors.lightGray}`,
+    borderLeft: vertical ? `4px solid ${theme.colors.lightGray}` : undefined,
+    flexDirection: vertical ? 'column' : undefined,
+    paddingLeft: vertical ? 16 : undefined,
 
     '&:hover': {
         color: theme.colors.primary,
@@ -46,8 +46,8 @@ const Link = styled(NavLink)<{ verticalView: boolean }>(({ theme, verticalView }
     '&.active': {
         color: theme.colors.primary,
         borderColor: theme.colors.primary,
-        borderBottom: verticalView ? `1px solid ${theme.colors.lightGray}` : undefined,
-        borderLeftColor: verticalView ? theme.colors.primary : undefined,
+        borderBottom: vertical ? `1px solid ${theme.colors.lightGray}` : undefined,
+        borderLeftColor: vertical ? theme.colors.primary : undefined,
     },
 }));
 
@@ -62,7 +62,7 @@ export interface TabItem {
 
 export const Tabs: React.StatelessComponent<TabsProps> = ({ items }) => {
     const [breakpoint, setBreakpoint] = useState(0);
-    const [verticalView, setVerticalView] = useState(false);
+    const [vertical, setVertical] = useState(false);
     const { innerWidth } = useWindowSize();
     const ref = useRef<HTMLDivElement>(null);
 
@@ -73,16 +73,16 @@ export const Tabs: React.StatelessComponent<TabsProps> = ({ items }) => {
     }, [ref]);
 
     useEffect(() => {
-        setVerticalView(innerWidth <= breakpoint);
+        setVertical(innerWidth <= breakpoint);
     }, [innerWidth, breakpoint]);
 
     return (
         <Container>
-            <InnerContainer ref={ref} verticalView={verticalView}>
-                <List verticalView={verticalView}>
+            <InnerContainer ref={ref} vertical={vertical}>
+                <List vertical={vertical}>
                     {items.map((item, i) => (
                         <li key={i}>
-                            <Link to={item.path} exact={true} verticalView={verticalView}>
+                            <Link to={item.path} exact={true} vertical={vertical}>
                                 {item.label}
                             </Link>
                         </li>

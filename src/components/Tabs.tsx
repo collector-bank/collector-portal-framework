@@ -33,10 +33,10 @@ const Link = styled(NavLink)<{ verticalView: boolean }>(({ theme, verticalView }
     transitionProperty: 'border-color, color',
     transitionDuration: '200ms',
 
-    borderBottom: verticalView ? `1px solid ${theme.colors.lightGray}`: `4px solid ${theme.colors.lightGray}`,
-    borderLeft: verticalView ? `4px solid ${theme.colors.lightGray}`: undefined,
-    flexDirection: verticalView ? 'column': undefined,
-    paddingLeft: verticalView ? 16: undefined,
+    borderBottom: verticalView ? `1px solid ${theme.colors.lightGray}` : `4px solid ${theme.colors.lightGray}`,
+    borderLeft: verticalView ? `4px solid ${theme.colors.lightGray}` : undefined,
+    flexDirection: verticalView ? 'column' : undefined,
+    paddingLeft: verticalView ? 16 : undefined,
 
     '&:hover': {
         color: theme.colors.primary,
@@ -47,7 +47,7 @@ const Link = styled(NavLink)<{ verticalView: boolean }>(({ theme, verticalView }
     '&.active': {
         color: theme.colors.primary,
         borderColor: theme.colors.primary,
-        borderBottom: verticalView ? `1px solid ${theme.colors.lightGray}`: undefined,
+        borderBottom: verticalView ? `1px solid ${theme.colors.lightGray}` : undefined,
         borderLeftColor: verticalView ? theme.colors.primary : undefined,
     },
 }));
@@ -62,8 +62,8 @@ export interface TabItem {
 }
 
 export const Tabs: React.StatelessComponent<TabsProps> = ({ items }) => {
-    const [ breakpoint, setBreakpoint ] = useState(0);
-    const [ verticalView, setVerticalView ] = useState(false);
+    const [breakpoint, setBreakpoint] = useState(0);
+    const [verticalView, setVerticalView] = useState(false);
     const { innerWidth } = useWindowSize();
     const ref = useRef<HTMLDivElement>(null);
 
@@ -92,4 +92,4 @@ export const Tabs: React.StatelessComponent<TabsProps> = ({ items }) => {
             </InnerContainer>
         </Container>
     );
-}
+};

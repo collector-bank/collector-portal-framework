@@ -7,9 +7,9 @@ const Container = styled.nav({
     marginBottom: 30,
 });
 
-const InnerContainer = styled.div({
-    display: 'inline-block',
-});
+const InnerContainer = styled.div<{ verticalView: boolean }>(({ verticalView }) => ({
+    display: verticalView ? 'block' : 'inline-block',
+}));
 
 const List = styled.ul<{ verticalView: boolean }>(({ theme, verticalView }) => ({
     listStyleType: 'none',
@@ -29,10 +29,9 @@ const Link = styled(NavLink)<{ verticalView: boolean }>(({ theme, verticalView }
     fontSize: 18,
     fontWeight: 500,
     minWidth: 100,
-    textAlign: 'center',
     transitionProperty: 'border-color, color',
     transitionDuration: '200ms',
-
+    textAlign: verticalView ? 'left' : 'center',
     borderBottom: verticalView ? `1px solid ${theme.colors.lightGray}` : `4px solid ${theme.colors.lightGray}`,
     borderLeft: verticalView ? `4px solid ${theme.colors.lightGray}` : undefined,
     flexDirection: verticalView ? 'column' : undefined,
@@ -79,7 +78,7 @@ export const Tabs: React.StatelessComponent<TabsProps> = ({ items }) => {
 
     return (
         <Container>
-            <InnerContainer ref={ref}>
+            <InnerContainer ref={ref} verticalView={verticalView}>
                 <List verticalView={verticalView}>
                     {items.map((item, i) => (
                         <li key={i}>

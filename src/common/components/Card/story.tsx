@@ -85,5 +85,5 @@ components.add(
             </>
         );
     },
-    { notes }
+    { notes }
 );

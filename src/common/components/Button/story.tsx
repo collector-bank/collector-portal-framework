@@ -36,5 +36,5 @@ components.add(
             </Button>
         );
     },
-    { notes }
+    { notes }
 );

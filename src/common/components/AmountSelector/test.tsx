@@ -15,14 +15,7 @@ class Container extends React.Component {
     render() {
         return (
             <CollectorPortalFramework>
-                <AmountSelector
-                    currency="SEK"
-                    min={740}
-                    max={1330}
-                    stepSize={100}
-                    value={this.state.value}
-                    onChange={this.handleChange}
-                />
+                <AmountSelector currency="SEK" min={740} max={1330} stepSize={100} value={this.state.value} onChange={this.handleChange} />
             </CollectorPortalFramework>
         );
     }

@@ -31,5 +31,5 @@ components.add(
             </div>
         );
     },
-    { notes }
+    { notes }
 );

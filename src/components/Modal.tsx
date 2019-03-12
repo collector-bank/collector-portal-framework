@@ -13,12 +13,14 @@ const transitionTime = 300;
 
 export const Modal: React.StatelessComponent<any> = props => (
     <>
-        <Global styles={{
-            '.ReactModal__Body--open': {
-                overflow: 'hidden',
-                touchAction: 'none',
-            }
-        }} />
+        <Global
+            styles={{
+                '.ReactModal__Body--open': {
+                    overflow: 'hidden',
+                    touchAction: 'none',
+                },
+            }}
+        />
         <ClassNames>
             {({ css }) => (
                 <ReactModal
@@ -38,10 +40,10 @@ export const Modal: React.StatelessComponent<any> = props => (
                             boxSizing: 'border-box',
                             maxHeight: 'calc(100vh - 80px)',
                             maxWidth: 'calc(100vw - 32px)',
-                        
+
                             transition: `transform ${transitionTime}ms ease-out`,
                             transform: 'translateY(-30px)',
-                        
+
                             [breakpoints.mobileAndLower]: {
                                 padding: 24,
                             },
@@ -68,7 +70,7 @@ export const Modal: React.StatelessComponent<any> = props => (
                             justifyContent: 'center',
                             alignItems: 'center',
                             zIndex: 999,
-                        
+
                             transition: `opacity ${transitionTime}ms ease-in-out`,
                             opacity: 0,
                         }),

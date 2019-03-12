@@ -6,9 +6,12 @@ const track = (theme: Theme, percentFilled?: number) => ({
     width: '100%',
     height: 9,
     cursor: 'pointer',
-    background: percentFilled != null
-        ? `linear-gradient(to right, ${theme.colors.primary} ${percentFilled}%, ${theme.colors.primary} ${percentFilled}%, ${theme.colors.lightGray} ${percentFilled}%)`
-        : theme.colors.lightGray,
+    background:
+        percentFilled != null
+            ? `linear-gradient(to right, ${theme.colors.primary} ${percentFilled}%, ${theme.colors.primary} ${percentFilled}%, ${
+                  theme.colors.lightGray
+              } ${percentFilled}%)`
+            : theme.colors.lightGray,
     borderRadius: theme.borderRadius.small,
 });
 

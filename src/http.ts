@@ -39,8 +39,8 @@ const request = (method: string) => (endpoint: string, payload?: any, extraHeade
     }
 
     const getPromiseForStatus = (response: Response, stream: Promise<any>) =>
-        stream.then(
-            content => (response.status >= 200 && response.status < 300 ? content : Promise.reject({ status: response.status, content }))
+        stream.then(content =>
+            response.status >= 200 && response.status < 300 ? content : Promise.reject({ status: response.status, content })
         );
 
     return window

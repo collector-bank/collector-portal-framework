@@ -29,7 +29,7 @@ components.add(
             </State>
         );
     },
-    { notes }
+    { notes }
 );
 
 const groupStore = new Store({

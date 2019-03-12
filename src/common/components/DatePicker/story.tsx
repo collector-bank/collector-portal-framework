@@ -29,5 +29,5 @@ components.add(
             </State>
         );
     },
-    { notes }
+    { notes }
 );

@@ -9,7 +9,7 @@ import { useWindowSize } from '../../hooks/use-window-size';
 const Hamburger = () => (
     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
         <g fill="currentColor" fillRule="nonzero">
-            <path d="M3 13h18a1 1 0 0 0 0-2H3a1 1 0 0 0 0 2zM3 7h18a1 1 0 0 0 0-2H3a1 1 0 1 0 0 2zM3 19h18a1 1 0 0 0 0-2H3a1 1 0 0 0 0 2z"/>
+            <path d="M3 13h18a1 1 0 0 0 0-2H3a1 1 0 0 0 0 2zM3 7h18a1 1 0 0 0 0-2H3a1 1 0 1 0 0 2zM3 19h18a1 1 0 0 0 0-2H3a1 1 0 0 0 0 2z" />
         </g>
     </svg>
 );
@@ -17,8 +17,8 @@ const Hamburger = () => (
 const Cross = () => (
     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
         <g fill="currentColor" fillRule="nonzero">
-            <path d="M17.293 5.293l-12 12a1 1 0 0 0 1.414 1.414l12-12a1 1 0 1 0-1.414-1.414z"/>
-            <path d="M5.293 6.707l12 12a1 1 0 0 0 1.414-1.414l-12-12a1 1 0 0 0-1.414 1.414z"/>
+            <path d="M17.293 5.293l-12 12a1 1 0 0 0 1.414 1.414l12-12a1 1 0 1 0-1.414-1.414z" />
+            <path d="M5.293 6.707l12 12a1 1 0 0 0 1.414-1.414l-12-12a1 1 0 0 0-1.414 1.414z" />
         </g>
     </svg>
 );
@@ -51,8 +51,8 @@ const IconButton = styled.button({
     },
 
     '&:hover': {
-        opacity: .5,
-    }
+        opacity: 0.5,
+    },
 });
 
 const FooterContainer = styled.footer(({ theme }) => ({
@@ -164,49 +164,43 @@ const styles = (theme: Theme): any => ({
         visibility: 'hidden',
         transition: 'opacity 250ms ease-in-out, visibility 250ms ease-in-out',
         backgroundColor: 'rgba(0, 0, 0, .3)',
-    }
+    },
 });
 
 export const MainMenu: React.StatelessComponent<MainMenuProps> = withTheme(({ items, menuFooter, theme }) => {
     const windowSize = useWindowSize();
-    const [ sidebarIsOpen, setSidebarOpen ] = useState(false);
+    const [sidebarIsOpen, setSidebarOpen] = useState(false);
     const openSidebar = () => setSidebarOpen(true);
     const closeSidebar = () => setSidebarOpen(false);
 
     const renderSidebar = (includeCloseButton = false) => (
         <Container>
-            {includeCloseButton &&
+            {includeCloseButton && (
                 <IconButton type="button" onClick={closeSidebar}>
                     <Cross />
                 </IconButton>
-            }
+            )}
             <MenuContainer>
                 <MenuList>
                     {items.map((item: MainMenuItem, i: number) => (
                         <MenuListItem key={i} useMarginTop={item.useMarginTop}>
-                            {item.externalLink
-                                ? (
-                                    <ExternalNavLink href={item.path} onClick={closeSidebar}>
-                                        <NavLinkIcon icon={item.icon} />
-                                        <NavLinkLabel>{item.label}</NavLinkLabel>
-                                    </ExternalNavLink>
-                                ) : (
-                                    <InternalNavLink to={item.path} onClick={closeSidebar}>
-                                        <NavLinkIcon icon={item.icon} />
-                                        <NavLinkLabel>{item.label}</NavLinkLabel>
-                                    </InternalNavLink>
-                                )
-                            }
+                            {item.externalLink ? (
+                                <ExternalNavLink href={item.path} onClick={closeSidebar}>
+                                    <NavLinkIcon icon={item.icon} />
+                                    <NavLinkLabel>{item.label}</NavLinkLabel>
+                                </ExternalNavLink>
+                            ) : (
+                                <InternalNavLink to={item.path} onClick={closeSidebar}>
+                                    <NavLinkIcon icon={item.icon} />
+                                    <NavLinkLabel>{item.label}</NavLinkLabel>
+                                </InternalNavLink>
+                            )}
                         </MenuListItem>
                     ))}
                 </MenuList>
             </MenuContainer>
 
-            {menuFooter &&
-                <FooterContainer>
-                    {menuFooter}
-                </FooterContainer>
-            }
+            {menuFooter && <FooterContainer>{menuFooter}</FooterContainer>}
         </Container>
     );
 
@@ -226,6 +220,6 @@ export const MainMenu: React.StatelessComponent<MainMenuProps> = withTheme(({ it
                     <Hamburger />
                 </IconButton>
             </Sidebar>
-        )
+        );
     }
 });

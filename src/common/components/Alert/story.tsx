@@ -35,5 +35,5 @@ components.add(
             />
         );
     },
-    { notes }
+    { notes }
 );

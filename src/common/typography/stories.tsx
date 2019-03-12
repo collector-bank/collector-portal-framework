@@ -16,12 +16,12 @@ const loremIpsum = `
     eros elementum vitae. Curabitur sagittis nulla in nisl vulputate, a semper est imperdiet.
 `;
 
-typography.add('Heading 1', () => <H1>{text('Heading', 'Heading 1')}</H1>, { notes });
+typography.add('Heading 1', () => <H1>{text('Heading', 'Heading 1')}</H1>, { notes });
 
-typography.add('Heading 2', () => <H2>{text('Heading', 'Heading 2')}</H2>, { notes });
+typography.add('Heading 2', () => <H2>{text('Heading', 'Heading 2')}</H2>, { notes });
 
-typography.add('Heading 3', () => <H3>{text('Heading', 'Heading 3')}</H3>, { notes });
+typography.add('Heading 3', () => <H3>{text('Heading', 'Heading 3')}</H3>, { notes });
 
-typography.add('Body text', () => <Text>{text('Text', loremIpsum)}</Text>, { notes });
+typography.add('Body text', () => <Text>{text('Text', loremIpsum)}</Text>, { notes });
 
-typography.add('Text link', () => <TextLink href="#">{text('Link text', 'This is a link')}</TextLink>, { notes });
+typography.add('Text link', () => <TextLink href="#">{text('Link text', 'This is a link')}</TextLink>, { notes });

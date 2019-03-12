@@ -13,5 +13,5 @@ components.add(
     () => {
         return <Spinner />;
     },
-    { notes }
+    { notes }
 );

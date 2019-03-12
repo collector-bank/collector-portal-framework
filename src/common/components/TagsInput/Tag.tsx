@@ -12,22 +12,18 @@ export interface Tag {
     id: string;
 }
 
-const TagContainer = styled.div(
-    {
-        padding: '8px 16px',
-        marginRight: 8,
-        marginTop: 16,
-        display: 'flex',
-        alignItems: 'center',
-        justifyContent: 'center',
-        whiteSpace: 'nowrap',
-        overflow: 'hidden',
-    },
-    ({ theme }) => ({
-        borderRadius: theme.borderRadius.large,
-        backgroundColor: theme.colors.lightGray,
-    })
-);
+const TagContainer = styled.div(({ theme }) => ({
+    padding: '8px 16px',
+    marginRight: 8,
+    marginTop: 16,
+    display: 'flex',
+    alignItems: 'center',
+    justifyContent: 'center',
+    whiteSpace: 'nowrap',
+    overflow: 'hidden',
+    borderRadius: theme.borderRadius.large,
+    backgroundColor: theme.colors.lightGray,
+}));
 
 const IconContainer = styled.div({
     marginLeft: 8,

@@ -31,7 +31,7 @@ const getBorderColor = (indicateError: boolean, showAlertMessage: boolean, theme
     return theme.colors.mediumGray;
 };
 
-const commonStyles = (indicateError: boolean, theme: Theme, showAlertMessage: boolean): CSSObject => ({
+export const InputField: any = styled.input<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
     font: 'inherit',
     color: 'inherit',
     width: '100%',
@@ -52,15 +52,9 @@ const commonStyles = (indicateError: boolean, theme: Theme, showAlertMessage: bo
         background: theme.colors.offWhite,
         borderColor: theme.colors.lightGray,
     },
-});
-
-export const InputField: any = styled.input<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
-    ...commonStyles(indicateError, theme, showAlertMessage),
 }));
 
-const Textarea = styled.textarea<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
-    ...commonStyles(indicateError, theme, showAlertMessage),
-
+const Textarea = styled(InputField.withComponent('textarea'))<ErrorProps>(({ showAlertMessage }) => ({
     resize: 'vertical',
     minHeight: 80,
     marginBottom: showAlertMessage ? -6 : undefined,
@@ -91,12 +85,12 @@ export const InputWarning: any = styled.div(({ theme }) => ({
 }));
 
 export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
-    label?: React.ReactNode;
+    label?: string | React.ReactNode;
     value?: string;
     placeholder?: string;
     multiline?: boolean;
     disabled?: boolean;
-    error?: boolean | React.ReactNode;
+    error?: string | boolean | React.ReactNode;
     warning?: React.ReactNode;
     maxLength?: number;
     pattern?: string;

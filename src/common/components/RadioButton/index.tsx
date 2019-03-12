@@ -2,13 +2,11 @@ import React from 'react';
 import styled from '../../../';
 import uniqid from 'uniqid';
 
-const RadioButtonContainer = styled.div<{ disabled?: Boolean }>(
-    {
-        display: 'flex',
-        marginBottom: 8,
-    },
-    ({ disabled }) => (disabled ? { opacity: 0.5 } : {})
-);
+const RadioButtonContainer = styled.div<{ disabled?: Boolean }>(({ disabled }) => ({
+    display: 'flex',
+    marginBottom: 8,
+    opacity: disabled ? 0.5 : 1,
+}));
 
 const Input = styled.input(({ theme }) => ({
     appearance: 'none',
@@ -32,6 +30,7 @@ const Input = styled.input(({ theme }) => ({
         borderRadius: '100%',
         transition: 'background-color 150ms',
     },
+
     '&:checked': {
         borderColor: theme.colors.primary,
     },

@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text } from '@storybook/addon-knobs';
 import { withReadme } from 'storybook-readme';
 import { H1, H2, H3, Text, TextLink } from './';
 import readme from './README.md';
@@ -18,15 +18,15 @@ const loremIpsum = `
 `;
 
 typography.add('Heading 1', withReadme(readme, () =>
-    <H1 centered={boolean('Centered', false)}>{text('Heading', 'Heading 1')}</H1>
+    <H1>{text('Heading', 'Heading 1')}</H1>
 ));
 
 typography.add('Heading 2', withReadme(readme, () =>
-    <H2 centered={boolean('Centered', false)}>{text('Heading', 'Heading 2')}</H2>
+    <H2>{text('Heading', 'Heading 2')}</H2>
 ));
 
 typography.add('Heading 3', withReadme(readme, () =>
-    <H3 centered={boolean('Centered', false)}>{text('Heading', 'Heading 3')}</H3>
+    <H3>{text('Heading', 'Heading 3')}</H3>
 ));
 
 typography.add('Body text', withReadme(readme, () =>

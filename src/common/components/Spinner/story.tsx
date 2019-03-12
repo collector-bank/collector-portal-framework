@@ -11,7 +11,6 @@ components.addDecorator(withKnobs);
 
 components.add('Spinner', withReadme(readme, () => {
     return (
-        <Spinner
-        />
+        <Spinner />
     );
 }));

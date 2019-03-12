@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { forwardRef } from 'react';
 import { CSSObject } from '@emotion/core';
 import { Theme } from '../../../themes';
 import { lighten, darken } from 'polished';
@@ -7,10 +7,7 @@ import styled from '../../../';
 /**
  * The SVG was made with http://loading.io
  */
-const spinner = (color: string) =>
-    `'data:image/svg+xml,%3Csvg width=%2280%22 height=%2280%22 xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22 preserveAspectRatio=%22xMidYMid%22 class=%22uil-ring-alt%22%3E%3Cpath class=%22bk%22 fill=%22none%22 d=%22M0 0h100v100h-100z%22/%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22none%22/%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 stroke=%22${encodeURIComponent(
-        color
-    )}%22 stroke-width=%226%22 stroke-linecap=%22round%22 fill=%22none%22%3E%3Canimate attributeName=%22stroke-dashoffset%22 dur=%222s%22 repeatCount=%22indefinite%22 from=%220%22 to=%22502%22/%3E%3Canimate attributeName=%22stroke-dasharray%22 dur=%222s%22 repeatCount=%22indefinite%22 values=%22150.6 100.4;1 250;150.6 100.4%22/%3E%3C/circle%3E%3C/svg%3E'`;
+const spinner = (color: string) => `'data:image/svg+xml,%3Csvg width=%2280%22 height=%2280%22 xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22 preserveAspectRatio=%22xMidYMid%22 class=%22uil-ring-alt%22%3E%3Cpath class=%22bk%22 fill=%22none%22 d=%22M0 0h100v100h-100z%22/%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22none%22/%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 stroke=%22${encodeURIComponent(color)}%22 stroke-width=%226%22 stroke-linecap=%22round%22 fill=%22none%22%3E%3Canimate attributeName=%22stroke-dashoffset%22 dur=%222s%22 repeatCount=%22indefinite%22 from=%220%22 to=%22502%22/%3E%3Canimate attributeName=%22stroke-dasharray%22 dur=%222s%22 repeatCount=%22indefinite%22 values=%22150.6 100.4;1 250;150.6 100.4%22/%3E%3C/circle%3E%3C/svg%3E'`;
 
 export type ButtonType = 'primary' | 'secondary' | 'secondaryNegative' | 'success' | 'warn' | 'text';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -30,7 +27,7 @@ export interface ButtonElementProps extends ButtonProps {
     theme: Theme;
 }
 
-const ButtonElement: any = styled.button<ButtonProps>(({ size, type, loading, icon, theme }) => {
+const ButtonElement = styled.button<ButtonProps>(({ size, type, loading, icon, theme }) => {
     const styles: CSSObject = {
         fontFamily: 'inherit',
         whiteSpace: 'nowrap',
@@ -136,6 +133,18 @@ const getTypeStyles = (theme: Theme, type?: ButtonType) => {
 };
 
 const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
+    const small: CSSObject = {
+        fontSize: 16,
+        lineHeight: '24px',
+        fontWeight: 500,
+        minWidth: 80,
+        paddingTop: 6,
+        paddingBottom: 6,
+        paddingLeft: 16,
+        paddingRight: 16,
+        backgroundSize: 22, // the loading indicator
+    };
+
     const medium: CSSObject = {
         fontSize: 18,
         lineHeight: '24px',
@@ -145,36 +154,35 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
         paddingBottom: 12,
         paddingLeft: 24,
         paddingRight: 24,
+        backgroundSize: 36, // the loading indicator
+    };
+
+    const large: CSSObject = {
+        fontSize: 21,
+        lineHeight: '32px',
+        fontWeight: 500,
+        minWidth: 200,
+        paddingTop: 12,
+        paddingBottom: 12,
+        paddingLeft: 32,
+        paddingRight: 32,
+        backgroundSize: 46, // the loading indicator
     };
 
     switch (size) {
         case 'small':
-            return {
-                fontSize: 16,
-                lineHeight: '24px',
-                fontWeight: 500,
-                minWidth: 80,
-                paddingTop: 4,
-                paddingBottom: 4,
-                paddingLeft: 12,
-                paddingRight: 12,
-            };
+            return small;
         case 'large':
             return {
-                fontSize: 21,
-                lineHeight: '32px',
-                fontWeight: 500,
-                minWidth: 200,
-                paddingTop: 12,
-                paddingBottom: 12,
-                paddingLeft: 32,
-                paddingRight: 32,
-
+                ...large,
                 [theme.breakpoints.mobileAndLower]: medium,
             };
         case 'medium':
         default:
-            return medium;
+            return {
+                ...medium,
+                [theme.breakpoints.mobileAndLower]: small,
+            };
     }
 };
 
@@ -209,19 +217,6 @@ const getLoadingStyles = (theme: Theme, loading?: boolean, type?: ButtonType, si
                 styles.backgroundImage = `url(${spinner(theme.colors.white)})`;
                 break;
         }
-
-        switch (size) {
-            case 'small':
-                styles.backgroundSize = 22;
-                break;
-            case 'large':
-                styles.backgroundSize = 46;
-                break;
-            case 'medium':
-            default:
-                styles.backgroundSize = 36;
-                break;
-        }
     }
 
     return styles;
@@ -249,21 +244,18 @@ const IconContainer = styled.span<{ iconAlignment: IconAlignment }>(({ iconAlign
     alignItems: 'center',
 }));
 
-export const Button: React.StatelessComponent<ButtonProps & React.ButtonHTMLAttributes<HTMLButtonElement>> = ({
-    loading,
-    children,
-    icon,
-    iconAlignment = 'start',
-    size,
-    ...rest
-}) => {
-    return (
-        <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} {...rest}>
+type CollectorButtonProps = React.ForwardRefExoticComponent<
+    ButtonProps & React.RefAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement>
+>;
+
+export const Button: CollectorButtonProps = forwardRef<HTMLButtonElement, ButtonProps>(
+    ({ loading, children, icon, iconAlignment = 'start', size, ...rest }, ref) => (
+        <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} {...rest} ref={ref}>
             {icon && iconAlignment === 'start' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}
             <span>{children}</span>
             {icon && iconAlignment === 'end' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}
         </ButtonElement>
-    );
-};
+    )
+);
 
 Button.displayName = 'Collector.Button';

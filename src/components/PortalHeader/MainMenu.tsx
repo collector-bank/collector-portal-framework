@@ -72,11 +72,7 @@ const MenuList = styled.ul({
     padding: 0,
 });
 
-interface MenuListItemProps {
-    useMarginTop?: boolean;
-}
-
-const MenuListItem = styled.li<MenuListItemProps>(({ useMarginTop }) => ({
+const MenuListItem = styled.li<{ useMarginTop?: boolean }>(({ useMarginTop }) => ({
     marginTop: useMarginTop ? 40 : 0,
     marginLeft: 12,
     marginRight: 12,

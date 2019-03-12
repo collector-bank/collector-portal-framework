@@ -18,20 +18,23 @@ const components = storiesOf('Components', module);
 
 components.addDecorator(withKnobs);
 
-components.add('Button', withReadme(readme, () => {
-    const types: ButtonType[] = ['primary', 'secondary', 'secondaryNegative', 'warn', 'text', 'success'];
-    const sizes: ButtonSize[] = ['small', 'medium', 'large'];
+components.add(
+    'Button',
+    withReadme(readme, () => {
+        const types: ButtonType[] = ['primary', 'secondary', 'secondaryNegative', 'warn', 'text', 'success'];
+        const sizes: ButtonSize[] = ['small', 'medium', 'large'];
 
-    return (
-        <Button
-            type={select('Type', types, 'primary')}
-            size={select('Size', sizes, 'medium')}
-            disabled={boolean('Disabled', false)}
-            loading={boolean('Loading', false)}
-            icon={boolean('Icon', false) ? <BankIdIcon /> : undefined}
-            iconAlignment={select('Icon alignment', ['start', 'end'], 'start')}
-        >
-            {text('Label', 'En knapp')}
-        </Button>
-    );
-}));
+        return (
+            <Button
+                type={select('Type', types, 'primary')}
+                size={select('Size', sizes, 'medium')}
+                disabled={boolean('Disabled', false)}
+                loading={boolean('Loading', false)}
+                icon={boolean('Icon', false) ? <BankIdIcon /> : undefined}
+                iconAlignment={select('Icon alignment', ['start', 'end'], 'start')}
+            >
+                {text('Label', 'En knapp')}
+            </Button>
+        );
+    })
+);

@@ -1,8 +1,8 @@
 export * from '../common/components';
 export * from '../common/typography';
 
-export * from './Fieldset';
 export * from './FetchHandler';
+export * from './Fieldset';
 export * from './Modal';
 export * from './NoBr';
 export * from './PageContainer';

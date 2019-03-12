@@ -32,19 +32,15 @@ const Chevron = styled.a<ChevronProps>(({ direction, enabled, theme }) => ({
     cursor: enabled ? 'pointer' : 'default',
 }));
 
-const Ellipses = styled.span(
-    {
-        width: 20,
-        display: 'inline-block',
-        paddingLeft: 6,
-        paddingRight: 6,
-        textAlign: 'center',
-        fontSize: 18,
-    },
-    ({ theme }) => ({
-        color: theme.colors.darkGray,
-    })
-);
+const Ellipses = styled.span(({ theme }) => ({
+    width: 20,
+    display: 'inline-block',
+    paddingLeft: 6,
+    paddingRight: 6,
+    textAlign: 'center',
+    fontSize: 18,
+    color: theme.colors.darkGray,
+}));
 
 const Page = styled.a<{ active: boolean }>(({ active, theme }) => ({
     paddingLeft: 6,

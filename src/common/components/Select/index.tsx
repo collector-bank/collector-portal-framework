@@ -32,27 +32,24 @@ const SelectFieldContainer = styled.div<{ hasError: boolean; disabled?: boolean 
     },
 }));
 
-const SelectField = styled.select(
-    {
-        font: 'inherit',
-        color: 'inherit',
-        appearance: 'none',
-        background: 'transparent',
-        border: 0,
-        width: '100%',
-        padding: 11, // To make it 11 when accounting for border
-        paddingRight: 40,
+const SelectField = styled.select(({ theme }) => ({
+    font: 'inherit',
+    color: 'inherit',
+    appearance: 'none',
+    background: 'transparent',
+    border: 0,
+    width: '100%',
+    padding: 11, // To make it 11 when accounting for border
+    paddingRight: 40,
 
-        '&::-ms-expand': {
-            display: 'none',
-        },
+    '&::-ms-expand': {
+        display: 'none',
     },
-    ({ theme }) => ({
-        '&:disabled': {
-            background: theme.colors.offWhite,
-        },
-    })
-);
+
+    '&:disabled': {
+        background: theme.colors.offWhite,
+    },
+}));
 
 export interface SelectItem {
     key?: string;

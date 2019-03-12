@@ -138,10 +138,10 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
         lineHeight: '24px',
         fontWeight: 500,
         minWidth: 80,
-        paddingTop: 6,
-        paddingBottom: 6,
-        paddingLeft: 16,
-        paddingRight: 16,
+        paddingTop: 8,
+        paddingBottom: 8,
+        paddingLeft: 24,
+        paddingRight: 24,
         backgroundSize: 22, // the loading indicator
     };
 

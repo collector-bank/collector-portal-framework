@@ -17,5 +17,5 @@ Buttons are used to invoke an event.
 ## Example
 
 ```jsx
-<Button onClick={() => console.log('the button was clicked')}>Foobar</Button>
+<Button>Foobar</Button>
 ```

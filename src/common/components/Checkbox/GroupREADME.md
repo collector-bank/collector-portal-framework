@@ -40,7 +40,5 @@ const items = [
     }
 ];
 
-return (
-    <CheckboxGroup label="En label" items={items} />
-);
+return <CheckboxGroup label="En label" items={items} />;
 ```

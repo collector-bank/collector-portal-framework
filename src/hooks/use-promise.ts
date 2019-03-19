@@ -19,7 +19,7 @@ export function usePromise<TResult>(promise: () => Promise<TResult>) {
         }
 
         setLoading(false);
-    }, []);
+    }, [promise]);
 
     return { data, loading, error, trigger };
 }

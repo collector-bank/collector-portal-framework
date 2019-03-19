@@ -15,6 +15,6 @@ Our typographic components are simple to use as they are close to the completely
 ## Example
 ```jsx
 <H1>A heading</H1>
-<H2>A smaller centered heading</H2>
+<H2>A second level heading</H2>
 <Text>A paragraph of text</Text>
 ```

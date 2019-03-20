@@ -1,13 +1,14 @@
 import React from 'react';
-import { configure, addDecorator } from '@storybook/react';
-import { withOptions } from '@storybook/addon-options';
+import { configure, addDecorator, addParameters } from '@storybook/react';
 import { CollectorPortalFramework } from '../src';
 
-addDecorator(withOptions({
-    name: 'Collector Portal Framework',
-    url: 'https://github.com/collector-bank/collector-portal-framework',
-    enableShortcuts: false,
-}));
+addParameters({
+    option: {
+        brandTitle: 'Collector Portal Framework',
+        brandUrl: 'https://github.com/collector-bank/collector-portal-framework',
+        enableShortcuts: false,
+    }
+});
 
 addDecorator(story => (
     <CollectorPortalFramework>

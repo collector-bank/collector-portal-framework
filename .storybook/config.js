@@ -1,11 +1,16 @@
 import React from 'react';
 import { configure, addDecorator, addParameters } from '@storybook/react';
+import { create } from '@storybook/theming';
 import { CollectorPortalFramework } from '../src';
 
 addParameters({
-    option: {
-        brandTitle: 'Collector Portal Framework',
-        brandUrl: 'https://github.com/collector-bank/collector-portal-framework',
+    options: {
+        theme: create({
+            base: 'light',
+            brandTitle: 'Collector Portal Framework',
+            brandUrl: 'https://github.com/collector-bank/collector-portal-framework',
+            brandImage: null,
+          }),
         enableShortcuts: false,
     }
 });

@@ -26,72 +26,73 @@ const inputErrorTransition = css({
     transition: 'height 150ms',
 });
 
-const InputFieldWithIcon = styled(InputField)<{ hasError: boolean; }>({
+const InputFieldWithIcon = styled(InputField)<{ hasError: boolean }>({
     background: `url(${calendar}) no-repeat 95% center`,
     backgroundPosition: `calc(100% - 12px) 50%`, // doesn't work in IE11, that's why we need the 95% fallback above
     backgroundSize: '24px 24px', // a single value here doesn't work in IE11
 });
 
-const style = (theme: Theme) => css({
-    '.react-datepicker': {
-        font: theme.fonts.desktop.small,
-        borderColor: theme.colors.mediumGray,
-        borderRadius: theme.borderRadius.small,
-
-        '& .react-datepicker__current-month, & .react-datepicker__day-name': {
-            textTransform: 'capitalize',
-        },
-
-        '& .react-datepicker__current-month': {
-            font: theme.fonts.desktop.medium,
-            fontWeight: 500,
-        },
-
-        '& .react-datepicker__navigation': {
-            top: 14,
-        },
-
-        '& .react-datepicker__day-name, & .react-datepicker__day': {
-            width: 32,
-            lineHeight: '32px',
-        },
-
-        '& .react-datepicker__day--selected': {
-            backgroundColor: theme.colors.primary,
-        },
-
-        '& .react-datepicker__day:not(.react-datepicker__day--selected):not(.react-datepicker__day--disabled):hover': {
-            backgroundColor: theme.colors.offWhite,
-        },
-
-        '& .react-datepicker__day-name': {
-            color: theme.colors.darkGray,
-        },
-
-        '& .react-datepicker__header': {
-            backgroundColor: theme.colors.offWhite,
+const style = (theme: Theme) =>
+    css({
+        '.react-datepicker': {
+            font: theme.fonts.desktop.small,
             borderColor: theme.colors.mediumGray,
-            borderTopLeftRadius: theme.borderRadius.small,
-            borderTopRightRadius: theme.borderRadius.small,
-        },
+            borderRadius: theme.borderRadius.small,
 
-        '.react-datepicker-popper[data-placement^="bottom"] & .react-datepicker__triangle': {
-            borderBottomColor: theme.colors.offWhite,
-        },
+            '& .react-datepicker__current-month, & .react-datepicker__day-name': {
+                textTransform: 'capitalize',
+            },
 
-        '.react-datepicker-popper[data-placement^="bottom"] & .react-datepicker__triangle:before': {
-            borderBottomColor: theme.colors.mediumGray,
-        },
+            '& .react-datepicker__current-month': {
+                font: theme.fonts.desktop.medium,
+                fontWeight: 500,
+            },
 
-        '& .react-datepicker__navigation--previous': {
-            borderRightColor: theme.colors.mediumGray,
-        },
+            '& .react-datepicker__navigation': {
+                top: 14,
+            },
 
-        '& .react-datepicker__navigation--next': {
-            borderLeftColor: theme.colors.mediumGray,
+            '& .react-datepicker__day-name, & .react-datepicker__day': {
+                width: 32,
+                lineHeight: '32px',
+            },
+
+            '& .react-datepicker__day--selected': {
+                backgroundColor: theme.colors.primary,
+            },
+
+            '& .react-datepicker__day:not(.react-datepicker__day--selected):not(.react-datepicker__day--disabled):hover': {
+                backgroundColor: theme.colors.offWhite,
+            },
+
+            '& .react-datepicker__day-name': {
+                color: theme.colors.darkGray,
+            },
+
+            '& .react-datepicker__header': {
+                backgroundColor: theme.colors.offWhite,
+                borderColor: theme.colors.mediumGray,
+                borderTopLeftRadius: theme.borderRadius.small,
+                borderTopRightRadius: theme.borderRadius.small,
+            },
+
+            '.react-datepicker-popper[data-placement^="bottom"] & .react-datepicker__triangle': {
+                borderBottomColor: theme.colors.offWhite,
+            },
+
+            '.react-datepicker-popper[data-placement^="bottom"] & .react-datepicker__triangle:before': {
+                borderBottomColor: theme.colors.mediumGray,
+            },
+
+            '& .react-datepicker__navigation--previous': {
+                borderRightColor: theme.colors.mediumGray,
+            },
+
+            '& .react-datepicker__navigation--next': {
+                borderLeftColor: theme.colors.mediumGray,
+            },
         },
-    },
-});
+    });
 
 const inputWidth = 220;
 css.global('.react-datepicker__input-container', {
@@ -122,14 +123,14 @@ class DatePicker_ extends React.Component<DatePickerProps & { theme: Theme }, St
     };
 
     /*
-    * Here we use the fact that there are two onChange handlers, one of which
-    * is used to set a valid date only, to handle an invalid state.
-    * We set the isValid state to true whenever a valid date is set,
-    * which is the onChange, but we always set isValid to false otherwise.
-    * Since onChange is always executed later, we are able to ensure that
-    * isValid is only set to valid if a proper onChange has been run.
-    * Then, onBlur, if we did not recieve an onChange event, we display an error message.
-    */
+     * Here we use the fact that there are two onChange handlers, one of which
+     * is used to set a valid date only, to handle an invalid state.
+     * We set the isValid state to true whenever a valid date is set,
+     * which is the onChange, but we always set isValid to false otherwise.
+     * Since onChange is always executed later, we are able to ensure that
+     * isValid is only set to valid if a proper onChange has been run.
+     * Then, onBlur, if we did not recieve an onChange event, we display an error message.
+     */
     private handleChange = (date: Date) => {
         this.setState({ isValid: true }, () => {
             this.props.onChange(date);

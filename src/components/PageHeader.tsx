@@ -43,7 +43,5 @@ export interface PageHeaderProps {
 }
 
 export const PageHeader: React.StatelessComponent<PageHeaderProps> = ({ title, children }) => (
-    <PageHeaderContainer>
-        {title ? <Title>{title}</Title> : children}
-    </PageHeaderContainer>
+    <PageHeaderContainer>{title ? <Title>{title}</Title> : children}</PageHeaderContainer>
 );

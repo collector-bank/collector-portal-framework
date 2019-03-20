@@ -12,7 +12,7 @@ This compoment can be used to capture a date. It provides an input field which, 
 | `minDate`        |           | Date                           |                        |
 | `maxDate`        |           | Date                           |                        |
 | `invalidMessage` |           | string                         |                        |
-| `onChange`       |           | `(date: Date \| null) => void` |                        |
+| `onChange`       |           | `(date: Date OR null) => void` |                        |
 
 ## Example
 

@@ -1,63 +1,53 @@
-import React from 'react';
-import { NavLink as RouterNavLink } from 'react-router-dom';
+import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import { NavLink } from 'react-router-dom';
 import styled from '../';
+import { useWindowSize } from '../hooks';
 
-const NavContainer = styled.nav({
+const Container = styled.nav({
     marginBottom: 30,
 });
 
-const NavList = styled.ul(({ theme }) => ({
+const InnerContainer = styled.div<{ vertical: boolean }>(({ vertical }) => ({
+    display: vertical ? 'block' : 'inline-block',
+}));
+
+const List = styled.ul<{ vertical: boolean }>(({ theme, vertical }) => ({
     listStyleType: 'none',
     padding: 0,
     margin: 0,
     display: 'flex',
-
-    '> li': {
-        marginRight: 16,
-
-        [theme.breakpoints.mobileAndLower]: {
-            margin: 0,
-        },
-    },
-
-    [theme.breakpoints.mobileAndLower]: {
-        flexDirection: 'column',
-        borderRadius: theme.borderRadius.small,
-        border: `1px solid ${theme.colors.lightGray}`,
-        borderBottom: 0,
-    },
+    flexDirection: vertical ? 'column' : undefined,
+    borderRadius: vertical ? theme.borderRadius.small : undefined,
+    border: vertical ? `1px solid ${theme.colors.lightGray}` : undefined,
+    borderBottom: 0,
 }));
 
-const NavLink = styled(RouterNavLink)(({ theme }) => ({
+const Link = styled(NavLink)<{ vertical: boolean }>(({ theme, vertical }) => ({
     display: 'block',
-    padding: '10px 4px',
+    padding: '12px 20px',
     textDecoration: 'none',
     fontSize: 18,
     fontWeight: 500,
+    minWidth: 100,
     transitionProperty: 'border-color, color',
     transitionDuration: '200ms',
-    borderBottom: '4px solid transparent',
-    color: theme.colors.mediumGray,
+    textAlign: vertical ? 'left' : 'center',
+    borderBottom: vertical ? `1px solid ${theme.colors.lightGray}` : `4px solid ${theme.colors.lightGray}`,
+    borderLeft: vertical ? `4px solid ${theme.colors.lightGray}` : undefined,
+    flexDirection: vertical ? 'column' : undefined,
+    paddingLeft: vertical ? 16 : undefined,
 
     '&:hover': {
-        color: 'inherit',
+        color: theme.colors.primary,
     },
+
+    color: 'inherit',
 
     '&.active': {
-        color: 'inherit',
+        color: theme.colors.primary,
         borderColor: theme.colors.primary,
-    },
-
-    [theme.breakpoints.mobileAndLower]: {
-        borderBottom: `1px solid ${theme.colors.lightGray}`,
-        borderLeft: `4px solid ${theme.colors.lightGray}`,
-        flexDirection: 'column',
-        paddingLeft: 16,
-
-        '&.active': {
-            borderBottom: `1px solid ${theme.colors.lightGray}`,
-            borderLeftColor: theme.colors.primary,
-        },
+        borderBottom: vertical ? `1px solid ${theme.colors.lightGray}` : undefined,
+        borderLeftColor: vertical ? theme.colors.primary : undefined,
     },
 }));
 
@@ -70,16 +60,35 @@ export interface TabItem {
     label: string;
 }
 
-export const Tabs: React.StatelessComponent<TabsProps> = ({ items }) => (
-    <NavContainer>
-        <NavList>
-            {items.map((item, i) => (
-                <li key={i}>
-                    <NavLink to={item.path} exact={true}>
-                        {item.label}
-                    </NavLink>
-                </li>
-            ))}
-        </NavList>
-    </NavContainer>
-);
+export const Tabs: React.StatelessComponent<TabsProps> = ({ items }) => {
+    const [breakpoint, setBreakpoint] = useState(0);
+    const [vertical, setVertical] = useState(false);
+    const { innerWidth } = useWindowSize();
+    const ref = useRef<HTMLDivElement>(null);
+
+    useLayoutEffect(() => {
+        if (ref && ref.current) {
+            setBreakpoint(ref.current.offsetWidth);
+        }
+    }, [ref]);
+
+    useEffect(() => {
+        setVertical(innerWidth <= breakpoint);
+    }, [innerWidth, breakpoint]);
+
+    return (
+        <Container>
+            <InnerContainer ref={ref} vertical={vertical}>
+                <List vertical={vertical}>
+                    {items.map((item, i) => (
+                        <li key={i}>
+                            <Link to={item.path} exact={true} vertical={vertical}>
+                                {item.label}
+                            </Link>
+                        </li>
+                    ))}
+                </List>
+            </InnerContainer>
+        </Container>
+    );
+};

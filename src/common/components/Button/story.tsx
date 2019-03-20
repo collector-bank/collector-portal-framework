@@ -1,9 +1,8 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
-import { withReadme } from 'storybook-readme';
 import { Button, ButtonType, ButtonSize } from './';
-import readme from './README.md';
+import notes from './README.md';
 
 const BankIdIcon = () => (
     <svg width="100%" height="100%" viewBox="0 0 16 16">
@@ -20,7 +19,7 @@ components.addDecorator(withKnobs);
 
 components.add(
     'Button',
-    withReadme(readme, () => {
+    () => {
         const types: ButtonType[] = ['primary', 'secondary', 'secondaryNegative', 'warn', 'text', 'success'];
         const sizes: ButtonSize[] = ['small', 'medium', 'large'];
 
@@ -36,5 +35,6 @@ components.add(
                 {text('Label', 'En knapp')}
             </Button>
         );
-    })
+    },
+    { notes }
 );

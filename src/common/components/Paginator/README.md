@@ -15,15 +15,24 @@ This component allows a user to paginate an arbitrary list, with user defined it
 ## Example
 
 ```jsx
-State = {
-    originalList: ['Item 1'...'Item 100']
-};
+const originalList = ['Item 1'...'Item 100']; // pseudo code
+const activePage = 2;
+const pageSize = 10;
 
-const paginatedList = this.state.originalList.slice((this.state.activePage - 1) * this.pageSize , this.state.activePage * this.pageSize);
+const paginatedList = originalList.slice((activePage - 1) * pageSize, activePage * pageSize);
 
-<Paginator onChange={this.handleChange} numbersInMiddle={5} pageSize={this.pageSize} length={this.state.originalList.length} />
+<div>
+    <Paginator
+        onChange={this.handleChange}
+        numbersInMiddle={5}
+        pageSize={pageSize}
+        length={originalList.length}
+    />
 
-<Items>
-    {paginatedList.map(item => <Item>item</Item>)}
-</Items>
+    <Items>
+        {paginatedList.map(item =>
+            <Item>item</Item>
+        )}
+    </Items>
+</div>
 ```

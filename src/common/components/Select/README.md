@@ -33,7 +33,5 @@ const items = [
     { label: 'Baz' },
 ];
 
-return (
-    <Select label="Välj en" items={items} />
-);
+return <Select label="Välj en" items={items} />;
 ```

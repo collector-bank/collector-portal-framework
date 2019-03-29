@@ -103,7 +103,7 @@ const getAnimation = (fadeIn?: boolean): CSSObject => {
 export type AlertSize = 'small' | 'large';
 export type AlertType = 'error' | 'warning' | 'info' | 'success';
 
-export interface AlertProps {
+export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
     heading?: string;
     message: string | JSX.Element;
     type: AlertType;
@@ -112,7 +112,7 @@ export interface AlertProps {
     wide?: boolean;
 }
 
-export const Alert: React.StatelessComponent<AlertProps & React.ButtonHTMLAttributes<HTMLDivElement>> = ({
+export const Alert: React.StatelessComponent<AlertProps> = ({
     heading,
     message,
     alertSize = 'large' as AlertSize,

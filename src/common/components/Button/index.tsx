@@ -11,6 +11,8 @@ export type ButtonSize = 'small' | 'medium' | 'large';
 export type IconAlignment = 'start' | 'end';
 
 export interface ButtonProps {
+    name?: string;
+    value?: string;
     type?: ButtonType;
     size?: ButtonSize;
     icon?: JSX.Element;
@@ -226,11 +228,7 @@ const getSpinnerColorByType = (theme: Theme, type?: ButtonType) => {
     }
 }
 
-type CollectorButtonProps = React.ForwardRefExoticComponent<
-    ButtonProps & React.RefAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement>
->;
-
-const _Button: CollectorButtonProps = forwardRef<HTMLButtonElement, ButtonProps & { theme: Theme }>(
+const _Button = forwardRef<HTMLButtonElement, ButtonProps & { theme: Theme }>(
     ({ theme, type, loading, children, icon, iconAlignment = 'start', size, ...rest }, ref) => (
         <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} type={type} {...rest} ref={ref}>
             <div>

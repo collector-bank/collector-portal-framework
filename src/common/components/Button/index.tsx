@@ -1,16 +1,10 @@
 import React, { forwardRef } from 'react';
 import { CSSObject } from '@emotion/core';
-import { Theme } from '../../../themes';
+import { withTheme } from 'emotion-theming';
 import { lighten, darken } from 'polished';
+import { Theme } from '../../../themes';
 import styled from '../../../';
-
-/**
- * The SVG was made with http://loading.io
- */
-const spinner = (color: string) =>
-    `'data:image/svg+xml,%3Csvg width=%2280%22 height=%2280%22 xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 100 100%22 preserveAspectRatio=%22xMidYMid%22 class=%22uil-ring-alt%22%3E%3Cpath class=%22bk%22 fill=%22none%22 d=%22M0 0h100v100h-100z%22/%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 fill=%22none%22/%3E%3Ccircle cx=%2250%22 cy=%2250%22 r=%2240%22 stroke=%22${encodeURIComponent(
-        color
-    )}%22 stroke-width=%226%22 stroke-linecap=%22round%22 fill=%22none%22%3E%3Canimate attributeName=%22stroke-dashoffset%22 dur=%222s%22 repeatCount=%22indefinite%22 from=%220%22 to=%22502%22/%3E%3Canimate attributeName=%22stroke-dasharray%22 dur=%222s%22 repeatCount=%22indefinite%22 values=%22150.6 100.4;1 250;150.6 100.4%22/%3E%3C/circle%3E%3C/svg%3E'`;
+import { SpinnerSvg } from '../Spinner';
 
 export type ButtonType = 'primary' | 'secondary' | 'secondaryNegative' | 'success' | 'warn' | 'text';
 export type ButtonSize = 'small' | 'medium' | 'large';
@@ -40,6 +34,8 @@ const ButtonElement = styled.button<ButtonProps>(({ size, type, loading, icon, t
         border: 0,
         borderRadius: 50,
         transition: 'background-color 100ms',
+        position: 'relative',
+        pointerEvents: loading ? 'none' : undefined,
 
         '&:disabled': {
             backgroundColor: theme.colors.mediumGray,
@@ -50,16 +46,24 @@ const ButtonElement = styled.button<ButtonProps>(({ size, type, loading, icon, t
             cursor: 'pointer',
         },
 
+        '> div': { // all content but the spinner
+            visibility: loading ? 'hidden' : undefined,
+            display: icon ? 'flex' : undefined,
+            alignItems: icon ? 'center' : undefined,
+            justifyContent: icon ? 'center' : undefined,
+        },
+
+        '> svg': { // the spinner
+            display: loading ? 'flex' : 'none',
+            position: 'absolute',
+            top: '50%',
+            left: '50%',
+            transform: 'translate(-50%, -50%)',
+        },
+
         ...getSizeStyles(theme, size),
         ...getTypeStyles(theme, type),
-        ...getLoadingStyles(theme, loading, type, size),
     };
-
-    if (icon) {
-        styles.display = 'flex';
-        styles.alignItems = 'center';
-        styles.justifyContent = 'center';
-    }
 
     return styles;
 });
@@ -145,7 +149,6 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
         paddingBottom: 8,
         paddingLeft: 24,
         paddingRight: 24,
-        backgroundSize: 22, // the loading indicator
     };
 
     const medium: CSSObject = {
@@ -157,7 +160,6 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
         paddingBottom: 12,
         paddingLeft: 24,
         paddingRight: 24,
-        backgroundSize: 36, // the loading indicator
     };
 
     const large: CSSObject = {
@@ -169,7 +171,6 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
         paddingBottom: 12,
         paddingLeft: 32,
         paddingRight: 32,
-        backgroundSize: 46, // the loading indicator
     };
 
     switch (size) {
@@ -187,42 +188,6 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
                 [theme.breakpoints.mobileAndLower]: small,
             };
     }
-};
-
-const getLoadingStyles = (theme: Theme, loading?: boolean, type?: ButtonType, size?: ButtonSize): CSSObject => {
-    let styles: CSSObject = {};
-
-    if (loading) {
-        styles = {
-            backgroundRepeat: 'no-repeat',
-            backgroundPosition: 'center',
-            pointerEvents: 'none',
-
-            '> span': {
-                visibility: 'hidden',
-            },
-        };
-
-        switch (type) {
-            case 'warn':
-            case 'success':
-                styles.backgroundImage = `url(${spinner(theme.colors.white)})`;
-                break;
-            case 'secondary':
-            case 'secondaryNegative':
-                styles.backgroundImage = `url(${spinner(theme.colors.primary)})`;
-                break;
-            case 'text':
-                styles.backgroundImage = `url(${spinner(theme.colors.primary)})`;
-                break;
-            case 'primary':
-            default:
-                styles.backgroundImage = `url(${spinner(theme.colors.white)})`;
-                break;
-        }
-    }
-
-    return styles;
 };
 
 const background = (backgroundColor: string): CSSObject => ({
@@ -247,18 +212,37 @@ const IconContainer = styled.span<{ iconAlignment: IconAlignment }>(({ iconAlign
     alignItems: 'center',
 }));
 
+const getSpinnerColorByType = (theme: Theme, type?: ButtonType) => {
+    switch (type) {
+        case 'secondary':
+        case 'secondaryNegative':
+        case 'text':
+            return theme.colors.primary;
+        case 'primary':
+        case 'warn':
+        case 'success':
+        default:
+            return theme.colors.white;
+    }
+}
+
 type CollectorButtonProps = React.ForwardRefExoticComponent<
     ButtonProps & React.RefAttributes<HTMLButtonElement> & React.ButtonHTMLAttributes<HTMLButtonElement>
 >;
 
-export const Button: CollectorButtonProps = forwardRef<HTMLButtonElement, ButtonProps>(
-    ({ loading, children, icon, iconAlignment = 'start', size, ...rest }, ref) => (
-        <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} {...rest} ref={ref}>
-            {icon && iconAlignment === 'start' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}
-            <span>{children}</span>
-            {icon && iconAlignment === 'end' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}
+const _Button: CollectorButtonProps = forwardRef<HTMLButtonElement, ButtonProps & { theme: Theme }>(
+    ({ theme, type, loading, children, icon, iconAlignment = 'start', size, ...rest }, ref) => (
+        <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} type={type} {...rest} ref={ref}>
+            <div>
+                {icon && iconAlignment === 'start' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}
+                {children}
+                {icon && iconAlignment === 'end' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}
+            </div>
+            <SpinnerSvg size="75%" color={getSpinnerColorByType(theme, type)} />
         </ButtonElement>
     )
 );
+
+export const Button = withTheme(_Button);
 
 Button.displayName = 'Collector.Button';

@@ -1,25 +1,18 @@
 import React from 'react';
 import { configure, addDecorator, addParameters } from '@storybook/react';
-import { create } from '@storybook/theming';
 import { CollectorPortalFramework } from '../src';
+import portalTheme from './portalTheme';
 
 addParameters({
     options: {
-        theme: create({
-            base: 'light',
-            brandTitle: 'Collector Portal Framework',
-            brandUrl: 'https://github.com/collector-bank/collector-portal-framework',
-            brandImage: null,
-          }),
+        theme: portalTheme,
         enableShortcuts: false,
-    }
+    },
 });
 
 addDecorator(story => (
     <CollectorPortalFramework>
-        <div style={{ padding: 10 }}>
-            {story()}
-        </div>
+        <div style={{ padding: 10 }}>{story()}</div>
     </CollectorPortalFramework>
 ));
 

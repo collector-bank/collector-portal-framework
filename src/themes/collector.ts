@@ -22,18 +22,18 @@ const fontStack = 'ProximaNova, sans-serif';
 
 export const fonts = {
     desktop: {
-        small: `0.875rem/1.5rem ${fontStack}`,
-        medium: `1rem/1.5rem ${fontStack}`,
-        large: `1.3125rem/1.5rem ${fontStack}`,
-        xl: `1.75rem/2rem ${fontStack}`,
-        xxl: `2.375rem/2.5rem ${fontStack}`,
+        small: `14px/24px ${fontStack}`,
+        medium: `16px/24px ${fontStack}`,
+        large: `21px/24px ${fontStack}`,
+        xl: `28px/32px ${fontStack}`,
+        xxl: `38px/40px ${fontStack}`,
     },
     mobile: {
-        small: `14rem/1.5rem ${fontStack}`,
-        medium: `1rem/1.5rem ${fontStack}`,
-        large: `18rem/1.5rem ${fontStack}`,
-        xl: `1.3125rem/1.75rem ${fontStack}`,
-        xxl: `1.5rem/2rem ${fontStack}`,
+        small: `14px/24px ${fontStack}`,
+        medium: `16px/24px ${fontStack}`,
+        large: `18px/24px ${fontStack}`,
+        xl: `21px/28px ${fontStack}`,
+        xxl: `24px/32px ${fontStack}`,
     },
 };
 

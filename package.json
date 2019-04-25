@@ -64,7 +64,7 @@
         "copy-static-files": "copyfiles -u 1 \"src/**/*\" -e \"**/*.{ts,tsx}\" dist",
         "transpile": "tsc",
         "build": "npm run clean && npm run copy-static-files && npm run transpile && npm run prettier",
-        "prettier": "prettier --write src/**/*.{ts,tsx}",
+        "prettier": "prettier --write 'src/**/*.{ts,tsx}' && prettier --write '**/*.{json,ts,js}'",
         "deploy-demo": "storybook-to-ghpages",
         "watch": "npm run build -- --watch",
         "prepare": "npm run build",

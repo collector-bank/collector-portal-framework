@@ -1,7 +1,7 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
 import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
-import { Button, ButtonType, ButtonSize } from './';
+import { Button, ButtonKind, ButtonSize, IconAlignment } from './';
 import notes from './README.md';
 
 const BankIdIcon = () => (
@@ -20,17 +20,17 @@ components.addDecorator(withKnobs);
 components.add(
     'Button',
     () => {
-        const types: ButtonType[] = ['primary', 'secondary', 'secondaryNegative', 'warn', 'text', 'success'];
+        const kinds: ButtonKind[] = ['primary', 'secondary', 'secondaryNegative', 'warn', 'text', 'success'];
         const sizes: ButtonSize[] = ['small', 'medium', 'large'];
 
         return (
             <Button
-                type={select('Type', types, 'primary')}
+                kind={select('Kind', kinds, 'primary')}
                 size={select('Size', sizes, 'medium')}
                 disabled={boolean('Disabled', false)}
                 loading={boolean('Loading', false)}
                 icon={boolean('Icon', false) ? <BankIdIcon /> : undefined}
-                iconAlignment={select('Icon alignment', ['start', 'end'], 'start')}
+                iconAlignment={select('Icon alignment', ['start', 'end'] as IconAlignment[], 'start')}
             >
                 {text('Label', 'En knapp')}
             </Button>

@@ -6,27 +6,23 @@ import { Theme } from '../../../themes';
 import styled from '../../../';
 import { SpinnerSvg } from '../Spinner';
 
-export type ButtonType = 'primary' | 'secondary' | 'secondaryNegative' | 'success' | 'warn' | 'text';
+export type ButtonKind = 'primary' | 'secondary' | 'secondaryNegative' | 'success' | 'warn' | 'text';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type IconAlignment = 'start' | 'end';
 
 export interface ButtonProps {
     name?: string;
     value?: string;
-    type?: ButtonType;
     size?: ButtonSize;
     icon?: JSX.Element;
+    kind?: ButtonKind;
     iconAlignment?: IconAlignment;
     onClick?: () => void;
     disabled?: boolean;
     loading?: boolean;
 }
 
-export interface ButtonElementProps extends ButtonProps {
-    theme: Theme;
-}
-
-const ButtonElement = styled.button<ButtonProps>(({ size, type, loading, icon, theme }) => {
+const ButtonElement = styled.button<ButtonProps>(({ size, kind, loading, icon, theme }) => {
     const styles: CSSObject = {
         fontFamily: 'inherit',
         whiteSpace: 'nowrap',
@@ -66,14 +62,14 @@ const ButtonElement = styled.button<ButtonProps>(({ size, type, loading, icon, t
         },
 
         ...getSizeStyles(theme, size),
-        ...getTypeStyles(theme, type),
+        ...getKindStyles(theme, kind),
     };
 
     return styles;
 });
 
-const getTypeStyles = (theme: Theme, type?: ButtonType) => {
-    switch (type) {
+const getKindStyles = (theme: Theme, kind?: ButtonKind) => {
+    switch (kind) {
         case 'warn':
             return {
                 ...background(theme.colors.red),
@@ -216,8 +212,8 @@ const IconContainer = styled.span<{ iconAlignment: IconAlignment }>(({ iconAlign
     alignItems: 'center',
 }));
 
-const getSpinnerColorByType = (theme: Theme, type?: ButtonType) => {
-    switch (type) {
+const getSpinnerColorByKind = (theme: Theme, kind?: ButtonKind) => {
+    switch (kind) {
         case 'secondary':
         case 'secondaryNegative':
         case 'text':
@@ -231,14 +227,14 @@ const getSpinnerColorByType = (theme: Theme, type?: ButtonType) => {
 };
 
 const _Button = forwardRef<HTMLButtonElement, ButtonProps & { theme: Theme }>(
-    ({ theme, type, loading, children, icon, iconAlignment = 'start', size, ...rest }, ref) => (
-        <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} type={type} {...rest} ref={ref}>
+    ({ theme, kind, loading, children, icon, iconAlignment = 'start', size, ...rest }, ref) => (
+        <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} kind={kind} {...rest} ref={ref}>
             <div>
                 {icon && iconAlignment === 'start' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}
                 {children}
                 {icon && iconAlignment === 'end' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}
             </div>
-            <SpinnerSvg size="75%" color={getSpinnerColorByType(theme, type)} />
+            <SpinnerSvg size="75%" color={getSpinnerColorByKind(theme, kind)} />
         </ButtonElement>
     )
 );

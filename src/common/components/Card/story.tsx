@@ -26,7 +26,7 @@ components.add(
                         <>
                             <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
                                 <Button onClick={() => null}>Button</Button>
-                                <Button type="text" onClick={() => null}>
+                                <Button kind="text" onClick={() => null}>
                                     Avbryt
                                 </Button>
                             </div>
@@ -50,7 +50,7 @@ components.add(
                                 <>
                                     <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
                                         <Button onClick={() => null}>Button</Button>
-                                        <Button type="text" onClick={() => null}>
+                                        <Button kind="text" onClick={() => null}>
                                             Avbryt
                                         </Button>
                                     </div>
@@ -71,7 +71,7 @@ components.add(
                                 <>
                                     <div style={{ display: 'flex', justifyContent: 'center', flexDirection: 'column' }}>
                                         <Button onClick={() => null}>Button</Button>
-                                        <Button type="text" onClick={() => null}>
+                                        <Button kind="text" onClick={() => null}>
                                             Avbryt
                                         </Button>
                                     </div>

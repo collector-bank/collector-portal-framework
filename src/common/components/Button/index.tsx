@@ -48,14 +48,16 @@ const ButtonElement = styled.button<ButtonProps>(({ size, type, loading, icon, t
             cursor: 'pointer',
         },
 
-        '> div': { // all content but the spinner
+        '> div': {
+            // all content but the spinner
             visibility: loading ? 'hidden' : undefined,
             display: icon ? 'flex' : undefined,
             alignItems: icon ? 'center' : undefined,
             justifyContent: icon ? 'center' : undefined,
         },
 
-        '> svg': { // the spinner
+        '> svg': {
+            // the spinner
             display: loading ? 'flex' : 'none',
             position: 'absolute',
             top: '50%',
@@ -226,7 +228,7 @@ const getSpinnerColorByType = (theme: Theme, type?: ButtonType) => {
         default:
             return theme.colors.white;
     }
-}
+};
 
 const _Button = forwardRef<HTMLButtonElement, ButtonProps & { theme: Theme }>(
     ({ theme, type, loading, children, icon, iconAlignment = 'start', size, ...rest }, ref) => (

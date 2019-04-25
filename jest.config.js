@@ -4,14 +4,12 @@ module.exports = {
     rootDir: 'src',
     transform: {
         '^.+\\.(t|j)sx?$': 'ts-jest',
-        '^.+\\.(css)$': '<rootDir>/../style-mock.js'
+        '^.+\\.(css)$': '<rootDir>/../style-mock.js',
     },
-    transformIgnorePatterns: [
-        'node_modules/(?!(react-formatted-number-input)/)'
-    ],
+    transformIgnorePatterns: ['node_modules/(?!(react-formatted-number-input)/)'],
     globals: {
         'ts-jest': {
-            tsConfig: 'tsconfig.test.json'
-        }
-    }
+            tsConfig: 'tsconfig.test.json',
+        },
+    },
 };

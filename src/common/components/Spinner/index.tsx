@@ -9,15 +9,15 @@ const animation = keyframes({
         strokeDashoffset: '0',
         strokeDasharray: '150 100',
     },
-    
+
     '50%': {
-        strokeDasharray: '1 250'
+        strokeDasharray: '1 250',
     },
-    
+
     '100%': {
         strokeDashoffset: '502',
-        strokeDasharray: '150 100'
-    }
+        strokeDasharray: '150 100',
+    },
 });
 
 const AnimatedCircle = styled.circle({

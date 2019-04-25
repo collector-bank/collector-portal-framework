@@ -1,7 +1,7 @@
 {
     "title": "Collector Portal Framework",
     "name": "collector-portal-framework",
-    "version": "16.0.0",
+    "version": "16.0.1",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "sideEffects": false,
@@ -32,7 +32,7 @@
         "react": "16.8.6",
         "react-dom": "16.8.6",
         "react-router-dom": "5.0.0",
-        "react-scripts": "2.1.8",
+        "react-scripts": "3.0.0",
         "react-testing-library": "6.1.2",
         "rimraf": "2.6.3",
         "ts-jest": "24.0.2",

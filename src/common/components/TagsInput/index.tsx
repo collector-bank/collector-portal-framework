@@ -215,10 +215,10 @@ export class TagsInput_ extends React.Component<TagInputProps & { theme: Theme }
 
                 {canAddAllAutocompleteItemsButton && (
                     <ButtonGroup>
-                        <Button onClick={this.addAllAutocompleteItems} size="small" type="secondary">
+                        <Button onClick={this.addAllAutocompleteItems} size="small" kind="secondary">
                             {addAllAutocompleteItemsButtonText}
                         </Button>
-                        <Button size="small" type="warn" onClick={this.handleClear}>
+                        <Button size="small" kind="warn" onClick={this.handleClear}>
                             {clearAllAutocompleteItemsButtonText}
                         </Button>
                     </ButtonGroup>

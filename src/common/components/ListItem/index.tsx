@@ -93,6 +93,7 @@ const RightColumn = styled.div({
     flexDirection: 'column',
     alignItems: 'flex-end',
     justifyContent: 'center',
+    textAlign: 'right',
 });
 
 export const ListItem: React.FC<ListItemProps> = ({ item, location: link, children }) => {

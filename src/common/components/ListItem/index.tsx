@@ -4,6 +4,7 @@ import { ArrowDown } from './ArrowDown';
 import { Collapse } from 'react-collapse';
 import { ArrowRight } from './ArrowRight';
 import { breakpoints } from '../../../themes/collector';
+import { Link as RouterLink } from 'react-router-dom';
 
 export interface ListItem {
     title: React.ReactNode;
@@ -14,7 +15,7 @@ export interface ListItem {
 
 export interface ListItemProps {
     item: ListItem;
-    link?: string;
+    location?: string;
 }
 
 const SuperContainer = styled.li(({ theme }) => ({
@@ -38,7 +39,7 @@ const Container = styled.div<{ isClickable: boolean }>(({ theme, isClickable }) 
     },
 }));
 
-const LinkContainer = Container.withComponent('a');
+const LinkContainer = Container.withComponent(RouterLink);
 
 const TitleContainer = styled.div(({ theme }) => ({
     font: theme.fonts.mobile.large,
@@ -94,7 +95,7 @@ const RightColumn = styled.div({
     justifyContent: 'center',
 });
 
-export const ListItem: React.FC<ListItemProps> = ({ item, link, children }) => {
+export const ListItem: React.FC<ListItemProps> = ({ item, location: link, children }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
 
@@ -125,7 +126,7 @@ export const ListItem: React.FC<ListItemProps> = ({ item, link, children }) => {
     return (
         <SuperContainer onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             {link ? (
-                <LinkContainer isClickable={true} href={link}>
+                <LinkContainer isClickable={true} to={link}>
                     {renderBody()}
                 </LinkContainer>
             ) : (

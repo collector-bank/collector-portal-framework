@@ -22,7 +22,7 @@ const SuperContainer = styled.li(({ theme }) => ({
     borderBottom: `1px solid ${theme.colors.lightGray}`,
 }));
 
-const Container = styled.div<{ isClickable: boolean }>(({ theme, isClickable }) => ({
+const Container = styled.div<{ clickable: boolean }>(({ theme, clickable }) => ({
     display: 'flex',
     padding: '21px 16px',
     textDecoration: 'none',
@@ -31,7 +31,7 @@ const Container = styled.div<{ isClickable: boolean }>(({ theme, isClickable }) 
 
     '&:hover': {
         background: theme.colors.lightOffWhite,
-        cursor: isClickable ? 'pointer' : 'inherit',
+        cursor: clickable ? 'pointer' : 'inherit',
     },
 
     [theme.breakpoints.mobileAndLower]: {
@@ -96,11 +96,11 @@ const RightColumn = styled.div({
     textAlign: 'right',
 });
 
-export const ListItem: React.FC<ListItemProps> = ({ item, location: link, children }) => {
+export const ListItem: React.FC<ListItemProps> = ({ item, location, children }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
 
-    if (link && children) {
+    if (location && children) {
         throw new Error('Listitem cannot be expandable and linkable at the same time');
     }
 
@@ -120,18 +120,18 @@ export const ListItem: React.FC<ListItemProps> = ({ item, location: link, childr
             )}
 
             {children && <ArrowDown isHovered={isHovered} isExpanded={isExpanded} />}
-            {link && <ArrowRight isHovered={isHovered} />}
+            {location && <ArrowRight isHovered={isHovered} />}
         </>
     );
 
     return (
         <SuperContainer onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
-            {link ? (
-                <LinkContainer isClickable={true} to={link}>
+            {location ? (
+                <LinkContainer clickable={true} to={location}>
                     {renderBody()}
                 </LinkContainer>
             ) : (
-                <Container isClickable={!!children} onClick={children ? () => setIsExpanded(prev => !prev) : undefined}>
+                <Container clickable={!!children} onClick={children ? () => setIsExpanded(prev => !prev) : undefined}>
                     {renderBody()}
                 </Container>
             )}

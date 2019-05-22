@@ -5,6 +5,7 @@ import notes from './README.md';
 import { ListItem, Text, Badge } from '../../../components';
 import { formatMoney } from '../../../formatters';
 import { isAfter } from 'date-fns';
+import { BrowserRouter } from 'react-router-dom';
 
 const components = storiesOf('Components', module);
 
@@ -65,15 +66,17 @@ components.add(
         });
 
         return (
-            <ul style={{ maxWidth: 420, padding: 0, margin: 0 }}>
-                {apiExample.map((item, index) => (
-                    <ListItem key={index} location={isEvenItem(index) ? 'https://dn.se' : undefined} item={getItem(item)}>
-                        {!isEvenItem(index) && (
-                            <Text style={{ background: '#F4F4F4', padding: 16, borderRadius: 8, marginBottom: 0 }}>Details</Text>
-                        )}
-                    </ListItem>
-                ))}
-            </ul>
+            <BrowserRouter>
+                <ul style={{ maxWidth: 420, padding: 0, margin: 0 }}>
+                    {apiExample.map((item, index) => (
+                        <ListItem key={index} location={isEvenItem(index) ? 'https://dn.se' : undefined} item={getItem(item)}>
+                            {!isEvenItem(index) && (
+                                <Text style={{ background: '#F4F4F4', padding: 16, borderRadius: 8, marginBottom: 0 }}>Details</Text>
+                            )}
+                        </ListItem>
+                    ))}
+                </ul>
+            </BrowserRouter>
         );
     },
     { notes }

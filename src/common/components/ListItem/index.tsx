@@ -22,7 +22,7 @@ const SuperContainer = styled.li(({ theme }) => ({
     borderBottom: `1px solid ${theme.colors.lightGray}`,
 }));
 
-const Container = styled.div<{ others: { clickable: boolean } }>(({ theme, others }) => ({
+const Container = styled.div<{ others: { isClickable: boolean } }>(({ theme, others }) => ({
     display: 'flex',
     padding: '21px 16px',
     textDecoration: 'none',
@@ -30,8 +30,8 @@ const Container = styled.div<{ others: { clickable: boolean } }>(({ theme, other
     transition: 'background ease-in 100ms',
 
     '&:hover': {
-        background: theme.colors.lightOffWhite,
-        cursor: others.clickable ? 'pointer' : 'inherit',
+        background: others.isClickable ? theme.colors.lightOffWhite : 'initial',
+        cursor: others.isClickable ? 'pointer' : 'inherit',
     },
 
     [theme.breakpoints.mobileAndLower]: {
@@ -127,11 +127,11 @@ export const ListItem: React.FC<ListItemProps> = ({ item, location, children }) 
     return (
         <SuperContainer onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             {location ? (
-                <LinkContainer others={{ clickable: true }} to={location}>
+                <LinkContainer others={{ isClickable: true }} to={location}>
                     {renderBody()}
                 </LinkContainer>
             ) : (
-                <Container others={{ clickable: !!children }} onClick={children ? () => setIsExpanded(prev => !prev) : undefined}>
+                <Container others={{ isClickable: !!children }} onClick={children ? () => setIsExpanded(prev => !prev) : undefined}>
                     {renderBody()}
                 </Container>
             )}

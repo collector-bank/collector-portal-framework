@@ -61,7 +61,7 @@ const DetailsContainer = styled.div(({ theme }) => ({
 }));
 
 const SubTitleContainer = styled.div(({ theme }) => ({
-    color: theme.colors.mediumGray,
+    color: theme.colors.darkGray,
 
     [theme.breakpoints.mobileAndLower]: {
         font: theme.fonts.mobile.small,
@@ -69,7 +69,7 @@ const SubTitleContainer = styled.div(({ theme }) => ({
 }));
 
 const SubDetailsContainer = styled.div(({ theme }) => ({
-    color: theme.colors.mediumGray,
+    color: theme.colors.darkGray,
 
     [theme.breakpoints.mobileAndLower]: {
         font: theme.fonts.mobile.small,

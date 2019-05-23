@@ -18,7 +18,7 @@ export interface ListItemProps {
     location?: string;
 }
 
-const SuperContainer = styled.li(({ theme }) => ({
+const LinkItemContainer = styled.li(({ theme }) => ({
     borderBottom: `1px solid ${theme.colors.lightGray}`,
 }));
 
@@ -125,7 +125,7 @@ export const ListItem: React.FC<ListItemProps> = ({ item, location, children }) 
     );
 
     return (
-        <SuperContainer onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <LinkItemContainer onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             {location ? (
                 <LinkContainer others={{ isClickable: true }} to={location}>
                     {renderBody()}
@@ -141,6 +141,6 @@ export const ListItem: React.FC<ListItemProps> = ({ item, location, children }) 
                     <ExpandedContainer>{children}</ExpandedContainer>
                 </Collapse>
             )}
-        </SuperContainer>
+        </LinkItemContainer>
     );
 };

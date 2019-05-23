@@ -69,7 +69,7 @@ components.add(
             <BrowserRouter>
                 <ul style={{ maxWidth: 420, padding: 0, margin: 0 }}>
                     {apiExample.map((item, index) => (
-                        <ListItem key={index} location={isEvenItem(index) ? 'https://dn.se' : undefined} item={getItem(item)}>
+                        <ListItem key={index} location={isEvenItem(index) && index < 4 ? 'https://dn.se' : undefined} item={getItem(item)}>
                             {!isEvenItem(index) && (
                                 <Text style={{ background: '#F4F4F4', padding: 16, borderRadius: 8, marginBottom: 0 }}>Details</Text>
                             )}

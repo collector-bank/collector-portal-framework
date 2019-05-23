@@ -20,6 +20,7 @@ export interface ListItemProps {
 
 const LinkItemContainer = styled.li(({ theme }) => ({
     borderBottom: `1px solid ${theme.colors.lightGray}`,
+    width: '100%',
 }));
 
 const Container = styled.div<{ others: { isClickable: boolean } }>(({ theme, others }) => ({

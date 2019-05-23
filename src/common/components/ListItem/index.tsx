@@ -22,7 +22,7 @@ const SuperContainer = styled.li(({ theme }) => ({
     borderBottom: `1px solid ${theme.colors.lightGray}`,
 }));
 
-const Container = styled.div<{ clickable: boolean }>(({ theme, clickable }) => ({
+const Container = styled.div<{ others: { clickable: boolean } }>(({ theme, others }) => ({
     display: 'flex',
     padding: '21px 16px',
     textDecoration: 'none',
@@ -31,7 +31,7 @@ const Container = styled.div<{ clickable: boolean }>(({ theme, clickable }) => (
 
     '&:hover': {
         background: theme.colors.lightOffWhite,
-        cursor: clickable ? 'pointer' : 'inherit',
+        cursor: others.clickable ? 'pointer' : 'inherit',
     },
 
     [theme.breakpoints.mobileAndLower]: {
@@ -127,11 +127,11 @@ export const ListItem: React.FC<ListItemProps> = ({ item, location, children }) 
     return (
         <SuperContainer onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
             {location ? (
-                <LinkContainer clickable={true} to={location}>
+                <LinkContainer others={{ clickable: true }} to={location}>
                     {renderBody()}
                 </LinkContainer>
             ) : (
-                <Container clickable={!!children} onClick={children ? () => setIsExpanded(prev => !prev) : undefined}>
+                <Container others={{ clickable: !!children }} onClick={children ? () => setIsExpanded(prev => !prev) : undefined}>
                     {renderBody()}
                 </Container>
             )}

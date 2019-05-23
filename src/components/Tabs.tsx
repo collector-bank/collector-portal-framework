@@ -22,7 +22,7 @@ const List = styled.ul<{ vertical: boolean }>(({ theme, vertical }) => ({
     borderBottom: 0,
 }));
 
-const Link = styled(NavLink)<{ vertical: boolean }>(({ theme, vertical }) => ({
+const Link = styled(NavLink)<{ others: { vertical: boolean } }>(({ theme, others }) => ({
     display: 'block',
     padding: '12px 20px',
     textDecoration: 'none',
@@ -31,11 +31,11 @@ const Link = styled(NavLink)<{ vertical: boolean }>(({ theme, vertical }) => ({
     minWidth: 100,
     transitionProperty: 'border-color, color',
     transitionDuration: '200ms',
-    textAlign: vertical ? 'left' : 'center',
-    borderBottom: vertical ? `1px solid ${theme.colors.lightGray}` : `4px solid ${theme.colors.lightGray}`,
-    borderLeft: vertical ? `4px solid ${theme.colors.lightGray}` : undefined,
-    flexDirection: vertical ? 'column' : undefined,
-    paddingLeft: vertical ? 16 : undefined,
+    textAlign: others.vertical ? 'left' : 'center',
+    borderBottom: others.vertical ? `1px solid ${theme.colors.lightGray}` : `4px solid ${theme.colors.lightGray}`,
+    borderLeft: others.vertical ? `4px solid ${theme.colors.lightGray}` : undefined,
+    flexDirection: others.vertical ? 'column' : undefined,
+    paddingLeft: others.vertical ? 16 : undefined,
 
     '&:hover': {
         color: theme.colors.primary,
@@ -46,8 +46,8 @@ const Link = styled(NavLink)<{ vertical: boolean }>(({ theme, vertical }) => ({
     '&.active': {
         color: theme.colors.primary,
         borderColor: theme.colors.primary,
-        borderBottom: vertical ? `1px solid ${theme.colors.lightGray}` : undefined,
-        borderLeftColor: vertical ? theme.colors.primary : undefined,
+        borderBottom: others.vertical ? `1px solid ${theme.colors.lightGray}` : undefined,
+        borderLeftColor: others.vertical ? theme.colors.primary : undefined,
     },
 }));
 
@@ -82,7 +82,7 @@ export const Tabs: React.StatelessComponent<TabsProps> = ({ items }) => {
                 <List vertical={vertical}>
                     {items.map((item, i) => (
                         <li key={i}>
-                            <Link to={item.path} exact={true} vertical={vertical}>
+                            <Link to={item.path} exact={true} others={{ vertical }}>
                                 {item.label}
                             </Link>
                         </li>

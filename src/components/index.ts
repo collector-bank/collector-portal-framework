@@ -14,3 +14,4 @@ export * from './TabContent';
 export * from './Tabs';
 export * from './Togglable';
 export * from './ValueList';
+export * from './InformationContainer';

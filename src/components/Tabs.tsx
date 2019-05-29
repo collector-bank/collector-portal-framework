@@ -1,4 +1,4 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useRef, useState, useLayoutEffect } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from '../';
 import { useWindowSize } from '../hooks';
@@ -61,20 +61,24 @@ export interface TabItem {
 }
 
 export const Tabs: React.StatelessComponent<TabsProps> = ({ items }) => {
-    const [breakpoint, setBreakpoint] = useState(0);
     const [vertical, setVertical] = useState(false);
     const { innerWidth } = useWindowSize();
     const ref = useRef<HTMLDivElement>(null);
+    const [horizontalWidth, setHorizontalWidth] = useState<undefined | number>(undefined);
+
+    useLayoutEffect(() => {
+        if (horizontalWidth) {
+            setVertical(innerWidth <= horizontalWidth);
+        }
+    }, [innerWidth, horizontalWidth]);
 
     useLayoutEffect(() => {
         if (ref && ref.current) {
-            setBreakpoint(ref.current.offsetWidth);
+            if (!horizontalWidth) {
+                setHorizontalWidth(ref.current.offsetWidth);
+            }
         }
-    }, [ref]);
-
-    useEffect(() => {
-        setVertical(innerWidth <= breakpoint);
-    }, [innerWidth, breakpoint]);
+    }, [horizontalWidth, innerWidth, ref]);
 
     return (
         <Container>

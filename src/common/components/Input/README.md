@@ -19,7 +19,6 @@ This component can be used for freeform data entry.
 | `name`        |          | string                               |                                             |
 | `onChange`    |          | `event => void`                      |                                             |
 | `onBlur`      |          | `event => void`                      |                                             |
-| `innerRef`    |          | `() => void`                         |                                             |
 | `type`        |          | string                               |                                             |
 | `Description` |          | string                               |                                             |
 

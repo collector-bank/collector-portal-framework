@@ -98,7 +98,6 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
     rows?: number;
     onChange?: (event: React.FormEvent<HTMLInputElement | HTMLTextAreaElement>) => void;
     onBlur?: (event: React.FormEvent<HTMLInputElement> | undefined) => void;
-    innerRef?: (inputElement: HTMLInputElement) => void;
     type?: string;
     description?: string;
 }
@@ -125,7 +124,7 @@ export class Input extends React.Component<InputProps, InputState> {
     };
 
     render() {
-        const { label, error, warning, multiline, description, innerRef, ...rest } = this.props;
+        const { label, error, warning, multiline, description, ...rest } = this.props;
         const InputElement = multiline ? Textarea : InputField;
         const indicateError = Boolean(this.state.isDirty && error);
         const showErrorMessage = indicateError && typeof error !== 'boolean';
@@ -148,7 +147,6 @@ export class Input extends React.Component<InputProps, InputState> {
                             hasError={indicateError}
                             aria-invalid={indicateError}
                             showAlertMessage={showErrorMessage || showWarningMessage}
-                            ref={innerRef}
                             {...rest}
                             onBlur={this.makeDirty}
                         />

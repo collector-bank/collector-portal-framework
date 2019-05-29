@@ -42,7 +42,7 @@ const AlertContainer = styled.div<AlertContainerProps>(({ type, alertSize, fadeI
 }));
 
 const Heading = styled.div({
-    fontWeight: 600,
+    fontWeight: 700,
 });
 
 const getStyle = (type: AlertType, alertSize: AlertSize, theme: Theme): CSSObject => {

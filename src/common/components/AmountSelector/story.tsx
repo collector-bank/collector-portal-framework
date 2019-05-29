@@ -9,20 +9,9 @@ const components = storiesOf('Components', module);
 
 components.addDecorator(withKnobs);
 
-let myNumbah = '****';
-
 const store = new Store({
     value: 1000,
 });
-
-const revealNumbers = () => {
-    console.log(myNumbah.substring(myNumbah.length - 1));
-    while (myNumbah.substring(myNumbah.length - 1) === '*') {
-        setTimeout(() => {
-            return myNumbah.replace('*', `${Math.random() * 10}`);
-        }, 100);
-    }
-};
 
 components.add(
     'Amount selector',
@@ -39,13 +28,6 @@ components.add(
                         stepSize={number('Step size', 100)}
                     />
                 </State>
-
-                <div
-                    style={{ width: 50, height: 25, textAlign: 'center', background: '#eee', fontFamily: 'monospace', cursor: 'pointer' }}
-                    onClick={revealNumbers}
-                >
-                    {myNumbah}
-                </div>
             </div>
         );
     },

@@ -10,7 +10,7 @@ const Container = styled.div(({ theme }) => ({
     justifyContent: 'center',
     flexShrink: 0,
     alignItems: 'center',
-    fontWeight: 600,
+    fontWeight: 700,
     background: theme.colors.sidebarBlueLight,
     color: theme.colors.white,
 
@@ -38,11 +38,11 @@ const Image = styled.img({
 const SiteName = styled.div(({ theme }) => ({
     textAlign: 'center',
     font: theme.fonts.desktop.xl,
-    fontWeight: 600,
+    fontWeight: 700,
 
     [theme.breakpoints.mobileAndLower]: {
         font: theme.fonts.mobile.xl,
-        fontWeight: 600,
+        fontWeight: 700,
     },
 }));
 

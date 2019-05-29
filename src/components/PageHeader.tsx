@@ -30,11 +30,11 @@ const PageHeaderContainer = styled.div(({ theme }) => ({
 const Title = styled.h1(({ theme }) => ({
     margin: 0,
     font: theme.fonts.desktop.xxl,
-    fontWeight: 600,
+    fontWeight: 700,
 
     [theme.breakpoints.mobileAndLower]: {
         font: theme.fonts.mobile.xxl,
-        fontWeight: 600,
+        fontWeight: 700,
     },
 }));
 

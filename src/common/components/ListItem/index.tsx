@@ -56,10 +56,10 @@ const DetailsContainer = styled.div(({ theme }) => ({
 
     [breakpoints.mobileAndLower]: {
         font: theme.fonts.mobile.medium,
-        fontWeight: 'bold',
+        fontWeight: 600,
     },
 
-    fontWeight: 'bold',
+    fontWeight: 600,
 }));
 
 const SubTitleContainer = styled.div(({ theme }) => ({

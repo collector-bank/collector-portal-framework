@@ -20,7 +20,7 @@ const CardContainer = styled.div(({ theme }) => ({
 
 const Heading = styled.div(({ color, theme }) => ({
     display: 'inline-block',
-    fontWeight: 600,
+    fontWeight: 700,
     marginBottom: 16,
     borderBottom: '3px solid',
     borderColor: color ? theme.colors[color] : 'transparent',

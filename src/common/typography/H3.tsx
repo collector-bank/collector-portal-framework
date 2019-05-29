@@ -2,7 +2,7 @@ import styled from '../../';
 
 export const H3 = styled.h3<{}>(({ theme }) => ({
     font: theme.fonts.desktop.large,
-    fontWeight: 600,
+    fontWeight: 700,
     marginBottom: 16,
 
     '&:first-child': {
@@ -11,7 +11,7 @@ export const H3 = styled.h3<{}>(({ theme }) => ({
 
     [theme.breakpoints.mobileAndLower]: {
         font: theme.fonts.mobile.large,
-        fontWeight: 600,
+        fontWeight: 700,
         marginBottom: 12,
     },
 }));

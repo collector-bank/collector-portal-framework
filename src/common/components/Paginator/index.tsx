@@ -50,7 +50,7 @@ const Page = styled.a<{ active: boolean }>(({ active, theme }) => ({
     textAlign: 'center',
     cursor: 'pointer',
     color: active ? theme.colors.black : theme.colors.primary,
-    fontWeight: active ? 600 : 400,
+    fontWeight: active ? 700 : 400,
 }));
 
 const PaginatorContainer = styled.div({

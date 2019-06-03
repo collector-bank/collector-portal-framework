@@ -1,7 +1,7 @@
 {
     "title": "Collector Portal Framework",
     "name": "collector-portal-framework",
-    "version": "17.1.0",
+    "version": "17.1.1",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "sideEffects": false,
@@ -67,7 +67,7 @@
         "clean": "rimraf dist",
         "copy-static-files": "copyfiles -u 1 \"src/**/*\" -e \"**/*.{ts,tsx}\" dist",
         "transpile": "tsc",
-        "build": "npm run clean && npm run copy-static-files && npm run transpile && npm run prettier",
+        "build": "npm run clean && npm run copy-static-files && npm run transpile",
         "prettier": "prettier --write 'src/**/*.{ts,tsx}'",
         "deploy-demo": "storybook-to-ghpages",
         "watch": "npm run build -- --watch",

@@ -42,7 +42,7 @@ export interface TogglableProps {
     title: string;
     defaultExpanded?: boolean;
     size?: Size;
-    onClick: (isExpanded: boolean) => void;
+    onClick?: (isExpanded: boolean) => void;
 }
 
 export const Togglable: React.FC<TogglableProps> = ({ defaultExpanded, size, title, children, onClick }) => {
@@ -52,7 +52,9 @@ export const Togglable: React.FC<TogglableProps> = ({ defaultExpanded, size, tit
 
     const toggle = () => {
         setIsExpanded(prevExpanded => !prevExpanded);
-        onClick(isExpanded);
+        if (onClick) {
+            onClick(isExpanded);
+        }
     };
 
     return (

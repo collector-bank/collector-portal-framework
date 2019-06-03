@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Collapse from 'react-css-collapse';
 import { ClassNames } from '@emotion/core';
 import uniqid from 'uniqid';
@@ -36,49 +36,39 @@ const ToggleButton = styled.button<{ expanded: boolean; iconSize: Size }>(({ exp
     backgroundSize: iconSize === 'medium' ? undefined : 18,
 }));
 
+type Size = 'small' | 'medium';
+
 export interface TogglableProps {
     title: string;
     defaultExpanded?: boolean;
     size?: Size;
+    onClick: (isExpanded: boolean) => void;
 }
 
-type Size = 'small' | 'medium';
+export const Togglable: React.FC<TogglableProps> = ({ defaultExpanded, size, title, children, onClick }) => {
+    const [isExpanded, setIsExpanded] = useState(!!defaultExpanded);
+    const id = uniqid();
+    const toggleSize: Size = size ? size : 'medium';
 
-export interface TogglableState {
-    isExpanded: boolean;
-    id: string;
-}
-
-export class Togglable extends React.Component<TogglableProps, TogglableState> {
-    state: TogglableState = {
-        isExpanded: this.props.defaultExpanded ? true : false,
-        id: uniqid(),
+    const toggle = () => {
+        setIsExpanded(prevExpanded => !prevExpanded);
+        onClick(isExpanded);
     };
 
-    private toggle = () => {
-        this.setState(prevState => ({
-            isExpanded: !prevState.isExpanded,
-        }));
-    };
+    return (
+        <ClassNames>
+            {({ css }) => (
+                <Container>
+                    <Header onClick={toggle} aria-expanded={isExpanded} aria-controls={id}>
+                        <ToggleButton expanded={isExpanded} iconSize={toggleSize} />
+                        {toggleSize === 'medium' ? <H2>{title}</H2> : <H3>{title}</H3>}
+                    </Header>
 
-    render() {
-        const { children, title } = this.props;
-        const size: Size = this.props.size ? this.props.size : 'medium';
-
-        return (
-            <ClassNames>
-                {({ css }) => (
-                    <Container>
-                        <Header onClick={this.toggle} aria-expanded={this.state.isExpanded} aria-controls={this.state.id}>
-                            <ToggleButton expanded={this.state.isExpanded} iconSize={size} />
-                            {size === 'medium' ? <H2>{title}</H2> : <H3>{title}</H3>}
-                        </Header>
-                        <Collapse isOpen={this.state.isExpanded} className={css({ transition: 'height 150ms' })}>
-                            <div id={this.state.id}>{children}</div>
-                        </Collapse>
-                    </Container>
-                )}
-            </ClassNames>
-        );
-    }
-}
+                    <Collapse isOpen={isExpanded} className={css({ transition: 'height 150ms' })}>
+                        <div id={id}>{children}</div>
+                    </Collapse>
+                </Container>
+            )}
+        </ClassNames>
+    );
+};

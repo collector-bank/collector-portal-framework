@@ -38,7 +38,7 @@
         "react-scripts": "3.0.1",
         "rimraf": "2.6.3",
         "ts-jest": "24.0.2",
-        "typescript": "3.4.5"
+        "typescript": "3.5.1"
     },
     "dependencies": {
         "@emotion/core": "^10.0.10",

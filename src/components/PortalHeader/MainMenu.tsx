@@ -5,6 +5,7 @@ import { withTheme } from 'emotion-theming';
 import styled from '../../';
 import { Theme } from '../../themes';
 import { useWindowSize } from '../../hooks/use-window-size';
+import { AddOptionalTo } from 'emotion-theming/types/helper';
 
 const Hamburger = () => (
     <svg width="24" height="24" xmlns="http://www.w3.org/2000/svg">
@@ -167,7 +168,7 @@ const styles = (theme: Theme): any => ({
     },
 });
 
-export const MainMenu: React.FC<MainMenuProps> = withTheme(({ items, menuFooter, theme }) => {
+export const MainMenu: React.FC<AddOptionalTo<MainMenuProps, Theme>> = withTheme(({ items, menuFooter, theme }) => {
     const windowSize = useWindowSize();
     const [sidebarIsOpen, setSidebarOpen] = useState(false);
     const openSidebar = () => setSidebarOpen(true);

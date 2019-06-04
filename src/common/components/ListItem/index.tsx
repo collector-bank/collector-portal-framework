@@ -45,6 +45,7 @@ const LinkContainer = Container.withComponent(RouterLink);
 
 const TitleContainer = styled.div(({ theme }) => ({
     font: theme.fonts.mobile.large,
+    color: theme.colors.black,
 
     [breakpoints.mobileAndLower]: {
         font: theme.fonts.mobile.medium,
@@ -53,6 +54,7 @@ const TitleContainer = styled.div(({ theme }) => ({
 
 const DetailsContainer = styled.div(({ theme }) => ({
     font: theme.fonts.mobile.large,
+    color: theme.colors.black,
 
     [breakpoints.mobileAndLower]: {
         font: theme.fonts.mobile.medium,

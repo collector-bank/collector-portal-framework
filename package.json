@@ -1,7 +1,7 @@
 {
     "title": "Collector Portal Framework",
     "name": "collector-portal-framework",
-    "version": "17.1.1",
+    "version": "17.1.2",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "sideEffects": false,
@@ -38,7 +38,7 @@
         "react-scripts": "3.0.1",
         "rimraf": "2.6.3",
         "ts-jest": "24.0.2",
-        "typescript": "3.5.1"
+        "typescript": "3.4.5"
     },
     "dependencies": {
         "@emotion/core": "^10.0.10",

@@ -51,7 +51,7 @@ const Inner = styled.div(({ theme }) => ({
     whiteSpace: 'pre-line',
 }));
 
-export const Tooltip: React.StatelessComponent<Props> = ({ visible, children }) => {
+export const Tooltip: React.FC<Props> = ({ visible, children }) => {
     return (
         <Outer visible={visible}>
             <Inner>{children}</Inner>

@@ -67,7 +67,7 @@ export interface CardProps {
     location?: string;
 }
 
-export const Card: React.StatelessComponent<CardProps> = ({ heading, color, body, subBody, onDismiss, location }) => {
+export const Card: React.FC<CardProps> = ({ heading, color, body, subBody, onDismiss, location }) => {
     const card = (
         <CardContainer>
             {heading && (

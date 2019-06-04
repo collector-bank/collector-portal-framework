@@ -64,7 +64,7 @@ export interface TabItem {
     label: string;
 }
 
-export const Tabs: React.StatelessComponent<TabsProps> = ({ items }) => {
+export const Tabs: React.FC<TabsProps> = ({ items }) => {
     const [breakpoint, setBreakpoint] = useState(0);
     const [vertical, setVertical] = useState<boolean>(false);
     const { innerWidth } = useWindowSize();

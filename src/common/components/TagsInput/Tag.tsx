@@ -40,7 +40,7 @@ const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, onDelete: (id
     }
 };
 
-export const Tag: React.StatelessComponent<TagProps> = ({ tag, onDelete }) => (
+export const Tag: React.FC<TagProps> = ({ tag, onDelete }) => (
     <TagContainer>
         {tag.label}
         <IconContainer role="button" tabIndex={0} onKeyDown={evt => handleKeyDown(evt, onDelete, tag)} onClick={() => onDelete(tag.id)}>

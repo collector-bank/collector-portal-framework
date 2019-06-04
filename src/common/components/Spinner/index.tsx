@@ -25,7 +25,7 @@ const AnimatedCircle = styled.circle({
     fill: 'none',
 });
 
-export const SpinnerSvg: React.StatelessComponent<{ color: string; size: string | number }> = ({ color, size }) => (
+export const SpinnerSvg: React.FC<{ color: string; size: string | number }> = ({ color, size }) => (
     <svg width={size} height={size} viewBox="0 0 100 100">
         <AnimatedCircle cx={50} cy={50} r={40} />
         <AnimatedCircle cx={50} cy={50} r={40} stroke={color} strokeWidth={6} strokeLinecap="round" />
@@ -59,7 +59,7 @@ export interface SpinnerProps {
     centered?: boolean;
 }
 
-const Spinner_: React.StatelessComponent<SpinnerProps & { theme: Theme }> = ({ theme, size = 80, centered = false }) => (
+const Spinner_: React.FC<SpinnerProps & { theme: Theme }> = ({ theme, size = 80, centered = false }) => (
     <Container size={size} centered={centered}>
         <SpinnerSvg size={size} color={theme.colors.primary} />
     </Container>

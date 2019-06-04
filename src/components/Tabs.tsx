@@ -60,7 +60,7 @@ export interface TabItem {
     label: string;
 }
 
-export const Tabs: React.StatelessComponent<TabsProps> = ({ items }) => {
+export const Tabs: React.FC<TabsProps> = ({ items }) => {
     const [vertical, setVertical] = useState(false);
     const { innerWidth } = useWindowSize();
     const ref = useRef<HTMLDivElement>(null);

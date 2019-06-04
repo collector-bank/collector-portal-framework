@@ -52,7 +52,7 @@ interface Props {
     siteName: string;
 }
 
-export const Logo: React.StatelessComponent<Props> = ({ location, image, siteName }) => (
+export const Logo: React.FC<Props> = ({ location, image, siteName }) => (
     <Container>
         <Link to={location}>{image ? <Image src={image} alt={siteName} /> : <SiteName>{siteName}</SiteName>}</Link>
     </Container>

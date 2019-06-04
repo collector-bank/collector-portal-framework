@@ -32,7 +32,7 @@ interface PortalHeaderProps {
     menuFooter?: JSX.Element;
 }
 
-export const PortalHeader: React.StatelessComponent<PortalHeaderProps> = ({ logoImage, logoTarget, siteName, menuItems, menuFooter }) => (
+export const PortalHeader: React.FC<PortalHeaderProps> = ({ logoImage, logoTarget, siteName, menuItems, menuFooter }) => (
     <Container>
         <Logo image={logoImage} siteName={siteName} location={logoTarget} />
         <MainMenu items={menuItems} menuFooter={menuFooter} />

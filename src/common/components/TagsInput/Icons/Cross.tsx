@@ -1,7 +1,7 @@
 /* tslint:disable:max-line-length */
 import React from 'react';
 
-export const CrossIcon: React.StatelessComponent<{}> = () => (
+export const CrossIcon: React.FC<{}> = () => (
     <svg xmlns="http://www.w3.org/2000/svg" height="16px" viewBox="0 0 16 16">
         <path
             fill="#F02C2C"

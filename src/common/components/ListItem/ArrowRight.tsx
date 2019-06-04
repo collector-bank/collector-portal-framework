@@ -1,7 +1,7 @@
 import * as React from 'react';
 import styled from '../../..';
 
-const GrayArrow: React.StatelessComponent = () => (
+const GrayArrow: React.FC = () => (
     <svg width="24" height="24" fill="currentColor">
         <path
             id="a"
@@ -22,7 +22,7 @@ const ArrowRightContainer = styled.div<{ isHovered: boolean }>(({ isHovered, the
     },
 }));
 
-export const ArrowRight: React.StatelessComponent<{ isHovered: boolean }> = ({ isHovered }) => (
+export const ArrowRight: React.FC<{ isHovered: boolean }> = ({ isHovered }) => (
     <ArrowRightContainer isHovered={isHovered}>
         <GrayArrow />
     </ArrowRightContainer>

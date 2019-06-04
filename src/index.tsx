@@ -23,7 +23,7 @@ interface Props {
     theme?: Theme;
 }
 
-export const CollectorPortalFramework: React.StatelessComponent<Props> = ({ theme = collectorTheme, children }) => (
+export const CollectorPortalFramework: React.FC<Props> = ({ theme = collectorTheme, children }) => (
     <ThemeProvider theme={theme}>
         <Global styles={globalStyles} />
         {children}

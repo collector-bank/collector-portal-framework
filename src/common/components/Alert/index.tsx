@@ -112,7 +112,7 @@ export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
     wide?: boolean;
 }
 
-export const Alert: React.StatelessComponent<AlertProps> = ({
+export const Alert: React.FC<AlertProps> = ({
     heading,
     message,
     alertSize = 'large' as AlertSize,

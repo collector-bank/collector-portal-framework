@@ -167,7 +167,7 @@ const styles = (theme: Theme): any => ({
     },
 });
 
-export const MainMenu: React.StatelessComponent<MainMenuProps> = withTheme(({ items, menuFooter, theme }) => {
+export const MainMenu: React.FC<MainMenuProps> = withTheme(({ items, menuFooter, theme }) => {
     const windowSize = useWindowSize();
     const [sidebarIsOpen, setSidebarOpen] = useState(false);
     const openSidebar = () => setSidebarOpen(true);

@@ -42,6 +42,6 @@ export interface PageHeaderProps {
     title?: string;
 }
 
-export const PageHeader: React.StatelessComponent<PageHeaderProps> = ({ title, children }) => (
+export const PageHeader: React.FC<PageHeaderProps> = ({ title, children }) => (
     <PageHeaderContainer>{title ? <Title>{title}</Title> : children}</PageHeaderContainer>
 );

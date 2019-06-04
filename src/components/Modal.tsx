@@ -11,7 +11,7 @@ if (rootElement) {
 
 const transitionTime = 300;
 
-export const Modal: React.StatelessComponent<any> = props => (
+export const Modal: React.FC<any> = props => (
     <>
         <Global
             styles={{

@@ -27,7 +27,7 @@ export interface InfoItem {
     value: any;
 }
 
-export const ValueList: React.StatelessComponent<ValueListProps> = props => {
+export const ValueList: React.FC<ValueListProps> = props => {
     const items = props.items
         .map(item => (Array.isArray(item.value) ? { ...item, value: item.value.filter(x => x) } : item))
         .filter(item => item.heading && item.value && item.value.length > 0);

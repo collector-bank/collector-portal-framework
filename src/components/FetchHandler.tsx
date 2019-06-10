@@ -19,7 +19,7 @@ interface Props<TResult> {
 }
 
 export const FetchHandler = <TResult extends {}>({ apiMethod, children, errorText, errorIndicator, loadingIndicator }: Props<TResult>) => {
-    const { loading, data, error, trigger } = usePromise(apiMethod);
+    const { loading, data, error, trigger, errorCode } = usePromise(apiMethod);
     const [dependencyList, setDependencyList] = useState(undefined);
 
     useEffect(() => {
@@ -29,7 +29,7 @@ export const FetchHandler = <TResult extends {}>({ apiMethod, children, errorTex
     return (
         <>
             {loading && (loadingIndicator ? loadingIndicator : <Spinner centered />)}
-            {error && (errorIndicator ? errorIndicator : <Alert type="error" message={errorText} />)}
+            {error && (errorIndicator ? errorIndicator : errorCode !== 401 ? <Alert type="error" message={errorText} /> : <Spinner />)}
             {data && children(data, (dependencies: any) => setDependencyList(dependencies))}
         </>
     );

@@ -23,7 +23,6 @@ const PageHeaderContainer = styled.div(({ theme }) => ({
     [theme.breakpoints.mobileAndLower]: {
         padding: 16,
         minHeight: 0,
-        border: 0,
     },
 }));
 

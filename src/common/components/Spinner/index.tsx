@@ -59,8 +59,8 @@ export interface SpinnerProps {
     centered?: boolean;
 }
 
-const Spinner_: React.FC<SpinnerProps & { theme: Theme }> = ({ theme, size = 80, centered = false }) => (
-    <Container size={size} centered={centered}>
+const Spinner_: React.FC<SpinnerProps & { theme: Theme }> = ({ theme, size = 80, centered = false, ...rest }) => (
+    <Container size={size} centered={centered} {...rest}>
         <SpinnerSvg size={size} color={theme.colors.primary} />
     </Container>
 );

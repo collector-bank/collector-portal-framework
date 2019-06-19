@@ -62,10 +62,10 @@ export class CheckboxGroup extends React.Component<CheckboxGroupProps, CheckboxG
     };
 
     render() {
-        const { label, items, disabled, error } = this.props;
+        const { label, items, disabled, error, ...rest } = this.props;
 
         return (
-            <ClassNames>
+            <ClassNames {...rest}>
                 {({ css }) => (
                     <CheckboxGroupContainer>
                         <Label>{label}</Label>

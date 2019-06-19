@@ -100,7 +100,7 @@ const RightColumn = styled.div({
     textAlign: 'right',
 });
 
-export const ListItem: React.FC<ListItemProps> = ({ item, location, children }) => {
+export const ListItem: React.FC<ListItemProps> = ({ item, location, children, ...rest }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
 
@@ -129,7 +129,7 @@ export const ListItem: React.FC<ListItemProps> = ({ item, location, children }) 
     );
 
     return (
-        <LinkItemContainer onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)}>
+        <LinkItemContainer onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} {...rest}>
             {location ? (
                 <LinkContainer others={{ isClickable: true }} to={location}>
                     {renderBody()}

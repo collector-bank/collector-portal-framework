@@ -71,10 +71,10 @@ export class Checkbox extends React.Component<CheckboxProps, CheckboxState> {
     };
 
     render() {
-        const { label, name, checked, disabled, onChange } = this.props;
+        const { label, name, checked, disabled, onChange, ...rest } = this.props;
 
         return (
-            <CheckboxContainer disabled={disabled}>
+            <CheckboxContainer disabled={disabled} {...rest}>
                 <Input type="checkbox" id={this.state.id} name={name} checked={checked} disabled={disabled} onChange={onChange} />
                 <label htmlFor={this.state.id} dangerouslySetInnerHTML={{ __html: label }} />
             </CheckboxContainer>

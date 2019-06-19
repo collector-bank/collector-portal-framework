@@ -69,10 +69,10 @@ export class RadioButton extends React.Component<RadioButtonProps, RadioButtonSt
     };
 
     render() {
-        const { label, name, selected, disabled, onChange } = this.props;
+        const { label, name, selected, disabled, onChange, ...rest } = this.props;
 
         return (
-            <RadioButtonContainer disabled={disabled}>
+            <RadioButtonContainer disabled={disabled} {...rest}>
                 <Input type="radio" id={this.state.id} name={name} checked={selected} disabled={disabled} onChange={onChange} />
                 <label htmlFor={this.state.id} dangerouslySetInnerHTML={{ __html: label }} />
             </RadioButtonContainer>

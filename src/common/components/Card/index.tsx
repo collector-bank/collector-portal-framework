@@ -67,9 +67,9 @@ export interface CardProps {
     location?: string;
 }
 
-export const Card: React.FC<CardProps> = ({ heading, color, body, subBody, onDismiss, location }) => {
+export const Card: React.FC<CardProps> = ({ heading, color, body, subBody, onDismiss, location, ...rest }) => {
     const card = (
-        <CardContainer>
+        <CardContainer {...rest}>
             {heading && (
                 <HeadingContainer>
                     <Heading color={color}>{heading}</Heading>

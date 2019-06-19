@@ -79,7 +79,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
     };
 
     render() {
-        const { label, disabled, value, name, error, placeholder, onChange } = this.props;
+        const { label, disabled, value, name, error, placeholder, onChange, ...rest } = this.props;
         let { items } = this.props;
 
         if (!value && items) {
@@ -93,7 +93,7 @@ export class Select extends React.Component<SelectProps, SelectState> {
         }
 
         return (
-            <SelectContainer>
+            <SelectContainer {...rest}>
                 <Label htmlFor={this.state.id}>{label}</Label>
                 <SelectFieldContainer hasError={Boolean(error)} disabled={disabled}>
                     <SelectField id={this.state.id} disabled={disabled} name={name} value={value ? value : '-1'} onChange={onChange}>

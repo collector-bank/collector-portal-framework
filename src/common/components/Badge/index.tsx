@@ -4,10 +4,11 @@ import styled from '../../../';
 
 export type BadgeColor = 'primary' | 'yellow' | 'green' | 'red' | 'blue' | 'lightGray';
 
-export interface BadgeProps {
+export interface BadgeProps extends React.ComponentProps<'div'> {
     label: string;
     color?: BadgeColor;
     tooltip?: string;
+    className?: string;
 }
 
 interface BadgeState {
@@ -56,10 +57,10 @@ export class Badge extends React.Component<BadgeProps, BadgeState> {
     };
 
     render() {
-        const { label, tooltip, color = 'primary' } = this.props;
+        const { label, tooltip, color = 'primary', ...rest } = this.props;
 
         return (
-            <Container>
+            <Container {...rest}>
                 <Label
                     color={color}
                     onMouseEnter={tooltip ? this.showTooltip : undefined}

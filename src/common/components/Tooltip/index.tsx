@@ -51,9 +51,9 @@ const Inner = styled.div(({ theme }) => ({
     whiteSpace: 'pre-line',
 }));
 
-export const Tooltip: React.FC<Props> = ({ visible, children }) => {
+export const Tooltip: React.FC<Props> = ({ visible, children, ...rest }) => {
     return (
-        <Outer visible={visible}>
+        <Outer visible={visible} {...rest}>
             <Inner>{children}</Inner>
         </Outer>
     );

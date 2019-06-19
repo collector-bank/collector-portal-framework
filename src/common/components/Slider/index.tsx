@@ -8,9 +8,7 @@ const track = (theme: Theme, percentFilled?: number) => ({
     cursor: 'pointer',
     background:
         percentFilled != null
-            ? `linear-gradient(to right, ${theme.colors.primary} ${percentFilled}%, ${theme.colors.primary} ${percentFilled}%, ${
-                  theme.colors.lightGray
-              } ${percentFilled}%)`
+            ? `linear-gradient(to right, ${theme.colors.primary} ${percentFilled}%, ${theme.colors.primary} ${percentFilled}%, ${theme.colors.lightGray} ${percentFilled}%)`
             : theme.colors.lightGray,
     borderRadius: theme.borderRadius.small,
 });

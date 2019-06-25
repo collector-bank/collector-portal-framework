@@ -67,53 +67,40 @@ export interface SelectProps {
     onChange: (event: React.FormEvent<HTMLSelectElement>) => void;
 }
 
-export interface SelectState {
-    id: string;
-}
+export const Select: React.FC<SelectProps> = ({ label, disabled, value, name, error, placeholder, onChange, items, ...rest }) => {
+    const id: string = uniqid();
 
-export class Select extends React.Component<SelectProps, SelectState> {
-    static displayName = 'Collector.Select';
-
-    state: SelectState = {
-        id: uniqid(),
-    };
-
-    render() {
-        const { label, disabled, value, name, error, placeholder, onChange, ...rest } = this.props;
-        let { items } = this.props;
-
-        if (!value && items) {
-            items = [
-                {
-                    key: '-1',
-                    label: placeholder ? placeholder : '',
-                },
-                ...items,
-            ];
-        }
-
-        return (
-            <SelectContainer {...rest}>
-                <Label htmlFor={this.state.id}>{label}</Label>
-                <SelectFieldContainer hasError={Boolean(error)} disabled={disabled}>
-                    <SelectField id={this.state.id} disabled={disabled} name={name} value={value ? value : '-1'} onChange={onChange}>
-                        {items ? (
-                            items.map(item => (
-                                <option
-                                    key={item.key ? item.key : item.label}
-                                    value={item.key ? item.key : item.label}
-                                    disabled={item.key === '-1'}
-                                >
-                                    {item.label}
-                                </option>
-                            ))
-                        ) : (
-                            <option disabled={true} />
-                        )}
-                    </SelectField>
-                </SelectFieldContainer>
-                {error && typeof error === 'string' && <Alert type="error" message={error} alertSize="small" />}
-            </SelectContainer>
-        );
+    if (!value && items) {
+        items = [
+            {
+                key: '-1',
+                label: placeholder ? placeholder : '',
+            },
+            ...items,
+        ];
     }
-}
+
+    return (
+        <SelectContainer {...rest}>
+            <Label htmlFor={id}>{label}</Label>
+            <SelectFieldContainer hasError={Boolean(error)} disabled={disabled}>
+                <SelectField id={id} disabled={disabled} name={name} value={value ? value : '-1'} onChange={onChange}>
+                    {items ? (
+                        items.map(item => (
+                            <option
+                                key={item.key ? item.key : item.label}
+                                value={item.key ? item.key : item.label}
+                                disabled={item.key === '-1'}
+                            >
+                                {item.label}
+                            </option>
+                        ))
+                    ) : (
+                        <option disabled={true} />
+                    )}
+                </SelectField>
+            </SelectFieldContainer>
+            {error && typeof error === 'string' && <Alert type="error" message={error} alertSize="small" />}
+        </SelectContainer>
+    );
+};

@@ -1,4 +1,4 @@
-import React, { forwardRef } from 'react';
+import React, { forwardRef, HTMLAttributes } from 'react';
 import { CSSObject } from '@emotion/core';
 import { withTheme } from 'emotion-theming';
 import { lighten, darken } from 'polished';
@@ -226,7 +226,7 @@ const getSpinnerColorByKind = (theme: Theme, kind?: ButtonKind) => {
     }
 };
 
-const _Button = forwardRef<HTMLButtonElement, ButtonProps & { theme: Theme }>(
+const _Button = forwardRef<HTMLButtonElement, ButtonProps & HTMLAttributes<HTMLButtonElement> & { theme: Theme }>(
     ({ theme, kind, loading, children, icon, iconAlignment = 'start', size, ...rest }, ref) => (
         <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} kind={kind} {...rest} ref={ref}>
             <div>

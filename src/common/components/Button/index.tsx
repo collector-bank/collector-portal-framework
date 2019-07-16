@@ -32,8 +32,8 @@ const ButtonElement = styled.button<ButtonProps>(({ size, kind, loading, icon, t
         border: 0,
         borderRadius: 50,
         transition: 'background-color 100ms',
-        position: 'relative',
         pointerEvents: loading ? 'none' : undefined,
+        position: loading ? 'relative' : 'initial',
 
         '&:disabled': {
             backgroundColor: theme.colors.mediumGray,

@@ -1,7 +1,7 @@
 import React from 'react';
 import ReactModal from 'react-modal';
 import { Global, ClassNames } from '@emotion/core';
-import { borderRadius, colors, breakpoints } from '../themes/collector';
+import { borderRadius, colors, breakpoints } from '../../themes/collector';
 
 const rootElement = document.getElementById('root') as HTMLElement;
 

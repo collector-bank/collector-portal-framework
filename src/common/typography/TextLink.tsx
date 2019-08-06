@@ -5,6 +5,7 @@ export const TextLink = styled.a<{}>(({ theme }) => ({
     textDecoration: 'none',
     borderBottom: '1px solid',
     transition: 'border-color 200ms',
+    cursor: 'pointer',
 
     '&:hover': {
         borderColor: 'currentColor',

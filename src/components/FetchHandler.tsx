@@ -15,10 +15,18 @@ interface Props<TResult> {
     children: Child<TResult>;
     errorText: string;
     errorIndicator?: React.ReactNode;
+    notFoundIndicator?: React.ReactNode;
     loadingIndicator?: React.ReactNode;
 }
 
-export const FetchHandler = <TResult extends {}>({ apiMethod, children, errorText, errorIndicator, loadingIndicator }: Props<TResult>) => {
+export const FetchHandler = <TResult extends {}>({
+    apiMethod,
+    children,
+    errorText,
+    errorIndicator,
+    notFoundIndicator,
+    loadingIndicator,
+}: Props<TResult>) => {
     const { loading, data, error, trigger, errorCode } = usePromise(apiMethod);
     const [dependencyList, setDependencyList] = useState(undefined);
 
@@ -26,10 +34,20 @@ export const FetchHandler = <TResult extends {}>({ apiMethod, children, errorTex
         trigger();
     }, [dependencyList, trigger]);
 
+    const renderError = () => {
+        if (errorIndicator && errorCode !== 404) {
+            return errorIndicator;
+        } else if (errorCode === 404 && notFoundIndicator) {
+            return notFoundIndicator;
+        }
+
+        return errorCode !== 401 ? <Alert type="error" message={errorText} /> : <Spinner />;
+    };
+
     return (
         <>
             {loading && (loadingIndicator ? loadingIndicator : <Spinner centered />)}
-            {error && (errorIndicator ? errorIndicator : errorCode !== 401 ? <Alert type="error" message={errorText} /> : <Spinner />)}
+            {error && renderError()}
             {data && children(data, (dependencies: any) => setDependencyList(dependencies))}
         </>
     );

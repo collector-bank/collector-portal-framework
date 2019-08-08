@@ -51,7 +51,7 @@ const Link = styled(NavLink)<{ others: { vertical: boolean } }>(({ theme, others
     },
 }));
 
-export interface TabsProps {
+export interface TabsProps extends React.HTMLAttributes<HTMLElement> {
     items: TabItem[];
 }
 
@@ -60,7 +60,7 @@ export interface TabItem {
     label: string;
 }
 
-export const Tabs: React.FC<TabsProps> = ({ items }) => {
+export const Tabs: React.FC<TabsProps> = ({ items, ...rest }) => {
     const [vertical, setVertical] = useState(false);
     const { innerWidth } = useWindowSize();
     const ref = useRef<HTMLDivElement>(null);
@@ -81,7 +81,7 @@ export const Tabs: React.FC<TabsProps> = ({ items }) => {
     }, [horizontalWidth, innerWidth, ref]);
 
     return (
-        <Container>
+        <Container {...rest}>
             <InnerContainer ref={ref} vertical={vertical}>
                 <List vertical={vertical}>
                     {items.map((item, i) => (

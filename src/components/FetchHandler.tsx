@@ -35,7 +35,7 @@ export const FetchHandler = <TResult extends {}>({
     }, [dependencyList, trigger]);
 
     const renderError = () => {
-        if (errorIndicator && errorCode !== 404) {
+        if (errorIndicator && (errorCode !== 404 && notFoundIndicator)) {
             return errorIndicator;
         } else if (errorCode === 404 && notFoundIndicator) {
             return notFoundIndicator;

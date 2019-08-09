@@ -11,7 +11,7 @@ import { Tag } from './Tag';
 
 export interface TagInputProps {
     tags: Tag[];
-    autocompleteItems?: string[];
+    autocompleteItems?: string[] | AutocompleteItem[];
     placeholder?: string;
     label?: string | React.ReactNode;
     canAddAllAutocompleteItemsButton?: boolean;
@@ -19,6 +19,11 @@ export interface TagInputProps {
     clearAllAutocompleteItemsButtonText?: string;
     tagsDirection?: FlexDirections;
     onChange: (items: Tag[]) => void;
+}
+
+export interface AutocompleteItem {
+    label: string;
+    searchTerms: string[];
 }
 
 export interface TagInputState {
@@ -112,7 +117,7 @@ export class TagsInput_ extends React.Component<TagInputProps & { theme: Theme }
         });
     };
 
-    private getSuggestions = (value: string) => {
+    private getSuggestions = (value: string): string[] => {
         if (!this.props.autocompleteItems) {
             return [];
         }
@@ -120,9 +125,9 @@ export class TagsInput_ extends React.Component<TagInputProps & { theme: Theme }
         const inputValue = value.trim().toLowerCase();
         const inputLength = inputValue.length;
 
-        return this.props.autocompleteItems
-            .filter(item => !this.props.tags.some(tag => tag.label === item))
-            .filter(item => item.toLowerCase().slice(0, inputLength) === inputValue);
+        return this.isStringArray(this.props.autocompleteItems)
+            ? this.getStringArraySuggestions(inputLength, inputValue)
+            : this.getAutocompleteItemSuggestions(inputLength, inputValue);
     };
 
     private getSuggestionValue = (suggestion: string) => suggestion;
@@ -155,6 +160,10 @@ export class TagsInput_ extends React.Component<TagInputProps & { theme: Theme }
         });
     };
 
+    private isStringArray = (arg: any[]): arg is string[] => typeof arg[0] === 'string';
+
+    private isAutocompleteArray = (arg: any[]): arg is AutocompleteItem[] => typeof arg[0] === 'object';
+
     private renderTag = (tag: Tag) => <Tag key={tag.id} tag={tag} onDelete={this.handleDelete} />;
 
     private handleKeyDown = (event: React.KeyboardEvent<KeyboardEvent>) => {
@@ -165,8 +174,19 @@ export class TagsInput_ extends React.Component<TagInputProps & { theme: Theme }
         }
     };
 
+    private getItems = (): string[] => {
+        if (this.isStringArray(this.props.autocompleteItems!)) {
+            return this.props.autocompleteItems;
+        } else {
+            if (this.isAutocompleteArray(this.props.autocompleteItems!)) {
+                return this.props.autocompleteItems.map(item => item.label);
+            }
+        }
+        return [];
+    };
+
     private addAllAutocompleteItems = () => {
-        const tags: Tag[] = this.props.autocompleteItems!.map((suggestion, index) => ({ label: suggestion, id: index.toString() }));
+        const tags: Tag[] = this.getItems().map((suggestion, index) => ({ label: suggestion, id: index.toString() }));
 
         this.props.onChange(tags);
     };
@@ -174,6 +194,27 @@ export class TagsInput_ extends React.Component<TagInputProps & { theme: Theme }
     private handleClear = () => {
         this.setState({ value: '' }, () => this.props.onChange([]));
     };
+
+    private getStringArraySuggestions(inputLength: number, inputValue: string): string[] {
+        if (this.isStringArray(this.props.autocompleteItems!)) {
+            return this.props.autocompleteItems
+                .filter(item => !this.props.tags.some(tag => tag.label === item))
+                .filter(item => item.toLowerCase().slice(0, inputLength) === inputValue);
+        }
+
+        return [];
+    }
+
+    private getAutocompleteItemSuggestions(inputLength: number, inputValue: string): string[] {
+        if (this.isAutocompleteArray(this.props.autocompleteItems!)) {
+            return this.props.autocompleteItems
+                .filter(item => !this.props.tags.some(tag => item.label === tag.label))
+                .filter(item => item.searchTerms.some(term => term.toLowerCase().slice(0, inputLength) === inputValue))
+                .map(autoCompleteItem => autoCompleteItem.label);
+        }
+
+        return [];
+    }
 
     render() {
         const { value, id, suggestions } = this.state;

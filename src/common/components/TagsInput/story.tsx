@@ -3,7 +3,7 @@ import uniqid from 'uniqid';
 import { State, Store } from '@sambego/storybook-state';
 import { array, boolean, text, withKnobs } from '@storybook/addon-knobs';
 import { storiesOf } from '@storybook/react';
-import { TagsInput } from './';
+import { TagsInput, AutocompleteItem } from './';
 import notes from './README.md';
 
 const components = storiesOf('Components', module);
@@ -23,6 +23,32 @@ components.add(
             <State store={store}>
                 <TagsInput
                     autocompleteItems={array('Suggestions', autoCompleteItems)}
+                    label={text('Label', 'En label')}
+                    placeholder={text('Placeholder', 'Search with autocomplete (try Item)')}
+                    canAddAllAutocompleteItemsButton={boolean('Add all button', false)}
+                    addAllAutocompleteItemsButtonText={text('Text for add all button', 'Add all suggestions')}
+                    clearAllAutocompleteItemsButtonText={text('Text for clearing suggestions', 'Clear')}
+                    tags={store.get('tags')}
+                    onChange={tags => store.set({ tags })}
+                />
+            </State>
+        );
+    },
+    { notes }
+);
+
+components.add(
+    'Object Tags Input',
+    () => {
+        const autoCompleteItems: AutocompleteItem[] = [
+            { label: 'Item 1', searchTerms: ['Item', '1'] },
+            { label: 'Item 2', searchTerms: ['Item', '2'] },
+        ];
+
+        return (
+            <State store={store}>
+                <TagsInput
+                    autocompleteItems={autoCompleteItems}
                     label={text('Label', 'En label')}
                     placeholder={text('Placeholder', 'Search with autocomplete (try Item)')}
                     canAddAllAutocompleteItemsButton={boolean('Add all button', false)}

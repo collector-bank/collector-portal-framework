@@ -41,7 +41,7 @@ export const FetchHandler = <TResult extends {}>({
             return notFoundIndicator;
         }
 
-        return errorCode !== 401 ? <Alert type="error" message={errorText} /> : <Spinner />;
+        return errorCode !== 401 ? <Alert type="error" message={errorText} /> : <Spinner centered />;
     };
 
     return (

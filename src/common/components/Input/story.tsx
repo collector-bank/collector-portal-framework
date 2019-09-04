@@ -28,7 +28,8 @@ components.add(
                     disabled={boolean('Disabled', false)}
                     rows={number('Rows', 10)}
                     value={store.get('value')}
-                    onChange={event => store.set({ value: event.currentTarget.value })}
+                    ref={ref => console.log(ref)}
+                    onChange={(event: { currentTarget: { value: string | undefined } }) => store.set({ value: event.currentTarget.value })}
                 />
             </State>
         );

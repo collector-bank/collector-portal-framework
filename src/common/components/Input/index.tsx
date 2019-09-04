@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, forwardRef, HTMLAttributes } from 'react';
 import Collapse from 'react-css-collapse';
 import { ClassNames, CSSObject } from '@emotion/core';
 import uniqid from 'uniqid';
@@ -107,35 +107,32 @@ export interface InputState {
     isDirty: boolean;
 }
 
-export class Input extends React.Component<InputProps, InputState> {
-    static displayName = 'Collector.Input';
+export const Input = forwardRef<HTMLInputElement, InputProps & HTMLAttributes<HTMLInputElement>>(
+    ({ label, error, warning, multiline, description, onBlur, ...rest }, ref) => {
+        const id = uniqid();
+        const [isDirty, setIsDirty] = useState(false);
 
-    state: InputState = {
-        id: uniqid(),
-        isDirty: false,
-    };
+        Input.displayName = 'Collector.Input';
 
-    makeDirty = (event: React.FormEvent<HTMLInputElement> | undefined) => {
-        if (this.props.onBlur) {
-            this.props.onBlur(event);
-        }
+        const makeDirty = (event: React.FormEvent<HTMLInputElement> | undefined) => {
+            if (onBlur) {
+                onBlur(event);
+            }
 
-        this.setState({ isDirty: true });
-    };
+            setIsDirty(true);
+        };
 
-    render() {
-        const { label, error, warning, multiline, description, ...rest } = this.props;
         const InputElement = multiline ? Textarea : InputField;
-        const indicateError = Boolean(this.state.isDirty && error);
+        const indicateError = Boolean(isDirty && error);
         const showErrorMessage = indicateError && typeof error !== 'boolean';
-        const showWarningMessage = Boolean(this.state.isDirty && warning);
+        const showWarningMessage = Boolean(isDirty && warning);
 
         return (
             <ClassNames>
                 {({ css }) => (
                     <InputContainer>
                         {label && (
-                            <InputLabel htmlFor={this.state.id} error={indicateError}>
+                            <InputLabel htmlFor={id} error={indicateError}>
                                 {label}
 
                                 {description && <Description description={description} />}
@@ -143,12 +140,13 @@ export class Input extends React.Component<InputProps, InputState> {
                         )}
 
                         <InputElement
-                            id={this.state.id}
+                            id={id}
                             hasError={indicateError}
                             aria-invalid={indicateError}
                             showAlertMessage={showErrorMessage || showWarningMessage}
+                            ref={ref}
                             {...rest}
-                            onBlur={this.makeDirty}
+                            onBlur={makeDirty}
                         />
 
                         <Collapse isOpen={showErrorMessage} className={css({ transition: 'height 150ms' })}>
@@ -163,4 +161,4 @@ export class Input extends React.Component<InputProps, InputState> {
             </ClassNames>
         );
     }
-}
+);

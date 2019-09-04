@@ -2,6 +2,8 @@
 
 This component can be used for freeform data entry.
 
+It uses forwardRef to forward a reference to the inner input component.
+
 ## Props
 
 | Name          | Required | Type                                 | Possible values                             |

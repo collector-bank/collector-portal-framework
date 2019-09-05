@@ -22,7 +22,8 @@ export interface ButtonProps {
     loading?: boolean;
 }
 
-const ButtonElement = styled.button<ButtonProps>(({ size, kind, loading, icon, theme }) => {
+// Loading is a html attribute and throws an error if we use it
+const ButtonElement = styled.button<ButtonProps & { buttonLoading?: boolean }>(({ size, kind, buttonLoading: loading, icon, theme }) => {
     const styles: CSSObject = {
         fontFamily: 'inherit',
         whiteSpace: 'nowrap',
@@ -228,7 +229,7 @@ const getSpinnerColorByKind = (theme: Theme, kind?: ButtonKind) => {
 
 const _Button = forwardRef<HTMLButtonElement, ButtonProps & HTMLAttributes<HTMLButtonElement> & { theme: Theme }>(
     ({ theme, kind, loading, children, icon, iconAlignment = 'start', size, ...rest }, ref) => (
-        <ButtonElement aria-busy={loading} loading={loading} icon={icon} size={size} kind={kind} {...rest} ref={ref}>
+        <ButtonElement aria-busy={loading} buttonLoading={loading} icon={icon} size={size} kind={kind} {...rest} ref={ref}>
             <div>
                 {icon && iconAlignment === 'start' && <IconContainer iconAlignment={iconAlignment}>{icon}</IconContainer>}
                 {children}

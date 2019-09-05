@@ -1,4 +1,4 @@
-import React, { useState, forwardRef, HTMLAttributes } from 'react';
+import React, { useState, forwardRef } from 'react';
 import Collapse from 'react-css-collapse';
 import { ClassNames, CSSObject } from '@emotion/core';
 import uniqid from 'uniqid';
@@ -107,58 +107,56 @@ export interface InputState {
     isDirty: boolean;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps & HTMLAttributes<HTMLInputElement>>(
-    ({ label, error, warning, multiline, description, onBlur, ...rest }, ref) => {
-        const id = uniqid();
-        const [isDirty, setIsDirty] = useState(false);
+export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, error, warning, multiline, description, onBlur, ...rest }, ref) => {
+    const id = uniqid();
+    const [isDirty, setIsDirty] = useState(false);
 
-        Input.displayName = 'Collector.Input';
+    Input.displayName = 'Collector.Input';
 
-        const makeDirty = (event: React.FormEvent<HTMLInputElement> | undefined) => {
-            if (onBlur) {
-                onBlur(event);
-            }
+    const makeDirty = (event: React.FormEvent<HTMLInputElement> | undefined) => {
+        if (onBlur) {
+            onBlur(event);
+        }
 
-            setIsDirty(true);
-        };
+        setIsDirty(true);
+    };
 
-        const InputElement = multiline ? Textarea : InputField;
-        const indicateError = Boolean(isDirty && error);
-        const showErrorMessage = indicateError && typeof error !== 'boolean';
-        const showWarningMessage = Boolean(isDirty && warning);
+    const InputElement = multiline ? Textarea : InputField;
+    const indicateError = Boolean(isDirty && error);
+    const showErrorMessage = indicateError && typeof error !== 'boolean';
+    const showWarningMessage = Boolean(isDirty && warning);
 
-        return (
-            <ClassNames>
-                {({ css }) => (
-                    <InputContainer>
-                        {label && (
-                            <InputLabel htmlFor={id} error={indicateError}>
-                                {label}
+    return (
+        <ClassNames>
+            {({ css }) => (
+                <InputContainer>
+                    {label && (
+                        <InputLabel htmlFor={id} error={indicateError}>
+                            {label}
 
-                                {description && <Description description={description} />}
-                            </InputLabel>
-                        )}
+                            {description && <Description description={description} />}
+                        </InputLabel>
+                    )}
 
-                        <InputElement
-                            id={id}
-                            hasError={indicateError}
-                            aria-invalid={indicateError}
-                            showAlertMessage={showErrorMessage || showWarningMessage}
-                            ref={ref}
-                            {...rest}
-                            onBlur={makeDirty}
-                        />
+                    <InputElement
+                        id={id}
+                        hasError={indicateError}
+                        aria-invalid={indicateError}
+                        showAlertMessage={showErrorMessage || showWarningMessage}
+                        ref={ref}
+                        {...rest}
+                        onBlur={makeDirty}
+                    />
 
-                        <Collapse isOpen={showErrorMessage} className={css({ transition: 'height 150ms' })}>
-                            <InputError>{error}</InputError>
-                        </Collapse>
+                    <Collapse isOpen={showErrorMessage} className={css({ transition: 'height 150ms' })}>
+                        <InputError>{error}</InputError>
+                    </Collapse>
 
-                        <Collapse isOpen={showWarningMessage} className={css({ transition: 'height 150ms' })}>
-                            <InputWarning>{warning}</InputWarning>
-                        </Collapse>
-                    </InputContainer>
-                )}
-            </ClassNames>
-        );
-    }
-);
+                    <Collapse isOpen={showWarningMessage} className={css({ transition: 'height 150ms' })}>
+                        <InputWarning>{warning}</InputWarning>
+                    </Collapse>
+                </InputContainer>
+            )}
+        </ClassNames>
+    );
+});

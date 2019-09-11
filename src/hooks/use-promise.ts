@@ -7,6 +7,8 @@ export function usePromise<TResult>(promise: () => Promise<TResult>) {
     const [errorCode, setErrorCode] = useState<number | undefined>(undefined);
 
     const trigger = useCallback(async () => {
+        const controller = new AbortController();
+
         setLoading(true);
         setError(false);
         setData(undefined);
@@ -21,6 +23,8 @@ export function usePromise<TResult>(promise: () => Promise<TResult>) {
         }
 
         setLoading(false);
+
+        return () => controller.abort();
     }, [promise]);
 
     return { data, loading, error, trigger, errorCode };

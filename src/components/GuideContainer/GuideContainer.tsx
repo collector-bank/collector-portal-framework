@@ -60,7 +60,7 @@ export const GuideContainer: React.StatelessComponent<Props> = ({ progressTracke
     <Container>
         <HeaderContainer>
             <HeaderContent>
-                <H1 style={{ marginBottom: progressTracker ? 'initial' : 0 }}>{label}</H1>
+                <H1 style={{ marginBottom: progressTracker ? undefined : 0 }}>{label}</H1>
                 {progressTracker}
             </HeaderContent>
         </HeaderContainer>

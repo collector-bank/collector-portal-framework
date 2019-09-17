@@ -2,7 +2,7 @@ import React from 'react';
 import { Tooltip } from '../Tooltip';
 import styled from '../../../';
 
-export type BadgeColor = 'primary' | 'yellow' | 'green' | 'red' | 'blue' | 'lightGray';
+export type BadgeColor = 'purple' | 'yellow' | 'green' | 'red' | 'blue' | 'lightGray';
 
 export interface BadgeProps extends React.ComponentProps<'div'> {
     label: string;
@@ -57,7 +57,7 @@ export class Badge extends React.Component<BadgeProps, BadgeState> {
     };
 
     render() {
-        const { label, tooltip, color = 'primary', ...rest } = this.props;
+        const { label, tooltip, color = 'purple', ...rest } = this.props;
 
         return (
             <Container {...rest}>

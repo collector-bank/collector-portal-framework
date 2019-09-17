@@ -6,7 +6,7 @@ import { Theme } from '../../../themes';
 import styled from '../../../';
 import { SpinnerSvg } from '../Spinner';
 
-export type ButtonKind = 'primary' | 'secondary' | 'secondaryNegative' | 'success' | 'warn' | 'text';
+export type ButtonKind = 'primary' | 'secondary' | 'secondaryNegative' | 'success' | 'warn' | 'text' | 'cta';
 export type ButtonSize = 'small' | 'medium' | 'large';
 export type IconAlignment = 'start' | 'end';
 
@@ -31,7 +31,7 @@ const ButtonElement = styled.button<ButtonProps & { buttonLoading?: boolean }>((
         textAlign: 'center',
         overflow: 'hidden',
         border: 0,
-        borderRadius: 50,
+        borderRadius: theme.borderRadius.small,
         transition: 'background-color 100ms',
         pointerEvents: loading ? 'none' : undefined,
         position: loading ? 'relative' : 'initial',
@@ -93,19 +93,19 @@ const getKindStyles = (theme: Theme, kind?: ButtonKind) => {
         case 'text':
             return {
                 backgroundColor: 'transparent',
-                color: theme.colors.primary,
+                color: theme.colors.purple,
 
                 minWidth: 0,
                 paddingLeft: 12,
                 paddingRight: 12,
 
                 '&:hover:not(:disabled)': {
-                    color: lighten(0.1, theme.colors.primary),
+                    color: lighten(0.1, theme.colors.purple),
                     textDecoration: 'underline',
                 },
 
                 '&:active:not(:disabled)': {
-                    color: lighten(0.2, theme.colors.primary),
+                    color: lighten(0.2, theme.colors.purple),
                 },
 
                 '&:disabled': {
@@ -131,11 +131,24 @@ const getKindStyles = (theme: Theme, kind?: ButtonKind) => {
                 ...background(theme.colors.green),
                 color: theme.colors.white,
             };
+        case 'cta':
+            return {
+                ...background(theme.colors.purple),
+                color: theme.colors.white,
+            };
         case 'primary':
         default:
             return {
                 ...background(theme.colors.primary),
-                color: theme.colors.white,
+                color: theme.colors.warmPurple,
+
+                '&:hover:not(:disabled)': {
+                    backgroundColor: darken(0.02, theme.colors.primary),
+                },
+
+                '&:active:not(:disabled)': {
+                    backgroundColor: darken(0.04, theme.colors.primary),
+                },
             };
     }
 };
@@ -145,9 +158,9 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
         fontSize: 16,
         lineHeight: '24px',
         fontWeight: 500,
-        minWidth: 80,
-        paddingTop: 8,
-        paddingBottom: 8,
+        minWidth: 120,
+        paddingTop: 4,
+        paddingBottom: 4,
         paddingLeft: 24,
         paddingRight: 24,
     };
@@ -157,8 +170,8 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
         lineHeight: '24px',
         fontWeight: 500,
         minWidth: 160,
-        paddingTop: 12,
-        paddingBottom: 12,
+        paddingTop: 8,
+        paddingBottom: 8,
         paddingLeft: 24,
         paddingRight: 24,
     };
@@ -168,8 +181,8 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
         lineHeight: '32px',
         fontWeight: 500,
         minWidth: 200,
-        paddingTop: 12,
-        paddingBottom: 12,
+        paddingTop: 10,
+        paddingBottom: 10,
         paddingLeft: 32,
         paddingRight: 32,
     };
@@ -218,7 +231,7 @@ const getSpinnerColorByKind = (theme: Theme, kind?: ButtonKind) => {
         case 'secondary':
         case 'secondaryNegative':
         case 'text':
-            return theme.colors.primary;
+            return theme.colors.purple;
         case 'primary':
         case 'warn':
         case 'success':

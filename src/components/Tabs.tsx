@@ -38,16 +38,16 @@ const Link = styled(NavLink)<{ others: { vertical: boolean } }>(({ theme, others
     paddingLeft: others.vertical ? 16 : undefined,
 
     '&:hover': {
-        color: theme.colors.primary,
+        color: theme.colors.purple,
     },
 
     color: 'inherit',
 
     '&.active': {
-        color: theme.colors.primary,
-        borderColor: theme.colors.primary,
+        color: theme.colors.purple,
+        borderColor: theme.colors.purple,
         borderBottom: others.vertical ? `1px solid ${theme.colors.lightGray}` : undefined,
-        borderLeftColor: others.vertical ? theme.colors.primary : undefined,
+        borderLeftColor: others.vertical ? theme.colors.purple : undefined,
     },
 }));
 

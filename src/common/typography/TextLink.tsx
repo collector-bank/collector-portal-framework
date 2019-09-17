@@ -10,6 +10,6 @@ export const TextLink = styled.a<{}>(({ theme }) => ({
     '&:hover': {
         borderColor: 'currentColor',
     },
-    color: theme.colors.primary,
-    borderColor: lighten(0.5, theme.colors.primary),
+    color: theme.colors.purple,
+    borderColor: lighten(0.5, theme.colors.purple),
 }));

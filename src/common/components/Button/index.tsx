@@ -235,15 +235,15 @@ const IconContainer = styled.span<{ iconAlignment: IconAlignment }>(({ iconAlign
 
 const getSpinnerColorByKind = (theme: Theme, kind?: ButtonKind) => {
     switch (kind) {
+        case 'warn':
+        case 'success':
+            return theme.colors.white;
         case 'primary':
         case 'secondary':
         case 'secondaryNegative':
         case 'text':
-            return theme.colors.purple;
-        case 'warn':
-        case 'success':
         default:
-            return theme.colors.white;
+            return theme.colors.purple;
     }
 };
 

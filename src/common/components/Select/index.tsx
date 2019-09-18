@@ -39,7 +39,7 @@ const SelectField = styled.select(({ theme }) => ({
     background: 'transparent',
     border: 0,
     width: '100%',
-    padding: 11, // To make it 11 when accounting for border
+    padding: '7px 11px', // To make it 11 when accounting for border
     paddingRight: 40,
 
     '&::-ms-expand': {

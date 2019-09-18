@@ -36,7 +36,7 @@ export const InputField: any = styled.input<ErrorProps>(({ indicateError, theme,
     color: 'inherit',
     width: '100%',
     border: '1px solid',
-    padding: 11, // To make it 12 pixels when accounting for the 1px border above
+    padding: '7px 11px', // To make it 12 pixels when accounting for the 1px border above
     boxSizing: 'border-box',
     appearance: 'none',
     boxShadow: 'none',

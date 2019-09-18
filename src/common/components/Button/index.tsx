@@ -142,7 +142,7 @@ const getKindStyles = (theme: Theme, kind?: ButtonKind) => {
                 color: theme.colors.purple,
 
                 '&:hover:not(:disabled)': {
-                    backgroundColor: lighten(0.02, theme.colors.lavender),
+                    backgroundColor: lighten(0.01, theme.colors.lavender),
                 },
 
                 '&:focus:not(:disabled)': {
@@ -202,7 +202,6 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
         default:
             return {
                 ...medium,
-                [theme.breakpoints.mobileAndLower]: small,
             };
     }
 };

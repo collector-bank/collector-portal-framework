@@ -37,8 +37,8 @@ const ButtonElement = styled.button<ButtonProps & { buttonLoading?: boolean }>((
         position: loading ? 'relative' : 'initial',
 
         '&:disabled': {
-            backgroundColor: theme.colors.lightGray,
-            color: theme.colors.darkGray,
+            backgroundColor: theme.colors.disabledBackground,
+            color: theme.colors.disabledText,
         },
 
         '&:not(:disabled)': {
@@ -101,7 +101,6 @@ const getKindStyles = (theme: Theme, kind?: ButtonKind) => {
 
                 '&:hover:not(:disabled)': {
                     color: theme.colors.purple,
-                    // textDecoration: 'underline',
                 },
 
                 '&:active:not(:disabled)': {
@@ -142,12 +141,12 @@ const getKindStyles = (theme: Theme, kind?: ButtonKind) => {
                 ...background(theme.colors.lavender),
                 color: theme.colors.purple,
 
-                '&:focus:not(:disabled)': {
-                    backgroundColor: darken(0.01, theme.colors.lavender),
-                },
-
                 '&:hover:not(:disabled)': {
                     backgroundColor: lighten(0.02, theme.colors.lavender),
+                },
+
+                '&:focus:not(:disabled)': {
+                    backgroundColor: darken(0.01, theme.colors.lavender),
                 },
 
                 '&:active:not(:disabled)': {
@@ -236,11 +235,11 @@ const IconContainer = styled.span<{ iconAlignment: IconAlignment }>(({ iconAlign
 
 const getSpinnerColorByKind = (theme: Theme, kind?: ButtonKind) => {
     switch (kind) {
+        case 'primary':
         case 'secondary':
         case 'secondaryNegative':
         case 'text':
-            return theme.colors.black;
-        case 'primary':
+            return theme.colors.purple;
         case 'warn':
         case 'success':
         default:

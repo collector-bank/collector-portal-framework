@@ -15,8 +15,8 @@ export const colors = {
     yellow: '#FFBE2C',
     darkIndigo: '#15091A',
 
-    disabledText: '',
-    disabledBackground: '',
+    disabledText: '#9B9B9B',
+    disabledBackground: '#E9E9E9',
     sidebarBlue: '#2C303E',
     sidebarBlueLight: '#323644',
     sidebarBlueDark: '#1E212B',

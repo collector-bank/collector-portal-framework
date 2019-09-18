@@ -80,7 +80,6 @@ const getKindStyles = (theme: Theme, kind?: ButtonKind) => {
             return {
                 ...background(theme.colors.offWhite),
                 color: theme.colors.black,
-                border: `1px solid ${theme.colors.offWhite}`,
 
                 '&:hover:not(:disabled)': {
                     backgroundColor: lighten(0.02, theme.colors.offWhite),
@@ -115,7 +114,6 @@ const getKindStyles = (theme: Theme, kind?: ButtonKind) => {
             return {
                 ...background(theme.colors.white),
                 color: theme.colors.black,
-                border: `1px solid ${theme.colors.white}`,
 
                 '&:hover:not(:disabled)': {
                     backgroundColor: darken(0.02, theme.colors.white),
@@ -198,12 +196,8 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
                 [theme.breakpoints.mobileAndLower]: medium,
             };
         case 'medium':
-            return medium;
         default:
-            return {
-                ...medium,
-                [theme.breakpoints.mobileAndLower]: small,
-            };
+            return medium;
     }
 };
 
@@ -223,20 +217,26 @@ const background = (backgroundColor: string): CSSObject => ({
     },
 });
 
-const IconContainer = styled.span<{ iconAlignment: IconAlignment }>(({ iconAlignment }) => ({
-    maxWidth: '1.5em',
-    maxHeight: '1.5em',
+const IconContainer = styled.span<{ iconAlignment: IconAlignment }>(({ iconAlignment, theme }) => ({
+    maxWidth: '1.3em',
+    maxHeight: '1.3em',
     marginRight: iconAlignment === 'start' ? '.5em' : 0,
     marginLeft: iconAlignment === 'end' ? '.5em' : 0,
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
+
+    [theme.breakpoints.mobileAndLower]: {
+        maxWidth: '1.5em',
+        maxHeight: '1.5em',
+    },
 }));
 
 const getSpinnerColorByKind = (theme: Theme, kind?: ButtonKind) => {
     switch (kind) {
         case 'warn':
         case 'success':
+        case 'cta':
             return theme.colors.white;
         case 'primary':
         case 'secondary':

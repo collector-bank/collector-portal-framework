@@ -8,7 +8,7 @@ const track = (theme: Theme, percentFilled?: number) => ({
     cursor: 'pointer',
     background:
         percentFilled != null
-            ? `linear-gradient(to right, ${theme.colors.primary} ${percentFilled}%, ${theme.colors.primary} ${percentFilled}%, ${theme.colors.lightGray} ${percentFilled}%)`
+            ? `linear-gradient(to right, ${theme.colors.purple} ${percentFilled}%, ${theme.colors.purple} ${percentFilled}%, ${theme.colors.lightGray} ${percentFilled}%)`
             : theme.colors.lightGray,
     borderRadius: theme.borderRadius.small,
 });
@@ -19,7 +19,7 @@ const thumb = (theme: Theme): CSSObject => ({
     width: 36,
     height: 36,
     borderRadius: '100%',
-    background: theme.colors.primary,
+    background: theme.colors.purple,
     cursor: 'pointer',
     WebkitAppearance: 'none',
     marginTop: -14,
@@ -56,7 +56,7 @@ export const Slider = styled.input<SliderProps>(({ min, max, value, theme }) => 
     },
 
     '&::-ms-fill-lower': {
-        background: theme.colors.primary,
+        background: theme.colors.purple,
     },
 
     '&::-ms-fill-upper': {

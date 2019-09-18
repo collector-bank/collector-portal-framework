@@ -42,16 +42,16 @@ const Link = styled(NavLink)<VerticalProps>(({ theme, vertical }) => ({
     paddingLeft: vertical ? 16 : undefined,
 
     '&:hover': {
-        color: theme.colors.primary,
+        color: theme.colors.purple,
     },
 
     color: 'inherit',
 
     '&.active': {
-        color: theme.colors.primary,
-        borderColor: theme.colors.primary,
+        color: theme.colors.purple,
+        borderColor: theme.colors.purple,
         borderBottom: vertical ? `1px solid ${theme.colors.lightGray}` : undefined,
-        borderLeftColor: vertical ? theme.colors.primary : undefined,
+        borderLeftColor: vertical ? theme.colors.purple : undefined,
     },
 }));
 

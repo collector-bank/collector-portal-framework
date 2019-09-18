@@ -57,7 +57,7 @@ const style = (theme: Theme) =>
             },
 
             '& .react-datepicker__day--selected': {
-                backgroundColor: theme.colors.primary,
+                backgroundColor: theme.colors.purple,
             },
 
             '& .react-datepicker__day:not(.react-datepicker__day--selected):not(.react-datepicker__day--disabled):hover': {

@@ -25,7 +25,7 @@ const Chevron = styled.a<ChevronProps>(({ direction, enabled, theme }) => ({
     paddingLeft: 2,
     paddingRight: 2,
     display: 'inline-block',
-    color: theme.colors.primary,
+    color: theme.colors.purple,
     background: `url(${direction === 'left' ? leftChevron : rightChevron}) no-repeat center center`,
     backgroundSize: 12,
     opacity: enabled ? 1 : 0.3,
@@ -49,7 +49,7 @@ const Page = styled.a<{ active: boolean }>(({ active, theme }) => ({
     display: 'inline-block',
     textAlign: 'center',
     cursor: 'pointer',
-    color: active ? theme.colors.black : theme.colors.primary,
+    color: active ? theme.colors.black : theme.colors.purple,
     fontWeight: active ? 700 : 400,
 }));
 

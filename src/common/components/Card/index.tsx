@@ -56,7 +56,7 @@ const HeadingContainer = styled.div({
     justifyContent: 'space-between',
 });
 
-export type CardColors = 'primary' | 'green' | 'red' | 'blue' | 'yellow' | undefined;
+export type CardColors = 'purple' | 'primary' | 'green' | 'red' | 'blue' | 'yellow' | undefined;
 
 export interface CardProps {
     heading?: string;

@@ -2,7 +2,7 @@ import React from 'react';
 import { Tooltip } from '../Tooltip';
 import styled from '../../../';
 
-export type BadgeColor = 'primary' | 'yellow' | 'green' | 'red' | 'blue' | 'lightGray';
+export type BadgeColor = 'purple' | 'yellow' | 'green' | 'red' | 'blue' | 'lightGray';
 
 export interface BadgeProps extends React.ComponentProps<'div'> {
     label: string;
@@ -29,10 +29,10 @@ const Container = styled.div(({ theme }) => ({
 }));
 
 const Label = styled.span<{ color: BadgeColor }>(({ color, theme }) => ({
-    padding: '4px 8px',
+    padding: '4px 12px',
     whiteSpace: 'nowrap',
     position: 'relative',
-    borderRadius: theme.borderRadius.small,
+    borderRadius: theme.borderRadius.large,
     background: theme.colors[color],
     color: color === 'yellow' || color === 'green' || color === 'lightGray' ? theme.colors.black : theme.colors.white,
 }));
@@ -57,7 +57,7 @@ export class Badge extends React.Component<BadgeProps, BadgeState> {
     };
 
     render() {
-        const { label, tooltip, color = 'primary', ...rest } = this.props;
+        const { label, tooltip, color = 'purple', ...rest } = this.props;
 
         return (
             <Container {...rest}>

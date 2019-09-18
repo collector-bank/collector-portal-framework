@@ -11,10 +11,10 @@ components.addDecorator(withKnobs);
 components.add(
     'Badge',
     () => {
-        const colors: BadgeColor[] = ['primary', 'yellow', 'green', 'red', 'blue', 'lightGray'];
+        const colors: BadgeColor[] = ['purple', 'yellow', 'green', 'red', 'blue', 'lightGray'];
 
         return (
-            <Badge label={text('Label', 'En badge')} color={select('Color', colors, 'primary')} tooltip={text('Tooltip', 'En tooltip')} />
+            <Badge label={text('Label', 'En badge')} color={select('Color', colors, 'purple')} tooltip={text('Tooltip', 'En tooltip')} />
         );
     },
     { notes }

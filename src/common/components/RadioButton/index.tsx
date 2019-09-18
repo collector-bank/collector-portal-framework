@@ -32,11 +32,11 @@ const Input = styled.input(({ theme }) => ({
     },
 
     '&:checked': {
-        borderColor: theme.colors.primary,
+        borderColor: theme.colors.purple,
     },
 
     '&:checked:after': {
-        backgroundColor: theme.colors.primary,
+        backgroundColor: theme.colors.purple,
     },
 
     '&:disabled': {

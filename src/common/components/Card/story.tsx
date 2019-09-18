@@ -56,7 +56,7 @@ components.add(
                                     </div>
                                 </>
                             }
-                            color="primary"
+                            color="purple"
                             heading="Label 2"
                         />
 

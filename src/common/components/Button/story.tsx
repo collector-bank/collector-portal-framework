@@ -20,7 +20,7 @@ components.addDecorator(withKnobs);
 components.add(
     'Button',
     () => {
-        const kinds: ButtonKind[] = ['primary', 'secondary', 'secondaryNegative', 'warn', 'text', 'success'];
+        const kinds: ButtonKind[] = ['primary', 'cta', 'secondary', 'secondaryNegative', 'warn', 'text', 'success'];
         const sizes: ButtonSize[] = ['small', 'medium', 'large'];
 
         return (

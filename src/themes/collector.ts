@@ -7,12 +7,16 @@ export const colors = {
     lightOffWhite: '#F9F9F9',
     white: '#FFFFFF',
 
-    primary: '#6B1FAF',
+    lavender: '#f4e8ff',
+    purple: '#6B1FAF',
     green: '#43CA43',
     red: '#F02C2C',
     blue: '#0672DF',
     yellow: '#FFBE2C',
+    darkIndigo: '#15091A',
 
+    disabledText: '#9B9B9B',
+    disabledBackground: '#E9E9E9',
     sidebarBlue: '#2C303E',
     sidebarBlueLight: '#323644',
     sidebarBlueDark: '#1E212B',

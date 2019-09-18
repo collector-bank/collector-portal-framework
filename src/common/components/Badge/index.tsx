@@ -29,10 +29,10 @@ const Container = styled.div(({ theme }) => ({
 }));
 
 const Label = styled.span<{ color: BadgeColor }>(({ color, theme }) => ({
-    padding: '4px 8px',
+    padding: '4px 12px',
     whiteSpace: 'nowrap',
     position: 'relative',
-    borderRadius: theme.borderRadius.small,
+    borderRadius: theme.borderRadius.large,
     background: theme.colors[color],
     color: color === 'yellow' || color === 'green' || color === 'lightGray' ? theme.colors.black : theme.colors.white,
 }));

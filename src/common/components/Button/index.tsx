@@ -37,8 +37,8 @@ const ButtonElement = styled.button<ButtonProps & { buttonLoading?: boolean }>((
         position: loading ? 'relative' : 'initial',
 
         '&:disabled': {
-            backgroundColor: theme.colors.mediumGray,
-            color: theme.colors.lightGray,
+            backgroundColor: theme.colors.lightGray,
+            color: theme.colors.darkGray,
         },
 
         '&:not(:disabled)': {
@@ -93,19 +93,19 @@ const getKindStyles = (theme: Theme, kind?: ButtonKind) => {
         case 'text':
             return {
                 backgroundColor: 'transparent',
-                color: theme.colors.purple,
+                color: theme.colors.darkIndigo,
 
                 minWidth: 0,
                 paddingLeft: 12,
                 paddingRight: 12,
 
                 '&:hover:not(:disabled)': {
-                    color: lighten(0.1, theme.colors.purple),
-                    textDecoration: 'underline',
+                    color: theme.colors.purple,
+                    // textDecoration: 'underline',
                 },
 
                 '&:active:not(:disabled)': {
-                    color: lighten(0.2, theme.colors.purple),
+                    color: theme.colors.purple,
                 },
 
                 '&:disabled': {
@@ -139,15 +139,19 @@ const getKindStyles = (theme: Theme, kind?: ButtonKind) => {
         case 'primary':
         default:
             return {
-                ...background(theme.colors.primary),
-                color: theme.colors.warmPurple,
+                ...background(theme.colors.lavender),
+                color: theme.colors.purple,
+
+                '&:focus:not(:disabled)': {
+                    backgroundColor: darken(0.01, theme.colors.lavender),
+                },
 
                 '&:hover:not(:disabled)': {
-                    backgroundColor: darken(0.02, theme.colors.primary),
+                    backgroundColor: lighten(0.02, theme.colors.lavender),
                 },
 
                 '&:active:not(:disabled)': {
-                    backgroundColor: darken(0.04, theme.colors.primary),
+                    backgroundColor: darken(0.02, theme.colors.lavender),
                 },
             };
     }
@@ -155,20 +159,20 @@ const getKindStyles = (theme: Theme, kind?: ButtonKind) => {
 
 const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
     const small: CSSObject = {
-        fontSize: 16,
-        lineHeight: '24px',
-        fontWeight: 500,
+        fontSize: 14,
+        lineHeight: 1.5,
+        fontWeight: 300,
         minWidth: 120,
-        paddingTop: 4,
-        paddingBottom: 4,
+        paddingTop: 6,
+        paddingBottom: 6,
         paddingLeft: 24,
         paddingRight: 24,
     };
 
     const medium: CSSObject = {
-        fontSize: 18,
-        lineHeight: '24px',
-        fontWeight: 500,
+        fontSize: 16,
+        lineHeight: 1.5,
+        fontWeight: 300,
         minWidth: 160,
         paddingTop: 8,
         paddingBottom: 8,
@@ -177,12 +181,12 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
     };
 
     const large: CSSObject = {
-        fontSize: 21,
-        lineHeight: '32px',
-        fontWeight: 500,
+        fontSize: 16,
+        lineHeight: 1.5,
+        fontWeight: 300,
         minWidth: 200,
-        paddingTop: 10,
-        paddingBottom: 10,
+        paddingTop: 14,
+        paddingBottom: 14,
         paddingLeft: 32,
         paddingRight: 32,
     };
@@ -207,12 +211,16 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
 const background = (backgroundColor: string): CSSObject => ({
     backgroundColor,
 
+    '&:focus:not(:disabled)': {
+        backgroundColor: darken(0.08, backgroundColor),
+    },
+
     '&:hover:not(:disabled)': {
-        backgroundColor: lighten(0.1, backgroundColor),
+        backgroundColor: lighten(0.06, backgroundColor),
     },
 
     '&:active:not(:disabled)': {
-        backgroundColor: lighten(0.2, backgroundColor),
+        backgroundColor: darken(0.1, backgroundColor),
     },
 });
 
@@ -231,7 +239,7 @@ const getSpinnerColorByKind = (theme: Theme, kind?: ButtonKind) => {
         case 'secondary':
         case 'secondaryNegative':
         case 'text':
-            return theme.colors.purple;
+            return theme.colors.black;
         case 'primary':
         case 'warn':
         case 'success':

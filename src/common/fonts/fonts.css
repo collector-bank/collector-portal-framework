@@ -1,5 +1,12 @@
 @font-face {
     font-family: 'ProximaNova';
+    font-weight: 300;
+
+    src: url('./medium.woff2') format('woff2'), url('./medium.woff') format('woff');
+}
+
+@font-face {
+    font-family: 'ProximaNova';
     font-weight: 400;
 
     src: url('./regular.woff2') format('woff2'), url('./regular.woff') format('woff');

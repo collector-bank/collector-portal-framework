@@ -67,7 +67,7 @@ components.add(
 
         return (
             <BrowserRouter>
-                <ul style={{ maxWidth: 420, padding: 0, margin: 0 }}>
+                <ul style={{ maxWidth: 480, padding: 0, margin: 0 }}>
                     {apiExample.map((item, index) => (
                         <ListItem key={index} location={isEvenItem(index) && index < 4 ? 'https://dn.se' : undefined} item={getItem(item)}>
                             {!isEvenItem(index) && (

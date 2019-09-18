@@ -198,6 +198,7 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
                 [theme.breakpoints.mobileAndLower]: medium,
             };
         case 'medium':
+            return medium;
         default:
             return {
                 ...medium,

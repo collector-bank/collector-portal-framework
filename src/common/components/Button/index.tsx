@@ -161,11 +161,10 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
         fontSize: 14,
         lineHeight: 1.5,
         fontWeight: 300,
-        minWidth: 120,
         paddingTop: 6,
         paddingBottom: 6,
-        paddingLeft: 24,
-        paddingRight: 24,
+        paddingLeft: 20,
+        paddingRight: 20,
     };
 
     const medium: CSSObject = {
@@ -202,6 +201,7 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
         default:
             return {
                 ...medium,
+                [theme.breakpoints.mobileAndLower]: small,
             };
     }
 };
@@ -223,8 +223,8 @@ const background = (backgroundColor: string): CSSObject => ({
 });
 
 const IconContainer = styled.span<{ iconAlignment: IconAlignment }>(({ iconAlignment }) => ({
-    maxWidth: '1.3em',
-    maxHeight: '1.3em',
+    maxWidth: '1.5em',
+    maxHeight: '1.5em',
     marginRight: iconAlignment === 'start' ? '.5em' : 0,
     marginLeft: iconAlignment === 'end' ? '.5em' : 0,
     display: 'flex',

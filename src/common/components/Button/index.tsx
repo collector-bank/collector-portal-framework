@@ -85,8 +85,12 @@ const getKindStyles = (theme: Theme, kind?: ButtonKind) => {
                     backgroundColor: lighten(0.02, theme.colors.offWhite),
                 },
 
+                '&:focus:not(:disabled)': {
+                    backgroundColor: darken(0.02, theme.colors.offWhite),
+                },
+
                 '&:active:not(:disabled)': {
-                    backgroundColor: lighten(0.04, theme.colors.offWhite),
+                    backgroundColor: darken(0.04, theme.colors.offWhite),
                 },
             };
         case 'text':
@@ -204,12 +208,12 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
 const background = (backgroundColor: string): CSSObject => ({
     backgroundColor,
 
-    '&:focus:not(:disabled)': {
-        backgroundColor: darken(0.08, backgroundColor),
-    },
-
     '&:hover:not(:disabled)': {
         backgroundColor: lighten(0.06, backgroundColor),
+    },
+
+    '&:focus:not(:disabled)': {
+        backgroundColor: darken(0.08, backgroundColor),
     },
 
     '&:active:not(:disabled)': {

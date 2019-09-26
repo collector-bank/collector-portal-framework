@@ -16,3 +16,4 @@ export * from './Togglable';
 export * from './ValueList';
 export * from './InformationContainer';
 export * from './GuideContainer';
+export * from './BackBar';

@@ -12,8 +12,4 @@ export const PortalMain = styled.main<{}>(({ theme }) => ({
     [theme.breakpoints.tabletAndLower]: {
         borderRight: 0,
     },
-
-    [theme.breakpoints.mobileAndLower]: {
-        marginTop: 46, // the height of the sticky header
-    },
 }));

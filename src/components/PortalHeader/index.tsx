@@ -2,6 +2,7 @@ import React from 'react';
 import styled from '../../';
 import { MainMenu, MainMenuItem } from './MainMenu';
 import { Logo } from './Logo';
+import { BackBar } from '../BackBar';
 
 const Container = styled.header(({ theme }) => ({
     position: 'relative',
@@ -24,17 +25,33 @@ const Container = styled.header(({ theme }) => ({
     },
 }));
 
+const BackBarContainer = styled.div(({ theme }) => ({
+    display: 'none',
+
+    [theme.breakpoints.mobileAndLower]: {
+        display: 'block',
+        marginTop: 46,
+    },
+}));
+
 interface PortalHeaderProps {
     logoImage?: string;
     logoTarget: string;
     siteName: string;
     menuItems: MainMenuItem[];
     menuFooter?: JSX.Element;
+    backLinkText?: string;
 }
 
-export const PortalHeader: React.FC<PortalHeaderProps> = ({ logoImage, logoTarget, siteName, menuItems, menuFooter }) => (
-    <Container>
-        <Logo image={logoImage} siteName={siteName} location={logoTarget} />
-        <MainMenu items={menuItems} menuFooter={menuFooter} />
-    </Container>
+export const PortalHeader: React.FC<PortalHeaderProps> = ({ logoImage, logoTarget, siteName, menuItems, menuFooter, backLinkText }) => (
+    <>
+        <Container>
+            <Logo image={logoImage} siteName={siteName} location={logoTarget} />
+            <MainMenu items={menuItems} menuFooter={menuFooter} />
+        </Container>
+
+        <BackBarContainer>
+            <BackBar linkText={backLinkText} />
+        </BackBarContainer>
+    </>
 );

@@ -40,7 +40,7 @@ interface BackBarProps {
 }
 
 export const BackBar: React.FC<BackBarProps> = ({ linkText, link }) => {
-    return linkText !== undefined ? (
+    return linkText !== undefined && link !== undefined ? (
         <Container>
             <Link href={link}>
                 <BackArrow />

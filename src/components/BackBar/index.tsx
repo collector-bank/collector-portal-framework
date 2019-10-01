@@ -34,15 +34,18 @@ const Link = styled(TextLink)(({ theme }) => ({
     },
 }));
 
-export const BackBar: React.FC<{ linkText?: string }> = ({ linkText }) => {
+interface BackBarProps {
+    linkText?: string;
+    link?: string;
+}
+
+export const BackBar: React.FC<BackBarProps> = ({ linkText, link }) => {
     return linkText !== undefined ? (
         <Container>
-            <Link href="https://secure.collector.se">
+            <Link href={link}>
                 <BackArrow />
                 <Description>{linkText}</Description>
             </Link>
         </Container>
-    ) : (
-        <></>
-    );
+    ) : null;
 };

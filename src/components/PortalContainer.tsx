@@ -19,13 +19,14 @@ const BackBarContainer = styled.div(({ theme }) => ({
 
 export interface PortalContainerProps {
     backLinkText?: string;
+    backLink?: string;
 }
 
-export const PortalContainer: React.FC<PortalContainerProps> = ({ children, backLinkText }) => {
+export const PortalContainer: React.FC<PortalContainerProps> = ({ children, backLinkText, backLink }) => {
     return (
         <>
             <BackBarContainer>
-                <BackBar linkText={backLinkText} />
+                <BackBar linkText={backLinkText} link={backLink} />
             </BackBarContainer>
             <Container>{children}</Container>
         </>

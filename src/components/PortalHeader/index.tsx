@@ -41,9 +41,18 @@ interface PortalHeaderProps {
     menuItems: MainMenuItem[];
     menuFooter?: JSX.Element;
     backLinkText?: string;
+    backLink?: string;
 }
 
-export const PortalHeader: React.FC<PortalHeaderProps> = ({ logoImage, logoTarget, siteName, menuItems, menuFooter, backLinkText }) => (
+export const PortalHeader: React.FC<PortalHeaderProps> = ({
+    logoImage,
+    logoTarget,
+    siteName,
+    menuItems,
+    menuFooter,
+    backLinkText,
+    backLink,
+}) => (
     <>
         <Container>
             <Logo image={logoImage} siteName={siteName} location={logoTarget} />
@@ -51,7 +60,7 @@ export const PortalHeader: React.FC<PortalHeaderProps> = ({ logoImage, logoTarge
         </Container>
 
         <BackBarContainer>
-            <BackBar linkText={backLinkText} />
+            <BackBar linkText={backLinkText} link={backLink} />
         </BackBarContainer>
     </>
 );

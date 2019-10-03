@@ -11,9 +11,9 @@ test('formatDate', () => {
 
 describe('formatMoney', () => {
     test('without currency', () => {
-        expect(formatMoney(100)).toBe('100,00');
-        expect(formatMoney(1000)).toBe('1 000,00');
-        expect(formatMoney(100000000)).toBe('100 000 000,00');
+        expect(formatMoney(100.0)).toBe('100');
+        expect(formatMoney(1000)).toBe('1 000');
+        expect(formatMoney(100000000)).toBe('100 000 000');
         expect(formatMoney(456.5433)).toBe('456,54');
         expect(formatMoney(1456.5433)).toBe('1 456,54');
         expect(formatMoney(0.5)).toBe('0,50');
@@ -21,8 +21,8 @@ describe('formatMoney', () => {
     });
 
     test('with currency', () => {
-        expect(formatMoney(1234, 'SEK')).toBe('1 234,00 SEK');
-        expect(formatMoney(12345678, 'SEK')).toBe('12 345 678,00 SEK');
+        expect(formatMoney(1234, 'SEK')).toBe('1 234 SEK');
+        expect(formatMoney(12345678, 'SEK')).toBe('12 345 678 SEK');
         expect(formatMoney(4356.5433, 'SEK')).toBe('4 356,54 SEK');
     });
 

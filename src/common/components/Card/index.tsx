@@ -10,7 +10,7 @@ const CardContainer = styled.div(({ theme }) => ({
     display: 'block',
     boxShadow: 'rgba(17,6,19, 0.3) 0px 1px 3px 0px, rgba(17,6,19, 0.12) 0px 15px 25px -10px',
     boxSizing: 'border-box',
-    width: 280,
+    width: 290,
     padding: 24,
     paddingTop: 32,
     marginBottom: 20,

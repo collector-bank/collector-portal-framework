@@ -12,12 +12,11 @@ components.addDecorator(withKnobs);
 components.add('Portal Example', () => {
     return (
         <BrowserRouter>
-            <PortalContainer backLinkText="Tillbaka till översikten">
+            <PortalContainer backLinkText="Tillbaka till översikten" backLink="http:://aftonbladet.se">
                 <PortalHeader
                     logoTarget="aftonbladet.se"
                     siteName="Storybook"
                     menuItems={[{ icon: 'haus', path: '/', label: 'Storybook' }]}
-                    backLinkText="Tillbaka till översikten"
                 />
 
                 <PortalMain>

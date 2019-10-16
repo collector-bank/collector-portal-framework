@@ -1,10 +1,11 @@
 import React, { useState } from 'react';
 import styled from '../../..';
 import { ArrowDown } from './ArrowDown';
-import { Collapse } from 'react-collapse';
 import { ArrowRight } from './ArrowRight';
 import { breakpoints } from '../../../themes/collector';
 import { Link as RouterLink } from 'react-router-dom';
+import Collapse from 'react-css-collapse';
+import { ClassNames } from '@emotion/core';
 
 export interface ListItem {
     title: React.ReactNode;
@@ -141,9 +142,13 @@ export const ListItem: React.FC<ListItemProps> = ({ item, location, children, ..
             )}
 
             {children && (
-                <Collapse isOpened={isExpanded}>
-                    <ExpandedContainer>{children}</ExpandedContainer>
-                </Collapse>
+                <ClassNames>
+                    {({ css }) => (
+                        <Collapse isOpen={isExpanded} className={css({ transition: 'height 150ms ease-in' })}>
+                            <ExpandedContainer>{children}</ExpandedContainer>
+                        </Collapse>
+                    )}
+                </ClassNames>
             )}
         </LinkItemContainer>
     );

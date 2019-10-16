@@ -1,16 +1,11 @@
-import React, { useState, forwardRef } from 'react';
+import React, { useState, forwardRef, useLayoutEffect, useMemo } from 'react';
 import Collapse from 'react-css-collapse';
 import { ClassNames, CSSObject } from '@emotion/core';
 import uniqid from 'uniqid';
 import { Theme } from '../../../themes';
-import { Label } from '../Label';
 import { Description } from './Description';
 import styled from '../../../';
-
-const InputLabel = styled(Label)<React.LabelHTMLAttributes<HTMLLabelElement>>({
-    display: 'flex',
-    alignItems: 'center',
-});
+import { InputLabel } from './Label';
 
 export const InputContainer: any = styled.div({
     maxWidth: 500,
@@ -42,10 +37,19 @@ export const InputField: any = styled.input<ErrorProps>(({ indicateError, theme,
     boxShadow: 'none',
     transition: 'border-bottom-left-radius 150ms, border-bottom-right-radius 150ms',
     borderRadius: theme.borderRadius.small,
-    borderColor: getBorderColor(indicateError, showAlertMessage, theme),
+    borderColor: getBorderColor(indicateError, false, theme),
     borderBottomLeftRadius: showAlertMessage ? 0 : theme.borderRadius.small,
     borderBottomRightRadius: showAlertMessage ? 0 : theme.borderRadius.small,
     borderBottomColor: indicateError ? theme.colors.red : theme.colors.mediumGray,
+
+    '&::-webkit-input-placeholder': {
+        WebkitTransition: 'opacity 150ms ease-in-out',
+        opacity: 0,
+    },
+
+    ':focus::-webkit-input-placeholder': {
+        opacity: 1,
+    },
 
     '&:disabled': {
         opacity: 1,
@@ -107,56 +111,77 @@ export interface InputState {
     isDirty: boolean;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, error, warning, multiline, description, onBlur, ...rest }, ref) => {
-    const id = uniqid();
-    const [isDirty, setIsDirty] = useState(false);
+export const Input = forwardRef<HTMLInputElement, InputProps>(
+    ({ label, error, warning, multiline, description, onBlur, placeholder, disabled, ...rest }, ref) => {
+        const id = useMemo(uniqid, []);
+        const [isDirty, setIsDirty] = useState(false);
+        const [labelShouldHover, setLabelShouldHover] = useState(false);
 
-    Input.displayName = 'Collector.Input';
+        Input.displayName = 'Collector.Input';
 
-    const makeDirty = (event: React.FormEvent<HTMLInputElement> | undefined) => {
-        if (onBlur) {
-            onBlur(event);
-        }
+        const makeDirty = (event: React.FormEvent<HTMLInputElement> | undefined) => {
+            if (onBlur) {
+                onBlur(event);
+            }
 
-        setIsDirty(true);
-    };
+            const input = document.getElementById(id) as HTMLInputElement;
+            if (input && (input.value === '' || input.value === undefined)) {
+                setLabelShouldHover(false);
+            }
 
-    const InputElement = multiline ? Textarea : InputField;
-    const indicateError = Boolean(isDirty && error);
-    const showErrorMessage = indicateError && typeof error !== 'boolean';
-    const showWarningMessage = Boolean(isDirty && warning);
+            setIsDirty(true);
+        };
 
-    return (
-        <ClassNames>
-            {({ css }) => (
-                <InputContainer>
-                    {label && (
-                        <InputLabel htmlFor={id} error={indicateError}>
-                            {label}
+        // Set initial state of label hovering or not before we do our first render
+        useLayoutEffect(() => {
+            const input = document.getElementById(id) as HTMLInputElement;
+            const inputEmpty = input && (input.value === '' || input.value === undefined);
 
-                            {description && <Description description={description} />}
-                        </InputLabel>
-                    )}
+            setLabelShouldHover(!inputEmpty);
+        }, [id]);
 
-                    <InputElement
-                        id={id}
-                        hasError={indicateError}
-                        aria-invalid={indicateError}
-                        showAlertMessage={showErrorMessage || showWarningMessage}
-                        ref={ref}
-                        {...rest}
-                        onBlur={makeDirty}
-                    />
+        const InputElement = multiline ? Textarea : InputField;
+        const indicateError = Boolean(isDirty && error);
+        const showErrorMessage = indicateError && typeof error !== 'boolean';
+        const showWarningMessage = Boolean(isDirty && warning);
 
-                    <Collapse isOpen={showErrorMessage} className={css({ transition: 'height 150ms' })}>
-                        <InputError>{error}</InputError>
-                    </Collapse>
+        return (
+            <ClassNames>
+                {({ css }) => (
+                    <InputContainer>
+                        {label && (
+                            <InputLabel disabled={disabled} shouldHover={labelShouldHover} inputId={id}>
+                                {label}
 
-                    <Collapse isOpen={showWarningMessage} className={css({ transition: 'height 150ms' })}>
-                        <InputWarning>{warning}</InputWarning>
-                    </Collapse>
-                </InputContainer>
-            )}
-        </ClassNames>
-    );
-});
+                                {description && <Description description={description} />}
+                            </InputLabel>
+                        )}
+
+                        <InputElement
+                            id={id}
+                            hasError={indicateError}
+                            aria-invalid={indicateError}
+                            showAlertMessage={showErrorMessage || showWarningMessage}
+                            ref={ref}
+                            placeholder={placeholder}
+                            disabled={disabled}
+                            {...rest}
+                            onFocus={(_: React.FormEvent) => {
+                                setLabelShouldHover(true);
+                            }}
+                            onBlur={makeDirty}
+                        />
+
+                        <Collapse isOpen={showErrorMessage} className={css({ transition: 'height 150ms' })}>
+                            <InputError>{error}</InputError>
+                        </Collapse>
+
+                        <Collapse isOpen={showWarningMessage} className={css({ transition: 'height 150ms' })}>
+                            <InputWarning>{warning}</InputWarning>
+                        </Collapse>
+                    </InputContainer>
+                )}
+            </ClassNames>
+        );
+    }
+);

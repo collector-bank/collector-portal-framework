@@ -27,11 +27,11 @@ const getBorderColor = (indicateError: boolean, showAlertMessage: boolean, theme
 };
 
 export const InputField: any = styled.input<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
-    font: 'inherit',
+    font: theme.fonts.mobile.large,
     color: 'inherit',
     width: '100%',
     border: '1px solid',
-    padding: '7px 11px', // To make it 12 pixels when accounting for the 1px border above
+    padding: 11, // To make it 12 pixels when accounting for the 1px border above
     boxSizing: 'border-box',
     appearance: 'none',
     boxShadow: 'none',
@@ -68,7 +68,7 @@ const alertStyle = (theme: Theme): CSSObject => ({
     fontWeight: 500,
     padding: 8,
     paddingLeft: 12,
-    minHeight: 40,
+    minHeight: 48,
     boxSizing: 'border-box',
     borderBottomLeftRadius: theme.borderRadius.small,
     borderBottomRightRadius: theme.borderRadius.small,

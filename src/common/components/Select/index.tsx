@@ -40,6 +40,7 @@ const SelectField = styled.select(({ theme }) => ({
     border: 0,
     width: '100%',
     padding: 12,
+    paddingLeft: 11,
     paddingRight: 40,
 
     '&::-ms-expand': {

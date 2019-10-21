@@ -185,8 +185,8 @@ const getSizeStyles = (theme: Theme, size?: ButtonSize): CSSObject => {
         lineHeight: 1.5,
         fontWeight: 300,
         minWidth: 200,
-        paddingTop: 14,
-        paddingBottom: 14,
+        paddingTop: 12,
+        paddingBottom: 12,
         paddingLeft: 32,
         paddingRight: 32,
     };

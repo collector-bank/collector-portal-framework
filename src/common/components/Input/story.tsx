@@ -31,6 +31,20 @@ components.add(
                     ref={ref => console.log(ref)}
                     onChange={(event: { currentTarget: { value: string | undefined } }) => store.set({ value: event.currentTarget.value })}
                 />
+
+                <Input
+                    label={text('Label', 'En label')}
+                    placeholder={text('Placeholder', '')}
+                    error={text('Error', '')}
+                    warning={text('Warning', '')}
+                    description={text('Description', '')}
+                    multiline={boolean('Multiline', false)}
+                    disabled={boolean('Disabled', false)}
+                    rows={number('Rows', 10)}
+                    value={store.get('value')}
+                    ref={ref => console.log(ref)}
+                    onChange={(event: { currentTarget: { value: string | undefined } }) => store.set({ value: event.currentTarget.value })}
+                />
             </State>
         );
     },

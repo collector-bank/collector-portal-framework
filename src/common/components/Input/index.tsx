@@ -10,6 +10,7 @@ import { InputLabel } from './Label';
 export const InputContainer: any = styled.div({
     maxWidth: 500,
     marginBottom: '1.25em',
+    position: 'relative',
 });
 
 interface ErrorProps {
@@ -27,6 +28,7 @@ const getBorderColor = (indicateError: boolean, showAlertMessage: boolean, theme
 };
 
 export const InputField: any = styled.input<ErrorProps>(({ indicateError, theme, showAlertMessage }) => ({
+    maxHeight: 48,
     font: theme.fonts.mobile.large,
     color: 'inherit',
     width: '100%',
@@ -43,7 +45,7 @@ export const InputField: any = styled.input<ErrorProps>(({ indicateError, theme,
     borderBottomColor: indicateError ? theme.colors.red : theme.colors.mediumGray,
 
     '&::-webkit-input-placeholder': {
-        WebkitTransition: 'opacity 150ms ease-in-out',
+        WebkitTransition: 'opacity 150ms ease-in',
         opacity: 0,
     },
 

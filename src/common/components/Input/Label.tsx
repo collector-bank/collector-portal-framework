@@ -20,13 +20,13 @@ const getLabelColor = (shouldHover: boolean, theme: Theme, disabled?: boolean) =
 
 const FloatingLabel = styled(Label)<LabelProps>(({ shouldHover, disabled, theme }) => ({
     display: 'table-cell',
-    alignItems: 'center',
-    transition: 'transform 150ms ease-in-out, background-color 150ms cubic-bezier(1,-0.68, 0.79, 2.55), color 150ms ease-in-out',
+    transition:
+        'transform 150ms ease-in-out, background-color 150ms cubic-bezier(1,-0.68, 0.79, 2.55), color 150ms ease-in-out, font-size 150ms ease-in-out',
     borderRadius: 50,
-    font: theme.fonts.mobile.large,
-    lineHeight: 1,
+    fontSize: shouldHover ? 16 : 18,
+    lineHeight: '24px',
+    transform: shouldHover ? `translate(8px, 12px)` : `translate(12px, 38px)`,
     width: '100%',
-    transform: shouldHover ? `translate(7px, 8px) scale(0.875)` : `translate(12px, 32px)`,
     background: getLabelColor(shouldHover, theme, disabled),
     color: shouldHover ? 'initial' : theme.colors.darkGray,
     paddingLeft: 4,

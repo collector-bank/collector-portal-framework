@@ -18,7 +18,7 @@ const CardContainer = styled.div(({ theme }) => ({
     textDecoration: 'none',
     minHeight: 200,
     borderRadius: theme.borderRadius.large,
-    background: '#2c1031',
+    background: theme.colors.darkPurple,
     position: 'relative',
 }));
 

@@ -15,6 +15,7 @@ export const colors = {
     yellow: '#FFBE2C',
     darkIndigo: '#2C0A4A',
     pink: '#F11DB8',
+    darkPurple: '#2C1031',
 
     disabledText: '#9B9B9B',
     disabledBackground: '#E9E9E9',

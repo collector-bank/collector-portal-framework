@@ -3,7 +3,7 @@ interface CardGroupProps {
     marginRight?: number;
 }
 
-export var CardGroup = styled.div<CardGroupProps>(({ marginRight, theme }) => ({
+export const CardGroup = styled.div<CardGroupProps>(({ marginRight, theme }) => ({
     display: 'flex',
     WebkitOverflowScrolling: 'touch',
     overflowX: 'auto',

@@ -74,7 +74,7 @@ const HeadingContainer = styled.div({
 
 export interface CardProps {
     heading?: string;
-    color?: BadgeColor;
+    badgeColor?: BadgeColor;
     body: React.ReactNode;
     subBody?: React.ReactNode;
     onDismiss?: () => void;
@@ -88,7 +88,7 @@ const BadgeContainer = styled.div({
     transform: 'translate(-1px, -50%)',
 });
 
-export const Card: React.FC<CardProps> = ({ heading, color, body, subBody, onDismiss, location, ...rest }) => {
+export const Card: React.FC<CardProps> = ({ heading, badgeColor, body, subBody, onDismiss, location, ...rest }) => {
     const card = (
         <CardContainer {...rest}>
             {heading && (

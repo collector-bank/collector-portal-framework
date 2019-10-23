@@ -11,12 +11,6 @@ const Container = styled.div(({ theme }) => ({
     },
 }));
 
-const BackBarContainer = styled.div(({ theme }) => ({
-    [theme.breakpoints.mobileAndLower]: {
-        display: 'none',
-    },
-}));
-
 export interface PortalContainerProps {
     backLinkText?: string;
     backLink?: string;
@@ -25,9 +19,7 @@ export interface PortalContainerProps {
 export const PortalContainer: React.FC<PortalContainerProps> = ({ children, backLinkText, backLink }) => {
     return (
         <>
-            <BackBarContainer>
-                <BackBar linkText={backLinkText} link={backLink} />
-            </BackBarContainer>
+            <BackBar linkText={backLinkText} link={backLink} />
             <Container>{children}</Container>
         </>
     );

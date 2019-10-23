@@ -1,14 +1,33 @@
-import styled from '../../../';
+import styled from '../../..';
+interface CardGroupProps {
+    marginRight?: number;
+}
 
-export const CardGroup = styled.div<{}>({
+export const CardGroup = styled.div<CardGroupProps>(({ marginRight, theme }) => ({
     display: 'flex',
-    flexWrap: 'wrap',
-    marginRight: -10,
-    marginLeft: -10,
+    WebkitOverflowScrolling: 'touch',
+    overflowX: 'auto',
+    paddingTop: 12,
+    marginLeft: -16,
 
     '> *': {
         flexShrink: 0,
-        marginRight: 10,
-        marginLeft: 10,
+        marginLeft: 16,
+
+        ':last-child': {
+            '&::after': {
+                position: 'absolute',
+                content: '""',
+                width: marginRight ? marginRight : 40,
+                height: marginRight ? marginRight : 40,
+                right: marginRight ? -marginRight : -40,
+
+                [theme.breakpoints.mobileAndLower]: {
+                    width: marginRight ? marginRight : 16,
+                    height: marginRight ? marginRight : 16,
+                    right: marginRight ? -marginRight : -16,
+                },
+            },
+        },
     },
-});
+}));

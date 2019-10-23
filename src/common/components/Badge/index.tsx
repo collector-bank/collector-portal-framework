@@ -2,7 +2,7 @@ import React from 'react';
 import { Tooltip } from '../Tooltip';
 import styled from '../../../';
 
-export type BadgeColor = 'purple' | 'yellow' | 'green' | 'red' | 'blue' | 'lightGray';
+export type BadgeColor = 'purple' | 'yellow' | 'green' | 'red' | 'blue' | 'pink' | 'lightGray';
 
 export interface BadgeProps extends React.ComponentProps<'div'> {
     label: string;
@@ -34,7 +34,7 @@ const Label = styled.span<{ color: BadgeColor }>(({ color, theme }) => ({
     position: 'relative',
     borderRadius: theme.borderRadius.large,
     background: theme.colors[color],
-    color: color === 'yellow' || color === 'green' || color === 'lightGray' ? theme.colors.black : theme.colors.white,
+    color: color === 'yellow' || color === 'green' || color === 'lightGray' ? theme.colors.darkIndigo : theme.colors.white,
 }));
 
 export class Badge extends React.Component<BadgeProps, BadgeState> {

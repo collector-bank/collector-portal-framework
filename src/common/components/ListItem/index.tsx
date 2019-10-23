@@ -17,6 +17,7 @@ export interface ListItem {
 export interface ListItemProps {
     item: ListItem;
     location?: string;
+    onClick?: () => void;
 }
 
 const LinkItemContainer = styled.li(({ theme }) => ({
@@ -101,12 +102,16 @@ const RightColumn = styled.div({
     textAlign: 'right',
 });
 
-export const ListItem: React.FC<ListItemProps> = ({ item, location, children, ...rest }) => {
+export const ListItem: React.FC<ListItemProps> = ({ item, location, children, onClick, ...rest }) => {
     const [isExpanded, setIsExpanded] = useState(false);
     const [isHovered, setIsHovered] = useState(false);
 
     if (location && children) {
         throw new Error('Listitem cannot be expandable and linkable at the same time');
+    }
+
+    if (location && onClick) {
+        throw new Error('Listitem cannot be clickable and linkable at the same time');
     }
 
     const renderBody = () => (
@@ -125,17 +130,25 @@ export const ListItem: React.FC<ListItemProps> = ({ item, location, children, ..
             )}
 
             {children && <ArrowDown isHovered={isHovered} isExpanded={isExpanded} />}
-            {location && <ArrowRight isHovered={isHovered} />}
+            {(location || onClick) && <ArrowRight isHovered={isHovered} />}
         </>
     );
 
     return (
         <LinkItemContainer onMouseEnter={() => setIsHovered(true)} onMouseLeave={() => setIsHovered(false)} {...rest}>
-            {location ? (
+            {onClick && (
+                <Container onClick={onClick} others={{ isClickable: true }}>
+                    {renderBody()}
+                </Container>
+            )}
+
+            {location && (
                 <LinkContainer others={{ isClickable: true }} to={location}>
                     {renderBody()}
                 </LinkContainer>
-            ) : (
+            )}
+
+            {!location && !onClick && (
                 <Container others={{ isClickable: !!children }} onClick={children ? () => setIsExpanded(prev => !prev) : undefined}>
                     {renderBody()}
                 </Container>

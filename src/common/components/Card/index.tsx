@@ -18,7 +18,7 @@ const CardContainer = styled.div(({ theme }) => ({
     textDecoration: 'none',
     minHeight: 200,
     borderRadius: theme.borderRadius.large,
-    background: '#2c1031',
+    background: theme.colors.darkPurple,
     position: 'relative',
 }));
 
@@ -74,7 +74,7 @@ const HeadingContainer = styled.div({
 
 export interface CardProps {
     heading?: string;
-    color?: BadgeColor;
+    badgeColor?: BadgeColor;
     body: React.ReactNode;
     subBody?: React.ReactNode;
     onDismiss?: () => void;
@@ -88,13 +88,13 @@ const BadgeContainer = styled.div({
     transform: 'translate(-1px, -50%)',
 });
 
-export const Card: React.FC<CardProps> = ({ heading, color, body, subBody, onDismiss, location, ...rest }) => {
+export const Card: React.FC<CardProps> = ({ heading, badgeColor, body, subBody, onDismiss, location, ...rest }) => {
     const card = (
         <CardContainer {...rest}>
             {heading && (
                 <HeadingContainer>
                     <BadgeContainer>
-                        <Badge color={color} label={heading} />
+                        <Badge color={badgeColor} label={heading} />
                     </BadgeContainer>
 
                     {onDismiss && <Dismissable onClick={onDismiss} />}

@@ -32,7 +32,7 @@ components.add(
                             </div>
                         </>
                     }
-                    color="yellow"
+                    badgeColor="yellow"
                     heading={text('Heading', 'Card 1 heading')}
                     onDismiss={boolean('Dismissable', false) ? () => console.log('Card dismissal event') : undefined}
                 />
@@ -53,7 +53,7 @@ components.add(
                                     </div>
                                 </>
                             }
-                            color="pink"
+                            badgeColor="pink"
                             heading="Label 2"
                         />
 
@@ -71,7 +71,7 @@ components.add(
                                     </div>
                                 }
                                 location="/#"
-                                color="red"
+                                badgeColor="red"
                                 heading="Label 3"
                             />
                         </BrowserRouter>

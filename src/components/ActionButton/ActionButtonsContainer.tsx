@@ -8,6 +8,10 @@ const Container = styled.div(({ theme }) => ({
     alignItems: 'flex-start',
 
     button: {
+        '&:first-of-type': {
+            paddingLeft: 0,
+        },
+
         '&:not(:last-child)': {
             marginRight: 40,
 

@@ -10,6 +10,6 @@ export const PageContainer = styled.div<{}>(({ theme }) => ({
     },
 
     [theme.breakpoints.mobileAndLower]: {
-        padding: 16,
+        padding: '24px 16px',
     },
 }));

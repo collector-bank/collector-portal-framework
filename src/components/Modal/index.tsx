@@ -38,9 +38,9 @@ export const Modal: React.FC<any> = props => (
                             padding: '40px',
                             borderRadius: borderRadius.small,
                             boxSizing: 'border-box',
-                            maxHeight: 'calc(100vh - 80px)',
-                            maxWidth: 'calc(100vw - 32px)',
-
+                            maxHeight: 'calc(100vh - 11px)', // For the margin top to align nicely
+                            maxWidth: 'calc(100vw - 16px)', // 8px margin on each side
+                            marginTop: 8,
                             transition: `transform ${transitionTime}ms ease-out`,
                             transform: 'translateY(-30px)',
 

@@ -54,7 +54,7 @@ const Link = styled(RouterLink)(({ theme }) => ({
     '&:focus': {
         outline: 'none',
 
-        'div:nth-of-type(2)': {
+        '> div > div': {
             outline: '-webkit-focus-ring-color auto 5px',
         },
     },

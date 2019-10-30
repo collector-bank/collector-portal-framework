@@ -20,7 +20,7 @@ const BodyContainer = styled.div<{ backgroundColor?: CardBackgroundColors }>(({ 
     textDecoration: 'none',
     minHeight: 200,
     borderRadius: theme.borderRadius.large,
-    background: theme.colors[backgroundColor ? backgroundColor : theme.colors.white], // If default is changed here, change the text color default as well
+    background: theme.colors[backgroundColor ? backgroundColor : 'white'], // If default is changed here, change the text color default as well
 }));
 
 const Body = styled.div({

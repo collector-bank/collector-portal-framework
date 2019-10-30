@@ -9,6 +9,7 @@ const cross = `'data:image/svg+xml,%3Csvg xmlns="http://www.w3.org/2000/svg" xml
 type CardBackgroundColors = 'white' | 'darkPurple';
 
 const BodyContainer = styled.div<{ backgroundColor?: CardBackgroundColors }>(({ theme, backgroundColor }) => ({
+    position: 'relative',
     display: 'block',
     boxShadow: 'rgba(17,6,19, 0.3) 0px 1px 3px 0px, rgba(17,6,19, 0.12) 0px 15px 25px -10px',
     boxSizing: 'border-box',
@@ -35,6 +36,9 @@ const Dismissable = styled.div({
     width: 14,
     height: 14,
     backgroundImage: `url(${cross})`,
+    position: 'absolute',
+    right: 24,
+    top: 32,
 
     '&:hover': {
         cursor: 'pointer',
@@ -110,12 +114,12 @@ export const Card: React.FC<CardProps> = ({ heading, badgeColor, body, subBody, 
                     <BadgeContainer>
                         <Badge color={badgeColor} label={heading} />
                     </BadgeContainer>
-
-                    {onDismiss && <Dismissable onClick={onDismiss} />}
                 </HeadingContainer>
             )}
 
             <BodyContainer {...rest}>
+                {onDismiss && <Dismissable onClick={onDismiss} />}
+
                 <Body>{body}</Body>
                 {subBody && <SubBody>{subBody}</SubBody>}
             </BodyContainer>

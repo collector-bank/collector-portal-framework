@@ -16,7 +16,7 @@ const BodyContainer = styled.div<{ backgroundColor?: CardBackgroundColors }>(({ 
     width: 290,
     padding: 24,
     paddingTop: 32,
-    marginBottom: 20,
+    marginBottom: 24, // to make the box shadow not clip, but also not exceed our lowest amount of padding in headers
     color: backgroundColor !== 'darkPurple' ? theme.colors.black : theme.colors.white,
     textDecoration: 'none',
     minHeight: 200,
@@ -37,8 +37,8 @@ const Dismissable = styled.div({
     height: 14,
     backgroundImage: `url(${cross})`,
     position: 'absolute',
-    right: 24,
-    top: 32,
+    right: 16,
+    top: 16,
 
     '&:hover': {
         cursor: 'pointer',

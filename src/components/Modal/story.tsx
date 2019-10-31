@@ -21,7 +21,7 @@ components.add(
     () => {
         return (
             <Modal isOpen={true}>
-                <Container>A nice modal that is always</Container>
+                <Container>A nice modal that is always open!</Container>
             </Modal>
         );
     },

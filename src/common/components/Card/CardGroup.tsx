@@ -7,6 +7,7 @@ export const CardGroup = styled.div<CardGroupProps>(({ marginRight, theme }) => 
     display: 'flex',
     WebkitOverflowScrolling: 'touch',
     overflowX: 'auto',
+    overflowY: 'hidden',
     paddingTop: 12,
     marginLeft: -16,
 

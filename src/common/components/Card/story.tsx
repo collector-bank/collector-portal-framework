@@ -1,6 +1,6 @@
 import React from 'react';
 import { storiesOf } from '@storybook/react';
-import { withKnobs, text, boolean } from '@storybook/addon-knobs';
+import { withKnobs, text, boolean, select } from '@storybook/addon-knobs';
 import { Card } from './';
 import { Button, H3, Text } from '../../../components';
 import { CardGroup } from './CardGroup';
@@ -18,7 +18,7 @@ components.add(
             <div style={{ padding: 24 }}>
                 <Card
                     body={
-                        <div style={{ minHeight: 50 }}>
+                        <div style={{ minHeight: 110 }}>
                             <H3>{text('Title', 'My title')}</H3>
                             <Text>{text('Body', 'Här kommer det in mer text')}</Text>
                         </div>
@@ -33,15 +33,16 @@ components.add(
                         </>
                     }
                     badgeColor="yellow"
+                    backgroundColor={select('Background color', ['white', 'darkPurple'], 'white')}
                     heading={text('Heading', 'Card 1 heading')}
                     onDismiss={boolean('Dismissable', false) ? () => console.log('Card dismissal event') : undefined}
                 />
 
                 {boolean('Show cardgroup', true) && (
-                    <CardGroup>
+                    <CardGroup style={{ paddingBottom: 14 }}>
                         <Card
                             body={
-                                <div style={{ minHeight: 50 }}>
+                                <div style={{ minHeight: 110 }}>
                                     <H3>{text('Title', 'My title')}</H3>
                                     <Text>{text('Body', 'Här kommer det in mer text')}</Text>
                                 </div>
@@ -54,6 +55,7 @@ components.add(
                                 </>
                             }
                             badgeColor="pink"
+                            backgroundColor={select('Background color', ['white', 'darkPurple'], 'white')}
                             heading="Label 2"
                         />
 
@@ -72,6 +74,7 @@ components.add(
                                 }
                                 location="/#"
                                 badgeColor="red"
+                                backgroundColor={select('Background color', ['white', 'darkPurple'], 'white')}
                                 heading="Label 3"
                             />
                         </BrowserRouter>

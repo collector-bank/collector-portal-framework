@@ -68,8 +68,10 @@ const LabelContainer = styled.span(({ theme }) => ({
     marginLeft: 12,
 
     [theme.breakpoints.mobileAndLower]: {
+        font: theme.fonts.mobile.small,
+        fontWeight: 300, // has to be specified twice as font declaration above seems to override it.
         margin: 0,
-        marginTop: 4,
+        marginTop: 8,
     },
 }));
 

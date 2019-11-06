@@ -64,11 +64,12 @@ const IconSquare = styled.div(({ theme }) => ({
 const LabelContainer = styled.span(({ theme }) => ({
     font: theme.fonts.desktop.medium,
     fontWeight: 300,
-    lineHeight: 1,
+    lineHeight: 1.25,
     marginLeft: 12,
 
     [theme.breakpoints.mobileAndLower]: {
         font: theme.fonts.mobile.small,
+        lineHeight: 1.25,
         fontWeight: 300, // has to be specified twice as font declaration above seems to override it.
         margin: 0,
         marginTop: 8,

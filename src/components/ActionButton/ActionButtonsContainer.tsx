@@ -5,6 +5,7 @@ const Container = styled.div(({ theme }) => ({
     display: 'flex',
     overflowX: 'auto',
     maxWidth: '100vw',
+    width: '100%',
     alignItems: 'flex-start',
 
     button: {

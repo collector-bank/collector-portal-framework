@@ -60,6 +60,10 @@ const FooterContainer = styled.footer(({ theme }) => ({
     background: theme.colors.sidebarBlueDark,
     color: theme.colors.white,
     padding: 20,
+    position: 'fixed',
+    width: 240,
+    overflow: 'hidden',
+    bottom: 0,
 }));
 
 const MenuContainer = styled.nav({

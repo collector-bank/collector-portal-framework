@@ -34,7 +34,7 @@ const Label = styled.span<{ color: BadgeColor }>(({ color, theme }) => ({
     position: 'relative',
     borderRadius: theme.borderRadius.large,
     background: theme.colors[color],
-    color: color === 'yellow' || color === 'green' || color === 'lightGray' ? theme.colors.darkIndigo : theme.colors.white,
+    color: color === 'yellow' || color === 'lightGray' ? theme.colors.darkIndigo : theme.colors.white,
 }));
 
 export class Badge extends React.Component<BadgeProps, BadgeState> {

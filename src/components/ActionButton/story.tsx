@@ -15,12 +15,12 @@ const Icon: React.FC = () => (
                 id="path-1"
             ></path>
         </defs>
-        <g id="Symbols" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <g id="Symbols" stroke="none" strokeWidth="1" fill="none" fillRule="evenodd">
             <g id="Artboard">
                 <mask id="mask-2" fill="white">
                     <use xlinkHref="#path-1"></use>
                 </mask>
-                <use id="Combined-Shape" fill="currentColor" fill-rule="nonzero" xlinkHref="#path-1"></use>
+                <use id="Combined-Shape" fill="currentColor" fillRule="nonzero" xlinkHref="#path-1"></use>
             </g>
         </g>
     </svg>

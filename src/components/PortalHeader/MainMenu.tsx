@@ -120,6 +120,7 @@ const NavLinkIcon = styled.div<NavLinkIconProps>(({ icon }) => ({
 export interface MainMenuProps {
     items: MainMenuItem[];
     menuFooter?: JSX.Element;
+    menuEvents?: MenuEvents;
 }
 
 export interface NavLinkIconProps {
@@ -132,6 +133,12 @@ export interface MainMenuItem {
     icon: string;
     externalLink?: boolean;
     useMarginTop?: boolean;
+    onClick?: (item : MainMenuItem) => void;
+}
+
+export interface MenuEvents {
+    onOpen?: () => void;
+    onClose?: () => void;
 }
 
 const styles = (theme: Theme): any => ({
@@ -168,11 +175,27 @@ const styles = (theme: Theme): any => ({
     },
 });
 
-export const MainMenu: React.FC<AddOptionalTo<MainMenuProps, Theme>> = withTheme(({ items, menuFooter, theme }) => {
+export const MainMenu: React.FC<AddOptionalTo<MainMenuProps, Theme>> = withTheme(({ items, menuFooter, menuEvents, theme }) => {
     const windowSize = useWindowSize();
     const [sidebarIsOpen, setSidebarOpen] = useState(false);
-    const openSidebar = () => setSidebarOpen(true);
-    const closeSidebar = () => setSidebarOpen(false);
+    const openSidebar = () => {
+        if (menuEvents && menuEvents.onOpen) {
+            menuEvents.onOpen();
+        }
+        setSidebarOpen(true);
+    }
+    const closeSidebar = () => {
+        if (menuEvents && menuEvents.onClose) {
+            menuEvents.onClose();
+        }
+        setSidebarOpen(false);
+    }
+    const menuItemClick = (item: MainMenuItem) => {
+        if (item.onClick) {
+            item.onClick(item);
+        } 
+        setSidebarOpen(false);
+    }
 
     const renderSidebar = (includeCloseButton = false) => (
         <Container>
@@ -186,12 +209,12 @@ export const MainMenu: React.FC<AddOptionalTo<MainMenuProps, Theme>> = withTheme
                     {items.map((item: MainMenuItem, i: number) => (
                         <MenuListItem key={i} useMarginTop={item.useMarginTop}>
                             {item.externalLink ? (
-                                <ExternalNavLink href={item.path} onClick={closeSidebar}>
+                                <ExternalNavLink href={item.path} onClick={() => menuItemClick(item)}>
                                     <NavLinkIcon icon={item.icon} />
                                     <NavLinkLabel>{item.label}</NavLinkLabel>
                                 </ExternalNavLink>
                             ) : (
-                                <InternalNavLink to={item.path} onClick={closeSidebar}>
+                                <InternalNavLink to={item.path} onClick={() => menuItemClick(item)}>
                                     <NavLinkIcon icon={item.icon} />
                                     <NavLinkLabel>{item.label}</NavLinkLabel>
                                 </InternalNavLink>

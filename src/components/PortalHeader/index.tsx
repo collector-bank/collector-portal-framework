@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from '../../';
-import { MainMenu, MainMenuItem, Tracking } from './MainMenu';
+import { MainMenu, MainMenuItem, MenuEvents } from './MainMenu';
 import { Logo } from './Logo';
 
 const Container = styled.header(({ theme }) => ({
@@ -29,14 +29,14 @@ interface PortalHeaderProps {
     siteName: string;
     menuItems: MainMenuItem[];
     menuFooter?: JSX.Element;
-    menuTracking?: Tracking[];
+    menuEvents?: MenuEvents;
 }
 
-export const PortalHeader: React.FC<PortalHeaderProps> = ({ logoImage, logoTarget, siteName, menuItems, menuFooter, menuTracking }) => (
+export const PortalHeader: React.FC<PortalHeaderProps> = ({ logoImage, logoTarget, siteName, menuItems, menuFooter, menuEvents }) => (
     <>
         <Container>
             <Logo image={logoImage} siteName={siteName} location={logoTarget} />
-            <MainMenu items={menuItems} menuFooter={menuFooter} menuTracking={menuTracking} />
+            <MainMenu items={menuItems} menuFooter={menuFooter} menuEvents={menuEvents} />
         </Container>
     </>
 );

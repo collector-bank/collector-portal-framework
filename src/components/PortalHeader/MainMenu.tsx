@@ -120,7 +120,7 @@ const NavLinkIcon = styled.div<NavLinkIconProps>(({ icon }) => ({
 export interface MainMenuProps {
     items: MainMenuItem[];
     menuFooter?: JSX.Element;
-    menuTracking?: Tracking[];
+    menuEvents?: MenuEvents;
 }
 
 export interface NavLinkIconProps {
@@ -133,12 +133,12 @@ export interface MainMenuItem {
     icon: string;
     externalLink?: boolean;
     useMarginTop?: boolean;
-    tracking?: () => void;
+    onClick?: (item : MainMenuItem) => void;
 }
 
-export interface Tracking {
-    openMenuTracking?: () => void;
-    closeMenuTracking?: () => void;
+export interface MenuEvents {
+    onOpen?: () => void;
+    onClose?: () => void;
 }
 
 const styles = (theme: Theme): any => ({
@@ -175,26 +175,32 @@ const styles = (theme: Theme): any => ({
     },
 });
 
-export const MainMenu: React.FC<AddOptionalTo<MainMenuProps, Theme>> = withTheme(({ items, menuFooter, menuTracking, theme }) => {
+export const MainMenu: React.FC<AddOptionalTo<MainMenuProps, Theme>> = withTheme(({ items, menuFooter, menuEvents, theme }) => {
     const windowSize = useWindowSize();
     const [sidebarIsOpen, setSidebarOpen] = useState(false);
-    const openSidebar = () => setSidebarOpen(true);
-    const closeSidebar = () => setSidebarOpen(false);
+    const openSidebar = () => {
+        if (menuEvents && menuEvents.onOpen) {
+            menuEvents.onOpen();
+        }
+        setSidebarOpen(true);
+    }
+    const closeSidebar = () => {
+        if (menuEvents && menuEvents.onClose) {
+            menuEvents.onClose();
+        }
+        setSidebarOpen(false);
+    }
+    const menuItemClick = (item: MainMenuItem) => {
+        if (item.onClick) {
+            item.onClick(item);
+        }
+        setSidebarOpen(false);
+    }
 
     const renderSidebar = (includeCloseButton = false) => (
         <Container>
             {includeCloseButton && (
-                <IconButton 
-                    type="button" 
-                    onClick={menuTracking.map((track: Tracking) => (
-                        track.closeMenuTracking ? (
-                            () => {
-                                menuTracking.closeMenuTracking();
-                                setSidebarOpen(false);
-                            }
-                        ) : ( 
-                            closeSidebar
-                        )))}>
+                <IconButton type="button" onClick={closeSidebar}>
                     <Cross />
                 </IconButton>
             )}
@@ -203,30 +209,12 @@ export const MainMenu: React.FC<AddOptionalTo<MainMenuProps, Theme>> = withTheme
                     {items.map((item: MainMenuItem, i: number) => (
                         <MenuListItem key={i} useMarginTop={item.useMarginTop}>
                             {item.externalLink ? (
-                                <ExternalNavLink 
-                                    href={item.path} 
-                                    onClick={item.tracking ? (
-                                        () => {
-                                            item.tracking!();
-                                            setSidebarOpen(false);
-                                        }
-                                    ) : ( 
-                                        closeSidebar
-                                    )}>
+                                <ExternalNavLink href={item.path} onClick={() => menuItemClick(item)}>
                                     <NavLinkIcon icon={item.icon} />
                                     <NavLinkLabel>{item.label}</NavLinkLabel>
                                 </ExternalNavLink>
                             ) : (
-                                <InternalNavLink 
-                                    to={item.path} 
-                                    onClick={item.tracking ? (
-                                        () => {
-                                            item.tracking!();
-                                            setSidebarOpen(false);
-                                        }
-                                    ) : ( 
-                                        closeSidebar
-                                    )}>
+                                <InternalNavLink to={item.path} onClick={() => menuItemClick(item)}>
                                     <NavLinkIcon icon={item.icon} />
                                     <NavLinkLabel>{item.label}</NavLinkLabel>
                                 </InternalNavLink>
@@ -252,17 +240,7 @@ export const MainMenu: React.FC<AddOptionalTo<MainMenuProps, Theme>> = withTheme
                 styles={styles(theme)}
                 touch={false}
             >
-                <IconButton 
-                    type="button" 
-                    onClick={menuTracking.map((track: Tracking) => (
-                        track.openMenuTracking ? (
-                        () => {
-                            menuTracking.openMenuTracking();
-                            setSidebarOpen(true);
-                        }
-                    ) : ( 
-                        openSidebar
-                    )))}>
+                <IconButton type="button" onClick={openSidebar}>
                     <Hamburger />
                 </IconButton>
             </Sidebar>

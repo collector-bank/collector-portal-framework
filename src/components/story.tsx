@@ -16,7 +16,8 @@ components.add('Portal Example', () => {
                 <PortalHeader
                     logoTarget="aftonbladet.se"
                     siteName="Storybook"
-                    menuItems={[{ icon: 'haus', path: '/', label: 'Storybook' }]}
+                    menuItems={[{ icon: 'haus', path: '/', label: 'Storybook', onClick: (item) => { console.log('click: ' + item.label); } }]}
+                    menuEvents={{onOpen: () => console.log('open menu'), onClose: () => console.log('close menu')}}
                 />
 
                 <PortalMain>

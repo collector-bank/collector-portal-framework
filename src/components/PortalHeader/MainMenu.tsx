@@ -193,7 +193,7 @@ export const MainMenu: React.FC<AddOptionalTo<MainMenuProps, Theme>> = withTheme
     const menuItemClick = (item: MainMenuItem) => {
         if (item.onClick) {
             item.onClick(item);
-        }
+        } 
         setSidebarOpen(false);
     }
 

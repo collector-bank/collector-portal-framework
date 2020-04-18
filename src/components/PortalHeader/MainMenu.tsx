@@ -245,5 +245,5 @@ export const MainMenu: React.FC<AddOptionalTo<MainMenuProps, Theme>> = withTheme
                 </IconButton>
             </Sidebar>
         );
-    }
+    } 
 });

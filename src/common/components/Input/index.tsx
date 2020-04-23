@@ -188,7 +188,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, inputWid
                     )}
 
                     <Field inputWidth={inputWidth} >
-                        {hide && <IconSpan show={show} onClick={show ? () => setShow(false) : () => setShow(true)}>{show ? viewOn : viewOff}</IconSpan>}
+                        {hide && <IconSpan show={show} onClick={setShow(!show)}>{show ? viewOn : viewOff}</IconSpan>}
                         <InputElement
                             id={id}
                             hasError={indicateError}

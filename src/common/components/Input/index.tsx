@@ -146,10 +146,10 @@ const IconSpan = styled.span<{ show?: boolean }>(({ show }) => ({
 }));
 
 const Field = styled.div({
-    flexDirection: 'row-reverse',
     display: 'flex',
-    width: '100%',
-    //height: 50,
+    justifyContent: 'flex-end',
+    marginRight: 'auto',
+    //width: 'fit-content',
     userSelect: 'none',
 });
 

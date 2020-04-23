@@ -62,11 +62,11 @@ export const InputField: any = styled.input<ErrorProps>(({ indicateError, theme,
     borderBottomColor: indicateError ? theme.colors.red : theme.colors.mediumGray,
 
     '&::-ms-reveal': {
-        display: 'none', //to prevent browser from asking to save password
+        display: 'none', //to hide default password icon
     },
 
     '&::-ms-clear': {
-        display: 'none', //to prevent browser from asking to save password
+        display: 'none', //to hide default password icon
     },
 
     '&:disabled': {

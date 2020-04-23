@@ -128,9 +128,11 @@ export interface InputState {
     isDirty: boolean;
 }
 
-const IconSpan = styled.span<{ width?: number; height?: number; margin?: string, show?: boolean }>(({ show }) => ({
+const IconSpan = styled.span<{ show?: boolean }>(({ show }) => ({
+    height: 24,
     position: 'absolute',
     cursor: 'pointer',
+    alignSelf: 'center',
     zIndex: 1,
 
     '> svg': {
@@ -138,16 +140,16 @@ const IconSpan = styled.span<{ width?: number; height?: number; margin?: string,
         backgroundPosition: 'center',
         width: 24,
         height: 24,
-        margin: 14,
-        marginTop: show ? 15 : 14,
+        marginRight: 8,
+        marginTop: show ? 1 : 0,
     },
 }));
 
 const Field = styled.div({
     flexDirection: 'row-reverse',
     display: 'flex',
-    width: 300,
-    height: 50,
+    width: '100%',
+    //height: 50,
     userSelect: 'none',
 });
 

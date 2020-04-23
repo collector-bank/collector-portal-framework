@@ -123,6 +123,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
     type?: string;
     description?: string;
     hide?: boolean;
+    inputWidth?: string | number;
 }
 
 export interface InputState {
@@ -147,14 +148,15 @@ const IconSpan = styled.span<{ show?: boolean }>(({ show }) => ({
     },
 }));
 
-const Field = styled.div({
+const Field = styled.div<{ inputWidth?: string | number }>(({ inputWidth }) => ({
+    width: inputWidth ? inputWidth : '100%',
     display: 'flex',
     justifyContent: 'flex-end',
     marginRight: 'auto',
     userSelect: 'none',
-});
+}));
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, error, warning, multiline, description, hide, onBlur, ...rest }, ref) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, inputWidth, error, warning, multiline, description, hide, onBlur, ...rest }, ref) => {
     const id = uniqid();
     const [isDirty, setIsDirty] = useState(false);
     const [show, setShow] = useState(false);
@@ -185,23 +187,8 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, error, w
                         </InputLabel>
                     )}
 
-                    {hide ? (
-                        <Field>
-                            <IconSpan show={show} onClick={show ? () => setShow(false) : () => setShow(true)}>{show ? showContent : hiddenContent}</IconSpan>
-                            <InputElement
-                                id={id}
-                                hasError={indicateError}
-                                aria-invalid={indicateError}
-                                showAlertMessage={showErrorMessage || showWarningMessage}
-                                ref={ref}
-                                {...rest}
-                                onBlur={makeDirty}
-                                type={show ? null : 'Password'}
-                                onfocus="$(this).removeAttr('readonly');"
-                                readonly
-                            />
-                        </Field>
-                    ):(
+                    <Field inputWidth={inputWidth} >
+                        {hide && <IconSpan show={show} onClick={show ? () => setShow(false) : () => setShow(true)}>{show ? showContent : hiddenContent}</IconSpan>}
                         <InputElement
                             id={id}
                             hasError={indicateError}
@@ -210,8 +197,11 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, error, w
                             ref={ref}
                             {...rest}
                             onBlur={makeDirty}
+                            type={show ? null : 'Password'}
+                            onfocus="$(this).removeAttr('readonly');"
+                            readonly
                         />
-                    )} 
+                    </Field>
 
                     <Collapse isOpen={showErrorMessage} className={css({ transition: 'height 150ms' })}>
                         <InputError>{error}</InputError>

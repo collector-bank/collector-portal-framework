@@ -31,6 +31,7 @@ components.add(
                     ref={ref => console.log(ref)}
                     onChange={(event: { currentTarget: { value: string | undefined } }) => store.set({ value: event.currentTarget.value })}
                     hide={true}
+                    inputWidth={400}
                 />
             </State>
         );

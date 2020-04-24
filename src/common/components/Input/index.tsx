@@ -62,11 +62,11 @@ export const InputField: any = styled.input<ErrorProps>(({ indicateError, theme,
     borderBottomColor: indicateError ? theme.colors.red : theme.colors.mediumGray,
 
     '&::-ms-reveal': {
-        display: 'none', //to hide default password icon
+        display: 'none', //to togglePassword default password icon
     },
 
     '&::-ms-clear': {
-        display: 'none', //to hide default password icon
+        display: 'none', //to togglePassword default password icon
     },
 
     '&:disabled': {
@@ -122,7 +122,7 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
     onBlur?: (event: React.FormEvent<HTMLInputElement> | undefined) => void;
     type?: string;
     description?: string;
-    hide?: boolean;
+    togglePassword?: boolean;
     inputWidth?: string | number;
 }
 
@@ -156,7 +156,7 @@ const Field = styled.div<{ inputWidth?: string | number }>(({ inputWidth }) => (
     userSelect: 'none',
 }));
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, inputWidth, error, warning, multiline, description, hide, onBlur, ...rest }, ref) => {
+export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, inputWidth, error, warning, multiline, description, togglePassword, onBlur, ...rest }, ref) => {
     const id = uniqid();
     const [isDirty, setIsDirty] = useState(false);
     const [show, setShow] = useState(false);
@@ -188,7 +188,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, inputWid
                     )}
 
                     <Field inputWidth={inputWidth} >
-                        {hide && <IconSpan show={show} onClick={setShow(!show)}>{show ? viewOn : viewOff}</IconSpan>}
+                        {togglePassword && <IconSpan show={show} onClick={() => setShow(!show)}>{show ? viewOn : viewOff}</IconSpan>}
                         <InputElement
                             id={id}
                             hasError={indicateError}

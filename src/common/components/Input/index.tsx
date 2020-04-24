@@ -177,7 +177,7 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, togglePa
 
                     {togglePassword ? (
                         <Field togglePasswordWidth={togglePasswordWidth} >
-                            {togglePassword && <IconSpan show={show} onClick={() => setShow(!show)}>{show ? ViewOn : ViewOff}</IconSpan>}
+                            <IconSpan show={show} onClick={() => setShow(!show)}>{show ? ViewOn : ViewOff}</IconSpan>
                             <InputElement
                                 id={id}
                                 hasError={indicateError}
@@ -186,9 +186,9 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, togglePa
                                 ref={ref}
                                 {...rest}
                                 onBlur={makeDirty}
-                                type={show ? null : 'Password'}
-                                onfocus="$(this).removeAttr('readonly');"
-                                readonly
+                                type={show ? 'text' : 'password'}
+                                //onfocus="$(this).removeAttr('readonly');"
+                                //readonly
                             />
                         </Field>
                     ):(

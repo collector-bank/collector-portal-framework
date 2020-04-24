@@ -30,6 +30,8 @@ components.add(
                     value={store.get('value')}
                     ref={ref => console.log(ref)}
                     onChange={(event: { currentTarget: { value: string | undefined } }) => store.set({ value: event.currentTarget.value })}
+                    togglePassword={boolean('togglePassword', false)}
+                    togglePasswordWidth={number('togglePasswordWidth', 500)}
                 />
             </State>
         );

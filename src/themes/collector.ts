@@ -10,7 +10,7 @@ export const colors = {
     lavender: '#f4e8ff',
     purple: '#6B1FAF',
     green: '#30AB30',
-    red: '#F02C2C',
+    red: '#DA1E28',
     blue: '#0672DF',
     yellow: '#FFBE2C',
     darkIndigo: '#2C0A4A',

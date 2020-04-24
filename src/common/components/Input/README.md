@@ -23,6 +23,8 @@ It uses forwardRef to forward a reference to the inner input component.
 | `onBlur`      |          | `event => void`                      |                                             |
 | `type`        |          | string                               |                                             |
 | `Description` |          | string                               |                                             |
+| `togglePassword` |       | boolean                              |                                             |
+| `togglePasswordWidth` |  | string | number                      |                                             |
 
 ## Example
 

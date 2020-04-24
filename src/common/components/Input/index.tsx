@@ -5,6 +5,7 @@ import uniqid from 'uniqid';
 import { Theme } from '../../../themes';
 import { Label } from '../Label';
 import { Description } from './Description';
+import { ViewOn, ViewOff } from './Icons';
 import styled from '../../../';
 
 const InputLabel = styled(Label)<React.LabelHTMLAttributes<HTMLLabelElement>>({
@@ -36,6 +37,7 @@ export const InputField: any = styled.input<ErrorProps>(({ indicateError, theme,
     color: 'inherit',
     width: '100%',
     border: '1px solid',
+    marginRight: 'auto',
     padding: '7px 11px', // To make it 12 pixels when accounting for the 1px border above
     boxSizing: 'border-box',
     appearance: 'none',
@@ -46,6 +48,14 @@ export const InputField: any = styled.input<ErrorProps>(({ indicateError, theme,
     borderBottomLeftRadius: showAlertMessage ? 0 : theme.borderRadius.small,
     borderBottomRightRadius: showAlertMessage ? 0 : theme.borderRadius.small,
     borderBottomColor: indicateError ? theme.colors.red : theme.colors.mediumGray,
+
+    '&::-ms-reveal': {
+        display: 'none', //to togglePassword default password icon
+    },
+
+    '&::-ms-clear': {
+        display: 'none', //to togglePassword default password icon
+    },
 
     '&:disabled': {
         opacity: 1,
@@ -100,6 +110,8 @@ export interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> 
     onBlur?: (event: React.FormEvent<HTMLInputElement> | undefined) => void;
     type?: string;
     description?: string;
+    togglePassword?: boolean;
+    togglePasswordWidth?: string | number;
 }
 
 export interface InputState {
@@ -107,10 +119,35 @@ export interface InputState {
     isDirty: boolean;
 }
 
-export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, error, warning, multiline, description, onBlur, ...rest }, ref) => {
+const IconSpan = styled.span<{ show?: boolean }>(({ show }) => ({
+    height: 24,
+    position: 'absolute',
+    cursor: 'pointer',
+    alignSelf: 'center',
+    zIndex: 1,
+
+    '> svg': {
+        backgroundRepeat: 'no-repeat',
+        backgroundPosition: 'center',
+        width: 24,
+        height: 24,
+        marginRight: 8,
+        marginTop: show ? 1 : 0,
+    },
+}));
+
+const Field = styled.div<{ togglePasswordWidth?: string | number }>(({ togglePasswordWidth }) => ({
+    width: togglePasswordWidth ? togglePasswordWidth : '100%',
+    display: 'flex',
+    justifyContent: 'flex-end',
+    marginRight: 'auto',
+    userSelect: 'none',
+}));
+
+export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, togglePasswordWidth, error, warning, multiline, description, togglePassword, onBlur, ...rest }, ref) => {
     const id = uniqid();
     const [isDirty, setIsDirty] = useState(false);
-
+    const [show, setShow] = useState(false);
     Input.displayName = 'Collector.Input';
 
     const makeDirty = (event: React.FormEvent<HTMLInputElement> | undefined) => {
@@ -138,15 +175,31 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, error, w
                         </InputLabel>
                     )}
 
-                    <InputElement
-                        id={id}
-                        hasError={indicateError}
-                        aria-invalid={indicateError}
-                        showAlertMessage={showErrorMessage || showWarningMessage}
-                        ref={ref}
-                        {...rest}
-                        onBlur={makeDirty}
-                    />
+                    {togglePassword ? (
+                        <Field togglePasswordWidth={togglePasswordWidth} >
+                            <IconSpan show={show} onClick={() => setShow(!show)}>{show ? ViewOn : ViewOff}</IconSpan>
+                            <InputElement
+                                id={id}
+                                hasError={indicateError}
+                                aria-invalid={indicateError}
+                                showAlertMessage={showErrorMessage || showWarningMessage}
+                                ref={ref}
+                                {...rest}
+                                onBlur={makeDirty}
+                                type={show ? 'text' : 'password'}
+                            />
+                        </Field>
+                    ):(
+                        <InputElement
+                            id={id}
+                            hasError={indicateError}
+                            aria-invalid={indicateError}
+                            showAlertMessage={showErrorMessage || showWarningMessage}
+                            ref={ref}
+                            {...rest}
+                            onBlur={makeDirty}
+                        />
+                    )}
 
                     <Collapse isOpen={showErrorMessage} className={css({ transition: 'height 150ms' })}>
                         <InputError>{error}</InputError>

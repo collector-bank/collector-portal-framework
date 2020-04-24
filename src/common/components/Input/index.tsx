@@ -187,8 +187,6 @@ export const Input = forwardRef<HTMLInputElement, InputProps>(({ label, togglePa
                                 {...rest}
                                 onBlur={makeDirty}
                                 type={show ? 'text' : 'password'}
-                                //onfocus="$(this).removeAttr('readonly');"
-                                //readonly
                             />
                         </Field>
                     ):(

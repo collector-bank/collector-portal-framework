@@ -1,0 +1,37 @@
+@font-face {
+    font-family: 'ProximaNova';
+    font-weight: 300;
+
+    src: url(../../static/media/medium.2a3a0b75.woff2) format('woff2'), url(../../static/media/medium.0df62a0b.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'ProximaNova';
+    font-weight: 400;
+
+    src: url(../../static/media/regular.e232955a.woff2) format('woff2'), url(../../static/media/regular.76869b24.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'ProximaNova';
+    font-weight: 500;
+
+    src: url(../../static/media/semibold.5408b07d.woff2) format('woff2'), url(../../static/media/semibold.75e74f3d.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'ProximaNova';
+    font-weight: 600;
+
+    src: url(../../static/media/bold.c6301cf0.woff2) format('woff2'), url(../../static/media/bold.64136a35.woff) format('woff');
+}
+
+@font-face {
+    font-family: 'ProximaNova';
+    font-weight: 700;
+
+    src: url(../../static/media/extrabold.783ba727.woff2) format('woff2'), url(../../static/media/extrabold.6747f143.woff) format('woff');
+}
+
+
+/*# sourceMappingURL=main.e360abdb.chunk.css.map*/

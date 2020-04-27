@@ -1,16 +1,20 @@
 import { useState, useCallback } from 'react';
 
-export function usePromise<TResult>(promise: () => Promise<TResult>) {
+export function usePromise<TResult, TErrorResult extends {}>(promise: () => Promise<TResult>) {
     const [data, setData] = useState<TResult | undefined>(undefined);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
-    const [errorCode, setErrorCode] = useState<number | undefined>(undefined);
+    const [error, setError] = useState<{ code: number; data: TErrorResult } | undefined>(undefined);
+
+    const resetPromiseData = () => {
+        setData(undefined);
+        setError(undefined);
+    };
 
     const trigger = useCallback(async () => {
         const controller = new AbortController();
 
         setLoading(true);
-        setError(false);
+        setError(undefined);
         setData(undefined);
 
         try {
@@ -18,8 +22,7 @@ export function usePromise<TResult>(promise: () => Promise<TResult>) {
 
             setData(result);
         } catch (error) {
-            setErrorCode(error.status);
-            setError(true);
+            setError({ code: error.status, data: error.content });
         }
 
         setLoading(false);
@@ -27,5 +30,5 @@ export function usePromise<TResult>(promise: () => Promise<TResult>) {
         return () => controller.abort();
     }, [promise]);
 
-    return { data, loading, error, trigger, errorCode };
+    return { data, loading, error, trigger, resetPromiseData };
 }

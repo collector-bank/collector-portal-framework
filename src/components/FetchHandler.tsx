@@ -27,7 +27,7 @@ export const FetchHandler = <TResult extends {}>({
     notFoundIndicator,
     loadingIndicator,
 }: Props<TResult>) => {
-    const { loading, data, error, trigger, errorCode } = usePromise(apiMethod);
+    const { loading, data, error, trigger } = usePromise(apiMethod);
     const [dependencyList, setDependencyList] = useState(undefined);
 
     useEffect(() => {
@@ -35,13 +35,13 @@ export const FetchHandler = <TResult extends {}>({
     }, [dependencyList, trigger]);
 
     const renderError = () => {
-        if (errorIndicator && (errorCode !== 404 && notFoundIndicator)) {
+        if (errorIndicator && error?.code !== 404 && notFoundIndicator) {
             return errorIndicator;
-        } else if (errorCode === 404 && notFoundIndicator) {
+        } else if (error?.code === 404 && notFoundIndicator) {
             return notFoundIndicator;
         }
 
-        return errorCode !== 401 ? <Alert type="error" message={errorText} /> : <Spinner centered />;
+        return error?.code !== 401 ? <Alert type="error" message={errorText} /> : <Spinner centered />;
     };
 
     return (

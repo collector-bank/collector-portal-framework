@@ -30,7 +30,7 @@ const request = (method: string) => async (
     }
 
     if (extraHeaders) {
-        Object.keys(extraHeaders).forEach((key) => headers.append(key, extraHeaders[key]));
+        Object.keys(extraHeaders).forEach(key => headers.append(key, extraHeaders[key]));
     }
 
     const options: RequestInit = {
@@ -45,7 +45,7 @@ const request = (method: string) => async (
     }
 
     const getPromiseForStatus = (response: Response, stream: Promise<any>) =>
-        stream.then((content) =>
+        stream.then(content =>
             response.status >= 200 && response.status < 300 ? content : Promise.reject({ status: response.status, content })
         );
 

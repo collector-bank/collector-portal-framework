@@ -1,6 +1,6 @@
-import { useState, useCallback } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 
-export function usePromise<TResult, TErrorResult extends {}>(promise: () => Promise<TResult>) {
+export function usePromise<TResult, TErrorResult extends {}>(promise: (abortSignal?: AbortSignal) => Promise<TResult>) {
     const [data, setData] = useState<TResult | undefined>(undefined);
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState<{ code: number; data: TErrorResult } | undefined>(undefined);
@@ -10,25 +10,38 @@ export function usePromise<TResult, TErrorResult extends {}>(promise: () => Prom
         setError(undefined);
     };
 
-    const trigger = useCallback(async () => {
+    const { trigger, cancel } = useMemo(() => {
         const controller = new AbortController();
 
-        setLoading(true);
-        setError(undefined);
-        setData(undefined);
+        const trigger = async () => {
+            setLoading(true);
+            setError(undefined);
+            setData(undefined);
 
-        try {
-            const result = await promise();
+            try {
+                const result = await promise(controller.signal);
+                setData(result || ({} as TResult));
+            } catch (error) {
+                if (!controller.signal.aborted) {
+                    setError({ code: error.status, data: error.content });
+                }
+            }
 
-            setData(result);
-        } catch (error) {
-            setError({ code: error.status, data: error.content });
-        }
+            if (!controller.signal.aborted) {
+                setLoading(false);
+            }
 
-        setLoading(false);
+            return () => void 0;
+        };
 
-        return () => controller.abort();
+        const cancel = () => controller.abort();
+
+        return { trigger, cancel };
     }, [promise]);
+
+    useEffect(() => {
+        return cancel;
+    }, [cancel]);
 
     return { data, loading, error, trigger, resetPromiseData };
 }

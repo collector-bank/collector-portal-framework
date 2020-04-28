@@ -1,17 +1,15 @@
 import * as React from 'react';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 import { usePromise } from '../hooks';
 import { Spinner, Alert } from '.';
 
 /**
  * @param data This is a render-prop which you use to only render your content when data has come into effect
- * @param setDependencyList This is a callback which you use to set the list of dependencies for the useEffect hook.
- * Using this will allow you to re-fetch the data if you have a dependency on a submit for example.
  */
-type Child<TResult> = (data: TResult, setDependencyList: (dependencies: any) => void) => React.ReactNode;
+type Child<TResult> = (data: TResult) => React.ReactNode;
 
 interface Props<TResult> {
-    apiMethod: () => Promise<TResult>;
+    apiMethod: (abortSignal?: AbortSignal) => Promise<TResult>;
     children: Child<TResult>;
     errorText: string;
     errorIndicator?: React.ReactNode;
@@ -27,28 +25,27 @@ export const FetchHandler = <TResult extends {}>({
     notFoundIndicator,
     loadingIndicator,
 }: Props<TResult>) => {
-    const { loading, data, error, trigger, errorCode } = usePromise(apiMethod);
-    const [dependencyList, setDependencyList] = useState(undefined);
+    const { loading, data, error, trigger } = usePromise(apiMethod);
 
     useEffect(() => {
         trigger();
-    }, [dependencyList, trigger]);
+    }, [trigger]);
 
     const renderError = () => {
-        if (errorIndicator && (errorCode !== 404 && notFoundIndicator)) {
+        if (errorIndicator && error?.code !== 404 && notFoundIndicator) {
             return errorIndicator;
-        } else if (errorCode === 404 && notFoundIndicator) {
+        } else if (error?.code === 404 && notFoundIndicator) {
             return notFoundIndicator;
         }
 
-        return errorCode !== 401 ? <Alert type="error" message={errorText} /> : <Spinner centered />;
+        return error?.code !== 401 ? <Alert type="error" message={errorText} /> : <Spinner centered />;
     };
 
     return (
         <>
             {loading && (loadingIndicator ? loadingIndicator : <Spinner centered />)}
             {error && renderError()}
-            {data && children(data, (dependencies: any) => setDependencyList(dependencies))}
+            {data && children(data)}
         </>
     );
 };

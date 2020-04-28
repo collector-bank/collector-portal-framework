@@ -1,31 +1,47 @@
-import { useState, useCallback } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 
-export function usePromise<TResult>(promise: () => Promise<TResult>) {
+export function usePromise<TResult, TErrorResult extends {}>(promise: (abortSignal?: AbortSignal) => Promise<TResult>) {
     const [data, setData] = useState<TResult | undefined>(undefined);
     const [loading, setLoading] = useState(false);
-    const [error, setError] = useState(false);
-    const [errorCode, setErrorCode] = useState<number | undefined>(undefined);
+    const [error, setError] = useState<{ code: number; data: TErrorResult } | undefined>(undefined);
 
-    const trigger = useCallback(async () => {
+    const resetPromiseData = () => {
+        setData(undefined);
+        setError(undefined);
+    };
+
+    const { trigger, cancel } = useMemo(() => {
         const controller = new AbortController();
 
-        setLoading(true);
-        setError(false);
-        setData(undefined);
+        const trigger = async () => {
+            setLoading(true);
+            setError(undefined);
+            setData(undefined);
 
-        try {
-            const result = await promise();
+            try {
+                const result = await promise(controller.signal);
+                setData(result || ({} as TResult));
+            } catch (error) {
+                if (!controller.signal.aborted) {
+                    setError({ code: error.status, data: error.content });
+                }
+            }
 
-            setData(result);
-        } catch (error) {
-            setErrorCode(error.status);
-            setError(true);
-        }
+            if (!controller.signal.aborted) {
+                setLoading(false);
+            }
 
-        setLoading(false);
+            return () => void 0;
+        };
 
-        return () => controller.abort();
+        const cancel = () => controller.abort();
+
+        return { trigger, cancel };
     }, [promise]);
 
-    return { data, loading, error, trigger, errorCode };
+    useEffect(() => {
+        return cancel;
+    }, [cancel]);
+
+    return { data, loading, error, trigger, resetPromiseData };
 }

@@ -8,7 +8,12 @@ export interface Error {
     content: any;
 }
 
-const request = (method: string) => (endpoint: string, payload?: any, extraHeaders?: { [name: string]: string }) => {
+const request = (method: string) => async (
+    endpoint: string,
+    payload?: any,
+    extraHeaders?: { [name: string]: string },
+    abortSignal?: AbortSignal
+) => {
     const headers = new Headers({
         'X-Requested-With': 'XMLHttpRequest',
         Accept: 'application/json',
@@ -32,6 +37,7 @@ const request = (method: string) => (endpoint: string, payload?: any, extraHeade
         headers,
         method,
         credentials: 'same-origin',
+        signal: abortSignal,
     };
 
     if (payload) {
@@ -43,20 +49,19 @@ const request = (method: string) => (endpoint: string, payload?: any, extraHeade
             response.status >= 200 && response.status < 300 ? content : Promise.reject({ status: response.status, content })
         );
 
-    return window
-        .fetch(endpoint, options)
-        .then(response =>
-            getPromiseForStatus(
-                response,
-                response.headers.has('Content-Type') && response.headers.get('Content-Type')!.indexOf('application/json') !== -1
-                    ? response.json()
-                    : response.text()
-            )
-        )
-        .catch(err => {
-            console.error(err);
-            throw err;
-        });
+    try {
+        const response = await window.fetch(endpoint, options);
+
+        return await getPromiseForStatus(
+            response,
+            response.headers.has('Content-Type') && response.headers.get('Content-Type')!.indexOf('application/json') !== -1
+                ? response.json()
+                : response.text()
+        );
+    } catch (error) {
+        console.error(error);
+        throw error;
+    }
 };
 
 export const get = request('GET');

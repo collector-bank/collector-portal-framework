@@ -59,11 +59,11 @@ const request = (method: string) => async (
                 : response.text()
         );
     } catch (error) {
-        if (error.name === 'AbortError'){
+        if (error.name === 'AbortError') {
             console.log('The user aborted a request.');
             return;
         }
-        
+
         console.error(error);
         throw error;
     }

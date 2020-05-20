@@ -1,12 +1,14 @@
 import * as React from 'react';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 import { usePromise } from '../hooks';
 import { Spinner, Alert } from '.';
 
 /**
  * @param data This is a render-prop which you use to only render your content when data has come into effect
+ * @param setDependencyList This is a callback which you use to set the list of dependencies for the useEffect hook.
+ * Using this will allow you to re-fetch the data if you have a dependency on a submit for example.
  */
-type Child<TResult> = (data: TResult) => React.ReactNode;
+type Child<TResult> = (data: TResult, setDependencyList: (dependencies: any) => void) => React.ReactNode;
 
 interface Props<TResult> {
     apiMethod: (abortSignal?: AbortSignal) => Promise<TResult>;
@@ -26,10 +28,11 @@ export const FetchHandler = <TResult extends {}>({
     loadingIndicator,
 }: Props<TResult>) => {
     const { loading, data, error, trigger } = usePromise(apiMethod);
+    const [dependencyList, setDependencyList] = useState(undefined);
 
     useEffect(() => {
         trigger();
-    }, [trigger]);
+    }, [trigger, dependencyList]);
 
     const renderError = () => {
         if (errorIndicator && error?.code !== 404 && notFoundIndicator) {
@@ -45,7 +48,7 @@ export const FetchHandler = <TResult extends {}>({
         <>
             {loading && (loadingIndicator ? loadingIndicator : <Spinner centered />)}
             {error && renderError()}
-            {data && children(data)}
+            {data && children(data, (dependencies: any) => setDependencyList(dependencies))}
         </>
     );
 };

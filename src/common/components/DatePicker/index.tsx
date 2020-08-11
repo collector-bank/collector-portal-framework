@@ -152,7 +152,7 @@ class DatePicker_ extends React.Component<DatePickerProps & { theme: Theme }, St
     };
 
     render() {
-        const { label, locale, selectedDate, minDate, maxDate, invalidMessage, ...rest } = this.props;
+        const { label, locale, selectedDate, minDate, maxDate, invalidMessage, onChange, ...rest } = this.props;
         const showError = Boolean(this.state.showError && !this.state.isValid && invalidMessage);
         const calendarClassName = `${style(this.props.theme)}`;
 

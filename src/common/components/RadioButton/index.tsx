@@ -75,9 +75,9 @@ export class RadioButton extends React.Component<RadioButtonProps, RadioButtonSt
             <RadioButtonContainer disabled={disabled} {...rest}>
                 <Input type="radio" id={this.state.id} name={name} checked={selected} disabled={disabled} onChange={onChange} />
                 {typeof label === 'string' ? (
-                    <label htmlFor={this.state.id} dangerouslySetInnerHTML={{ __html: label }} /> 
-                ) :( 
-                   <label>{label}</label>
+                    <label htmlFor={this.state.id} dangerouslySetInnerHTML={{ __html: label }} />
+                ) : (
+                    <label>{label}</label>
                 )}
             </RadioButtonContainer>
         );

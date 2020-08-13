@@ -50,7 +50,7 @@ const Input = styled.input(({ theme }) => ({
 }));
 
 export interface RadioButtonProps {
-    label: string;
+    label: string | JSX.Element;
     name?: string;
     selected?: boolean;
     disabled?: boolean;
@@ -74,7 +74,11 @@ export class RadioButton extends React.Component<RadioButtonProps, RadioButtonSt
         return (
             <RadioButtonContainer disabled={disabled} {...rest}>
                 <Input type="radio" id={this.state.id} name={name} checked={selected} disabled={disabled} onChange={onChange} />
-                <label htmlFor={this.state.id} dangerouslySetInnerHTML={{ __html: label }} />
+                {typeof label === 'string' ? (
+                    <label htmlFor={this.state.id} dangerouslySetInnerHTML={{ __html: label }} />
+                ) : (
+                    <label>{label}</label>
+                )}
             </RadioButtonContainer>
         );
     }

@@ -6,7 +6,7 @@ This component allows the user to choose only one of a predefined set of mutuall
 
 | Name       | Required | Type            |
 | ---------- | -------- | --------------- |
-| `label`    | ✓        | string          |
+| `label`    | ✓        | string or JSX.Element |
 | `name`     |          | string          |
 | `selected` |          | boolean         |
 | `disabled` |          | boolean         |

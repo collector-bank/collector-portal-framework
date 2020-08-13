@@ -6,7 +6,7 @@ A group of radio buttons.
 
 | Name        | Required | Type                |
 | ----------- | -------- | ------------------- |
-| `label`     |          | string              |
+| `label`     |          | string or JSX.Element |
 | `items`     |          | `RadioButtonItem[]` |
 | `direction` |          | `'row'`, `'column'` |
 | `selected`  |          | any                 |
@@ -17,7 +17,7 @@ A group of radio buttons.
 ```typescript
 export interface RadioButtonItem {
     key: any;
-    label: string;
+    label: string | JSX.Element;
     child?: React.ReactNode;
 }
 ```

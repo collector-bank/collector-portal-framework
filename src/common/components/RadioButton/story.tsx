@@ -6,6 +6,7 @@ import { RadioButton } from './';
 import { RadioButtonGroup } from './RadioButtonGroup';
 import notes from './README.md';
 import groupReadme from './GroupREADME.md';
+import { Text } from '../../typography';
 
 const components = storiesOf('Components', module);
 
@@ -46,8 +47,12 @@ components.add(
             },
             {
                 key: 'bar',
-                label: 'Alternativ 2',
-            },
+                label: (
+                    <div style={{ display: 'block' }}>
+                        <Text style={{ marginBottom: -2, fontWeight: 700 }}>Alternativ 2</Text>
+                        <Text style={{ marginBottom: 0 }}>Här är ett syskon-element, som alltid syns.</Text>
+                    </div>
+            )},
             {
                 key: 'baz',
                 label: 'Alternativ 3',

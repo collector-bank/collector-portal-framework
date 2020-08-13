@@ -35,7 +35,7 @@ export type Key = any;
 
 export interface RadioButtonItem {
     key: Key;
-    label: string;
+    label: string | JSX.Element;
     child?: React.ReactNode;
 }
 

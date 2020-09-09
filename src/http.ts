@@ -74,3 +74,28 @@ export const put = request('PUT');
 export const del = request('DELETE');
 export const patch = request('PATCH');
 export const getRaw = request('GET', true);
+
+export const download = async (response: Response, fallbackFileName: string = 'file') => {
+    const file = window.URL.createObjectURL(await response.blob());
+    var filename = fallbackFileName;
+
+    if (response.headers.has('Content-Disposition')) {
+        const disposition = response.headers.get('Content-Disposition')!;
+        const matches = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/.exec(disposition);
+
+        if (matches != null && matches[1]) {
+            filename = matches[1].replace(/['"]/g, '');
+        }
+    }
+
+    const a = document.createElement('a');
+    a.href = file;
+    a.download = filename;
+    a.style.display = 'none';
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    setTimeout(() => document.body.removeChild(a), 100);
+};

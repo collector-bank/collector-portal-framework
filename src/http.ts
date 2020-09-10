@@ -8,7 +8,7 @@ export interface Error {
     content: any;
 }
 
-const request = (method: string) => async (
+const request = (method: string, returnRawResponse: boolean = false) => async (
     endpoint: string,
     payload?: any,
     extraHeaders?: { [name: string]: string },
@@ -48,16 +48,15 @@ const request = (method: string) => async (
         stream.then(content =>
             response.status >= 200 && response.status < 300 ? content : Promise.reject({ status: response.status, content })
         );
+    const getJsonOrText = (response: Response) =>
+        response.headers.has('Content-Type') && response.headers.get('Content-Type')!.indexOf('application/json') !== -1
+            ? response.json()
+            : response.text();
 
     try {
         const response = await window.fetch(endpoint, options);
 
-        return await getPromiseForStatus(
-            response,
-            response.headers.has('Content-Type') && response.headers.get('Content-Type')!.indexOf('application/json') !== -1
-                ? response.json()
-                : response.text()
-        );
+        return await getPromiseForStatus(response, returnRawResponse ? Promise.resolve(response) : getJsonOrText(response));
     } catch (error) {
         if (error.name === 'AbortError') {
             console.log('The user aborted a request.');
@@ -74,3 +73,29 @@ export const post = request('POST');
 export const put = request('PUT');
 export const del = request('DELETE');
 export const patch = request('PATCH');
+export const getRaw = request('GET', true);
+
+export const download = async (response: Response, fallbackFileName: string = 'file') => {
+    const file = window.URL.createObjectURL(await response.blob());
+    var filename = fallbackFileName;
+
+    if (response.headers.has('Content-Disposition')) {
+        const disposition = response.headers.get('Content-Disposition')!;
+        const matches = /filename[^;=\n]*=((['"]).*?\2|[^;\n]*)/.exec(disposition);
+
+        if (matches != null && matches[1]) {
+            filename = matches[1].replace(/['"]/g, '');
+        }
+    }
+
+    const a = document.createElement('a');
+    a.href = file;
+    a.download = filename;
+    a.style.display = 'none';
+
+    document.body.appendChild(a);
+
+    a.click();
+
+    setTimeout(() => document.body.removeChild(a), 100);
+};

@@ -23,7 +23,7 @@ export function usePromise<TResult, TErrorResult extends {}>(promise: (abortSign
                 setData(result || ({} as TResult));
             } catch (error) {
                 if (!controller.signal.aborted) {
-                    setError({ code: error.status, data: error.content });
+                    setError({ code: error.status, data: error.content || error.message });
                 }
             }
 

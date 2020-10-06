@@ -57,7 +57,7 @@ components.add(
                 key: 'baz',
                 label: 'Alternativ 3',
                 child: <div>Här är ett barn-element, som bara syns om "Alternativ 3" är markerat</div>,
-            },
+            }, 
         ];
 
         return (

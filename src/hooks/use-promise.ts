@@ -20,7 +20,9 @@ export function usePromise<TResult, TErrorResult extends {}>(promise: (abortSign
 
             try {
                 const result = await promise(controller.signal);
-                setData(result || ({} as TResult));
+                if (!controller.signal.aborted) {
+                    setData(result || ({} as TResult));
+                }
             } catch (error) {
                 if (!controller.signal.aborted) {
                     setError({ code: error.status, data: error.content || error.message });

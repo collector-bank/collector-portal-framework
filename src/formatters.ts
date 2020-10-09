@@ -34,7 +34,7 @@ export const formatMoney = (money: number, currency?: string, includeDecimals = 
 export const formatPercentage = (fraction: number) => {
     if (fraction != null) {
         return (fraction * 100).toFixed(2).replace('.', ',') + ' %';
-    }
+    } 
 
     return '';
 };

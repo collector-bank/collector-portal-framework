@@ -6,7 +6,7 @@ import { TextLink } from '../../common/typography';
 const Container = styled.div(({ theme }) => ({
     width: '100%',
     height: 52,
-    background: theme.colors.offWhite,
+    background: theme.colors.lightOffWhite,
     color: theme.colors.purple,
     fontWeight: 300,
 

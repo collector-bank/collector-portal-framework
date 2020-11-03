@@ -3,7 +3,7 @@ import { BackBar } from './BackBar';
 import styled from '..';
 
 const Container = styled.div(({ theme }) => ({
-    backgroundColor: theme.colors.offWhite,
+    backgroundColor: theme.colors.lightOffWhite,
     display: 'flex',
 
     [theme.breakpoints.mobileAndLower]: {

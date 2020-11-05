@@ -22,6 +22,7 @@ export const colors = {
     sidebarBlue: '#2C303E',
     sidebarBlueLight: '#323644',
     sidebarBlueDark: '#1E212B',
+    pendingBlue: '#EDF5FF',
 };
 
 const fontStack = 'ProximaNova, sans-serif';

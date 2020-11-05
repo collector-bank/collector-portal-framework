@@ -12,7 +12,7 @@ components.add(
     'Alert',
     () => {
         const sizes: AlertSize[] = ['small', 'large'];
-        const types: AlertType[] = ['error', 'warning', 'info', 'success'];
+        const types: AlertType[] = ['error', 'warning', 'info', 'success', 'pending'];
 
         return (
             <Alert

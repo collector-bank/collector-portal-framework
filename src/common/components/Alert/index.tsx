@@ -8,6 +8,7 @@ const largeIcons = {
     warning: require('./icons/warning.svg'),
     info: require('./icons/info-black.svg'),
     success: require('./icons/success.svg'),
+    pending: require('./icons/info-blue.svg'),
 };
 
 const smallIcons = {
@@ -15,6 +16,7 @@ const smallIcons = {
     warning: require('./icons/warning.svg'),
     info: require('./icons/info-black.svg'),
     success: require('./icons/success-black.svg'),
+    pending: require('./icons/info-blue.svg'),
 };
 
 interface AlertContainerProps {
@@ -51,6 +53,7 @@ const getStyle = (type: AlertType, alertSize: AlertSize, theme: Theme): CSSObjec
         warning: theme.colors.yellow,
         info: theme.colors.offWhite,
         success: theme.colors.green,
+        pending: theme.colors.pendingBlue,
     };
 
     const textColors = {
@@ -58,6 +61,7 @@ const getStyle = (type: AlertType, alertSize: AlertSize, theme: Theme): CSSObjec
         warning: theme.colors.black,
         info: theme.colors.black,
         success: theme.colors.white,
+        pending: theme.colors.black,
     };
 
     switch (alertSize) {
@@ -101,7 +105,7 @@ const getAnimation = (fadeIn?: boolean): CSSObject => {
 };
 
 export type AlertSize = 'small' | 'large';
-export type AlertType = 'error' | 'warning' | 'info' | 'success';
+export type AlertType = 'error' | 'warning' | 'info' | 'success' | 'pending';
 
 export interface AlertProps extends React.HTMLAttributes<HTMLDivElement> {
     heading?: string;

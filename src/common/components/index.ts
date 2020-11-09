@@ -15,7 +15,7 @@ export * from './Paginator';
 export * from './RadioButton';
 export * from './RadioButton/RadioButtonGroup';
 export * from './Select';
-export * from './Spinner';
+export * from './Slider';
 export * from './Spinner';
 export * from './TagsInput';
 export * from './ListItem';

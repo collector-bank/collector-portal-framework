@@ -78,7 +78,7 @@ export const Portal: React.FC<{ menuItems: null; hostname: string; nrOfUnreadMes
                 isActive = true;
             }
         })
-        //console.log('toplevelUrl', toplevelUrl);
+        
         return {toplevelIndex: toplevelIndex, toplevelUrl: toplevelUrl, childUrl: childUrl, isActive: isActive};
     }
 

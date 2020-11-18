@@ -1,0 +1,112 @@
+{
+    "messageIcon": "messageIconTop.svg",
+    "topItems": [
+        {
+            "label": "Hem",
+            "url": "localhost/iframesdsds.html",
+            "icon": "start_menu-icon.svg",
+            "subpages": []
+        },
+        {
+            "label": "Lån",
+            "url": "",
+            "icon": "loans_menu-icon.svg",
+            "subpages": [
+                {
+                    "label": "Översikt",
+                    "url": "https://lana-uat.collector.se/customer/overview/",
+                    "icon": "",
+                    "subpages": []
+                },
+                {
+                    "label": "Dokument",
+                    "url": "https://lana-uat.collector.se/iframessss.html",
+                    "icon": "",
+                    "subpages": []
+                },
+                {
+                    "label": "Dina uppgifter",
+                    "url": "https://lana-uat.collector.se/customer/profile",
+                    "icon": "",
+                    "subpages": []
+                }
+            ]
+        },
+        {
+            "label": "Kreditkort",
+            "url": "",
+            "icon": "creditcards_menu-icon.svg",
+            "subpages": [
+                {
+                    "label": "Översikt",
+                    "url": "https://web-cardportal-uat.azurewebsites.net/easyliving/overview/",
+                    "icon": "",
+                    "subpages": []
+                },
+                {
+                    "label": "Transaktioner",
+                    "url": "https://web-cardportal-uat.azurewebsites.net/easyliving/transactions/",
+                    "icon": "",
+                    "subpages": []
+                },
+                {
+                    "label": "Fakturor",
+                    "url": "https://web-cardportal-uat.azurewebsites.net/easyliving/invoices/",
+                    "icon": "",
+                    "subpages": []
+                }
+            ]
+        },
+        {
+            "label": "Sparkonton",
+            "url": "",
+            "icon": "savings_menu-icon.svg",
+            "subpages": [
+                {
+                    "label": "Översikt",
+                    "url": "https://spara-uat.collector.se/overviewpath/",
+                    "icon": "",
+                    "subpages": []
+                },
+                {
+                    "label": "Överföringar",
+                    "url": "localhost/issframe.html",
+                    "icon": "",
+                    "subpages": []
+                },
+                {
+                    "label": "Dokument",
+                    "url": "https://spara-uat.collector.se/documentspath/",
+                    "icon": "",
+                    "subpages": []
+                },
+                {
+                    "label": "Dina uppgifter",
+                    "url": "https://spara-uat.collector.se/userinfopath/",
+                    "icon": "",
+                    "subpages": []
+                }
+            ]
+        }
+    ],
+    "bottomItems": [
+        {
+            "label": "Meddelanden",
+            "url": "https://secure-web-test.collectordev.se/se/messages/",
+            "icon": "securemsg_menu-icon.svg",
+            "subpages": []
+        },
+        {
+            "label": "Kundservice",
+            "url": "https://secure-web-test.collectordev.se/se/customerservice/",
+            "icon": "customersvc_menu-icon.svg",
+            "subpages": []
+        },
+        {
+            "label": "Logga ut",
+            "url": "/auth/logout/",
+            "icon": "logout_menu-icon.svg",
+            "subpages": []
+        }
+    ]
+}

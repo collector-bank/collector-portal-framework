@@ -5,6 +5,7 @@ import { ThemeProvider } from 'emotion-theming';
 import { Theme } from './themes';
 import * as collectorTheme from './themes/collector';
 import './common/fonts/fonts.css';
+import 'collui/dist/bundle.css';
 
 const globalStyles = (theme: Theme) => ({
     html: {

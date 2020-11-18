@@ -1,0 +1,8 @@
+<svg width="20px" height="20px" viewBox="0 0 20 20" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+    <g id="menu_icon" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+        <polygon id="Path" fill="#FFFFFF" points="2 14.8 18 14.8 18 16 2 16"></polygon>
+        <polygon id="Path" fill="#FFFFFF" points="2 11.2 18 11.2 18 12.4 2 12.4"></polygon>
+        <polygon id="Path" fill="#FFFFFF" points="2 7.6 18 7.6 18 8.8 2 8.8"></polygon>
+        <polygon id="Path" fill="#FFFFFF" points="2 4 18 4 18 5.2 2 5.2"></polygon>
+    </g>
+</svg>

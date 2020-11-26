@@ -3,12 +3,12 @@ import { useEffect, useState, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import { getIconBy, svg } from './portalIcons';
 
-export const Portal: React.FC<{ menuItems: null; hostname: string; nrOfUnreadMessages?: number }> = ({
+export const Portal: React.FC<{ menuItems: null; nrOfUnreadMessages?: number }> = ({
     menuItems,
-    hostname,
     children,
     nrOfUnreadMessages,
 }) => {
+    const hostname = window.location.hostname;
     const [toplevelDropdownIndex, setToplevelDropdownIndex] = useState(-1);
     const [toplevelChildUrl, setToplevelChildUrl] = useState<string | null>(null);
     const [toplevelUrl, setToplevelUrl] = useState<string | null>(null);

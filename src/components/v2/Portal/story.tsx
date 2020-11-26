@@ -12,7 +12,7 @@ components.addDecorator(withKnobs);
 components.add('Portal', () => {
     return (
         <BrowserRouter>
-            <Portal menuItems={menuItems} hostname={window.location.hostname}>
+            <Portal menuItems={menuItems}>
                 Content
             </Portal>
         </BrowserRouter>

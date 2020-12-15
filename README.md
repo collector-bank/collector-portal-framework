@@ -1,7 +1,7 @@
 # Collector Portal Framework
 
+[![Publish Actions Status]][build-url]
 [![NPM version][npm-image]][npm-url]
-[![semantic-release](https://img.shields.io/badge/%20%20%F0%9F%93%A6%F0%9F%9A%80-semantic--release-e10079.svg)](https://github.com/semantic-release/semantic-release)
 
 A collection of UI components and helper functions used in a couple of our internal and external web applications at [Collector Bank](https://www.collector.se/).
 Documentation and an interactive test area can be found [here](https://collector-bank.github.io/collector-portal-framework/).
@@ -100,3 +100,5 @@ You can see a demo of the UI components [here](https://collector-bank.github.io/
 
 [npm-url]: https://npmjs.org/package/collector-portal-framework
 [npm-image]: https://badge.fury.io/js/collector-portal-framework.svg
+[build-url]: https://github.com/collector-bank/collector-portal-framework/actions
+

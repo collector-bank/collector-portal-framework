@@ -79,7 +79,6 @@
         "watch": "npm run build -- --watch",
         "prepare": "npm run build",
         "test": "jest",
-        "test-watch": "jest --watch",
-        "semantic-release": "semantic-release"
+        "test-watch": "jest --watch"
     }
 }

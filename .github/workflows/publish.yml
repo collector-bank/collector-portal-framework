@@ -1,7 +1,7 @@
 name: CD
 
 on:
-    push:
+    pull_request:
         branches: [master]
 
 jobs:
@@ -13,7 +13,7 @@ jobs:
             - name: Setup Node
               uses: actions/setup-node@v1.4.2
               with:
-                  node-version: 12
+                  node-version: '14.x'
                   registry-url: https://registry.npmjs.org
             - name: Publish
               run: npm publish --access public

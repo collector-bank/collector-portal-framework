@@ -1,6 +1,6 @@
 # Collector Portal Framework
 
-[![Publish Actions Status]][build-url]
+[![CD Actions Status]][build-url]
 [![NPM version][npm-image]][npm-url]
 
 A collection of UI components and helper functions used in a couple of our internal and external web applications at [Collector Bank](https://www.collector.se/).

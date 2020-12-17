@@ -1,4 +1,4 @@
-name: CD
+name: 'CD'
 
 on:
     push:
@@ -8,14 +8,13 @@ jobs:
     release:
         runs-on: ubuntu-latest
         steps:
+            - name: Checkout
               uses: actions/checkout@v2.1.1
-
             - name: Setup Node
               uses: actions/setup-node@v1.4.2
               with:
                   node-version: 12
                   registry-url: https://registry.npmjs.org
-
             - name: Publish
               run: npm publish --access public
               env:

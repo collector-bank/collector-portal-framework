@@ -13,6 +13,7 @@ jobs:
           with:
             node-version: '14.x'
             registry-url: https://registry.npmjs.com/
+            scope: '@mats-collector'
         - run: npm i
         - run: npm publish --access public
           env:

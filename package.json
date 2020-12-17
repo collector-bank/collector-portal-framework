@@ -1,7 +1,7 @@
 {
     "title": "Collector Portal Framework",
     "name": "collector-portal-framework",
-    "version": "0.0.0-development",
+    "version": "20.5.6",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "sideEffects": false,
@@ -79,7 +79,6 @@
         "watch": "npm run build -- --watch",
         "prepare": "npm run build",
         "test": "jest",
-        "test-watch": "jest --watch",
-        "semantic-release": "semantic-release"
+        "test-watch": "jest --watch"
     }
 }

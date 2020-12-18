@@ -1,7 +1,7 @@
 # Collector Portal Framework
 
-[![CD Actions Status]][build-url]
-[![NPM version][npm-image]][npm-url]
+![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/collector-bank/collector-portal-framework/CI/master?logo=GitHub)
+![npm](https://img.shields.io/npm/v/collector-portal-framework?color=%2334d058&label=npm%20package)
 
 A collection of UI components and helper functions used in a couple of our internal and external web applications at [Collector Bank](https://www.collector.se/).
 Documentation and an interactive test area can be found [here](https://collector-bank.github.io/collector-portal-framework/).
@@ -96,9 +96,3 @@ You can see a demo of the UI components [here](https://collector-bank.github.io/
 | PageHeader    | [Source](src/components/PageHeader.tsx)      |
 | Tabs          | [Source](src/components/Tabs.tsx)            |
 | ValueList     | [Source](src/components/ValueList.tsx)       |
-
-
-[npm-url]: https://npmjs.org/package/collector-portal-framework
-[npm-image]: https://badge.fury.io/js/collector-portal-framework.svg
-[build-url]: https://github.com/collector-bank/collector-portal-framework/actions
-

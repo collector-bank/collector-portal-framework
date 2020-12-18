@@ -1,19 +1,19 @@
 name: CD
 
 on:
-    pull_request:
+    push:
         branches: [master]
 
 jobs:
     release:
-      runs-on: ubuntu-latest
-      steps:
-        - uses: actions/checkout@v2
-        - uses: actions/setup-node@v1
-          with:
-            node-version: '14.x'
-            registry-url: https://registry.npmjs.com/
-        - run: npm i
-        - run: npm publish
-          env:
-            NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}
+        runs-on: ubuntu-latest
+        steps:
+            - uses: actions/checkout@v2
+            - uses: actions/setup-node@v1
+              with:
+                  node-version: '14.x'
+                  registry-url: https://registry.npmjs.com/
+            - run: npm i
+            - run: npm publish
+              env:
+                  NODE_AUTH_TOKEN: ${{secrets.NPM_AUTH_TOKEN}}

@@ -1,6 +1,7 @@
 # Collector Portal Framework
 
-![GitHub Workflow Status (branch)](https://img.shields.io/github/workflow/status/collector-bank/collector-portal-framework/CI/master?logo=GitHub)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/collector-bank/collector-portal-framework/CI?logo=GitHub)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/collector-bank/collector-portal-framework/CD?label=deployment&logo=npm)
 ![npm](https://img.shields.io/npm/v/collector-portal-framework?color=%2334d058&label=npm%20package)
 
 A collection of UI components and helper functions used in a couple of our internal and external web applications at [Collector Bank](https://www.collector.se/).

@@ -12,7 +12,7 @@ components.addDecorator(withKnobs);
 components.add('Portal', () => {
     return (
         <BrowserRouter>
-            <Portal menuItems={menuItems}>
+            <Portal portalMenu={menuItems} nrOfUnreadMessages={3} menuFooter={<div>hej</div>}>
                 Content
             </Portal>
         </BrowserRouter>

@@ -1,6 +1,22 @@
 {
-    "messageIcon": "messageIconTop.svg",
+    "homeUrl": "localhost/iframesdsds.html",
     "topItems": [
+        {
+            "label": "Meddelanden",
+            "url": "localhost/iframesdsds.html",
+            "icon": "start_menu-icon.svg",
+            "isMsg": true,
+            "subpages": []
+        },
+        {
+            "label": "Meddelanden",
+            "url": "localhost/iframesdsds.html",
+            "icon": "start_menu-icon.svg",
+            "isMsg": false,
+            "subpages": []
+        }
+    ],
+    "asidePortalItems": [
         {
             "label": "Hem",
             "url": "localhost/iframesdsds.html",
@@ -76,7 +92,7 @@
                 },
                 {
                     "label": "Submeny 3",
-                    "url": "testUrl3",
+                    "url": "http://localhost:9501/?path=/story/version-2--portal",
                     "icon": "",
                     "subpages": []
                 },
@@ -89,17 +105,18 @@
             ]
         }
     ],
-    "bottomItems": [
+    "asideGeneralItems": [
         {
             "label": "Exempel 4",
-            "url": "testUrl10",
+            "url": "http://localhost:9501/?path=/story/version-2--porta",
             "icon": "securemsg_menu-icon.svg",
             "subpages": []
         },
         {
-            "label": "Exempel 5",
-            "url": "testUrl11",
+            "label": "Meddelanden",
+            "url": "http://localhost:9501/?path=/story/version-2--port",
             "icon": "customersvc_menu-icon.svg",
+            "isMsg": true,
             "subpages": []
         },
         {

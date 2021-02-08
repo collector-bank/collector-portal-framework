@@ -28,27 +28,35 @@ export const PortalAsideMenuItem: React.FC<PortalAsideMenuItemProps> = ({
         onClick(url);
     };
 
+    const getMenuItemContent = (menuItem: PortalMenuItem): any => {
+        return (
+            <>
+                {getIcon(menuItem.icon)}
+                <div className="cui-content">
+                    {menuItem.label}
+                    {menuItem.hasOwnProperty('isMsg')
+                    && menuItem.isMsg
+                    && nrOfUnreadMessages > 0
+                        ? <span className="cui-msg">{nrOfUnreadMessages}</span>
+                        : ''
+                    }
+                </div>
+            </>
+        )
+    };
+
     const getMenuItem = () => {
         if (menuItem.hasExternalUrl) {
             return (
                 <a className="cui-nav-item" href={menuItem.url}>
-                    {getIcon(menuItem.icon)}
-                    <div className="cui-content">{menuItem.label}</div>
+                    {getMenuItemContent(menuItem)}
                 </a>
             );
         } else {
             return (
                 <Link className={`cui-nav-item ${isActive ? 'cui-is-active' : ''}`}
                       to={menuItem.url} onClick={() => onClickMenuItem(menuItem.url)}>
-                    {getIcon(menuItem.icon)}
-                    <div className="cui-content">
-                        {menuItem.label}
-                        {menuItem.hasOwnProperty('isMsg')
-                        && menuItem.isMsg
-                        && nrOfUnreadMessages > 0
-                            ? <span className="cui-msg">{nrOfUnreadMessages}</span>
-                            : ''}
-                    </div>
+                    {getMenuItemContent(menuItem)}
                 </Link>
             );
         }

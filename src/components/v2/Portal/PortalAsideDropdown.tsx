@@ -1,38 +1,28 @@
 import * as React from 'react';
-import { Link } from 'react-router-dom';
-import { getIconBy } from './portalIcons';
-import { PortalMenuItem } from './Portal';
 import { getIcon } from './PortalAsideMenuItem';
-import { useRef } from 'react';
+import { PortalMenuItem } from './portalMenu';
 
 export interface PortalAsideMenuItemProps {
-    selectedDropdownIndex: number;
+    isActive: boolean,
     menuItem: PortalMenuItem,
-    index: number,
-    onClick: (event) => void,
+    onClick: (event: any) => void,
 }
 
 export const PortalAsideDropdown: React.FC<PortalAsideMenuItemProps> = ({
-    selectedDropdownIndex,
+    isActive,
     menuItem,
-    index,
     onClick
 }) => {
-    const onClickNavDropdown = (index: number) => {
-        onClick(index);
-    };
-
-    const getMenuItem = () => {
-        return (
-            <button className={`cui-nav-item ${selectedDropdownIndex === index ? 'cui-is-open' : ''}`}
-                    onClick={() => onClickNavDropdown(index)}>
-            {getIcon(menuItem.icon)}
-            <div className="cui-content">{menuItem.label}</div>
-        </button>)
+    const onClickDropdown = (PortalMenuItem: PortalMenuItem): void => {
+        onClick(PortalMenuItem);
     };
 
     return (
-        getMenuItem()
-    );
+        <button className={`cui-nav-item ${isActive ? 'cui-is-open' : ''}`}
+                onClick={() => onClickDropdown(menuItem)}>
+            {getIcon(menuItem.icon)}
+            <div className="cui-content">{isActive}{menuItem.label}</div>
+        </button>
+    )
 };
 

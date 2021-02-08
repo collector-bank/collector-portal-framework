@@ -1,11 +1,9 @@
 import * as React from 'react';
 import { Link } from 'react-router-dom';
 import { getIconBy } from './portalIcons';
-import { PortalMenuItem } from './Portal';
-import ReactDOM from 'react-dom'
-import { useEffect, useRef } from 'react';
+import { PortalMenuItem } from './portalMenu';
 
-export const getIcon = (icon) => {
+export const getIcon = (icon: any) => {
     return icon ? (
         <span className="cui-img">
                 {getIconBy(icon)}
@@ -14,34 +12,34 @@ export const getIcon = (icon) => {
 }
 
 export interface PortalAsideMenuItemProps {
-    activeMenuItemUrl: string;
+    isActive: boolean,
     menuItem: PortalMenuItem,
+    onClick: (event: any) => void,
     nrOfUnreadMessages: number,
-    onClick: (event) => void,
 }
 
 export const PortalAsideMenuItem: React.FC<PortalAsideMenuItemProps> = ({
-    activeMenuItemUrl,
+    isActive,
     menuItem,
-    nrOfUnreadMessages = 0,
     onClick,
+    nrOfUnreadMessages = 0,
 }) => {
-    const onClickNavItem = (url: string) => {
+    const onClickMenuItem = (url: string): void => {
         onClick(url);
     };
 
     const getMenuItem = () => {
         if (menuItem.hasExternalUrl) {
             return (
-                <a className="cui-nav-item" href={menuItem.url} tabIndex={0}>
+                <a className="cui-nav-item" href={menuItem.url}>
                     {getIcon(menuItem.icon)}
                     <div className="cui-content">{menuItem.label}</div>
                 </a>
             );
         } else {
             return (
-                <Link className={`cui-nav-item ${activeMenuItemUrl === menuItem.url ? 'cui-is-active' : ''}`}
-                      to={menuItem.url} onClick={() => onClickNavItem(menuItem.url)} tabIndex={0}>
+                <Link className={`cui-nav-item ${isActive ? 'cui-is-active' : ''}`}
+                      to={menuItem.url} onClick={() => onClickMenuItem(menuItem.url)}>
                     {getIcon(menuItem.icon)}
                     <div className="cui-content">
                         {menuItem.label}

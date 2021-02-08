@@ -3,125 +3,113 @@
     "topItems": [
         {
             "label": "Meddelanden",
-            "url": "localhost/iframesdsds.html",
+            "url": "testUrl0",
             "icon": "start_menu-icon.svg",
             "isMsg": true,
-            "subpages": []
-        },
-        {
-            "label": "Meddelanden",
-            "url": "localhost/iframesdsds.html",
-            "icon": "start_menu-icon.svg",
-            "isMsg": false,
             "subpages": []
         }
     ],
     "asidePortalItems": [
         {
             "label": "Hem",
-            "url": "localhost/iframesdsds.html",
+            "url": "testUrl1",
             "icon": "start_menu-icon.svg",
             "subpages": []
         },
         {
-            "label": "Exempel 1",
+            "label": "Menu 1",
             "url": "",
             "icon": "loans_menu-icon.svg",
             "subpages": [
                 {
                     "label": "Submeny 1",
-                    "url": "testUrl1",
+                    "url": "testUrl1-1",
                     "icon": "",
                     "subpages": []
                 },
                 {
                     "label": "Submeny 2",
-                    "url": "testUrl2",
+                    "url": "testUrl1-2",
                     "icon": "",
                     "subpages": []
                 },
                 {
                     "label": "Submeny 3",
-                    "url": "testUrl3",
+                    "url": "testUrl1-3",
                     "icon": "",
                     "subpages": []
                 }
             ]
         },
         {
-            "label": "Exempel 2",
+            "label": "Menu 2",
             "url": "",
             "icon": "creditcards_menu-icon.svg",
             "subpages": [
                 {
                     "label": "Submeny 1",
-                    "url": "testUrl1",
+                    "url": "testUrl2-1",
                     "icon": "",
                     "subpages": []
                 },
                 {
                     "label": "Submeny 2",
-                    "url": "testUrl2",
+                    "url": "testUrl2-2",
                     "icon": "",
                     "subpages": []
                 },
                 {
                     "label": "Submeny 3",
-                    "url": "testUrl3",
+                    "url": "testUrl2-3",
                     "icon": "",
                     "subpages": []
                 }
             ]
         },
         {
-            "label": "Exempel 3",
+            "label": "Menu 3",
             "url": "",
             "icon": "savings_menu-icon.svg",
             "subpages": [
                 {
-                    "label": "Submeny 1",
-                    "url": "testUrl1",
+                    "label": "menu item",
+                    "url": "testUrl3-1",
                     "icon": "",
                     "subpages": []
                 },
                 {
-                    "label": "Submeny 2",
-                    "url": "testUrl2",
+                    "label": "menu item",
+                    "url": "testUrl3-2",
                     "icon": "",
                     "subpages": []
                 },
                 {
-                    "label": "Submeny 3",
-                    "url": "http://localhost:9501/?path=/story/version-2--portal",
+                    "label": "dropdown",
+                    "url": "",
                     "icon": "",
-                    "subpages": []
-                },
-                {
-                    "label": "Submeny 4",
-                    "url": "testUrl3",
-                    "icon": "",
-                    "subpages": []
+                    "subpages": [
+                        {
+                            "label": "menu item",
+                            "url": "testUrl3-2-1",
+                            "icon": "",
+                            "subpages": []
+                        }
+                    ]
                 }
             ]
         }
     ],
     "asideGeneralItems": [
         {
-            "label": "Exempel 4",
-            "url": "http://localhost:9501/?path=/story/version-2--porta",
-            "icon": "securemsg_menu-icon.svg",
-            "subpages": []
-        },
-        {
-            "label": "Meddelanden",
-            "url": "http://localhost:9501/?path=/story/version-2--port",
+            "label": "Menu 4",
+            "url": "testUrl4",
             "icon": "customersvc_menu-icon.svg",
             "isMsg": true,
             "subpages": []
         },
         {
-            "label": "Logga ut",
-            "url": "/auth/logout/",
+            "label": "Menu 5",
+            "url": "testUrl5",
             "icon": "logout_menu-icon.svg",
             "subpages": []
         }

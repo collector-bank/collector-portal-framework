@@ -1,9 +1,9 @@
 import * as React from 'react';
 import { useEffect, useState } from 'react';
 import styled from '@emotion/styled';
-import { PortalMenu, PortalMenuItem } from './Portal';
 import { PortalAsideMenuItem } from './PortalAsideMenuItem';
 import { PortalAsideDropdown } from './PortalAsideDropdown';
+import { getTraversedMenuLeafs, PortalMenu, PortalMenuItem, PortalMenuTreeLeaf } from './portalMenu';
 
 const FootContent = styled.section({
     width: 'calc(100% - 40px)',
@@ -13,20 +13,10 @@ const FootContent = styled.section({
 
 export interface PortalMenuProps {
     menuTree: PortalMenu;
-    menuFooter?: JSXElement,
+    menuFooter?: JSX.Element,
     nrOfUnreadMessages?: number,
     isNavMenuOpen: boolean
 }
-
-export interface PortalUserTraverseMenuTree {
-    selectedDropdownIndex: number,
-    activeMenuItemUrl: string,
-}
-
-const initalPortalUserTraverseMenuTree = {
-    activeMenuItemUrl: '',
-    selectedDropdownIndex: -1
-};
 
 export const PortalAsideMenu: React.FC<PortalMenuProps> = ({
     menuTree,
@@ -34,104 +24,109 @@ export const PortalAsideMenu: React.FC<PortalMenuProps> = ({
     nrOfUnreadMessages= 0,
     isNavMenuOpen = true,
 }) => {
-    const [userNavigationData, setUserNavigationData] = useState<PortalUserTraverseMenuTree>({...initalPortalUserTraverseMenuTree});
+    const [traversedMenu, setTraversedMenu] = useState<PortalMenuTreeLeaf[]>([]);
+    const [activeMenuItemUrl, setActiveMenuItemUrl] = useState<string>('');
+    const [menuItems, setMenuItems] = useState<PortalMenuItem[]>([]);
 
     useEffect(() => {
-        const pathname = ':9501/?path=/story/version-2--portal';
         const menuItems = [...menuTree.asidePortalItems, ...menuTree.asideGeneralItems];
-        let userNavigation = getUserNavigationData(menuItems, pathname);
-        setUserNavigationData(userNavigation);
+        setMenuItems(menuItems);
+
+        const pathname = window.location.pathname;
+        let traversedMenuLeafs = getTraversedMenuLeafs(menuItems, pathname, false, setActiveMenuItemUrl);
+        setTraversedMenu(traversedMenuLeafs);
     }, [menuTree]);
 
-    const getUserNavigationData = (menuItems: any, pathname: string) => {
-        let portalUserTraverseMenuTree = {...initalPortalUserTraverseMenuTree};
-
-        menuItems.forEach((menuItem: any, menuItemIndex: number) => {
-            if(pathname === menuItem.url) {
-                portalUserTraverseMenuTree.activeMenuItemUrl = menuItem.url;
-            }
-            const foundChildMenuItem = menuItem.subpages.find((subpageMenuItem: any) => {
-                return subpageMenuItem.url === pathname;
-            })
-            if (foundChildMenuItem) {
-                portalUserTraverseMenuTree.selectedDropdownIndex = menuItemIndex;
-                portalUserTraverseMenuTree.activeMenuItemUrl = foundChildMenuItem.url;
-            }
-        })
-
-        return portalUserTraverseMenuTree;
+    const isDropdownActive = (menuLevel: number, indexLeaf: number): boolean => {
+        if(traversedMenu[menuLevel]) {
+            return traversedMenu[menuLevel].index === indexLeaf;
+        }
+        return false;
     }
+
+    const isMenuItemActive = (menuItem: PortalMenuItem): boolean => {
+        return activeMenuItemUrl === menuItem.url;
+    }
+
+    const getNextUrlOf = (subpages: PortalMenuItem[], index = 0): string => {
+        const menuItem = subpages[index];
+        return menuItem.url === '' ? getNextUrlOf(subpages, ++index) : menuItem.url;
+    }
+
+    const closeDropdown = (traversedMenuItemIndex: number): void => {
+        const traverseBack = traversedMenu.slice(0, traversedMenuItemIndex)
+        setTraversedMenu(traverseBack);
+    }
+
+    const openDropdown = (selectedDropdownMenuItem: PortalMenuItem): void => {
+        const url = getNextUrlOf(selectedDropdownMenuItem.subpages);
+        let traversedMenuLeafs = getTraversedMenuLeafs(menuItems, url, true);
+        setTraversedMenu(traversedMenuLeafs);
+    }
+
+    const onClickDropdown = (selectedDropdownMenuItem: PortalMenuItem): void => {
+        const id = selectedDropdownMenuItem.id;
+        const traversedMenuItemIndex = traversedMenu.findIndex(traversedMenuItem => id === traversedMenuItem.id);
+        traversedMenuItemIndex !== -1   ? closeDropdown(traversedMenuItemIndex)
+                                        : openDropdown(selectedDropdownMenuItem);
+    };
+
+    const onClickNavItem = (url: string): void => {
+        let traversedMenuLeafs = getTraversedMenuLeafs(menuItems, url, false, setActiveMenuItemUrl);
+        setTraversedMenu(traversedMenuLeafs);
+    };
 
     const Menu = (menu: any): any => {
         return  createSubmenuFrom(menu.asidePortalItems)
-                .concat(<div className="cui-nav-divider" key={'0-divider'} />)
-                .concat(createSubmenuFrom(menu.asideGeneralItems));
+            .concat(<div className="cui-nav-divider" key={'0-divider'} />)
+            .concat(createSubmenuFrom(menu.asideGeneralItems));
     };
 
-    const createSubmenuFrom = (menuItems: PortalMenuItem[], isTopLevel: boolean = false): any => {
-        return isTopLevel ? (
+    const createSubmenuFrom = (menuItems: PortalMenuItem[], menuLevel = 0, isDropdown = false): any => {
+        return isDropdown ? (
             <div className={`cui-nav-subgroup`}>
-                {getMenuItemsOf(menuItems, false)}
+                {getMenuItemsOf(menuItems, menuLevel)}
             </div>
         ) : (
-            getMenuItemsOf(menuItems, true)
+            getMenuItemsOf(menuItems, menuLevel)
         );
     };
 
-    const getMenuItemsOf = (menuItems: PortalMenuItem[], isTopLevel: boolean = true) => {
-        return menuItems.map((menuItem: any, i: number) => (
-            <React.Fragment key={menuItem.label}>
-                {getMenuItem(menuItem, i)}
-                {menuItem.subpages.length > 0 && createSubmenuFrom(menuItem.subpages, isTopLevel)}
-            </React.Fragment>
-        ));
+    const getMenuItemsOf = (menuItems: PortalMenuItem[], menuLevel: number) => {
+        return menuItems.map((menuItem: any, index: number) => {
+            const isDropdown = menuItem.subpages.length > 0;
+            const nextMenuLevel = menuLevel + 1;
+            return (
+                <React.Fragment key={menuItem.label + index}>
+                    {getMenuItem(menuItem, index, menuLevel, isDropdown)}
+                    {isDropdown && createSubmenuFrom(menuItem.subpages, nextMenuLevel, isDropdown)}
+                </React.Fragment>
+            )
+        });
     };
 
     const getMenuItem = (
         menuItem: PortalMenuItem,
-        position: number,
+        indexLeaf: number,
+        menuLevel: number,
+        isDropdown: boolean,
     ) => {
-        const isDropdown = menuItem.subpages.length > 0;
         if (isDropdown) {
             return (
-                <PortalAsideDropdown selectedDropdownIndex={userNavigationData.selectedDropdownIndex}
-                                     menuItem={menuItem}
-                                     index={position}
-                                     onClick={onClickNavDropdownItem}
+                <PortalAsideDropdown menuItem={menuItem}
+                                     isActive={isDropdownActive(menuLevel, indexLeaf)}
+                                     onClick={onClickDropdown}
                 />
             );
         } else {
             return (
-                <PortalAsideMenuItem activeMenuItemUrl={userNavigationData.activeMenuItemUrl}
-                                     menuItem={menuItem}
-                                     nrOfUnreadMessages={nrOfUnreadMessages}
+                <PortalAsideMenuItem menuItem={menuItem}
+                                     isActive={isMenuItemActive(menuItem)}
                                      onClick={onClickNavItem}
+                                     nrOfUnreadMessages={nrOfUnreadMessages}
                 />
             )
         }
-    };
-
-    const openDropdown = (dropdownIndex: number) => {
-        setUserNavigationData(prevState => {
-            return {...prevState, selectedDropdownIndex: dropdownIndex}
-        });
-    }
-
-    const closeDropdown = () => {
-        setUserNavigationData(prevState => {
-            return {...prevState, selectedDropdownIndex: -1}
-        });
-    }
-
-    const onClickNavDropdownItem = (selectedDropdownIndex: number) => {
-        const isDropdownActive = (selectedDropdownIndex === userNavigationData.selectedDropdownIndex);
-        isDropdownActive ? closeDropdown() : openDropdown(selectedDropdownIndex);
-    };
-
-    const onClickNavItem = (url: string) => {
-        setUserNavigationData(prevState => {
-            return {...prevState, activeMenuItemUrl: url}
-        });
     };
 
     return (

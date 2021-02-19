@@ -15,7 +15,7 @@ export interface PortalMenuItem {
     subpages: PortalMenuItem[];
 }
 
-export interface PortalMenuTreeLeaf {
+export interface PortalMenuTreeNode {
     index: number,
     url: string,
     id: number
@@ -55,14 +55,14 @@ const getHostnameFrom = (url: string): string => {
     return hostname;
 }
 
-export const traverse = (menuItem: PortalMenuItem, hostname: string, leafs: any[]): any => {
+export const traverse = (menuItem: PortalMenuItem, hostname: string, nodes: any[]): any => {
     if (menuItem.url === hostname) {
         return [];
     } else if (menuItem.hasOwnProperty('subpages') && menuItem.subpages.length > 0) {
         for (let i = 0; i < menuItem.subpages.length; i++) {
-            let path = traverse(menuItem.subpages[i], hostname, leafs);
+            let path = traverse(menuItem.subpages[i], hostname, nodes);
             if (path !== null) {
-                leafs.push({
+                nodes.push({
                     index: i,
                     url: menuItem.subpages[i].url,
                     id: menuItem.subpages[i].id,
@@ -75,26 +75,26 @@ export const traverse = (menuItem: PortalMenuItem, hostname: string, leafs: any[
     return null;
 };
 
-export const getTraversedMenuLeafs = (menuItems: PortalMenuItem[], hostname: string, isDropdown = false, setActiveUrl?: Function): PortalMenuTreeLeaf[] => {
-    let leafs: any[] = [];
+export const getTraversedMenuNodes = (menuItems: PortalMenuItem[], hostname: string, isDropdown = false, setActiveUrl?: Function): PortalMenuTreeNode[] => {
+    let nodes: any[] = [];
     menuItems.forEach((menuItem: any, index: number) => {
-        const path = traverse(menuItem, hostname, leafs);
+        const path = traverse(menuItem, hostname, nodes);
         if (path) {
             path.unshift(index)
-            leafs.push({
+            nodes.push({
                 index: index,
                 url: menuItem.url,
                 id: menuItem.id,
             })
         }
     });
-    leafs = leafs.reverse();
-    if(setActiveUrl && leafs.length > 0 && !isDropdown) {
-        setActiveUrl(leafs[leafs.length - 1].url);
+    nodes = nodes.reverse();
+    if(setActiveUrl && nodes.length > 0 && !isDropdown) {
+        setActiveUrl(nodes[nodes.length - 1].url);
     }
 
     if(isDropdown) {
-        leafs.pop();
+        nodes.pop();
     }
-    return leafs;
+    return nodes;
 }

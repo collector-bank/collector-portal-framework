@@ -1,5 +1,4 @@
-import * as React from 'react';
-import { useEffect, useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import { svg } from './portalIcons';
 import { PortalAsideMenu } from './PortalAsideMenu';
 import { createMenuTreeBy, PortalMenu } from './portalMenu';
@@ -18,7 +17,7 @@ const portalMenuInit = {
     asidePortalItems: [],
 }
 
-export const Portal: React.FC<PortalProps> = ({
+export const Index: React.FC<PortalProps> = ({
     portalMenu,
     children,
     menuFooter,
@@ -35,7 +34,7 @@ export const Portal: React.FC<PortalProps> = ({
     }, [portalMenu]);
 
     const onHamburgerClick = (): void => {
-        setIsHamburgerMenuOpen(!isHamburgerMenuOpen);
+        setIsHamburgerMenuOpen(prevHamburgerMenuOpen => !prevHamburgerMenuOpen);
     };
 
     return (

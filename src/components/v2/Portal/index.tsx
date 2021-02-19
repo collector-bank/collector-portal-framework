@@ -17,7 +17,7 @@ const portalMenuInit = {
     asidePortalItems: [],
 }
 
-export const Index: React.FC<PortalProps> = ({
+export const Portal: React.FC<PortalProps> = ({
     portalMenu,
     children,
     menuFooter,

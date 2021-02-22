@@ -1,1 +1,1 @@
-export * from './Portal/Portal';
+export * from './Portal/index';

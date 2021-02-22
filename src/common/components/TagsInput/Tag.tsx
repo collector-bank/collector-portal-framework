@@ -43,7 +43,7 @@ const handleKeyDown = (event: React.KeyboardEvent<HTMLDivElement>, onDelete: (id
 export const Tag: React.FC<TagProps> = ({ tag, onDelete }) => (
     <TagContainer>
         {tag.label}
-        <IconContainer role="button" tabIndex={0} onKeyDown={evt => handleKeyDown(evt, onDelete, tag)} onClick={() => onDelete(tag.id)}>
+        <IconContainer role="button" onKeyDown={evt => handleKeyDown(evt, onDelete, tag)} onClick={() => onDelete(tag.id)}>
             <CrossIcon />
         </IconContainer>
     </TagContainer>

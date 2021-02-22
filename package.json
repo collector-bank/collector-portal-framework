@@ -1,7 +1,7 @@
 {
     "title": "Collector Portal Framework",
     "name": "collector-portal-framework",
-    "version": "20.5.7",
+    "version": "20.5.8",
     "main": "./dist/index.js",
     "types": "./dist/index.d.ts",
     "sideEffects": false,
@@ -61,7 +61,7 @@
         "react-motion": "0.5.2",
         "react-sidebar": "3.0.2",
         "uniqid": "^5.2.0",
-        "collui": "^1.4.1-7"
+        "collui": "^1.5.1"
     },
     "peerDependencies": {
         "react-dom": ">=16.8",

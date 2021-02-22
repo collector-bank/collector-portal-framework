@@ -15,21 +15,20 @@ export const PortalTopMenu: React.FC<PortalTopMenuProps> = ({
     const getTopIconContent = (menuItem: PortalMenuItem) => {
         return (
             <>
-                {
-                    menuItem.hasOwnProperty('isMsg')
-                    && menuItem.isMsg
-                    && nrOfUnreadMessages > 0
-                    && <span className="cui-msg">{nrOfUnreadMessages}</span>
-                }
+                {menuItem.hasOwnProperty('isMsg') &&
+                menuItem.isMsg &&
+                nrOfUnreadMessages > 0 && (
+                    <span className="cui-msg">{nrOfUnreadMessages}</span>
+                )}
                 {svg.securemsgIcon}
             </>
         )
     }
 
-    return <>
+    return (<>
         {submenu && submenu.map((menuItem, index) => {
             if (menuItem.hasExternalUrl) {
-                return(
+                return (
                     <a className="cui-menu-btn" href={menuItem.url} key={index}>
                         {getTopIconContent(menuItem)}
                     </a>
@@ -42,7 +41,7 @@ export const PortalTopMenu: React.FC<PortalTopMenuProps> = ({
                 );
             }
         })}
-    </>
+    </>)
 };
 
 

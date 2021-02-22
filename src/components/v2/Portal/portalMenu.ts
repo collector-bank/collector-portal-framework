@@ -29,9 +29,11 @@ export const createMenuTreeBy = (menu: any, hostname: string, menuItemStartId = 
                 const urlHostname = getHostnameFrom(menuItem.url);
                 const isSameHostname = (urlHostname === hostname);
                 menuItem.id = ++menuItemStartId;
+
                 if (isSameHostname) {
                     menuItem.url = transformUrlToPath(menuItem.url, hostname);
                 }
+
                 menuItem.hasExternalUrl = !isSameHostname;
 
                 if (menuItem.subpages.length > 0) {

@@ -4,6 +4,7 @@ import styled from '@emotion/styled';
 import { PortalAsideMenuItem } from './PortalAsideMenuItem';
 import { PortalAsideDropdown } from './PortalAsideDropdown';
 import { getTraversedMenuNodes, PortalMenu, PortalMenuItem, PortalMenuTreeNode } from './portalMenu';
+import { useHistory } from 'react-router-dom';
 
 const FootContent = styled.section({
     width: 'calc(100% - 40px)',
@@ -27,6 +28,7 @@ export const PortalAsideMenu: React.FC<PortalMenuProps> = ({
     const [traversedMenu, setTraversedMenu] = useState<PortalMenuTreeNode[]>([]);
     const [activeMenuItemUrl, setActiveMenuItemUrl] = useState<string>('');
     const [menuItems, setMenuItems] = useState<PortalMenuItem[]>([]);
+    const history = useHistory();
 
     useEffect(() => {
         const menuItems = [...menuTree.asidePortalItems, ...menuTree.asideGeneralItems];
@@ -36,6 +38,13 @@ export const PortalAsideMenu: React.FC<PortalMenuProps> = ({
         let traversedMenuNodes = getTraversedMenuNodes(menuItems, pathname, false, setActiveMenuItemUrl);
         setTraversedMenu(traversedMenuNodes);
     }, [menuTree]);
+
+    useEffect(() => {
+        return history.listen((location) => {
+            let traversedMenuNodes = getTraversedMenuNodes(menuItems, location.pathname, false, setActiveMenuItemUrl);
+            setTraversedMenu(traversedMenuNodes);
+        })
+    }, []);
 
     const isDropdownActive = (menuLevel: number, indexNode: number): boolean => {
         if(traversedMenu[menuLevel]) {

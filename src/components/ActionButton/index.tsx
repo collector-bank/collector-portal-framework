@@ -7,6 +7,8 @@ interface ActionButtonProps {
     label: React.ReactNode;
 }
 
+const actionButtonsBreakpoint = '@media only screen and (max-width: 1024px)';
+
 const Button = styled.button(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -16,7 +18,7 @@ const Button = styled.button(({ theme }) => ({
     background: 'none',
     cursor: 'pointer',
 
-    [theme.breakpoints.mobileAndLower]: {
+    [actionButtonsBreakpoint]: {
         flexDirection: 'column',
         width: '33%',
     },
@@ -67,7 +69,7 @@ const LabelContainer = styled.span(({ theme }) => ({
     lineHeight: 1.25,
     marginLeft: 12,
 
-    [theme.breakpoints.mobileAndLower]: {
+    [actionButtonsBreakpoint]: {
         font: theme.fonts.mobile.small,
         lineHeight: 1.25,
         fontWeight: 300, // has to be specified twice as font declaration above seems to override it.

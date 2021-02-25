@@ -7,9 +7,7 @@ const PageHeaderContainer = styled.div(({ theme }) => ({
     overflow: 'hidden',
     boxSizing: 'border-box',
     width: '100%',
-    minHeight: 129,
-    padding: '16px 40px',
-    borderBottom: `1px solid ${theme.colors.lightGray}`,
+    padding: '0 40px',
 
     '@media print': {
         display: 'none',

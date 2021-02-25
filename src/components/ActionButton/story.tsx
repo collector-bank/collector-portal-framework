@@ -37,6 +37,7 @@ components.add(
                 <ActionButton label="A longer example" icon={<Icon />} />
                 <ActionButton label="Example" icon={<Icon />} />
                 <ActionButton label="Example" icon={<Icon />} />
+                <ActionButton label="Example" icon={<Icon />} />
             </ActionButtonsContainer>
         );
     },

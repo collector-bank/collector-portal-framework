@@ -66,7 +66,7 @@ export const Portal: React.FC<PortalProps> = ({
                 {menuTree ? <PortalAsideMenu    menuTree={menuTree}
                                                 isNavMenuOpen={isHamburgerMenuOpen}
                                                 menuFooter={menuFooter}
-                                                onHamburgerClick={toggleHamburgerClick}
+                                                toggleHamburgerClick={toggleHamburgerClick}
                                                 nrOfUnreadMessages={nrOfUnreadMessages}/>
                             : ''}
                 <section className="cui-site-content">{children}</section>

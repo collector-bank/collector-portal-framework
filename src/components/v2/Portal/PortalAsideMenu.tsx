@@ -16,7 +16,8 @@ export interface PortalMenuProps {
     menuTree: PortalMenu;
     menuFooter?: JSX.Element,
     nrOfUnreadMessages?: number,
-    isNavMenuOpen: boolean
+    isNavMenuOpen: boolean,
+    toggleHamburgerClick: Function,
 }
 
 export const PortalAsideMenu: React.FC<PortalMenuProps> = ({
@@ -24,6 +25,7 @@ export const PortalAsideMenu: React.FC<PortalMenuProps> = ({
     menuFooter,
     nrOfUnreadMessages= 0,
     isNavMenuOpen = true,
+    toggleHamburgerClick
 }) => {
     const [traversedMenu, setTraversedMenu] = useState<PortalMenuTreeNode[]>([]);
     const [activeMenuItemUrl, setActiveMenuItemUrl] = useState<string>('');
@@ -42,9 +44,11 @@ export const PortalAsideMenu: React.FC<PortalMenuProps> = ({
     useEffect(() => {
         return history.listen((location) => {
             let traversedMenuNodes = getTraversedMenuNodes(menuItems, location.pathname, false, setActiveMenuItemUrl);
-            setTraversedMenu(traversedMenuNodes);
+            if(traversedMenuNodes.length > 0) {
+                setTraversedMenu(traversedMenuNodes);
+            }
         })
-    }, []);
+    }, [menuItems]);
 
     const isDropdownActive = (menuLevel: number, indexNode: number): boolean => {
         if(traversedMenu[menuLevel]) {
@@ -83,6 +87,7 @@ export const PortalAsideMenu: React.FC<PortalMenuProps> = ({
     const onClickNavItem = (url: string): void => {
         let traversedMenuNodes = getTraversedMenuNodes(menuItems, url, false, setActiveMenuItemUrl);
         setTraversedMenu(traversedMenuNodes);
+        toggleHamburgerClick();
     };
 
     const Menu = (menu: any): any => {

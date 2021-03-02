@@ -23,10 +23,16 @@ const request = (method: string, returnRawResponse: boolean = false) => async (
         headers.append('Content-Type', 'application/json');
     }
 
-    const csrfToken = getCookie('CSRF-TOKEN');
+    const csrfToken = getCookie('__Host-CSRF-TOKEN');
 
     if (csrfToken) {
         headers.append('X-CSRF-Token', csrfToken);
+    }
+
+    const csrfTokenPrevious = getCookie('CSRF-TOKEN');
+
+    if (!csrfToken && csrfTokenPrevious) {
+        headers.append('X-CSRF-Token', csrfTokenPrevious);
     }
 
     if (extraHeaders) {

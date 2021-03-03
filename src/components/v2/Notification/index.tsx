@@ -52,7 +52,7 @@ export const Notification: React.FC<NotificationProps> = ({ type, title, descrip
             }
             {isClosable && onCloseCallback &&
                 <div className="cui-notification-close">
-                    <a className="cui-closable" onClick={onCloseCallback ? onCloseCallback : ""}>
+                    <a className="cui-closable" onClick={() => onCloseCallback}>
                         <figure className="cui-icon-close cui-is-normal" />
                     </a>
                 </div>

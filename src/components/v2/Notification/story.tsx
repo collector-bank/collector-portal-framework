@@ -16,8 +16,8 @@ components.add('Notification', () => {
                       hasIcon={boolean('Icon', true)}
                       type={select('Type', types, 'cui-is-success')}
                       isOutlined={boolean('Outline', false)}
-                      actionBtnHref={text('Link', 'https://collector.se')}
-                      actionBtnText={text('Button text', 'Läs mer')}
+                      actionButtonHref={text('Link', 'https://collector.se')}
+                      actionButtonText={text('Button text', 'Läs mer')}
                       isClosable={boolean('Closable', true)}
         />
     );

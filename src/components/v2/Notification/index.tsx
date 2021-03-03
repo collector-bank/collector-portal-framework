@@ -5,6 +5,7 @@ export type NotificationType = 'cui-is-success' | 'cui-is-info' | 'cui-is-warnin
 interface NotificationProps {
     description: string;
     title?: string;
+    hasIcon?: boolean;
     type: NotificationType;
     isOutlined?: boolean;
     actionBtnHref?: string;
@@ -28,12 +29,14 @@ const getIconBy = (type: NotificationType): string => {
     }
 }
 
-export const Notification: React.FC<NotificationProps> = ({ type, title, description, isOutlined = false, actionBtn, actionBtnHref, actionBtnText, isClosable, onCloseCb }) => (
+export const Notification: React.FC<NotificationProps> = ({ type, title, hasIcon= true, description, isOutlined = false, actionBtn, actionBtnHref, actionBtnText, isClosable, onCloseCb }) => (
     <>
         <div className={`cui-notification ${type} ${isOutlined ? "cui-is-outlined" : ""}`}>
-            <div className="cui-notification-left">
-                <figure className={`${getIconBy(type)} cui-is-large`} />
-            </div>
+            {hasIcon &&
+                <div className="cui-notification-left">
+                    <figure className={`${getIconBy(type)} cui-is-large`} />
+                </div>
+            }
             <div className="cui-notification-content">
                 {title &&
                     <div className={"cui-title"}>{title}</div>

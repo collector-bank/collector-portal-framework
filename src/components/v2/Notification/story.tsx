@@ -12,7 +12,8 @@ components.add('Notification', () => {
     const icons: NotificationIcon[] = ['cui-icon-danger', 'cui-icon-check', 'cui-icon-warning', 'cui-icon-info'];
     return (
         <Notification title={text('Title', 'Senaste info gick inte att visa')}
-                        description={text('Description', 'Felet kan åtgärdas om du laddar om sidan.')}
+                      description={text('Description', 'Felet kan åtgärdas om du laddar om sidan.')}
+                      hasIcon={boolean('Icon', true)}
                       type={select('Type', types, 'cui-is-success')}
                       isOutlined={boolean('Outline', false)}
                       actionBtnHref={text('Link', 'https://collector.se')}

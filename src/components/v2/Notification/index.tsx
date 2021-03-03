@@ -3,15 +3,15 @@ import React from 'react';
 export type NotificationType = 'cui-is-success' | 'cui-is-info' | 'cui-is-warning' | 'cui-is-danger';
 
 interface NotificationProps {
-    description: string;
-    title?: string;
-    hasIcon?: boolean;
     type: NotificationType;
+    title?: string;
+    description: string;
+    hasIcon?: boolean;
     isOutlined?: boolean;
     actionButtonHref?: string;
     actionButtonText?: string;
-    onCloseCallback?: Function;
     isClosable: boolean;
+    onCloseCallback?: Function;
 }
 
 const getIconBy = (type: NotificationType): string => {
@@ -29,7 +29,7 @@ const getIconBy = (type: NotificationType): string => {
     }
 }
 
-export const Notification: React.FC<NotificationProps> = ({ type, title, hasIcon= true, description, isOutlined = false, actionButtonHref, actionButtonText, isClosable, onCloseCallback }) => (
+export const Notification: React.FC<NotificationProps> = ({ type, title, description, hasIcon = true, isOutlined = false, actionButtonHref, actionButtonText, isClosable, onCloseCallback }) => (
     <>
         <div className={`cui-notification ${type} ${isOutlined ? "cui-is-outlined" : ""}`}>
             {hasIcon &&
@@ -52,7 +52,7 @@ export const Notification: React.FC<NotificationProps> = ({ type, title, hasIcon
             }
             {isClosable &&
                 <div className="cui-notification-close">
-                    <a className="cui-closable" onClick={onCloseCallback}>
+                    <a className="cui-closable" onClick={onCloseCallback ? onCloseCallback : ""}>
                         <figure className="cui-icon-close cui-is-normal" />
                     </a>
                 </div>

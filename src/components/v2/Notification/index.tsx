@@ -12,6 +12,7 @@ interface NotificationProps {
     actionBtnText?: string;
     onActionCb?: Function;
     onCloseCb?: boolean;
+    isClosable: boolean;
 }
 
 const getIconBy = (type: NotificationType): string => {
@@ -29,7 +30,7 @@ const getIconBy = (type: NotificationType): string => {
     }
 }
 
-export const Notification: React.FC<NotificationProps> = ({ type, title, hasIcon= true, description, isOutlined = false, actionBtn, actionBtnHref, actionBtnText, isClosable, onCloseCb }) => (
+export const Notification: React.FC<NotificationProps> = ({ type, title, hasIcon= true, description, isOutlined = false, actionBtnHref, actionBtnText, isClosable, onCloseCb }) => (
     <>
         <div className={`cui-notification ${type} ${isOutlined ? "cui-is-outlined" : ""}`}>
             {hasIcon &&

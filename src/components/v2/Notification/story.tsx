@@ -9,7 +9,7 @@ components.addDecorator(withKnobs);
 
 components.add('Notification', () => {
     const types: NotificationType[] = ['cui-is-success', 'cui-is-info', 'cui-is-warning', 'cui-is-danger'];
-    const icons: NotificationIcon[] = ['cui-icon-danger', 'cui-icon-check', 'cui-icon-warning', 'cui-icon-info'];
+
     return (
         <Notification title={text('Title', 'Senaste info gick inte att visa')}
                       description={text('Description', 'Felet kan åtgärdas om du laddar om sidan.')}

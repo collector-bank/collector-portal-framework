@@ -1,0 +1,23 @@
+import React from 'react';
+import { storiesOf } from '@storybook/react';
+import { withKnobs, text, select, boolean } from '@storybook/addon-knobs';
+import { Notification, NotificationType } from './index';
+
+const components = storiesOf('Version 2', module);
+
+components.addDecorator(withKnobs);
+
+components.add('Notification', () => {
+    const types: NotificationType[] = ['cui-is-success', 'cui-is-info', 'cui-is-warning', 'cui-is-danger'];
+    const icons: NotificationIcon[] = ['cui-icon-danger', 'cui-icon-check', 'cui-icon-warning', 'cui-icon-info'];
+    return (
+        <Notification title={text('Title', 'Senaste info gick inte att visa')}
+                        description={text('Description', 'Felet kan åtgärdas om du laddar om sidan.')}
+                      type={select('Type', types, 'cui-is-success')}
+                      isOutlined={boolean('Outline', false)}
+                      actionBtnHref={text('Link', 'https://collector.se')}
+                      actionBtnText={text('Button text', 'Läs mer')}
+                      isClosable={boolean('Closable', true)}
+        />
+    );
+});

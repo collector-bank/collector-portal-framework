@@ -8,10 +8,9 @@ interface NotificationProps {
     hasIcon?: boolean;
     type: NotificationType;
     isOutlined?: boolean;
-    actionBtnHref?: string;
-    actionBtnText?: string;
-    onActionCb?: Function;
-    onCloseCb?: boolean;
+    actionButtonHref?: string;
+    actionButtonText?: string;
+    onCloseCallback?: Function;
     isClosable: boolean;
 }
 
@@ -30,7 +29,7 @@ const getIconBy = (type: NotificationType): string => {
     }
 }
 
-export const Notification: React.FC<NotificationProps> = ({ type, title, hasIcon= true, description, isOutlined = false, actionBtnHref, actionBtnText, isClosable, onCloseCb }) => (
+export const Notification: React.FC<NotificationProps> = ({ type, title, hasIcon= true, description, isOutlined = false, actionButtonHref, actionButtonText, isClosable, onCloseCallback }) => (
     <>
         <div className={`cui-notification ${type} ${isOutlined ? "cui-is-outlined" : ""}`}>
             {hasIcon &&
@@ -44,16 +43,16 @@ export const Notification: React.FC<NotificationProps> = ({ type, title, hasIcon
                 }
                 <p>{description}</p>
             </div>
-            {actionBtnHref && actionBtnText &&
+            {actionButtonHref && actionButtonText &&
                 <div className="cui-notification-right">
-                    <a href={actionBtnHref} className="cui-is-link">
-                        {actionBtnText}
+                    <a href={actionButtonHref} className="cui-is-link">
+                        {actionButtonText}
                     </a>
                 </div>
             }
             {isClosable &&
                 <div className="cui-notification-close">
-                    <a className="cui-closable" onClick={onCloseCb}>
+                    <a className="cui-closable" onClick={onCloseCallback}>
                         <figure className="cui-icon-close cui-is-normal" />
                     </a>
                 </div>

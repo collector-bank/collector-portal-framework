@@ -1,32 +1,35 @@
-import React, { useEffect, useLayoutEffect, useRef, useState } from 'react';
+import React, { useRef } from 'react';
 import { NavLink } from 'react-router-dom';
 import styled from '../..';
-import { useWindowSize } from '../../hooks';
 
 const Container = styled.nav({
     marginBottom: 30,
 });
 
-interface VerticalProps {
-    vertical: boolean;
-}
+const InnerContainer = styled.div(({ theme }) => ({
+    display: 'block',
 
-const InnerContainer = styled.div<VerticalProps>(({ vertical }) => ({
-    display: vertical ? 'block' : 'inline-block',
+    [theme.breakpoints.tabletAndLower]: {
+        maxWidth: 500,
+    },
 }));
 
-const List = styled.ul<VerticalProps>(({ theme, vertical }) => ({
+const List = styled.ul(({ theme }) => ({
     listStyleType: 'none',
     padding: 0,
     margin: 0,
     display: 'flex',
-    flexDirection: vertical ? 'column' : undefined,
-    borderRadius: vertical ? theme.borderRadius.small : undefined,
-    border: vertical ? `1px solid ${theme.colors.lightGray}` : undefined,
     borderBottom: 0,
+
+    [theme.breakpoints.tabletAndLower]: {
+        flexDirection: 'column',
+        borderRadius: theme.borderRadius.small,
+        border: `1px solid ${theme.colors.lightGray}`,
+        borderBottom: 'none',
+    },
 }));
 
-const Link = styled(NavLink)<VerticalProps>(({ theme, vertical }) => ({
+const Link = styled(NavLink)(({ theme }) => ({
     display: 'block',
     padding: '12px 20px',
     textDecoration: 'none',
@@ -35,11 +38,8 @@ const Link = styled(NavLink)<VerticalProps>(({ theme, vertical }) => ({
     minWidth: 100,
     transitionProperty: 'border-color, color',
     transitionDuration: '200ms',
-    textAlign: vertical ? 'left' : 'center',
-    borderBottom: vertical ? `1px solid ${theme.colors.lightGray}` : `4px solid ${theme.colors.lightGray}`,
-    borderLeft: vertical ? `4px solid ${theme.colors.lightGray}` : undefined,
-    flexDirection: vertical ? 'column' : undefined,
-    paddingLeft: vertical ? 16 : undefined,
+    textAlign: 'center',
+    borderBottom: `4px solid ${theme.colors.lightGray}`,
 
     '&:hover': {
         color: theme.colors.purple,
@@ -50,13 +50,65 @@ const Link = styled(NavLink)<VerticalProps>(({ theme, vertical }) => ({
     '&.active': {
         color: theme.colors.purple,
         borderColor: theme.colors.purple,
-        borderBottom: vertical ? `1px solid ${theme.colors.lightGray}` : undefined,
-        borderLeftColor: vertical ? theme.colors.purple : undefined,
     },
+
+    [theme.breakpoints.tabletAndLower]: {
+        textAlign: 'left',
+        borderBottom: `1px solid ${theme.colors.lightGray}`,
+        borderLeft: `4px solid ${theme.colors.lightGray}`,
+        flexDirection: 'column',
+        paddingLeft: 16,
+
+        '&.active': {
+            borderBottom: `1px solid ${theme.colors.lightGray}`,
+            borderLeftColor: theme.colors.purple,
+        },
+    },
+}));
+
+const VerticalList = styled.ul(({ theme }) => ({
+    listStyleType: 'none',
+    padding: 0,
+    margin: 0,
+    display: 'flex',
+    flexDirection: 'column',
+    borderRadius: theme.borderRadius.small,
+    border: `1px solid ${theme.colors.lightGray}`,
+    borderBottom: 'none',
+    maxWidth: 500,
+}));
+
+const VerticalLink = styled(NavLink)(({ theme }) => ({
+    display: 'block',
+    padding: '12px 20px',
+    textDecoration: 'none',
+    fontSize: 18,
+    fontWeight: 500,
+    minWidth: 100,
+    transitionProperty: 'border-color, color',
+    transitionDuration: '200ms',
+
+    '&:hover': {
+        color: theme.colors.purple,
+    },
+
+    color: 'inherit',
+
+    '&.active': {
+        borderBottom: `1px solid ${theme.colors.lightGray}`,
+        borderLeftColor: theme.colors.purple,
+    },
+
+    textAlign: 'left',
+    borderBottom: `1px solid ${theme.colors.lightGray}`,
+    borderLeft: `4px solid ${theme.colors.lightGray}`,
+    flexDirection: 'column',
+    paddingLeft: 16,
 }));
 
 export interface TabsProps {
     items: TabItem[];
+    isVertical?: boolean;
 }
 
 export interface TabItem {
@@ -64,29 +116,34 @@ export interface TabItem {
     label: string;
 }
 
-export const Tabs: React.FC<TabsProps> = ({ items }) => {
-    const [breakpoint, setBreakpoint] = useState(0);
-    const [vertical, setVertical] = useState<boolean>(false);
-    const { innerWidth } = useWindowSize();
+export const Tabs: React.FC<TabsProps> = ({ items, isVertical }) => {
     const ref = useRef<HTMLDivElement>(null);
 
-    useLayoutEffect(() => {
-        if (ref && ref.current) {
-            setBreakpoint(ref.current.offsetWidth);
-        }
-    }, [ref]);
-
-    useEffect(() => {
-        setVertical(innerWidth <= breakpoint);
-    }, [innerWidth, breakpoint]);
+    if (isVertical) {
+        return (
+            <Container>
+                <InnerContainer ref={ref}>
+                    <VerticalList>
+                        {items.map((item, i) => (
+                            <li key={i}>
+                                <VerticalLink exact to={item.path}>
+                                    {item.label}
+                                </VerticalLink>
+                            </li>
+                        ))}
+                    </VerticalList>
+                </InnerContainer>
+            </Container>
+        );
+    }
 
     return (
         <Container>
-            <InnerContainer ref={ref} vertical={vertical}>
-                <List vertical={vertical}>
+            <InnerContainer ref={ref}>
+                <List>
                     {items.map((item, i) => (
                         <li key={i}>
-                            <Link to={item.path} exact={true} vertical={vertical}>
+                            <Link exact to={item.path}>
                                 {item.label}
                             </Link>
                         </li>

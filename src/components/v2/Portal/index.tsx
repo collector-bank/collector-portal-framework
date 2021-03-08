@@ -62,7 +62,7 @@ export const Portal: React.FC<PortalProps> = ({
                     <div className={`cui-menu-btn-bar ${isHamburgerMenuOpen ? 'cui-is-open' : ''}`} />
                 </button>
                 <figure className="cui-logo">
-                    {menuTree ? <a href={menuTree.homeUrl}>{svg.collectorLogo}</a> : ''}
+                    {menuTree && menuTree.homeUrl ? <a href={menuTree.homeUrl}>{svg.collectorLogo}</a> : <>{svg.collectorLogo}</>}
                 </figure>
 
                 {menuTree && menuTree.topItems

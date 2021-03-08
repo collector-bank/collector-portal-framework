@@ -41,6 +41,13 @@ export const Portal: React.FC<PortalProps> = ({
         setMenuTree(menuTree);
     }, [portalMenu]);
 
+    useEffect(() => {
+        const smallDeviceBreakpoint = 768;
+        if(window.innerWidth < smallDeviceBreakpoint) {
+            isHamburgerMenuOpen ? document.body.style.overflow = 'hidden' : document.body.style.overflow = 'visible';
+        }
+    }, [isHamburgerMenuOpen]);
+
     const toggleHamburgerClick = (): void => {
         setIsHamburgerMenuOpen(prevHamburgerMenuOpen => !prevHamburgerMenuOpen);
     };

@@ -84,17 +84,10 @@
                     "subpages": []
                 },
                 {
-                    "label": "dropdown",
-                    "url": "",
+                    "label": "menu item",
+                    "url": "testUrl3-3",
                     "icon": "",
-                    "subpages": [
-                        {
-                            "label": "menu item",
-                            "url": "testUrl3-2-1",
-                            "icon": "",
-                            "subpages": []
-                        }
-                    ]
+                    "subpages": []
                 }
             ]
         }

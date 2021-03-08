@@ -36,19 +36,36 @@ export const PortalAsideMenu: React.FC<PortalMenuProps> = ({
         const menuItems = [...menuTree.asidePortalItems, ...menuTree.asideGeneralItems];
         setMenuItems(menuItems);
 
-        const pathname = window.location.pathname;
-        let traversedMenuNodes = getTraversedMenuNodes(menuItems, pathname, false, setActiveMenuItemUrl);
+        const pathname = getCurrentRoutePathBy(menuItems);
+        const traversedMenuNodes = getTraversedMenuNodes(menuItems, pathname, false, setActiveMenuItemUrl);
         setTraversedMenu(traversedMenuNodes);
     }, [menuTree]);
 
     useEffect(() => {
-        return history.listen((location) => {
-            let traversedMenuNodes = getTraversedMenuNodes(menuItems, location.pathname, false, setActiveMenuItemUrl);
-            if(traversedMenuNodes.length > 0) {
+        return history.listen(() => {
+            const pathname = getCurrentRoutePathBy(menuItems);
+            const traversedMenuNodes = getTraversedMenuNodes(menuItems, pathname, false, setActiveMenuItemUrl);
+            if (traversedMenuNodes.length > 0) {
                 setTraversedMenu(traversedMenuNodes);
             }
-        })
+        });
     }, [menuItems]);
+
+    const getCurrentRoutePathBy = (menuItems: PortalMenuItem[]) => {
+        const pathname = window.location.pathname;
+        let menuItemPathname = '';
+
+        menuItems.forEach(menuItem => {
+            const submenuItemFound = menuItem.subpages.find(submenuItem => {
+                return pathname.indexOf(submenuItem.url) !== (-1 || 0);
+            });
+
+            if(submenuItemFound) {
+                menuItemPathname = submenuItemFound.url;
+            }
+        });
+        return menuItemPathname;
+    };
 
     const isDropdownActive = (menuLevel: number, indexNode: number): boolean => {
         if(traversedMenu[menuLevel]) {
@@ -146,7 +163,11 @@ export const PortalAsideMenu: React.FC<PortalMenuProps> = ({
     return (
         <aside className={`cui-left-nav ${isNavMenuOpen ? 'cui-is-open' : ''}`}>
             {menuTree && Menu(menuTree)}
-            {menuFooter ? <FootContent>{menuFooter}</FootContent>: ''}
+            {menuFooter ? (
+                <span onClick={() => toggleHamburgerClick()}>
+                    <FootContent>{menuFooter}</FootContent>
+                </span>
+            ) : ''}
         </aside>
     );
 };

@@ -61,7 +61,7 @@
         "react-motion": "0.5.2",
         "react-sidebar": "3.0.2",
         "uniqid": "^5.2.0",
-        "collui": "^1.6.4"
+        "collui": "^1.6.5"
     },
     "peerDependencies": {
         "react-dom": ">=16.8",

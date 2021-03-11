@@ -54,13 +54,18 @@ export const PortalAsideMenu: React.FC<PortalMenuProps> = ({
     const getCurrentRoutePathBy = (menuItems: PortalMenuItem[]) => {
         const pathname = window.location.pathname;
         let menuItemPathname = '';
+        let submenuItemFound = null;
 
         menuItems.forEach(menuItem => {
-            const submenuItemFound = menuItem.subpages.find(submenuItem => {
-                return pathname.indexOf(submenuItem.url) !== (-1 || 0);
-            });
+            if (menuItem.subpages.length === 0) {
+                submenuItemFound = pathname.indexOf(menuItem.url) !== (-1 || 0) ? menuItem : null;
+            } else {
+                submenuItemFound = menuItem.subpages.find(submenuItem => {
+                    return pathname.indexOf(submenuItem.url) !== (-1 || 0);
+                });
+            }
 
-            if(submenuItemFound) {
+            if (submenuItemFound) {
                 menuItemPathname = submenuItemFound.url;
             }
         });

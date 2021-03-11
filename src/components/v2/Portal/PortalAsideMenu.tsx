@@ -167,7 +167,7 @@ export const PortalAsideMenu: React.FC<PortalMenuProps> = ({
 
     return (
         <aside className={`cui-left-nav ${isNavMenuOpen ? 'cui-is-open' : ''}`}>
-            {menuTree && Menu(menuTree)}
+            {menuTree && menuTree.asidePortalItems.length > 0 && Menu(menuTree)}
             {menuFooter ? (
                 <span onClick={() => toggleHamburgerClick()}>
                     <FootContent>{menuFooter}</FootContent>

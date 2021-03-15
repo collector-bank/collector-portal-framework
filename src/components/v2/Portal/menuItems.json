@@ -90,6 +90,25 @@
                     "subpages": []
                 }
             ]
+        },
+        {
+            "label": "Menu 4",
+            "url": "",
+            "icon": "payments_menu-icon.svg",
+            "subpages": [
+                {
+                    "label": "menu item",
+                    "url": "testUrl4-1",
+                    "icon": "",
+                    "subpages": []
+                },
+                {
+                    "label": "menu item",
+                    "url": "testUrl4-2",
+                    "icon": "",
+                    "subpages": []
+                }
+            ]
         }
     ],
     "asideGeneralItems": [

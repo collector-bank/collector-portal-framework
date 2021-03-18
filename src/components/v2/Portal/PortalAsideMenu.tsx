@@ -7,9 +7,8 @@ import { getTraversedMenuNodes, PortalMenu, PortalMenuItem, PortalMenuTreeNode }
 import { useHistory } from 'react-router-dom';
 
 const FootContent = styled.section({
-    width: 'calc(100% - 40px)',
     height: 'auto',
-    margin: 20,
+    margin: '20px 0px',
 });
 
 export interface PortalMenuProps {

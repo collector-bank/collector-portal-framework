@@ -19,3 +19,4 @@ export * from './Spinner';
 export * from './Spinner';
 export * from './TagsInput';
 export * from './ListItem';
+export * from './BoxMessage';

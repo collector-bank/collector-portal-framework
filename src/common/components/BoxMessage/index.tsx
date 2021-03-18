@@ -44,7 +44,7 @@ const BoxContainer = styled.div({
     height: '100vh',
 });
 
-export interface SelectProps {
+export interface BoxProps {
     showLogo?: boolean;
     label?: string | React.ReactNode;
     buttonLabel?: string;
@@ -52,7 +52,7 @@ export interface SelectProps {
     buttonKind?: ButtonKind;
 }
 
-export const BoxMessage: React.FC<SelectProps> = ({ showLogo, label, buttonLabel, onClick, buttonKind }) => {
+export const BoxMessage: React.FC<BoxProps> = ({ showLogo, label, buttonLabel, onClick, buttonKind }) => {
     return (
         <BoxContainer>
             {showLogo && PortalLogo}

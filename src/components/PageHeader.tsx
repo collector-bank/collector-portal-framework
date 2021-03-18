@@ -7,19 +7,14 @@ const PageHeaderContainer = styled.div(({ theme }) => ({
     overflow: 'hidden',
     boxSizing: 'border-box',
     width: '100%',
-    padding: '0 40px',
+    paddingBottom: 24,
 
     '@media print': {
         display: 'none',
     },
 
-    [theme.breakpoints.tabletAndLower]: {
-        paddingLeft: 24,
-        paddingRight: 24,
-    },
-
     [theme.breakpoints.mobileAndLower]: {
-        padding: 16,
+        paddingBottom: 16,
         minHeight: 0,
     },
 }));

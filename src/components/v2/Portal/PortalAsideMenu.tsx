@@ -8,7 +8,7 @@ import { useHistory } from 'react-router-dom';
 
 const FootContent = styled.section({
     height: 'auto',
-    marginTop: '20px 0px',
+    margin: '20px 0px',
 });
 
 export interface PortalMenuProps {

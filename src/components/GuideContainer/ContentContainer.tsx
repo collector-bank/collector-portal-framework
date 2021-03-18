@@ -5,5 +5,5 @@ export const GuideContentContainer = styled.div<{ maxWidth?: number }>(({ theme,
     borderRadius: theme.borderRadius.small,
     background: theme.colors.white,
     maxWidth: maxWidth ? maxWidth : undefined,
-    margin: maxWidth ? '0 auto 24px' : '0 0 24px',
+    margin: '0 0 24px',
 }));

@@ -24,7 +24,6 @@ const Box = styled.div(({ theme }) => ({
     padding: 16,
     boxSizing: 'border-box',
     marginBottom: '1.25em',
-    display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
     flexDirection: 'column',

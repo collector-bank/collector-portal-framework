@@ -5,7 +5,7 @@ export type NotificationType = 'cui-is-success' | 'cui-is-info' | 'cui-is-warnin
 interface NotificationProps {
     type: NotificationType;
     title?: string;
-    description: string;
+    description: string | JSX.Element;
     hasIcon?: boolean;
     isOutlined?: boolean;
     linkHref?: string;
@@ -16,46 +16,53 @@ interface NotificationProps {
 const getIconBy = (type: NotificationType): string => {
     switch (type) {
         case 'cui-is-success':
-            return 'cui-icon-check'
+            return 'cui-icon-check';
         case 'cui-is-info':
-            return 'cui-icon-info'
+            return 'cui-icon-info';
         case 'cui-is-warning':
-            return 'cui-icon-warning'
+            return 'cui-icon-warning';
         case 'cui-is-danger':
-            return 'cui-icon-danger'
+            return 'cui-icon-danger';
         default:
-            return 'cui-icon-check'
+            return 'cui-icon-check';
     }
-}
+};
 
-export const Notification: React.FC<NotificationProps> = ({ type, title, description, hasIcon = true, isOutlined = false, linkHref, linkText, onClose }) => (
+export const Notification: React.FC<NotificationProps> = ({
+    type,
+    title,
+    description,
+    hasIcon = true,
+    isOutlined = false,
+    linkHref,
+    linkText,
+    onClose,
+}) => (
     <>
-        <div className={`cui-notification ${type} ${isOutlined ? "cui-is-outlined" : ""}`}>
-            {hasIcon &&
+        <div className={`cui-notification ${type} ${isOutlined ? 'cui-is-outlined' : ''}`}>
+            {hasIcon && (
                 <div className="cui-notification-left">
                     <figure className={`${getIconBy(type)} cui-is-large`} />
                 </div>
-            }
+            )}
             <div className="cui-notification-content">
-                {title &&
-                    <div className={"cui-title"}>{title}</div>
-                }
-                <p>{description}</p>
+                {title && <div className={'cui-title'}>{title}</div>}
+                {typeof description === 'string' ? <p>{description}</p> : description}
             </div>
-            {linkHref && linkText &&
+            {linkHref && linkText && (
                 <div className="cui-notification-right">
                     <a href={linkHref} className="cui-is-link">
                         {linkText}
                     </a>
                 </div>
-            }
-            {onClose &&
+            )}
+            {onClose && (
                 <div className="cui-notification-close">
                     <a className="cui-closable" onClick={onClose}>
                         <figure className="cui-icon-close cui-is-normal" />
                     </a>
                 </div>
-            }
+            )}
         </div>
     </>
 );
